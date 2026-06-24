@@ -1,3 +1,4 @@
+import "./normalize-base-url";
 import { createApp, h } from "vue";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
