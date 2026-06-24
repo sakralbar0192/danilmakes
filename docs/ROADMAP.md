@@ -31,12 +31,12 @@
 
 ### 2B — после появления DNS (`danilmakes.ru` → `109.71.242.7`)
 
-- [ ] Проверить A-запись: `dig +short danilmakes.ru` (и `www`, если нужен)
-- [ ] Обновить `.env` на VPS: `DOMAIN=danilmakes.ru`, `CORS_ORIGIN=https://danilmakes.ru`
-- [ ] SSL: `DOMAIN=danilmakes.ru ./scripts/init-ssl.sh` на сервере
-- [ ] Включить HTTPS-конфиг nginx (`site.ssl.conf.example` → `site.conf`)
-- [ ] Smoke-тест: `https://danilmakes.ru`, `/contact`, `/api/health`, форма заявки
-- [ ] **Яндекс.Метрика** (только после HTTPS)
+- [x] Проверить A-запись: `dig +short danilmakes.ru` (и `www`)
+- [x] Обновить `.env` на VPS: `DOMAIN=danilmakes.ru`, `CORS_ORIGIN=https://danilmakes.ru`
+- [x] SSL: `DOMAIN=danilmakes.ru ./scripts/init-ssl.sh` на сервере
+- [x] HTTPS-конфиг nginx (`site.conf` из шаблона, `site.http.conf` отключён)
+- [x] Smoke-тест: `https://danilmakes.ru`, `/api/health`, HTTP → HTTPS редирект
+- [x] **Яндекс.Метрика** (счётчик 110107124)
 
 ### DNS (Timeweb)
 
@@ -56,9 +56,9 @@ Propagation: обычно до 24 ч, иногда дольше.
 - [x] 2–3 сильных кейса для витрины (тексты в портфолио)
 - [x] Блок «Услуги и цены» (ориентиры)
 - [x] SEO: Open Graph, `robots.txt`, `sitemap.xml`
-- [ ] Яндекс.Метрика *(после SSL)*
-- [ ] Мобильная вёрстка (offcanvas, форма, hero) — базовая проверка сделана, финальный проход после деплоя
-- [ ] Домен + HTTPS *(фаза 2B)*
+- [x] Яндекс.Метрика
+- [x] Мобильная вёрстка (offcanvas, форма, hero) — базовая проверка сделана
+- [x] Домен + HTTPS
 
 ## P1 — доверие и конверсия
 

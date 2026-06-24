@@ -1,9 +1,12 @@
-# Замените DOMAIN на ваш домен после получения сертификата.
-# Переименуйте в site.conf и перезапустите nginx.
+# После init-ssl.sh копируется в site.conf (DOMAIN подставляется скриптом).
+
+upstream api {
+    server api:3000;
+}
 
 server {
     listen 443 ssl http2;
-    server_name DOMAIN;
+    server_name DOMAIN www.DOMAIN;
 
     ssl_certificate /etc/letsencrypt/live/DOMAIN/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/DOMAIN/privkey.pem;
@@ -44,7 +47,7 @@ server {
 
 server {
     listen 80;
-    server_name DOMAIN;
+    server_name DOMAIN www.DOMAIN;
 
     location /.well-known/acme-challenge/ {
         root /var/www/certbot;

@@ -98,13 +98,18 @@ docker compose -f docker-compose.prod.yml up -d --build
 export DOMAIN=danilmakes.ru
 export CERTBOT_EMAIL=ya@daniluhov.ru
 ./scripts/init-ssl.sh
-
-# Создайте SSL-конфиг из шаблона
-cp docker/nginx/conf.d/site.ssl.conf.example docker/nginx/conf.d/site.conf
-sed -i "s/DOMAIN/$DOMAIN/g" docker/nginx/conf.d/site.conf
-
-docker compose -f docker-compose.prod.yml restart nginx
 ```
+
+Скрипт запросит сертификат для `danilmakes.ru` и `www`, создаст `site.conf`, отключит `site.http.conf` и перезапустит nginx.
+
+Перед SSL обновите `.env` на сервере:
+
+```
+DOMAIN=danilmakes.ru
+CORS_ORIGIN=https://danilmakes.ru
+```
+
+После смены `CORS_ORIGIN` пересоздайте API: `docker compose -f docker-compose.prod.yml up -d --force-recreate api`
 
 ## Обновление сайта
 
