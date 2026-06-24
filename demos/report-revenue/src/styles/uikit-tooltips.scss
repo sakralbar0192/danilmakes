@@ -1,0 +1,33 @@
+@import "./bnovo-shims";
+@import "./theme/tools/custom-variables";
+
+$tooltip-bg: #fff;
+$tooltip-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+$tooltip-text: #34425a;
+
+.v-tooltip > .v-overlay__content,
+.v-tooltip__content {
+  &.v-tooltip__content_arrowed,
+  &.b-tooltip-arrowed {
+    background: $tooltip-bg !important;
+    color: $tooltip-text !important;
+    opacity: 1 !important;
+    box-shadow: $tooltip-shadow;
+    filter: drop-shadow($tooltip-shadow);
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    line-height: 18px !important;
+    border-radius: 4px !important;
+    overflow-wrap: break-word;
+    letter-spacing: normal;
+    text-transform: none;
+    font-weight: map-get($font-weights, regular);
+  }
+}
+
+.v-tooltip > .v-overlay__content:not(.v-tooltip__content_arrowed) {
+  font-size: map-get($text-sizes, caption) !important;
+  font-weight: map-get($font-weights, medium);
+  padding: 6px 8px !important;
+  border-radius: 4px !important;
+}

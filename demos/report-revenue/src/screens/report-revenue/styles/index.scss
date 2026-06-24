@@ -1,0 +1,23 @@
+.bnovo-report-revenue__filters {
+  flex-wrap: wrap;
+}
+
+.bnovo-report-revenue__metrics-section {
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.bnovo-report-revenue__widget-doughunt {
+  flex: 0 0 320px;
+  max-width: 100%;
+}
+
+.px-typo {
+  padding: 16px 24px 32px;
+}
+
+@media (max-width: 960px) {
+  .px-typo {
+    padding: 12px 16px 24px;
+  }
+}
