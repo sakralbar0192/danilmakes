@@ -32,6 +32,8 @@ API: http://localhost:3000/api/health
 | `npm run dev` | Vite dev server с proxy `/api` |
 | `npm run build` | Сборка frontend в `dist/` |
 | `npm run build:tariff-prices` | Сборка демо «Цены и ограничения» в `public/tariffPrices/` |
+| `npm run build:report-revenue` | Сборка демо «Отчёт по доходу» в `public/reportRevenue/` |
+| `npm run build:divisions` | Сборка демо Divisions в `public/divisions/` |
 | `npm run lint` | ESLint |
 | `npm run preview` | Просмотр production-сборки |
 

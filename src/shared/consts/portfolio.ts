@@ -35,6 +35,25 @@ export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
         demoLink: `/CodeExample/${ECodeExamples.TARIFF_PRICES}`
     },
     {
+        id: 'divisions',
+        title: 'Divisions',
+        category: 'product',
+        task: 'Модуль администрирования организационной структуры: подразделения, ресурсные пулы, назначение сотрудников и менеджеров.',
+        solution: 'TypeScript, Lit Web Components, Feature-Sliced Design, интеграция с legacy ASMX API. Демо на оригинальных компонентах с MSW-моками.',
+        result: 'Интерактивное демо со списком подразделений, CRUD, навигацией по пулам и пользователям без backend.',
+        demoLink: `/CodeExample/${ECodeExamples.DIVISIONS}`,
+        sourceLink: 'https://github.com/sakralbar0192/Divisions'
+    },
+    {
+        id: 'report-revenue',
+        title: 'Отчёт по доходу',
+        category: 'product',
+        task: 'Аналитический экран отеля: метрики ADR, RevPAR, загрузка, графики и таблица по категориям номеров и доп. услугам.',
+        solution: 'Vue 3 + Chart.js + Vuex, фильтры по периоду, группировка данных, MSW с синтетическими ответами API.',
+        result: 'Интерактивное демо с графиками, метриками и вкладкой доп. услуг без backend.',
+        demoLink: `/CodeExample/${ECodeExamples.REPORT_REVENUE}`
+    },
+    {
         id: 'racketmate',
         title: 'RacketMate',
         category: 'bot',

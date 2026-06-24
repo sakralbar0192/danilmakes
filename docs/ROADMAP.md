@@ -97,7 +97,7 @@
 - [x] Docker Compose + nginx + SSL-скрипты
 - [x] BrowserRouter, документация, deploy-скрипты
 - [x] Убраны учебные SPA-демо из меню
-- [x] Портфолио: вёрстка, «Цены и ограничения», RacketMate, danilmakes
+- [x] Портфолио: вёрстка, Bnovo-демо (цены, divisions, отчёт), RacketMate, danilmakes
 
 ---
 
