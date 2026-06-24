@@ -1,0 +1,17 @@
+[
+  { "Id": 101, "Name": "Alex Morgan", "Login": "amorgan", "BranchName": "Saint Petersburg", "StartDate": "2021-03-15", "Id1C": "00101", "IsActive": true },
+  { "Id": 102, "Name": "Maria Chen", "Login": "mchen", "BranchName": "Saint Petersburg", "StartDate": "2020-07-01", "Id1C": "00102", "IsActive": true },
+  { "Id": 103, "Name": "James Wilson", "Login": "jwilson", "BranchName": "Moscow", "StartDate": "2019-11-20", "Id1C": "00103", "IsActive": true },
+  { "Id": 104, "Name": "Elena Petrova", "Login": "epetrova", "BranchName": "Saint Petersburg", "StartDate": "2022-01-10", "Id1C": "00104", "IsActive": true },
+  { "Id": 105, "Name": "David Kim", "Login": "dkim", "BranchName": "Remote", "StartDate": "2021-09-05", "Id1C": "00105", "IsActive": true },
+  { "Id": 106, "Name": "Anna Volkova", "Login": "avolkova", "BranchName": "Moscow", "StartDate": "2018-04-12", "Id1C": "00106", "IsActive": true },
+  { "Id": 107, "Name": "Robert Lee", "Login": "rlee", "BranchName": "Saint Petersburg", "StartDate": "2023-02-28", "Id1C": "00107", "IsActive": true },
+  { "Id": 108, "Name": "Sophie Martin", "Login": "smartin", "BranchName": "Remote", "StartDate": "2020-12-01", "Id1C": "00108", "IsActive": true },
+  { "Id": 109, "Name": "Ivan Sokolov", "Login": "isokolov", "BranchName": "Moscow", "StartDate": "2017-06-18", "Id1C": "00109", "IsActive": true },
+  { "Id": 110, "Name": "Olga Smirnova", "Login": "osmirnova", "BranchName": "Saint Petersburg", "StartDate": "2022-08-22", "Id1C": "00110", "IsActive": true },
+  { "Id": 111, "Name": "Chris Taylor", "Login": "ctaylor", "BranchName": "Remote", "StartDate": "2021-05-14", "Id1C": "00111", "IsActive": true },
+  { "Id": 112, "Name": "Nina Kozlova", "Login": "nkozlova", "BranchName": "Moscow", "StartDate": "2019-03-03", "Id1C": "00112", "IsActive": true },
+  { "Id": 113, "Name": "Peter Novak", "Login": "pnovak", "BranchName": "Saint Petersburg", "StartDate": "2024-01-08", "Id1C": "00113", "IsActive": true },
+  { "Id": 114, "Name": "Laura Brown", "Login": "lbrown", "BranchName": "Remote", "StartDate": "2020-10-30", "Id1C": "00114", "IsActive": true },
+  { "Id": 115, "Name": "Michael Ross", "Login": "mross", "BranchName": "Moscow", "StartDate": "2016-09-15", "Id1C": "00115", "IsActive": true }
+]

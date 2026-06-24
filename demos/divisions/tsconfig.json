@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "entities/*": ["../../../Divisions/source/entities/*"],
+      "shared/*": ["../../../Divisions/source/shared/*"],
+      "pages/*": ["../../../Divisions/source/pages/*"],
+      "widgets/*": ["../../../Divisions/source/widgets/*"],
+      "app/*": ["../../../Divisions/source/app/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "../../../Divisions/source/**/*.ts"]
+}

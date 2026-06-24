@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "baseUrl": "../../../Divisions/source",
+    "paths": {
+      "*": ["../../../Divisions/source/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "../../../Divisions/source/**/*.ts"]
+}
