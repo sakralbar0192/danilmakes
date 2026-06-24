@@ -1,4 +1,4 @@
-import { type FC, useState, useEffect } from 'react'
+import { type FC, useEffect } from 'react'
 import classes from './styles.module.scss'
 import { useParams } from 'react-router'
 import { ECodeExamples, ECodeExamplesLinksHrefs } from 'app/codeExamples'
@@ -7,11 +7,9 @@ import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 
 const CodeExample: FC = () => {
     const dispatch = useAppDispatch()
-    const { choosenExample } = useParams() as {choosenExample: ECodeExamples}
-    const [projectFolder, setprojectFolder] = useState<ECodeExamples | ''>('')
+    const { choosenExample } = useParams() as { choosenExample: ECodeExamples }
 
     useEffect(() => {
-        setprojectFolder(choosenExample)
         switch (choosenExample) {
             case ECodeExamples.BICYCLE:
                 dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.BICYCLE))
@@ -44,16 +42,31 @@ const CodeExample: FC = () => {
             case ECodeExamples.TARIFF_PRICES:
                 dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.TARIFF_PRICES))
                 break
+
+            case ECodeExamples.REPORT_REVENUE:
+                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.REPORT_REVENUE))
+                break
+
+            case ECodeExamples.DIVISIONS:
+                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.DIVISIONS))
+                break
         }
 
-        return () => {dispatch(setCodeExampleSourceLinkHref(''))}
+        return () => { dispatch(setCodeExampleSourceLinkHref('')) }
     }, [choosenExample, dispatch])
 
+    if (!choosenExample) {
+        return null
+    }
+
     return (
-        <div
-            dangerouslySetInnerHTML={ { __html: `<iframe class="${classes.iframe}" src="/${projectFolder}/index.html"></iframe>` } }
-            className={ classes.iframeWrapper }
-        />
+        <div className={ classes.iframeWrapper }>
+            <iframe
+                className={ classes.iframe }
+                src={ `/${choosenExample}/` }
+                title={ choosenExample }
+            />
+        </div>
     )
 }
 
