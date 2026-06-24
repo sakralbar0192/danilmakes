@@ -1,0 +1,10 @@
+{
+  "exportedAt": "2026-06-24",
+  "devUrl": "demo",
+  "hotelId": 50660,
+  "defaultPlanId": 515367,
+  "dependentPlanId": 515368,
+  "dateFrom": "24-6-2026",
+  "hasRmsTariff": true,
+  "notes": "Демо-фикстуры для MSW"
+}

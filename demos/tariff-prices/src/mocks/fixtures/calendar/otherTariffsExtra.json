@@ -1,0 +1,966 @@
+{
+    "extra_charges": {
+        "515368": {
+            "759106": {
+                "53478": [
+                    {
+                        "2026-06-24": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-25": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-26": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-27": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-28": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-29": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-30": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-01": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-02": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-03": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-04": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-05": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-06": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-07": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-08": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-09": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-10": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-11": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-12": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-13": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-14": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-15": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-16": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-17": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-18": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-19": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-20": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-21": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-22": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-23": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-24": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        }
+                    }
+                ],
+                "53479": [
+                    {
+                        "2026-06-24": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-25": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-26": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-27": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-28": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-29": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-30": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-01": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-02": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-03": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-04": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-05": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-06": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-07": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-08": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-09": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-10": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-11": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-12": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-13": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-14": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-15": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-16": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-17": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-18": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-19": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-20": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-21": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-22": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-23": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-24": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        }
+                    }
+                ],
+                "53480": [
+                    {
+                        "2026-06-24": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-25": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-26": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-27": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-28": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-29": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-30": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-01": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-02": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-03": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-04": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-05": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-06": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-07": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-08": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-09": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-10": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-11": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-12": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-13": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-14": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-15": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-16": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-17": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-18": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-19": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-20": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-21": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-22": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-23": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-24": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        }
+                    }
+                ]
+            }
+        },
+        "525299": {
+            "759106": {
+                "53478": [
+                    {
+                        "2026-06-24": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-25": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-26": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-27": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-28": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-29": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-30": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-01": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-02": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-03": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-04": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-05": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-06": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-07": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-08": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-09": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-10": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-11": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-12": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-13": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-14": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-15": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-16": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-17": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-18": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-19": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-20": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-21": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-22": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-23": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-24": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        }
+                    }
+                ],
+                "53479": [
+                    {
+                        "2026-06-24": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-25": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-26": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-27": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-28": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-29": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-30": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-01": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-02": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-03": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-04": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-05": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-06": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-07": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-08": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-09": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-10": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-11": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-12": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-13": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-14": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-15": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-16": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-17": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-18": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-19": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-20": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-21": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-22": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-23": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-24": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        }
+                    }
+                ],
+                "53480": [
+                    {
+                        "2026-06-24": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-25": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-26": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-27": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-28": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-29": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-06-30": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-01": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-02": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-03": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-04": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-05": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-06": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-07": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-08": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-09": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-10": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-11": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-12": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-13": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-14": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-15": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-16": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-17": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-18": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-19": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-20": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-21": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-22": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-23": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        },
+                        "2026-07-24": {
+                            "value": 0,
+                            "origin": "default",
+                            "origin_value": null
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

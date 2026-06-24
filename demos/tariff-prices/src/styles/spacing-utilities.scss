@@ -1,0 +1,54 @@
+@import "./bnovo-shims";
+@import "./theme/tools/custom-variables";
+
+@each $key, $val in $gaps {
+  .mt-#{$key} { margin-top: $val !important; }
+  .mr-#{$key} { margin-right: $val !important; }
+  .mb-#{$key} { margin-bottom: $val !important; }
+  .ml-#{$key} { margin-left: $val !important; }
+  .mx-#{$key} {
+    margin-right: $val !important;
+    margin-left: $val !important;
+  }
+  .my-#{$key} {
+    margin-top: $val !important;
+    margin-bottom: $val !important;
+  }
+  .ma-#{$key} { margin: $val !important; }
+
+  .pt-#{$key} { padding-top: $val !important; }
+  .pr-#{$key} { padding-right: $val !important; }
+  .pb-#{$key} { padding-bottom: $val !important; }
+  .pl-#{$key} { padding-left: $val !important; }
+  .px-#{$key} {
+    padding-right: $val !important;
+    padding-left: $val !important;
+  }
+  .py-#{$key} {
+    padding-top: $val !important;
+    padding-bottom: $val !important;
+  }
+  .pa-#{$key} { padding: $val !important; }
+
+  .gap-#{$key} { gap: $val !important; }
+  .gap-x-#{$key} { column-gap: $val !important; }
+  .gap-y-#{$key} { row-gap: $val !important; }
+}
+
+.justify-space-between { justify-content: space-between !important; }
+.justify-start { justify-content: flex-start !important; }
+.justify-end { justify-content: flex-end !important; }
+.align-start { align-items: flex-start !important; }
+.align-end { align-items: flex-end !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.flex-nowrap { flex-wrap: nowrap !important; }
+.nowrap { white-space: nowrap !important; }
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.background-white { background-color: $white !important; }
+.rounded-0 { border-radius: 0 !important; }
+.d-inline-flex { display: inline-flex !important; }
+.overflow-visible { overflow: visible !important; }

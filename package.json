@@ -11,7 +11,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:tariff-prices": "cd demos/tariff-prices && npm ci && npm run build && rm -rf ../../public/tariffPrices && cp -r dist ../../public/tariffPrices"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",

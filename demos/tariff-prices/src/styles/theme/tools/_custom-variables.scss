@@ -1,0 +1,598 @@
+@use 'sass:map';
+// ==================================== //
+// Default
+// ==================================== //
+$spacer-step: 4px; // базовая величина для автоматического расчета отступов
+$scroll-width-custom: 6px;
+
+// ==================================== //
+// Sizing
+// ==================================== //
+$grid-gaps: (
+  '1': $spacer-step * 2, // 8 == $gaps(group)
+  '2': $spacer-step * 3, // 12 == $gaps(inner)
+  '3': $spacer-step * 4, // 16 == $gaps(groups)
+  '4': $spacer-step * 6, // 24 == $gaps(groups)
+  '5': $spacer-step * 8, // 32 == $gaps( big-outer)
+);
+
+// используем только у нас в проекте, в vuetify не пробрасываем
+// из-за проблем мержа библиотекой объектов
+// (нарушается порядок полей и поэтому сгенеренных позднее классов, из-за чего ломается специфичность и стили колонок)
+$grid-breakpoints-extra: (
+  'xxxs': 0,
+  'xxs': 360px,
+  'xs': 480px
+);
+
+$grid-breakpoints-custom: (
+  'xs': 0,
+  'sm': 640px,
+  'md': 960px,
+  'lg': 1280px - $scroll-width-custom,
+  'xl': 1440px - $scroll-width-custom,
+  'xxl': 1700px - $scroll-width-custom,
+  'xxxl': 1920px - $scroll-width-custom,
+);
+
+
+// ==================================== //
+// Typography
+// ==================================== //
+$text-sizes: (
+  xsmall: var(--text-xsmall),
+  small: var(--text-small),
+  caption8: var(--text-xsmall),
+  caption10: var(--text-small),
+  caption: var(--text-caption),
+  body: var(--text-body),
+  hero: var(--text-hero),
+  h1: var(--text-h1),
+  h2: var(--text-h2),
+  h3: var(--text-h3),
+  h4: var(--text-h4),
+  h5: var(--text-body),
+  subtitle: var(--text-body),
+);
+
+// ==================================== //
+// Spacing
+// ==================================== //
+// f.e. `padding: map-get($gaps, inner);`
+$gaps: (
+  small: rem(2px), // Очень редко, между элементами в строке, например отступ иконки в тексте ссылки
+  typo: rem(4px), // Очень редко, между элементами в строке, например отступ иконки в тексте ссылки
+  semi-inner: rem(6px),
+  ingroup: rem(8px), // Между связанными элементами в группе, между текстом и чекбоксом, между 2 кнопками в группе кнопок
+  inner: rem(12px), // Между независимыми элементами внутри группы. Кнопки в карточке
+  groups: rem(16px), // Внутренние отступы карточек, между группами внутри блока 1 порядка. между блоками карточки, между 1 и 2 заголовком и последующим текстом
+  outer: rem(24px), // Между крупными блоками на странице, между карточками или колонками 1 порядка, внутренние отступы карточек 1 порядка
+  big-outer: rem(32px), // Пока нет применения
+  space: rem(40px), // Пока нет применения
+);
+
+// ==================================== //
+// Colors
+// ==================================== //
+$main: #3C435A;
+$border-color: #DDDDE3; // $color-шахматка-фон-разлиновка
+$border-thumb-color: #ECECEF; // $color-шахматка-фон-разлиновка
+$input-border-width: 1px;
+$border: $input-border-width solid $border-color; // $color-шахматка-фон-разлиновка
+$white: #fff;
+$black: #000;
+$disabled: #838A9A;
+$text-disabled: #C2C3C9;
+$disabledFill: #c4c8cf;
+$breadcrumbs: #6e6b7b;
+$caption: #838A9A;
+$skeleton: #EEEEF1;
+$pre-color: #f5f2f0;
+$box-shadow: 0 1px 11px 0 rgba(0, 0, 0, .04);
+$input-content: #B0B0BF;
+$sand: #F39509;
+
+// Color groups
+$sky: #E4EDFD;
+$sky-hover: #ECF3FF;
+$sky-focus: #D2E1FB;
+$sky-active: #F5F9FE;
+$primary: #1875F0; // $color-кнопка-первичная-норм
+$primary-lighten-4: #E2EEFD; // color accent/lighten 4 from uikit
+
+$primary-hover: #0E67DC; // $color-кнопка-первичная-наведение
+$primary-focus: #1e5bea; // $color-кнопка-первичная-нажатие
+$primary-active: #1e5bea; // $color-кнопка-первичная-нажатие
+
+$secondary: #EEEEF1; // $color-основные-светло-серый
+$secondary-hover: #F7F7F8; // $color-кнопка-третичная-наведение
+$tertiary: #EEEEF1; // $color-кнопка-третичная
+$tertiary-hover: #DDDDE3; // $color-кнопка-третичная-наведение
+$secondary-focus: #f3f7fb; // $color-кнопка-вторичная-нажатие (old)
+$secondary-active: #f3f7fb; //$color-кнопка-вторичная-нажатие (old)
+
+$primary-transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+$secondary-transition: 0.2s cubic-bezier(0.25, 0.8, 0.5, 1);
+
+$secondary-blue: #E2EEFD; // $color-кнопка-вторичная-норм
+$secondary-blue-hover: #BCD7FB; // $color-кнопка-вторичная-наведение
+
+$error: #C23C28; // $color-кнопка-опасная-норм
+$error-hover: #BA3927; // $color-кнопка-опасная-наведение
+$error-focus: #BA3927; // $color-кнопка-опасная-нажатие
+$error-active: #BA3927; //$color-кнопка-вторичная-нажатие
+$error-bg: #F8E0DD;
+
+$accent: #3BC953; // $color-шахматка-статус-уборки-проверено-чисто
+$accent-hover: #4AD361; // ??
+$accent-focus: #44B858; // ??
+$accent-active: #44B858; // ??
+
+$warning: #F17521; // ??
+$warning-hover: #FF9C59; // ??
+$warning-focus: #E76107; // ??
+$warning-active: #E76107; // ??
+$warning-lighten-1: #FEF2E1;
+
+$success: #2FAC44; // ??
+$success-hover: #4AD361; // ??
+$success-focus: #44B858; // ??
+$success-active: #44B858; // ??
+$success-darken: #279039; // ??
+$success-lighten-1: #EFFBF1;
+
+$batman: $main;
+$batman-hover: #232734;
+$batman-focus: #1F2330;
+$batman-active: #1F2330;
+
+// Brand color's
+$brand-colors: (
+  whatsapp: #57D163,
+  telegram: #38B0E3,
+  email: #0077FF, // для кнопки email в диалоговом окне "Поделиться"
+  other: #3C435A, // для кнопки "Другое" в диалоговом окне "Поделиться"
+  cellphone: $sand, // для кнопки "Позвонить" в диалоговом окне "Поделиться"
+);
+
+$disabled-colors: (
+  background : #F4F4F6,
+  stroke : #B0B0BF,
+  label : #B0B0BF,
+  background-default: #F7F8FA,
+);
+
+$gradient: (
+  smartips: linear-gradient(269.89deg, rgba(255, 255, 255, 0) 0.09%, rgba(255, 216, 102, 0.45) 99.91%),
+  iiko: linear-gradient(269.89deg, rgba(255, 255, 255, 0) 0.09%, rgba(245, 180, 103, 0.45) 99.91%),
+);
+
+// Integration Landing's colors
+$landing-colors: (
+  smartips: (
+    background-gradient: map.get($gradient, smartips),
+    background: $success-lighten-1,
+    icon: $success,
+  ),
+  iiko: (
+    background-gradient: map.get($gradient, iiko),
+    background: $warning-lighten-1,
+    icon: $sand,
+  ),
+);
+
+// ==================================== //
+// Font color for theme
+// ==================================== //
+$b-text: (
+  default: #3C435A, // $color-основные-темно-синий
+  dark: $white,
+  grey: #a4aab5,
+  disabled: $disabled, // $color-доп-серый
+  subtitle: #888B91,
+);
+$text-color: map.get($b-text, default);
+
+// ==================================== //
+// Coloring bnovo-world-map
+// ==================================== //
+$b-colors: (
+  sky: $sky,
+  sky-hover: $sky-hover,
+  sky-focus: $sky-focus,
+  sky-active: $sky-active,
+  sky-text: $text-color,
+  sky-text-hover: $primary-hover,
+  sky-text-focus: $primary-focus,
+  sky-text-active: $primary-active,
+  primary: $primary,
+  primary-hover: $primary-hover,
+  primary-focus: $primary-focus,
+  primary-active: $primary-active,
+  primary-text: map.get($b-text, dark),
+  primary-text-hover: map.get($b-text, dark),
+  primary-text-focus: map.get($b-text, dark),
+  primary-text-active: map.get($b-text, dark),
+  secondary: $secondary,
+  secondary-hover: $secondary-hover,
+  secondary-focus: $secondary-focus,
+  secondary-active: $secondary-active,
+  secondary-text: $text-color,
+  secondary-text-hover: $primary-hover,
+  secondary-text-focus: $primary-focus,
+  secondary-text-active: $primary-active,
+  error: $error,
+  error-hover: $error-hover,
+  error-focus: $error-focus,
+  error-active: $error-active,
+  error-text: map.get($b-text, dark),
+  error-text-hover: map.get($b-text, dark),
+  error-text-focus: map.get($b-text, dark),
+  error-text-active: map.get($b-text, dark),
+  accent: $accent,
+  accent-hover: $accent-hover,
+  accent-focus: $accent-focus,
+  accent-active: $accent-active,
+  accent-text: map.get($b-text, dark),
+  accent-text-hover: map.get($b-text, dark),
+  accent-text-focus: map.get($b-text, dark),
+  accent-text-active: map.get($b-text, dark),
+  warning: $warning,
+  warning-hover: $warning-hover,
+  warning-focus: $warning-focus,
+  warning-active: $warning-active,
+  warning-text: map.get($b-text, dark),
+  warning-text-hover: map.get($b-text, dark),
+  warning-text-focus: map.get($b-text, dark),
+  warning-text-active: map.get($b-text, dark),
+  success: $success,
+  success-hover: $success-hover,
+  success-focus: $success-focus,
+  success-active: $success-active,
+  success-text: map.get($b-text, dark),
+  success-text-hover: map.get($b-text, dark),
+  success-text-focus: map.get($b-text, dark),
+  success-text-active: map.get($b-text, dark),
+);
+
+// ==================================== //
+// Buttons
+// ==================================== //
+$btn-types-style: (
+  'primary': (
+    'base': $primary,
+    'hover': $primary-hover,
+    'focus': $primary-hover,
+    'active': $primary-hover,
+    'text': map.get($b-text, dark),
+    'text-hover': map.get($b-text, dark),
+    'text-focus': map.get($b-text, dark),
+    'text-active': map.get($b-text, dark),
+    'adding-styles': (
+      'v-btn--text': (
+        'base': transparent,
+        'hover': $secondary-hover,
+        'focus': $secondary-hover,
+        'active': $secondary-hover,
+        'text': $primary,
+        'text-hover': $primary,
+        'text-focus': $primary,
+        'text-active': $primary,
+      ),
+      'v-btn--text-inline': (
+        'text': $primary,
+        'text-hover': $primary-hover,
+        'text-focus': $primary-hover,
+        'text-active': $primary-hover,
+      ),
+      'v-btn--outlined': (
+        'base': transparent,
+        'hover': $sky-active,
+        'focus': $sky-active,
+        'active': $sky-active,
+        'text': $primary,
+        'border': $primary,
+        'border-hover': $primary,
+        'border-focus': $primary,
+        'border-active': $primary,
+      ),
+    ),
+  ),
+  'secondary': (
+    'base': $secondary-blue,
+    'hover': $secondary-blue-hover,
+    'focus': $secondary-blue-hover,
+    'active': $secondary-blue-hover,
+    'text': $primary,
+    'text-hover': $primary,
+    'text-focus': $primary,
+    'text-active': $primary,
+    'adding-styles': (
+      'v-btn--text': (
+        'base': transparent,
+        'hover': $secondary-hover,
+        'focus': $secondary-hover,
+        'active': $secondary-hover,
+        'text': $primary,
+      ),
+      'v-btn--text-inline': (
+        'text': $primary,
+        'text-hover': $primary-hover,
+        'text-focus': $primary-hover,
+        'text-active': $primary-hover,
+      ),
+      'v-btn--outlined': (
+        'base': transparent,
+        'hover': $sky-active,
+        'focus': $sky-active,
+        'active': $sky-active,
+        'text': $primary,
+        'text-hover': $primary,
+        'text-focus': $primary,
+        'text-active': $primary,
+        'border': $primary,
+        'border-hover': $primary,
+        'border-focus': $primary,
+        'border-active': $primary,
+      ),
+    ),
+  ),
+  'tertiary': (
+    'base': $secondary,
+    'hover': $tertiary-hover,
+    'focus': $tertiary-hover,
+    'active': $tertiary-hover,
+    'text': $main,
+    'text-hover': $primary-hover,
+    'text-focus': $primary-hover,
+    'text-active': $primary-hover,
+    'adding-styles': (
+      'v-btn--text': (
+        'base': transparent,
+        'hover': $secondary-hover,
+        'focus': $secondary-hover,
+        'active': $secondary-hover,
+        'text': $main,
+        'text-hover': $primary-hover,
+        'text-focus': $primary-hover,
+        'text-active': $primary-hover,
+      ),
+      'v-btn--text-inline': (
+        'text': $main,
+        'text-hover': $primary-hover,
+        'text-focus': $primary-hover,
+        'text-active': $primary-hover,
+      ),
+      'v-btn--outlined': (
+        'base': transparent,
+        'hover': $secondary-hover,
+        'focus': $secondary-hover,
+        'active': $secondary-hover,
+        'text': $main,
+        'text-hover': $primary-hover,
+        'text-focus': $primary-hover,
+        'text-active': $primary-hover,
+        'border': $tertiary-hover,
+        'border-hover': $tertiary-hover,
+        'border-focus': $tertiary-hover,
+        'border-active': $tertiary-hover,
+      ),
+    ),
+  ),
+  'error': (
+    'base': $error,
+    'hover': $error-hover,
+    'focus': $error-hover,
+    'active': $error-hover,
+    'text': map.get($b-text, dark),
+    'text-hover': map.get($b-text, dark),
+    'text-focus': map.get($b-text, dark),
+    'text-active': map.get($b-text, dark),
+    'adding-styles': (
+      'v-btn--text': (
+        'base': transparent,
+        'hover': $error-bg,
+        'focus': $error-bg,
+        'active': $error-bg,
+        'text': $error,
+      ),
+      'v-btn--text-inline': (
+        'base': transparent,
+        'text': $error,
+        'text-hover': $error-hover,
+        'text-focus': $error-hover,
+        'text-active': $error-hover,
+      ),
+      'v-btn--outlined': (
+        'base': transparent,
+        'hover': $error-bg,
+        'focus': $error-bg,
+        'active': $error-bg,
+        'text': $error,
+        'text-hover': $error,
+        'border': $error,
+        'border-hover': $error,
+        'border-focus': $error,
+        'border-active': $error,
+      )
+    ),
+  ),
+  'success': (
+    'base': $success,
+    'hover': $success-darken,
+    'focus': $success-darken,
+    'active': $success-darken,
+    'text': map.get($b-text, dark),
+    'text-hover': map.get($b-text, dark),
+    'text-focus': map.get($b-text, dark),
+    'text-active': map.get($b-text, dark),
+    'adding-styles': (
+      'v-btn--text': (
+        'base': transparent,
+        'hover': $success-lighten-1,
+        'focus': $success-lighten-1,
+        'active': $success-lighten-1,
+        'text': $success,
+      ),
+      'v-btn--text-inline': (
+        'base': transparent,
+        'text': $success,
+        'text-hover': $success-darken,
+        'text-focus': $success-darken,
+        'text-active': $success-darken,
+      ),
+      'v-btn--outlined': (
+        'base': transparent,
+        'hover': $success-lighten-1,
+        'focus': $success-lighten-1,
+        'active': $success-lighten-1,
+        'text': $success,
+        'text-hover': $success,
+        'border': $success,
+        'border-hover': $success,
+        'border-focus': $success,
+        'border-active': $success,
+      ),
+    ),
+  ),
+  'batman': (
+    'base': $batman,
+    'hover': $batman-hover,
+    'focus': $batman-focus,
+    'active': $batman-active,
+    'text': map.get($b-text, dark),
+    'text-hover': map.get($b-text, dark),
+    'text-focus': map.get($b-text, dark),
+    'text-active': map.get($b-text, dark),
+  ),
+);
+
+// ==================================== //
+// Selects
+// ==================================== //
+$select-sizes: (
+  'small': 24px,
+  'default': 34px,
+  'large': 38px,
+);
+
+$select-text-sizes: (
+  'small': 12px,
+  'default': 14, px 'large': 16px,
+);
+
+$booking-colors: (
+  'booking-color-new': #D2EFB6,
+  'booking-color-new-contrast': #54d39c,
+  'booking-color-cancel': #E8A6A8,
+  'booking-color-cancel-contrast': #D34141,
+  'booking-color-living': #8ECDF1,
+  'booking-color-living-contrast': #60C0FF,
+  'booking-color-left': #EEEEF1,
+  'booking-color-left-contrast': #B3BAC4,
+  'booking-color-checked': #FFE4AC,
+  'booking-color-checked-contrast': #FDDF92,
+  'booking-color-consideration': #E29EE5,
+  'booking-color-consideration-contrast': #FB90FF
+);
+
+$planning-booking-contrast-colors: (
+  'booking-color-new': #54D39C,
+  'booking-color-check-in': #60C0FF,
+  'booking-color-check-out': #DDDDE3,
+  'booking-color-waiting': #F9DF9C,
+  'booking-color-request': #D9A5FC,
+  'booking-color-cancel': #D34141,
+);
+
+$planning-booking-colors: (
+  'booking-color-new': #B6ECD5,
+  'booking-color-check-in': #ADDFFF,
+  'booking-color-check-out': #DDDDE3,
+  'booking-color-waiting': #FCECC5,
+  'booking-color-request': #D9A5FC,
+  'booking-color-cancel': #F8E0DD,
+);
+
+$planning-booking-labels-colors: (
+  "lable-red": #D34141,
+  "lable-orange": #FF8000,
+  "lable-yellow": #FFBF00,
+  "lable-green": #01A55F,
+  "lable-blue": #00449D,
+  "lable-violet": #AB4CAF,
+  "lable-lilac": #93A0C1,
+  "lable-burgundy": #AC6969,
+  "lable-gray": #cecece,
+  "lable-mustard": #DBCF3A,
+);
+
+$planning-booking-cleaning-status-colors: (
+  "cleaning-status_clean": #1875F0,
+  "cleaning-status_dirty": $error,
+  "cleaning-status_inspected": $success,
+  "cleaning-status_inspecting": #838A9A,
+  "cleaning-status_cleaning": #F47119,
+);
+
+$bookings-statistics-statuses-colors: (
+  'booking-color-new': map-get($planning-booking-contrast-colors, booking-color-new),
+  'booking-color-check-in': map-get($planning-booking-contrast-colors, booking-color-new),
+  'booking-color-cancel': $error,
+  'booking-color-inhabited': map-get($planning-booking-contrast-colors, booking-color-check-in),
+  'booking-color-check-out': $primary,
+  'booking-color-leave': map-get($planning-booking-contrast-colors, booking-color-check-out),
+);
+
+// задаем дефолтные настройки для кнопки без указанных props
+$btn-type-default: map.get($btn-types-style, 'secondary');
+$input-large-height: rem(38px); // высота большого инпута и кнопки
+$input-height: rem(34px); // дефолтная высота инпута и кнопки
+$input-small-height: rem(24px); // высота маленького инпута и кнопки
+$text-field-label-top: 4px;
+$btn-content-sizes: (
+  "small": map-get($text-sizes, caption),
+  "default": map-get($text-sizes, body),
+  "large": map-get($text-sizes, h5),
+  "large-squared": map-get($text-sizes, h1),
+);
+// ==================================== //
+// Dialogs
+// ==================================== //
+$overlay: transparentize($white, 0.2);
+$dialog-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+$dialog-border: 2px solid $secondary-hover;
+$dialog-header-height: rem(70px);
+
+$header-height: rem(70px);
+
+// ==================================== //
+// Transition's
+// ==================================== //
+$transition-duration-default: .3s;
+$transition-timing-fn-default: ease;
+$dialog-custom-header-background: $secondary-hover;
+
+
+// ==================================== //
+// checkbox / radio sizes
+// ==================================== //
+$selection-sizes: (
+  'small': 14px,
+  'default': 16px,
+  'large': 18px,
+);
+
+$table-cell-size: (
+  'action': 96px,
+);
+
+// ==================================== //
+// Chips
+// ==================================== //
+$chip-border-radius: (
+  'x-small': 4px,
+  'small': 4px,
+  'default': 6px,
+  'large': 6px,
+)

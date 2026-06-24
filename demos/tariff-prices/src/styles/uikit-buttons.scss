@@ -1,0 +1,115 @@
+@import "./bnovo-shims";
+@import "./theme/tools/custom-variables";
+
+.v-btn {
+  transition-property: color, background-color, border;
+  transition-duration: 0.2s;
+  letter-spacing: normal;
+  text-transform: none;
+  font-weight: map-get($font-weights, medium);
+  font-size: map-get($text-sizes, body);
+  border-radius: 6px;
+
+  &::before {
+    display: none;
+  }
+
+  &:not(.v-btn--icon):not(.v-btn--squared) {
+    min-height: $input-height;
+    height: $input-height;
+    padding-inline: 16px;
+  }
+
+  &.v-btn--variant-outlined,
+  &.v-btn--variant-flat {
+    letter-spacing: normal;
+    text-transform: none;
+  }
+
+  &.v-btn--squared {
+    min-width: $input-height;
+    width: $input-height;
+    height: $input-height;
+    padding: 0;
+  }
+
+  &.v-btn--text-inline {
+    display: inline;
+    padding: 0;
+    height: auto;
+    min-width: auto !important;
+    line-height: normal;
+    background-color: transparent !important;
+  }
+
+  &.bg-primary,
+  &.text-primary.v-btn--variant-flat {
+    background-color: $primary !important;
+    color: #fff !important;
+  }
+
+  &.bg-secondary,
+  &.text-secondary.v-btn--variant-flat {
+    background-color: $secondary-blue !important;
+    color: $primary !important;
+  }
+
+  &.text-tertiary.v-btn--variant-outlined,
+  &.text-tertiary.v-btn--variant-flat {
+    color: $main !important;
+  }
+
+  &.text-tertiary.v-btn--variant-outlined {
+    border-color: $tertiary-hover !important;
+    background-color: transparent !important;
+  }
+
+  &.text-tertiary.v-btn--variant-flat:not(.v-btn--active) {
+    background-color: $secondary !important;
+  }
+}
+
+.v-btn-toggle.b-btn-group {
+  height: $input-height;
+  overflow-x: visible;
+  overflow-y: visible;
+  flex-shrink: 0;
+
+  .v-btn {
+    min-height: $input-height !important;
+    height: $input-height !important;
+    flex-shrink: 0;
+  }
+}
+
+.v-btn-group.v-btn-toggle {
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.v-btn-toggle.b-btn-group:not(.v-btn-toggle--borderless) {
+  .v-btn.v-btn--variant-outlined {
+    border-color: $border-color !important;
+    color: $main !important;
+    background-color: transparent !important;
+  }
+
+  .v-btn.v-btn--selected,
+  .v-btn.v-btn--active {
+    color: $primary !important;
+    background-color: $primary-lighten-4 !important;
+    border-color: $secondary-blue-hover !important;
+    font-weight: map-get($font-weights, bold);
+  }
+}
+
+.bnovo-btn,
+.b-screen-footer .v-btn {
+  min-height: $input-height;
+  font-size: map-get($text-sizes, body);
+}

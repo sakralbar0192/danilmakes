@@ -1,0 +1,17 @@
+@import '../../../../styles/variables.scss';
+
+/// Поверхность «закрытая продажа»: фон, левый border, hover — цены/ограничения, roomtype closed-sale-cell.
+@mixin tariff-closed-sale-surface {
+  background-color: $closed-bg-color !important;
+  border-left: 1px solid $closed-bg-color !important;
+
+  &:hover {
+    border-left: 1px solid $closed-hover-bg-color !important;
+    background-color: $closed-hover-bg-color !important;
+  }
+}
+
+/// Фон колонки имени roomtype и обёртки дней (main).
+@mixin tariff-roomtype-main-column-bg {
+  background-color: $main-cell-bg-color !important;
+}

@@ -26,14 +26,13 @@ export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
         sourceLink: 'https://github.com/sakralbar0192/danilmakes'
     },
     {
-        id: 'cyberzilla',
-        title: 'CyberZilla',
+        id: 'tariff-prices',
+        title: 'Цены и ограничения',
         category: 'product',
-        task: 'Разработать интернет-магазин с каталогом, корзиной и оформлением заказа.',
-        solution: 'SPA на Vue 3: Composition API, Pinia, Vue Router, Vuetify, работа с backend API.',
-        result: 'Полноценный UI магазина с адаптивной вёрсткой, демо доступно на сайте.',
-        demoLink: `/CodeExample/${ECodeExamples.CYBER_ZILLA}`,
-        sourceLink: 'https://github.com/sakralbar0192/CyberZilla'
+        task: 'Сложный экран управления ценами и ограничениями тарифа: календарная таблица, inline-редактирование, массовые обновления.',
+        solution: 'Vue 3 + Vuex + Vuetify 3, виртуальный скролл, drag-selection, MSW-мок API.',
+        result: 'Интерактивное демо с переключением тарифов, режимов и сохранением без backend.',
+        demoLink: `/CodeExample/${ECodeExamples.TARIFF_PRICES}`
     },
     {
         id: 'racketmate',

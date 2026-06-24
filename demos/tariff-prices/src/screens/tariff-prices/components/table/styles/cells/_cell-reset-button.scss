@@ -1,0 +1,20 @@
+@import '../../../../styles/variables.scss';
+
+/** Общая кнопка сброса в ячейках цены и ограничений (таблица). */
+@mixin tariff-cell-reset-button {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  left: 4px;
+  z-index: 5;
+  width: 14px !important;
+  cursor: url("/public/spa/img/pointer.png"), pointer;
+
+  :global(.v-icon) {
+    transform: scaleX(-1);
+  }
+}
+
+.reset-button {
+  @include tariff-cell-reset-button;
+}

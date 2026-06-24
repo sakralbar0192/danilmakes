@@ -41,8 +41,8 @@ const CodeExample: FC = () => {
                 dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.KEKSOBOOKING))
                 break
 
-            case ECodeExamples.CYBER_ZILLA:
-                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.CYBER_ZILLA))
+            case ECodeExamples.TARIFF_PRICES:
+                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.TARIFF_PRICES))
                 break
         }
 

@@ -1,1 +1,0 @@
-import{_ as t,u as o,r,o as p,c as n,a as c,t as l,b as _,d as u,n as i}from"./index-5fb056fc.js";const m="_appWrapper_1lau7_1",d={appWrapper:m},f={__name:"MainPage",setup(v){const e=o();return(s,y)=>{const a=r("router-view");return p(),n("div",{class:i(s.$style.appWrapper)},[c("h1",null,l(_(e).title),1),u(a)],2)}}},M={$style:d},g=t(f,[["__cssModules",M]]);export{g as default};

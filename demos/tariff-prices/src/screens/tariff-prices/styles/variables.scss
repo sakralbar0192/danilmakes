@@ -1,0 +1,25 @@
+$cell-width: 86px;
+$cell-height: 32px;
+/** Контент внутри v-card с bordered-b: внешняя высота ячейки включает нижнюю границу (border-box). */
+$tariff-table-cell-inner-height: $cell-height - 1px;
+
+$updating-price-cell-width: 95.88px;
+$updating-price-cell-height: 48px;
+
+$price-cell-default-text-color: #888B91;
+
+$main-cell-bg-color: #F7F8FA;
+$sub-cell-bg-color: #FFFFFF;
+$closed-bg-color: #FFF5F2;
+
+$main-cell-hover-bg-color: #F0F1F5;
+$sub-cell-hover-bg-color: #FAFAFB;
+$closed-hover-bg-color: #FFE2DB;
+
+$copied-restriction-cell-background: #F0F1F5;
+
+$tariff-table-grid-border-color: rgba(0, 0, 0, 0.12);
+
+$compact-restriction-filled-bg-color: #FFD38C;
+$compact-restriction-boolean-filled-bg-color: #FFC86F;
+$compact-restriction-copied-filled-bg-color: #FFDBAB;

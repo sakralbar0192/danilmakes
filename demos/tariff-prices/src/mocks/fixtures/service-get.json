@@ -1,0 +1,11 @@
+{
+  "services": [
+    {
+      "id": "1",
+      "name": "Завтрак",
+      "board_type": "b",
+      "price": "500",
+      "enabled": "1"
+    }
+  ]
+}

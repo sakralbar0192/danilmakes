@@ -1,0 +1,112 @@
+@import "./bnovo-shims";
+@import "./theme/tools/custom-variables";
+
+$tariff-control-height: $input-height;
+
+.b-input-group {
+  display: grid;
+  grid-auto-flow: column;
+  width: 100%;
+
+  > label {
+    font-weight: map-get($font-weights, bold);
+  }
+
+  > .slot-wrapper {
+    min-width: 0;
+
+    .b-select,
+    .v-select {
+      width: 100%;
+    }
+
+    &:first-of-type .v-field {
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      border-right-width: 0;
+    }
+
+    &:not(:first-of-type):not(:last-of-type) .v-field {
+      border-radius: 0 !important;
+      border-right-width: 0;
+    }
+
+    &:last-of-type:not(:only-of-type) .v-field {
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+    }
+  }
+}
+
+.b-select.v-select,
+.b-select.b-select--grouped {
+  cursor: pointer;
+
+  .v-field {
+    min-height: $tariff-control-height;
+    font-size: 14px;
+    color: $main;
+    --v-field-padding-start: 12px;
+    --v-field-padding-end: 8px;
+  }
+
+  &.b-select--error .v-field__outline {
+    color: $error !important;
+  }
+}
+
+.b-select-menu__card {
+  overflow-y: auto;
+}
+
+.b-select.v-select {
+  .v-field {
+    min-height: $tariff-control-height;
+  }
+
+  .v-field__input {
+    min-height: $tariff-control-height;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 14px;
+    align-items: center;
+  }
+
+  .v-field__outline {
+    --v-field-border-opacity: 1;
+  }
+
+  &.b-select-all .v-autocomplete__output-count,
+  &.b-select-all .v-autocomplete__output,
+  .v-autocomplete__output-count,
+  .v-autocomplete__output {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    color: $main;
+  }
+}
+
+.v-select__selection,
+.v-select__selection--comma {
+  font-size: 14px;
+  color: $main;
+}
+
+.b-select-menu .v-list-item-title {
+  font-size: 14px;
+}
+
+/* Ячейки таблицы: контент по центру, box-sizing как в production */
+.bnovo-tariff-prices-and-restrictions-table-price-cell,
+[data-test="tariff-restriction-cell"],
+[data-test="tariff-price-cell"] {
+  box-sizing: border-box;
+}
+
+.bnovo-tariff-prices-and-restrictions-table-price-cell input,
+[data-test="tariff-restriction-cell"] input {
+  box-sizing: border-box;
+}

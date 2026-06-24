@@ -1,0 +1,52 @@
+@import "./bnovo-shims";
+@import "./theme/tools/custom-variables";
+
+$tariff-toolbar-control-height: $input-height;
+
+.tariff-prices-and-restrictions-table-toolbar {
+  .bnovo-tariff-prices-table-sticky-header-inner {
+    min-height: $tariff-toolbar-control-height;
+  }
+
+  .d-flex.align-center {
+    align-items: center !important;
+  }
+
+  .b-btn.v-btn,
+  .v-btn-toggle.b-btn-group .v-btn {
+    min-height: $tariff-toolbar-control-height !important;
+    height: $tariff-toolbar-control-height !important;
+  }
+
+  .b-select.v-select .v-field {
+    min-height: $tariff-toolbar-control-height !important;
+    height: $tariff-toolbar-control-height !important;
+  }
+
+  .b-select.v-select .v-field__input {
+    min-height: $tariff-toolbar-control-height !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .b-input-group {
+    align-items: stretch;
+  }
+
+  .planning-header-toolbar__arrows .v-btn {
+    min-width: $tariff-toolbar-control-height !important;
+    width: $tariff-toolbar-control-height !important;
+  }
+
+  .tariff-prices-and-restrictions-table-toolbar__price-toggler {
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    max-width: none;
+  }
+}
+
+.bnovo-tariff-prices-table-sticky-header {
+  .v-card.pa-ingroup {
+    box-sizing: border-box;
+  }
+}

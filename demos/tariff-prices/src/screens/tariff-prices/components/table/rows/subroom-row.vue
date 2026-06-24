@@ -1,0 +1,188 @@
+<template>
+  <div>
+    <div
+      :class="['d-flex align-center justify-space-between bordered-b bordered-r bordered-l rounded-0', {
+        'pa-ingroup pl-groups': !compactMode,
+        'pa-typo': compactMode,
+      }]"
+      :style="[$options.nameStyles, { maxWidth: `${$options.roomtypeNameCellWidth}px`, height: `${rowHeight}px`, boxSizing: 'border-box' }]"
+    >
+      <people-count
+        :adults="subroom.adults"
+        :children="subroom.children"
+        :without-beds-children="withoutBedsChildren"
+        :class="[{'ml-inner': !compactMode}]"
+      />
+      <span v-if="isExtraCharge" :style="{color: $vuetify.theme.current.colors.secondary}">
+        {{ bedTypeString }}
+      </span>
+      <subroom-people-tooltip :subroom="subroom" :without-beds-children="withoutBedsChildren"/>
+    </div>
+    <div :style="daysWrapperStyle">
+      <div :style="hcalDaysRowFlexStyle">
+        <div :style="hcalLeadingSpacerStyle" aria-hidden="true"/>
+        <div :style="visibleDaysStyle">
+          <div
+            v-for="item in priceCellsForVisibleDays"
+            :key="item.day.date"
+          >
+            <tariff-table-price-cell
+              :cell-vm="item.cellVm"
+            />
+          </div>
+        </div>
+        <div :style="hcalTrailingSpacerStyle" aria-hidden="true"/>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { bedTypesShort, bedTypes } from "../../../config/screen-config.js";
+import { roomtypeNameCellWidth, cellWidth, cellHeight, nameCellStyles,
+  rowWindowCacheLimit } from "../config/table-grid-metrics.js";
+import tariffHorizontalCalendarSlice from "../mixins/tariff-horizontal-calendar-slice.js";
+import TariffTablePriceCell from "../cells/tariff-table-price-cell.vue";
+import PeopleCount from "../shared/people-count.vue";
+import SubroomPeopleTooltip from "../shared/subroom-people-tooltip.vue";
+
+export default {
+  name: "BnovoTariffPricesAndRestrictionsTableRoomtypeRow",
+  components: {
+    TariffTablePriceCell,
+    PeopleCount,
+    SubroomPeopleTooltip,
+  },
+  mixins: [tariffHorizontalCalendarSlice],
+  inject: {
+    getPriceCellVm: { default: null },
+    getPriceRowVmEpoch: { default: null },
+  },
+  props: {
+    subroom: {
+      type: Object,
+      required: true,
+    },
+    isExtraCharge: {
+      type: Boolean,
+      default: false,
+    },
+    withoutBedsChildren: {
+      type: Array,
+      default: () => [],
+    },
+    calendar: {
+      type: Array,
+      default: null,
+    },
+    compactMode: {
+      type: Boolean,
+      default: false,
+    },
+    rowHeight: {
+      type: Number,
+      default: cellHeight,
+    },
+  },
+  roomtypeNameCellWidth,
+  cellWidth,
+  cellHeight,
+  nameStyles: nameCellStyles,
+  data() {
+    return {
+      rowWindowPriceCellsCache: new Map(),
+      rowDayPriceCellsCache: new Map(),
+    };
+  },
+  computed: {
+    bedTypeString() {
+      return (this.compactMode ? bedTypesShort : bedTypes)[0] || "";
+    },
+    daysWrapperStyle() {
+      const width = this.hcalCalendarLength * this.hcalCellWidth;
+      return { width: `${width}px`, minWidth: `${width}px` };
+    },
+    visibleDaysStyle() {
+      const count = this.hcalDisplayCalendar.length;
+      const cw = this.hcalCellWidth;
+      return {
+        marginLeft: "0",
+        display: "grid",
+        gridTemplateColumns: `repeat(${count}, ${cw}px)`,
+        width: `${count * cw}px`,
+      };
+    },
+    priceCellsForVisibleDays() {
+      const vmEpoch = typeof this.getPriceRowVmEpoch === "function"
+        ? this.getPriceRowVmEpoch({ roomtype: this.subroom })
+        : "";
+      const cacheKey = this.getRowWindowCacheKey(vmEpoch);
+      const cached = cacheKey ? this.rowWindowPriceCellsCache.get(cacheKey) : null;
+      if (cached) {
+        return cached;
+      }
+      const fn = this.getPriceCellVm;
+      if (typeof fn !== "function") {
+        return [];
+      }
+      const rows = this.hcalDisplayCalendar.map((day) => {
+        const dayKey = day?.date || "";
+        const cachedDay = dayKey ? this.rowDayPriceCellsCache.get(dayKey) : null;
+        if (cachedDay && cachedDay.epoch === vmEpoch) {
+          return {
+            day,
+            cellVm: cachedDay.cellVm,
+          };
+        }
+        const cellVm = fn({
+          roomtype: this.subroom,
+          day,
+          isMain: false,
+        });
+        if (dayKey) {
+          if (this.rowDayPriceCellsCache.size >= rowWindowCacheLimit) {
+            const oldestDayKey = this.rowDayPriceCellsCache.keys().next().value;
+            if (oldestDayKey !== undefined) {
+              this.rowDayPriceCellsCache.delete(oldestDayKey);
+            }
+          }
+          this.rowDayPriceCellsCache.set(dayKey, {
+            cellVm,
+            epoch: vmEpoch,
+          });
+        }
+        return {
+          day,
+          cellVm,
+        };
+      });
+      if (cacheKey) {
+        if (this.rowWindowPriceCellsCache.size >= rowWindowCacheLimit) {
+          const oldestKey = this.rowWindowPriceCellsCache.keys().next().value;
+          if (oldestKey !== undefined) {
+            this.rowWindowPriceCellsCache.delete(oldestKey);
+          }
+        }
+        this.rowWindowPriceCellsCache.set(cacheKey, rows);
+      }
+      return rows;
+    },
+  },
+  methods: {
+    getRowWindowCacheKey(vmEpoch = "") {
+      if (!this.subroom?.id) {
+        return "";
+      }
+      const epoch = vmEpoch || (typeof this.getPriceRowVmEpoch === "function"
+        ? this.getPriceRowVmEpoch({ roomtype: this.subroom })
+        : "");
+      return [
+        this.subroom.id,
+        this.isExtraCharge ? 1 : 0,
+        this.hcalWindowKey,
+        epoch,
+      ].join("|");
+    },
+  },
+};
+</script>

@@ -31,6 +31,7 @@ API: http://localhost:3000/api/health
 |---------|----------|
 | `npm run dev` | Vite dev server с proxy `/api` |
 | `npm run build` | Сборка frontend в `dist/` |
+| `npm run build:tariff-prices` | Сборка демо «Цены и ограничения» в `public/tariffPrices/` |
 | `npm run lint` | ESLint |
 | `npm run preview` | Просмотр production-сборки |
 
@@ -50,6 +51,7 @@ docker/        — конфиги nginx
 scripts/       — deploy.sh, init-ssl.sh, backup-db.sh
 docs/          — архитектура, деплой, roadmap
 public/        — статические демо-проекты портфолио
+demos/         — исходники демо (сборка в public/)
 ```
 
 ## Деплой на VPS

@@ -1,0 +1,159 @@
+.bnovo-tariff-prices-and-restrictions__scroll-container {
+  @include scrollbar();
+  max-width: 1912px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+
+  @include respondBelow(md) {
+    /* Не блокировать scroll chaining — иначе нет нативного pull-to-refresh в мобильном браузере. */
+    overscroll-behavior-y: auto;
+  }
+  /* JS: `scroll-container-bottom-fit-controller` + `clampBottomOcclusionForMinScrollViewport` в scroll-container-bottom-fit.js */
+  --prices-table-bottom-gap: 8px;
+  scroll-padding-bottom: var(--prices-table-horizontal-scrollbar-reserve, 0px);
+  max-height: calc(
+    100vh
+    - var(--prices-table-top-offset, 0px)
+    - var(--prices-table-bottom-occlusion, 0px)
+    - var(--prices-table-bottom-gap)
+  );
+  max-height: calc(
+    100dvh
+    - var(--prices-table-top-offset, 0px)
+    - var(--prices-table-bottom-occlusion, 0px)
+    - var(--prices-table-bottom-gap)
+  );
+}
+
+/* Липнет только toolbar+months; табы/tariff-info скроллятся вместе с таблицей. */
+.bnovo-tariff-prices-and-restrictions__scroll-container {
+  .bnovo-tariff-prices-page-sticky-header {
+    position: static;
+  }
+}
+
+.bnovo-tariff-prices-table-sticky-header {
+  top: 0;
+}
+
+/* WebKit Safari: z-order, compositing и top под fixed header приложения (см. webkit-safari-sticky-fix.js) */
+.bnovo-tariff-prices-and-restrictions__scroll-container--safari-sticky-fix {
+  scroll-padding-top: var(--prices-table-sticky-top-relative, 0px);
+
+  .bnovo-tariff-prices-table-sticky-header {
+    top: var(--prices-table-sticky-top-relative, 0px);
+    z-index: 8;
+    isolation: isolate;
+  }
+
+  @include respondAbove(md) {
+    .bnovo-tariff-prices-table-sticky-header {
+      top: var(--prices-table-sticky-top, var(--prices-table-top-offset, 0px));
+    }
+  }
+
+  .bnovo-tariff-prices-mobile-edit-elevated-host .bnovo-tariff-prices-table-sticky-header {
+    z-index: 1;
+  }
+
+  .bnovo-tariff-prices-table-sticky-header-inner {
+    z-index: 3;
+  }
+
+  .bnovo-tariff-prices-table-container--safari-compositing {
+    backface-visibility: hidden;
+  }
+}
+
+.bordered {
+  border: 1px solid $border-color !important;
+}
+
+.bordered-r {
+  border-right: 1px solid $border-color !important;
+}
+
+.bordered-l {
+  border-left: 1px solid $border-color !important;
+}
+
+.bordered-t {
+  border-top: 1px solid $border-color !important;
+}
+
+.bordered-b {
+  border-bottom: 1px solid $border-color !important;
+}
+
+.gap-groups {
+  gap: map-get($gaps , groups)
+}
+
+.gap-inner {
+  gap: map-get($gaps , inner)
+}
+
+.scrollbar{
+  @include scrollbar();
+}
+
+body.bnovo-tariff-prices-mobile-editing {
+  .bnovo-mobile-footer--outer {
+    visibility: hidden;
+    display: none;
+    pointer-events: none;
+  }
+
+  // Корневой v-app — #bnovo-spa (класса .bnovo-v-app на нём нет).
+  #bnovo-spa .bnovo-spa__wrapper {
+    padding-bottom: 0 !important;
+  }
+
+  // Запас под нижнюю навигацию для fixed page footer (headerHeightGroup, max-width 1000px).
+  .b-screen-footer:not(.chm-module-only) {
+    margin-bottom: 0 !important;
+  }
+}
+
+.tariff-category-select--text-wrap {
+  white-space: normal;
+  word-break: break-word;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+html:fullscreen {
+  &::backdrop {
+    background: inherit;
+  }
+
+  body.bnovo-tariff-prices-page-fullscreen {
+    .bnovo-header--outer {
+      display: none !important;
+    }
+
+    .bnovo-spa__wrapper {
+      padding: 0 !important;
+
+      & > .container {
+        max-width: 100%;
+        padding: 0;
+      }
+    }
+
+    .bnovo-tariff-prices-and-restrictions__scroll-container {
+      max-width: none;
+      width: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .bnovo-v-app .container {
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+  }
+}
