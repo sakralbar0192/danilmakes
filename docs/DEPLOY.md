@@ -57,7 +57,16 @@ NOTIFY_EMAIL=ya@daniluhov.ru
 
 ## DNS
 
-A-запись домена → IP VPS. Подождите до 24 ч propagation.
+Домен: **danilmakes.ru** → **109.71.242.7**
+
+| Запись | Тип | Значение |
+|--------|-----|----------|
+| `@` | A | `109.71.242.7` |
+| `www` | A | `109.71.242.7` |
+
+Проверка: `dig +short danilmakes.ru` — должен вернуть IP. Propagation: до 24–48 ч.
+
+Пока DNS не работает, сайт доступен по **http://109.71.242.7**. В `.env` на сервере временно: `CORS_ORIGIN=http://109.71.242.7`.
 
 ## Первый деплой
 
@@ -83,8 +92,10 @@ docker compose -f docker-compose.prod.yml up -d --build
 
 ## SSL (Let's Encrypt)
 
+**Только после того, как `dig +short danilmakes.ru` вернёт IP сервера.**
+
 ```bash
-export DOMAIN=daniluhov.ru
+export DOMAIN=danilmakes.ru
 export CERTBOT_EMAIL=ya@daniluhov.ru
 ./scripts/init-ssl.sh
 

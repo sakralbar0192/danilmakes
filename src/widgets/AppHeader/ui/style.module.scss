@@ -1,13 +1,18 @@
 .header {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
     display: flex;
     align-items: center;
-    padding: 20px;
-    height: 60px;
-    border-bottom: 1px solid #666;
+    padding: 12px 16px;
+    min-height: 56px;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
 
     a {
         display: block;
-        margin: 0 0 0 20px;
+        margin: 0 0 0 16px;
+        font-size: 0.9rem;
     }
 }
 
@@ -15,28 +20,39 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 5px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 8px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
 
     svg {
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
     }
 }
 
 .sidebarContainer {
     display: flex;
     flex-direction: column;
+    padding-top: 8px;
 
     a {
-        margin: 0 0 10px;
+        display: block;
+        padding: 12px 4px;
+        margin: 0;
+        font-size: 1.05rem;
         color: #333;
+        text-decoration: none;
 
         &.active {
-            color: #ff8c00;
+            color: #1e8bc3;
+            font-weight: 600;
         }
 
         &:hover {
-            color: blue;
+            color: #1e8bc3;
         }
     }
 }

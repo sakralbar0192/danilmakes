@@ -7,6 +7,7 @@ export interface PortfolioItem {
     title: string
     category: PortfolioCategory
     task: string
+    solution: string
     result: string
     demoLink: string
     demoExternal?: boolean
@@ -18,8 +19,9 @@ export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
         id: 'danilmakes',
         title: 'danilmakes.ru',
         category: 'product',
-        task: 'Сайт-визитка для поиска небольших заказов: портфолио, контакты, форма заявок.',
-        result: 'React + Node API + PostgreSQL, деплой на VPS, уведомления на почту.',
+        task: 'Запустить персональный сайт для привлечения небольших заказов: портфолио, контакты, приём заявок без посредников.',
+        solution: 'Full-stack на своём VPS: React SPA, Express API, PostgreSQL в Docker, nginx, уведомления через Яндекс SMTP.',
+        result: 'Сайт в проде по IP, форма сохраняет заявки в БД и дублирует на почту. Готов к домену и SSL.',
         demoLink: '/',
         sourceLink: 'https://github.com/sakralbar0192/danilmakes'
     },
@@ -27,8 +29,9 @@ export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
         id: 'cyberzilla',
         title: 'CyberZilla',
         category: 'product',
-        task: 'Интернет-магазин с каталогом, корзиной и оформлением заказа.',
-        result: 'SPA на Vue 3: роутинг, состояние, UI-компоненты, работа с API.',
+        task: 'Разработать интернет-магазин с каталогом, корзиной и оформлением заказа.',
+        solution: 'SPA на Vue 3: Composition API, Pinia, Vue Router, Vuetify, работа с backend API.',
+        result: 'Полноценный UI магазина с адаптивной вёрсткой, демо доступно на сайте.',
         demoLink: `/CodeExample/${ECodeExamples.CYBER_ZILLA}`,
         sourceLink: 'https://github.com/sakralbar0192/CyberZilla'
     },
@@ -36,8 +39,9 @@ export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
         id: 'racketmate',
         title: 'RacketMate',
         category: 'bot',
-        task: 'Telegram-бот для записи на теннисные корты и управления бронированием.',
-        result: 'Backend на bun + Telegraf, PostgreSQL, развёрнутый бот в проде.',
+        task: 'Упростить запись на теннисные корты — бронирование через Telegram без звонков и таблиц.',
+        solution: 'Бот на bun + Telegraf, PostgreSQL для расписания и броней, деплой в прод.',
+        result: 'Бот работает в продакшене, записи через @RacketMateBot.',
         demoLink: 'https://t.me/RacketMateBot',
         demoExternal: true
     }
@@ -49,7 +53,8 @@ export const PORTFOLIO_LAYOUTS: PortfolioItem[] = [
         title: 'Mishka',
         category: 'layout',
         task: 'Адаптивный интернет-магазин: сетка каталога, карточки товаров, формы.',
-        result: 'Кроссбраузерная вёрстка, mobile-first, семантическая разметка.',
+        solution: 'HTML5, SCSS, mobile-first, семантическая разметка, Gulp-сборка.',
+        result: 'Кроссбраузерная вёрстка, корректное отображение на desktop и mobile.',
         demoLink: `/CodeExample/${ECodeExamples.MISHKA}`,
         sourceLink: 'https://github.com/sakralbar0192/Mishka'
     },
@@ -58,7 +63,8 @@ export const PORTFOLIO_LAYOUTS: PortfolioItem[] = [
         title: 'Jewellery',
         category: 'layout',
         task: 'Многостраничный каталог украшений с фильтрацией и карточкой товара.',
-        result: 'Несколько страниц, единая дизайн-система, сборка через Webpack.',
+        solution: 'Несколько связанных страниц, единая сетка и компоненты, сборка Webpack.',
+        result: 'Согласованный дизайн на всех страницах, удобная навигация по каталогу.',
         demoLink: `/CodeExample/${ECodeExamples.JEVELLERY}`,
         sourceLink: 'https://github.com/sakralbar0192/Jewellery'
     },
@@ -67,7 +73,8 @@ export const PORTFOLIO_LAYOUTS: PortfolioItem[] = [
         title: 'Europe',
         category: 'layout',
         task: 'Промо-лендинг турагентства: слайдеры, табы, интерактивные формы.',
-        result: 'Сложная страничная структура, анимации, валидация форм.',
+        solution: 'Сложная страничная структура, JS-анимации, валидация полей форм.',
+        result: 'Интерактивный лендинг с рабочими UI-элементами и формами.',
         demoLink: `/CodeExample/${ECodeExamples.EUROPE}`,
         sourceLink: 'https://github.com/sakralbar0192/Europe'
     },
@@ -76,7 +83,8 @@ export const PORTFOLIO_LAYOUTS: PortfolioItem[] = [
         title: 'SmartDevice',
         category: 'layout',
         task: 'Лендинг tech-продукта с акцентом на типографику и модульную сетку.',
-        result: 'Адаптив под desktop и mobile, BEM-подобная организация стилей.',
+        solution: 'Модульная сетка, SCSS, адаптив под breakpoints desktop/tablet/mobile.',
+        result: 'Чистая вёрстка с акцентом на контент и читаемость на всех экранах.',
         demoLink: `/CodeExample/${ECodeExamples.SMART_DEVICE}`,
         sourceLink: 'https://github.com/sakralbar0192/smart-device'
     },
@@ -85,7 +93,8 @@ export const PORTFOLIO_LAYOUTS: PortfolioItem[] = [
         title: 'Bicycle',
         category: 'layout',
         task: 'Промо-сайт веломагазина с каталогом и блоком преимуществ.',
-        result: 'Семантическая вёрстка, оптимизация графики, доступность.',
+        solution: 'Семантическая разметка, оптимизация изображений, доступные интерактивные элементы.',
+        result: 'Быстрая загрузка, понятная структура, адаптив под мобильные.',
         demoLink: `/CodeExample/${ECodeExamples.BICYCLE}`,
         sourceLink: 'https://github.com/sakralbar0192/uhov-bicycles'
     }

@@ -101,6 +101,15 @@
 
 @media (max-width: 576px) {
     .wrapper {
-        padding: 24px 20px 40px;
+        padding: 24px 16px 40px;
+    }
+
+    .links {
+        flex-wrap: wrap;
+    }
+
+    .demoLink,
+    .ctaButton {
+        text-align: center;
     }
 }

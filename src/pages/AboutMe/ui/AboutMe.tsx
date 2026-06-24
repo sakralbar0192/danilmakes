@@ -12,6 +12,8 @@ import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 
 import { SITE_CONTACT } from 'shared/consts/contact'
 
+import { PRICING_NOTE, PRICING_TIERS } from 'shared/consts/pricing'
+
 import myAvatarUrl from 'widgets/AboutMeCard/assets/myAvatar.jpeg'
 
 const SERVICES = [
@@ -133,6 +135,40 @@ const AboutMe: FC = () => {
                                 <h3>{ service.title }</h3>
 
                                 <p>{ service.text }</p>
+
+                            </div>
+
+                        </Col>
+
+                    ))}
+
+                </Row>
+
+            </section>
+
+            <section className={ classes.section }>
+
+                <h2>Услуги и цены</h2>
+
+                <p className={ classes.pricingNote }>{ PRICING_NOTE }</p>
+
+                <Row xs={ 1 } sm={ 2 } className='g-3'>
+
+                    {PRICING_TIERS.map(tier => (
+
+                        <Col key={ tier.title }>
+
+                            <div className={ classes.pricingCard }>
+
+                                <div className={ classes.pricingHeader }>
+
+                                    <h3>{ tier.title }</h3>
+
+                                    <span className={ classes.price }>{ tier.price }</span>
+
+                                </div>
+
+                                <p>{ tier.description }</p>
 
                             </div>
 

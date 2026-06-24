@@ -13,6 +13,8 @@ const PortfolioCard: FC<{ item: PortfolioItem }> = ({ item }) => {
                 <Card.Title>{ item.title }</Card.Title>
                 <p className={ classes.label }>Задача</p>
                 <Card.Text>{ item.task }</Card.Text>
+                <p className={ classes.label }>Решение</p>
+                <Card.Text>{ item.solution }</Card.Text>
                 <p className={ classes.label }>Результат</p>
                 <Card.Text>{ item.result }</Card.Text>
                 <div className={ classes.links }>

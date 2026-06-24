@@ -1,6 +1,7 @@
 .wrapper {
-    padding: 50px;
+    padding: 32px 24px 48px;
     max-width: 640px;
+    margin: 0 auto;
 }
 
 .intro {
@@ -13,8 +14,26 @@
     padding: 16px;
     background: #f8f9fa;
     border-radius: 8px;
+
+    p {
+        margin-bottom: 8px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 }
 
 .form {
     margin-top: 16px;
+
+    :global(.form-control) {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .wrapper {
+        padding: 24px 16px 40px;
+    }
 }

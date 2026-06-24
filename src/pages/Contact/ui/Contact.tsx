@@ -4,7 +4,7 @@ import { Alert, Button, Form, Spinner } from 'react-bootstrap'
 import classes from './styles.module.scss'
 import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
-import { SITE_CONTACT } from 'shared/consts/contact'
+import { SITE_CONTACT, hasPublicPhone } from 'shared/consts/contact'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
@@ -56,10 +56,12 @@ const Contact: FC = () => {
                     <strong>Email:</strong>{' '}
                     <a href={ `mailto:${SITE_CONTACT.email}` }>{ SITE_CONTACT.email }</a>
                 </p>
-                <p>
-                    <strong>Телефон:</strong>{' '}
-                    <a href={ `tel:${SITE_CONTACT.phone.replace(/\s/g, '')}` }>{ SITE_CONTACT.phone }</a>
-                </p>
+                {hasPublicPhone(SITE_CONTACT.phone) && (
+                    <p>
+                        <strong>Телефон:</strong>{' '}
+                        <a href={ `tel:${SITE_CONTACT.phone.replace(/\s/g, '')}` }>{ SITE_CONTACT.phone }</a>
+                    </p>
+                )}
                 <p><strong>Город:</strong> { SITE_CONTACT.city }</p>
             </div>
 

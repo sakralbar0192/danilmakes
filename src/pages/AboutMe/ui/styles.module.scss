@@ -92,6 +92,47 @@
     margin: 0;
 }
 
+.pricingNote {
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.pricingCard {
+    height: 100%;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+
+    p {
+        margin: 0;
+        color: #555;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+}
+
+.pricingHeader {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+
+    h3 {
+        margin: 0;
+        font-size: 1.05rem;
+    }
+}
+
+.price {
+    font-weight: 700;
+    color: #1e8bc3;
+    white-space: nowrap;
+}
+
 .serviceCard {
     height: 100%;
     padding: 20px;
@@ -145,5 +186,21 @@
 
     .heroActions {
         justify-content: center;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ctaPrimary,
+    .ctaSecondary {
+        text-align: center;
+    }
+
+    .pricingHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ctaBlock {
+        padding: 28px 20px;
     }
 }

@@ -20,14 +20,14 @@ Feature-Sliced Design:
 | Слой | Назначение |
 |------|------------|
 | `app/` | Роутер, Redux store, API-клиенты |
-| `pages/` | AboutMe, Contact, PostsList, CodeExample |
+| `pages/` | AboutMe, Portfolio, Contact, PostsList, CodeExample |
 | `widgets/` | AppHeader, фильтры, пагинация |
 | `entities/` | Posts, Users, Comments |
 | `shared/` | Константы, типы |
 
 ### Роутинг
 
-`createBrowserRouter` — чистые URL (`/`, `/contact`, `/PostsList`, `/CodeExample/:id`).
+`createBrowserRouter` — чистые URL (`/`, `/portfolio`, `/contact`, `/PostsList`, `/CodeExample/:id`).
 
 nginx отдаёт `index.html` для неизвестных путей (SPA fallback).
 
