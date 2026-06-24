@@ -20,7 +20,7 @@ export const ECodeExamplesLinksHrefs = {
     MISHKA: 'https://github.com/sakralbar0192/Mishka',
     KEKSOBOOKING: 'https://github.com/sakralbar0192/Keksobooking',
     POKEDEX: 'https://github.com/sakralbar0192/PokeDex',
-    POSTS_LIST: 'https://github.com/sakralbar0192/MitraSoftTest',
+    POSTS_LIST: 'https://github.com/sakralbar0192/danilmakes',
     CYBER_ZILLA: 'https://github.com/sakralbar0192/CyberZilla'
 } as const
 export type ECodeExamplesLinksHrefs = TValueOf<typeof ECodeExamplesLinksHrefs>

@@ -32,6 +32,7 @@ const Main: FC = () => {
         }
 
         dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.POSTS_LIST))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

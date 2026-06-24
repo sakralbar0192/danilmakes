@@ -65,11 +65,12 @@ const UserInfo: FC = () => {
                 }
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <>
-            <Link to='/PostsPage'>Back home</Link>
+            <Link to='/PostsList'>На главную</Link>
             <div className={ classes.container }>
                 {
                     activeUser

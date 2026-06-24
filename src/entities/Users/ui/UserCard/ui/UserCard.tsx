@@ -16,7 +16,7 @@ export const UserCard: FC<IUserCardProps> = ({ user }) => {
             <Card.Body>
                 <Card.Title>{user.name}</Card.Title>
                 <Card.Text>Email: { user.email }</Card.Text>
-                <Card.Text>Company: {user.website}</Card.Text>
+                <Card.Text>Website: {user.website}</Card.Text>
                 <Card.Text>{user.phone}</Card.Text>
             </Card.Body>
         </Card>

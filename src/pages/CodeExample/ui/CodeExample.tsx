@@ -47,11 +47,11 @@ const CodeExample: FC = () => {
         }
 
         return () => {dispatch(setCodeExampleSourceLinkHref(''))}
-    }, [choosenExample])
+    }, [choosenExample, dispatch])
 
     return (
         <div
-            dangerouslySetInnerHTML={ { __html: `<iframe className={ classes.iframe } src="${projectFolder}/index.html"></iframe>` } }
+            dangerouslySetInnerHTML={ { __html: `<iframe class="${classes.iframe}" src="/${projectFolder}/index.html"></iframe>` } }
             className={ classes.iframeWrapper }
         />
     )

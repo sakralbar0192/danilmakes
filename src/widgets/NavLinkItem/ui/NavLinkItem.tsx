@@ -23,7 +23,7 @@ export const NavLinkItem: FC<INavLinkItemProps> = ({ to, text, onClick, tooltipT
             >
                 <NavLink
                     className={ ({ isActive, isPending }) => isPending ? 'pending' : isActive ? classes.active : '' }
-                    to={ 'CodeExample/' + to }
+                    to={ `/CodeExample/${to}` }
                     onClick={ onClick }
                 >
                     {text}
