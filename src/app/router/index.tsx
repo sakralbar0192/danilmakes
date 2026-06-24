@@ -5,6 +5,7 @@ import { AboutMe } from 'pages/AboutMe'
 import { UserInfo } from 'pages/UserInfo'
 import { Main } from 'pages/Main'
 import { CodeExample } from 'pages/CodeExample'
+import { Contact } from 'pages/Contact'
 import { Portfolio } from 'pages/Portfolio'
 
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
             {
                 path: 'portfolio',
                 element: <Portfolio />
+            },
+            {
+                path: 'contact',
+                element: <Contact />
             },
             {
                 path: 'PostsList/UserInfo/:userId',
