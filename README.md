@@ -66,4 +66,5 @@ public/        — статические демо-проекты портфол
 
 ## Roadmap
 
-[docs/ROADMAP.md](docs/ROADMAP.md)
+- [docs/ROADMAP.md](docs/ROADMAP.md) — статус фаз
+- [docs/SPEC-BACKLOG.md](docs/SPEC-BACKLOG.md) — детальная спека доработок (для реализации в отдельных задачах)
