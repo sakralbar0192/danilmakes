@@ -55,7 +55,7 @@
 import { shouldIgnoreTariffRestrictionSheetVuetifyClose } from "./tariff-restriction-sheet-vuetify.js";
 
 export default {
-  name: "BnovoTariffDependentRestrictionReadonlyBottomSheet",
+  name: "TariffDependentRestrictionReadonlyBottomSheet",
   props: {
     restrictionLabel: {
       type: String,

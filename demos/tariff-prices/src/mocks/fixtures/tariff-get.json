@@ -1,8 +1,8 @@
 {
     "plans": [
         {
-            "id": "515367",
-            "hotel_id": "50660",
+            "id": "101",
+            "hotel_id": "100",
             "parent_id": "0",
             "name": "Стандартный",
             "board_b": "0",
@@ -60,9 +60,9 @@
             "deadline_calc_mode": "0"
         },
         {
-            "id": "515368",
-            "hotel_id": "50660",
-            "parent_id": "515367",
+            "id": "102",
+            "hotel_id": "100",
+            "parent_id": "101",
             "name": "+10%",
             "board_b": "0",
             "board_hb": "0",
@@ -121,7 +121,7 @@
         },
         {
             "id": "525299",
-            "hotel_id": "50660",
+            "hotel_id": "100",
             "parent_id": "0",
             "name": "X",
             "board_b": "0",

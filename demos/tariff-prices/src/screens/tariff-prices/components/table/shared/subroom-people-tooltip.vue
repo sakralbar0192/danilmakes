@@ -70,7 +70,7 @@ import rusWordCaserMixin from "@/mixins/rus-word-caser-mixin";
 import { formatChildrenAgeLabel, hasHotelChildrenAgeLabel } from "../../../lib/tariff/format-children-age-label.js";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsTableSubroomPeopleTooltip",
+  name: "TariffPricesTableSubroomPeopleTooltip",
   mixins: [rusWordCaserMixin],
   props: {
     subroom: {

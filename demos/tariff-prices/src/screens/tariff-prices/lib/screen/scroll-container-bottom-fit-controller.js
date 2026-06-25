@@ -172,11 +172,11 @@ export function createScrollContainerBottomFitController({
       if (!el) {
         return "0";
       }
-      let id = el.__bnovoScrollFitRoId;
+      let id = el.__demoScrollFitRoId;
       if (!id) {
         id = `t${(refreshResizeObserverTargets.__counter = (refreshResizeObserverTargets.__counter || 0) + 1)}`;
         try {
-          el.__bnovoScrollFitRoId = id;
+          el.__demoScrollFitRoId = id;
         } catch (err) {
           // ignore (frozen object — крайне маловероятно для HTMLElement)
         }

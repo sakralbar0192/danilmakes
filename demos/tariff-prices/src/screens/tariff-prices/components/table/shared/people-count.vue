@@ -31,7 +31,7 @@
 import { mapState } from "vuex";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsTablePeopleCount",
+  name: "TariffPricesTablePeopleCount",
   props: {
     adults: {
       type: [Number, String],

@@ -1,40 +1,34 @@
 <template>
-  <v-menu
-    v-if="shouldRender"
-    v-model="show"
-    :position-x="menuX"
-    :position-y="menuY"
-    absolute
-    offset-y
-    hide-overlay
-    @input="handleMenuInput"
-  >
-    <v-list width="180px" class="bnovo-dropdown-list" data-compact-boolean-dropdown-root>
-      <v-list-item
-        v-for="option in options"
-        :key="option.value"
-        data-test="compact-restriction-dropdown-option-text"
-        class="pr-ingroup"
-        @click="applyValue(option.value)"
-      >
-        <v-list-item-content>
-          <v-list-item-title>
-            <div class="d-flex">
-              <span>
-                {{ option.label }}
-              </span>
+  <Teleport to="body">
+    <v-card
+      v-if="shouldRender"
+      data-compact-boolean-dropdown-root
+      :class="$style.dropdown"
+      :style="dropdownStyle"
+    >
+      <v-list density="compact" class="demo-dropdown-list" width="180">
+        <v-list-item
+          v-for="option in options"
+          :key="option.value"
+          data-test="compact-restriction-dropdown-option-text"
+          class="pr-ingroup"
+          @click="applyValue(option.value)"
+        >
+          <template #title>
+            <div class="d-flex align-center">
+              <span>{{ option.label }}</span>
               <v-icon
-                v-if="option.value === selectedValue"
+                v-if="option.value === normalizedSelectedValue"
                 color="primary"
-                small
+                size="small"
                 class="icon-check ml-auto"
               />
             </div>
-          </v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-  </v-menu>
+          </template>
+        </v-list-item>
+      </v-list>
+    </v-card>
+  </Teleport>
 </template>
 
 <script>
@@ -57,20 +51,59 @@ export default {
     },
   },
   data() {
-    return { show: false };
+    return { positionTick: 0 };
   },
+  dropdownWidth: 180,
+  dropdownHeight: 88,
   computed: {
     shouldRender() {
-      return !!this.anchorEl;
+      if (!this.anchorEl) {
+        return false;
+      }
+      if (typeof this.anchorEl.isConnected === "boolean" && !this.anchorEl.isConnected) {
+        return false;
+      }
+      return true;
+    },
+    normalizedSelectedValue() {
+      return Number(this.selectedValue) ? 1 : 0;
     },
     anchorRect() {
-      return this.anchorEl?.getBoundingClientRect?.() || {};
+      void this.positionTick;
+      const rect = this.anchorEl?.getBoundingClientRect?.();
+      if (!rect || (rect.width === 0 && rect.height === 0)) {
+        return null;
+      }
+      return rect;
     },
-    menuX() {
-      return this.anchorRect.left || 0;
+    dropdownX() {
+      if (!this.anchorRect) {
+        return 0;
+      }
+      const rightSpace = window.innerWidth - this.anchorRect.right;
+      if (rightSpace < this.$options.dropdownWidth) {
+        return Math.max(8, this.anchorRect.right - this.$options.dropdownWidth);
+      }
+      return this.anchorRect.left;
     },
-    menuY() {
-      return this.anchorRect.bottom || 0;
+    dropdownY() {
+      if (!this.anchorRect) {
+        return 0;
+      }
+      const spaceBelow = window.innerHeight - this.anchorRect.bottom;
+      if (spaceBelow < this.$options.dropdownHeight) {
+        return Math.max(8, this.anchorRect.top - this.$options.dropdownHeight);
+      }
+      return this.anchorRect.bottom;
+    },
+    dropdownStyle() {
+      return {
+        position: "fixed",
+        left: `${this.dropdownX}px`,
+        top: `${this.dropdownY}px`,
+        width: `${this.$options.dropdownWidth}px`,
+        zIndex: 2400,
+      };
     },
     restrictionOnLabel() {
       if (this.restrictionType === PriceAndRestrictionsService.closedDepartureRestrictionName) {
@@ -79,44 +112,65 @@ export default {
       return this.$t("Закрыть на заезд");
     },
     options() {
-      const currentSelectedValue = Number(this.selectedValue) ? 1 : 0;
-      const options = [
+      return [
         {
           value: 1,
           label: this.restrictionOnLabel,
-          selected: currentSelectedValue === 1,
         },
         {
           value: 0,
           label: this.$t("Нет ограничения"),
-          selected: currentSelectedValue === 0,
         },
       ];
-
-      return options;
     },
   },
   watch: {
     anchorEl: {
       immediate: true,
       handler(v) {
-        this.show = Boolean(v);
+        this.syncPositionListeners(Boolean(v));
       },
     },
   },
+  beforeUnmount() {
+    this.syncPositionListeners(false);
+  },
   methods: {
+    syncPositionListeners(active) {
+      if (typeof window === "undefined") {
+        return;
+      }
+      if (this._positionListener) {
+        window.removeEventListener("scroll", this._positionListener, true);
+        window.removeEventListener("resize", this._positionListener);
+        this._positionListener = null;
+      }
+      if (!active) {
+        return;
+      }
+      this._positionListener = () => {
+        this.positionTick += 1;
+        if (this.anchorEl && !this.anchorEl.isConnected) {
+          this.$emit("close");
+        }
+      };
+      window.addEventListener("scroll", this._positionListener, true);
+      window.addEventListener("resize", this._positionListener);
+    },
     applyValue(value) {
       const nextValue = Number(value) ? 1 : 0;
-      if (nextValue !== Number(this.selectedValue ? 1 : 0)) {
+      if (nextValue !== this.normalizedSelectedValue) {
         this.$emit("apply", nextValue);
       }
       this.$emit("close");
     },
-    handleMenuInput(value) {
-      if (value === false) {
-        this.$emit("close");
-      }
-    },
   },
 };
 </script>
+
+<style lang="scss" module>
+.dropdown {
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+</style>

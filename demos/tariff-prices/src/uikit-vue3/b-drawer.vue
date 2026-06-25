@@ -29,7 +29,7 @@
 <script>
 import { getCompatModel, setCompatModel } from "@/utils/compat-model";
 
-const LOCK_CLASS = "bnovo-drawer--lock-overflow";
+const LOCK_CLASS = "demo-drawer--lock-overflow";
 
 export default {
   name: "BDrawer",
@@ -105,7 +105,7 @@ export default {
 </script>
 
 <style lang="scss">
-html.bnovo-drawer--lock-overflow {
+html.demo-drawer--lock-overflow {
   overflow: hidden !important;
 }
 

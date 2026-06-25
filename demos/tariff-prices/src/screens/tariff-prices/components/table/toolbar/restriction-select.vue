@@ -2,7 +2,6 @@
   <v-responsive
     :width="isMobileDevice ? 'calc(100vw - 56px)' : 320"
     class="overflow-visible"
-    data-tour="prices-and-restrictions-tour-select-restrictions-step"
   >
     <b-select
       v-model="internalValue"
@@ -41,7 +40,7 @@ import { compactRestrictionGroupItems,
   restrictionTypes } from "../../../config/screen-config.js";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsTableRestrictionSelect",
+  name: "TariffPricesTableRestrictionSelect",
   restrictionTypes: Object.freeze(Object.entries(restrictionTypes)
     .filter(([type]) => type !== PriceAndRestrictionsService.closedRestrictionName)
     .map(([type, info]) => ({

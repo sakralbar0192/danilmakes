@@ -77,6 +77,6 @@ export const nameCellStyles = {
   position: "sticky",
   left: "0px",
   zIndex: 4,
-  backgroundColor: "#FFFFFF",
+  backgroundColor: "#ffffff",
   fontSize: "12px !important",
 };

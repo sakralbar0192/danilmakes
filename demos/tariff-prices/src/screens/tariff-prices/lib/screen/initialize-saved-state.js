@@ -12,10 +12,11 @@ function resolveInterfaceSettingsSavedState(savedSettings, hasTourKey) {
 
   const shouldEnableAllSettings = hasTourKey === true;
   return {
-    interfaceSettings: new TariffInterfaceSettingsModel({
-      showResetPriceToDefault: shouldEnableAllSettings,
-      showOtherPricesHint: shouldEnableAllSettings,
-    }),
+    interfaceSettings: new TariffInterfaceSettingsModel(
+      shouldEnableAllSettings
+        ? { showResetPriceToDefault: true, showOtherPricesHint: true }
+        : {},
+    ),
     shouldPersistSettings: true,
   };
 }

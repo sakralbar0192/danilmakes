@@ -16,7 +16,7 @@
 import tariffVirtualizedCssModule from "../table/mixins/tariff-virtualized-css-module.js";
 
 export default {
-  name: "BnovoTiffPricesAndRestrictionsItemView",
+  name: "TariffPricesItemView",
   mixins: [tariffVirtualizedCssModule],
   props: {
     view: {

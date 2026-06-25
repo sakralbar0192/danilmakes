@@ -17,7 +17,7 @@ import { defineAsyncComponent } from "vue";
 import PriceAndRestrictionsService from "@/services/tariff/price-and-restrictions";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsTableRestrictionRowHint",
+  name: "TariffPricesTableRestrictionRowHint",
   components: {
     ClosedArrivalHint: defineAsyncComponent(() => import("./closed-arrival-hint.vue")),
     ClosedDepartureHint: defineAsyncComponent(() => import("./closed-departure-hint.vue")),

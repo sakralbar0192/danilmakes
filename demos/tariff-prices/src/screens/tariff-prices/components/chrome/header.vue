@@ -91,8 +91,8 @@
           {{ getPlanModification() }}
           <a
             data-test="tariff-header-parent-tariff-link"
-            :href="`/tariff/index/${parentTariffId}${queryString}`"
-            target="_blank"
+            :href="parentTariffHref"
+            @click.prevent="goToParentTariff"
           >
             <v-icon color="primary" class="icon-external-link"/>
           </a>
@@ -109,7 +109,7 @@ import { getPlanModification } from "../../config/screen-config.js";
 import SelectTariffPopup from "../popups/select-tariff-popup.vue";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsHeader",
+  name: "TariffPricesHeader",
   components: {
     SelectTariffPopup,
   },
@@ -135,8 +135,20 @@ export default {
       const params = new URLSearchParams(query).toString();
       return params ? `?${params}` : "";
     },
+    parentTariffHref() {
+      return `/tariff/index/${this.parentTariffId}${this.queryString}`;
+    },
   },
   methods: {
+    goToParentTariff() {
+      if (!this.parentTariffId) {
+        return;
+      }
+      this.$router.push({
+        path: `/tariff/index/${this.parentTariffId}`,
+        query: { ...this.$route.query },
+      });
+    },
     async setTariffMain() {
       if (this.setMainInProgress) {
         return;

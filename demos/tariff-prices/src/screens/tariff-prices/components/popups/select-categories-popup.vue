@@ -1,5 +1,5 @@
 <template>
-  <b-teleport-wrapper selector="#bnovo-spa">
+  <b-teleport-wrapper selector="#app-teleport-root">
     <component
       :is="popupComponent"
       v-model="show"
@@ -77,7 +77,7 @@ import ymHelpers from "@/utils/ym-helpers";
 import BTeleportWrapper from "@/uikit/b-teleport-wrapper";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsSelectCategoriesPopup",
+  name: "TariffPricesSelectCategoriesPopup",
   components: { BTeleportWrapper },
   props: {
     value: {

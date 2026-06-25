@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import TariffPricesScreen from "@/screens/tariff-prices/index.vue";
 import exportContext from "@/mocks/fixtures/export-context.json";
 
-const defaultPlanId = String(exportContext.defaultPlanId || "515367");
+const defaultPlanId = String(exportContext.defaultPlanId || "101");
 const dateFrom = exportContext.dateFrom || "24-6-2026";
 
 export default createRouter({

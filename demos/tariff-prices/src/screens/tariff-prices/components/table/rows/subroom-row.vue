@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      :class="['d-flex align-center justify-space-between bordered-b bordered-r bordered-l rounded-0', {
+      :class="['d-flex align-center justify-space-between bordered-b bordered-r bordered-l rounded-0 tariff-demo-table-name-cell', {
         'pa-ingroup pl-groups': !compactMode,
         'pa-typo': compactMode,
       }]"
@@ -47,7 +47,7 @@ import PeopleCount from "../shared/people-count.vue";
 import SubroomPeopleTooltip from "../shared/subroom-people-tooltip.vue";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsTableRoomtypeRow",
+  name: "TariffPricesTableRoomtypeRow",
   components: {
     TariffTablePriceCell,
     PeopleCount,

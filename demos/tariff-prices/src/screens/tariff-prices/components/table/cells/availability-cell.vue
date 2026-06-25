@@ -185,7 +185,7 @@ export default {
 
   &-error {
     .availability-text-field {
-      outline: 1px solid $error !important;
+      outline: 1px solid $tariff-cell-conflict-outline !important;
       outline-offset: -1px;
     }
 

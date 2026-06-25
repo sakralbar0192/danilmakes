@@ -97,7 +97,7 @@ export default {
 
       return response;
     },
-    // Изменение статуса включения модуля уборки Bnovo
+    // Изменение статуса включения модуля уборки Tariff
     async changeCleaningStatus({ commit }, status) {
       const response = await HotelService.changeCleaningStatus(status);
 
@@ -174,7 +174,7 @@ export default {
     plansWithClosedDependentRestrictions(state) {
       return state.rplans.filter(plan => !Number(plan.dependent_restrictions?.closed || ""));
     },
-    hasBnovoChannelManagerEnabled(state) {
+    hasChannelManagerEnabled(state) {
       return Number(state.extra.beta_channel) === 1;
     },
     labels(state){

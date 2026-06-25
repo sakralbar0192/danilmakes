@@ -3,7 +3,6 @@
     :class="['px-groups py-inner d-flex align-center', $style.legend]"
     outlined
     data-test="tariff-page-legend"
-    data-tour="prices-and-restrictions-tour-legend-step"
   >
     <legend-prices v-if="isOneOfPricesModesEnabled"/>
     <legend-restrictions v-else/>
@@ -16,7 +15,7 @@ import LegendPrices from "./legend/legend-prices.vue";
 import LegendRestrictions from "./legend/legend-restrictions.vue";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsLegend",
+  name: "TariffPricesLegend",
   components: { LegendPrices, LegendRestrictions },
   computed: { ...mapGetters("tariffPricesAndRestrictions", ["isOneOfPricesModesEnabled"]) },
 };

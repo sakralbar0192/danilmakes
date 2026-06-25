@@ -53,7 +53,7 @@ import PriceAndRestrictionsService from "@/services/tariff/price-and-restriction
 import { shouldIgnoreTariffRestrictionSheetVuetifyClose } from "./tariff-restriction-sheet-vuetify.js";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsBooleanRestrictionBottomSheet",
+  name: "TariffPricesBooleanRestrictionBottomSheet",
   props: {
     restrictionType: {
       type: String,

@@ -11,7 +11,7 @@
       ref="cellRoot"
       v-bind="mergePriceCellTooltipAttrs()"
       :style="priceCellActivatorStyle"
-      class="bnovo-tariff-prices-and-restrictions-table-price-cell d-flex flex-column align-center justify-center"
+      class="tariff-demo-and-restrictions-table-price-cell d-flex flex-column align-center justify-center"
       :class="cellClasses"
       data-test="tariff-price-cell"
       :data-id="cellVm.dataId"
@@ -53,6 +53,7 @@
         data-price-reset-anchor
         :class="$style['reset-button']"
         color="primary"
+        text
         text-inline
         squared
         :tabindex="resetButtonTabindex"
@@ -309,7 +310,7 @@ export default {
         content: '*';
         position: relative;
         right: 3px;
-        color: $success;
+        color: $tariff-dynamic-marker;
       }
     }
 
@@ -323,7 +324,7 @@ export default {
       right: 10px;
       top: 50%;
       transform: translateY(-50%);
-      color: $success;
+      color: $tariff-dynamic-marker;
       font-style: italic;
       pointer-events: none;
     }
@@ -377,12 +378,12 @@ export default {
 
   &-error {
     .price-text {
-      outline: 1px solid $error !important;
+      outline: 1px solid $tariff-cell-conflict-outline !important;
       z-index: 2;
     }
 
     .price-text-field {
-      outline: 1px solid $error !important;
+      outline: 1px solid $tariff-cell-conflict-outline !important;
       outline-offset: -1px;
     }
 
@@ -404,9 +405,6 @@ export default {
   &:hover .reset-button,
   &:focus-within .reset-button {
     opacity: 1;
-  }
-
-  &:focus-within .reset-button {
     pointer-events: all;
   }
 }

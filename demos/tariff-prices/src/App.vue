@@ -1,7 +1,7 @@
 <template>
   <v-app class="tariff-prices-demo">
     <div class="demo-banner text-caption pa-2 text-center">
-      Портфолио-демо · Цены и ограничения
+      Портфолио-демо · Цены и ограничения · синтетические данные
     </div>
     <v-main class="fill-height d-flex flex-column">
       <router-view class="flex-grow-1 d-flex flex-column" style="min-height: 0" />
@@ -20,6 +20,18 @@ html, body, #app {
   margin: 0;
 }
 
+:root {
+  --text-xsmall: 10px;
+  --text-small: 12px;
+  --text-caption: 13px;
+  --text-body: 14px;
+  --text-hero: 20px;
+  --text-h1: 24px;
+  --text-h2: 20px;
+  --text-h3: 16px;
+  --text-h4: 14px;
+}
+
 .tariff-prices-demo {
   display: flex;
   flex-direction: column;
@@ -31,10 +43,11 @@ html, body, #app {
   flex: 1 1 auto;
   min-height: 0;
   overflow: hidden;
+  background: #eef4f8;
 }
 
 .demo-banner {
-  background: #1e3a5f;
+  background: linear-gradient(135deg, #1e8bc3 0%, #16739f 100%);
   color: #fff;
   position: sticky;
   top: 0;
@@ -47,7 +60,7 @@ html, body, #app {
  * max-height по 100dvh отключаем — иначе scrollport не совпадает с flex-областью,
  * и горизонтальная полоса «висит» над таблицей / залезает на футер.
  */
-.tariff-prices-demo .bnovo-tariff-prices-and-restrictions__scroll-container {
+.tariff-prices-demo .tariff-demo-and-restrictions__scroll-container {
   flex: 1 1 auto;
   min-height: 0;
   max-height: none !important;
@@ -101,4 +114,5 @@ html, body, #app {
   pointer-events: auto;
 }
 @import "@/screens/tariff-prices/styles/index.scss";
+@import "@/screens/tariff-prices/styles/table-theme.scss";
 </style>

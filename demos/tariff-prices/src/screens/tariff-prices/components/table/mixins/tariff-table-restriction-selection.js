@@ -1,6 +1,3 @@
-import moment from "moment";
-import PriceAndRestrictionsService from "@/services/tariff/price-and-restrictions";
-import { massUpdateDrawersEnabled } from "../../../config/screen-config.js";
 import restrictionSelectionStateFactory from "../utils/restriction-selection-state.js";
 
 /**
@@ -126,22 +123,6 @@ export default {
       this.finalizePriceTextSelectionOnPointerUp?.();
       this.clearMobileEditPointerDownCellKey?.();
       if (this.selectionActive) {
-        if (!massUpdateDrawersEnabled) {
-          this.mouseDowned = false;
-          this.selectionActive = false;
-          this.resetSelectionRangeState();
-          return;
-        }
-        const dateFormat = PriceAndRestrictionsService.massiveUpdatingPricesDatesFormats.value;
-        const dateRange = [
-          moment(this.selectionRange.fromDate.date).format(dateFormat),
-          moment(this.selectionRange.toDate.date).format(dateFormat),
-        ];
-        this.$emit("update-restrictions", {
-          dateRange,
-          type: PriceAndRestrictionsService.getServerRestrictionTypeName(this.selectionRange.restrictionType),
-          currentRoomTypeId: this.selectionRange.roomTypeId,
-        });
         this.suppressRestrictionCellClickOnce = true;
       }
 

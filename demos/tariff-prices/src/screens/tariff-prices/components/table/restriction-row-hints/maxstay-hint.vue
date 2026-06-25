@@ -19,5 +19,5 @@
 </template>
 
 <script>
-export default { name: "BnovoTiffPricesAndRestrictionsMaxstayHint" };
+export default { name: "TariffPricesMaxstayHint" };
 </script>

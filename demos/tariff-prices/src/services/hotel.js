@@ -95,7 +95,7 @@ export default class HotelService extends CoreStatic {
     return this.http.post("/hotel/delete_logo", { id: "logo" });
   }
 
-  // Изменение статуса включения модуля уборки Bnovo
+  // Изменение статуса включения модуля уборки Tariff
   static async changeCleaningStatus(status) {
     return await this.http.post("/hotel/set_cleaning_status", { status });
   }

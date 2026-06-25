@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="nowrap pa-ingroup pl-groups d-flex align-center justify-space-between bordered-b bordered-r bordered-l rounded-0"
+      class="nowrap pa-ingroup pl-groups d-flex align-center justify-space-between bordered-b bordered-r bordered-l rounded-0 tariff-demo-table-name-cell"
       :style="[$options.nameStyles, {
         maxWidth: `${$options.roomtypeNameCellWidth}px`,
         height: `${rowHeight}px`,
@@ -44,7 +44,7 @@ import CompactRestrictionRowHint from "../restriction-row-hints/compact-restrict
 import TariffTableCompactRestrictionCell from "../cells/tariff-table-compact-restriction-cell.vue";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsCompactRestrictionRow",
+  name: "TariffPricesCompactRestrictionRow",
   components: {
     CompactRestrictionRowHint,
     TariffTableCompactRestrictionCell,
@@ -128,17 +128,25 @@ export default {
     visibleCloseRestrictionTypes() {
       return this.shouldShowCloseGroup ? this.$options.closeRestrictionTypes : [];
     },
+    restrictionRowVmEpoch() {
+      const selectedTypes = [
+        ...this.visibleStayRestrictionTypes,
+        ...this.visibleCloseRestrictionTypes,
+      ];
+      if (typeof this.getRestrictionRowVmEpoch !== "function") {
+        return "";
+      }
+      return this.getRestrictionRowVmEpoch({
+        roomtype: this.roomtype,
+        selectedRestrictionTypes: selectedTypes,
+      });
+    },
     compactRestrictionCellsForVisibleDays() {
       const selectedTypes = [
         ...this.visibleStayRestrictionTypes,
         ...this.visibleCloseRestrictionTypes,
       ];
-      const vmEpoch = typeof this.getRestrictionRowVmEpoch === "function"
-        ? this.getRestrictionRowVmEpoch({
-          roomtype: this.roomtype,
-          selectedRestrictionTypes: selectedTypes,
-        })
-        : "";
+      const vmEpoch = this.restrictionRowVmEpoch;
       const cacheKey = this.getRowWindowCacheKey(vmEpoch, selectedTypes);
       const cached = cacheKey ? this.rowWindowCompactRestrictionCellsCache.get(cacheKey) : null;
       if (cached) {
@@ -200,6 +208,12 @@ export default {
       return rows;
     },
   },
+  watch: {
+    restrictionRowVmEpoch() {
+      this.rowWindowCompactRestrictionCellsCache.clear();
+      this.rowDayCompactRestrictionCellsCache.clear();
+    },
+  },
   methods: {
     getRowWindowCacheKey(vmEpoch = "", selectedTypesInput = null) {
       if (!this.roomtype?.id) {
@@ -209,12 +223,7 @@ export default {
         ...this.visibleStayRestrictionTypes,
         ...this.visibleCloseRestrictionTypes,
       ];
-      const epoch = vmEpoch || (typeof this.getRestrictionRowVmEpoch === "function"
-        ? this.getRestrictionRowVmEpoch({
-          roomtype: this.roomtype,
-          selectedRestrictionTypes: selectedTypes,
-        })
-        : "");
+      const epoch = vmEpoch || this.restrictionRowVmEpoch;
       return [
         this.roomtype.id,
         "compact",

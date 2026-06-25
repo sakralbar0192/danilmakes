@@ -205,10 +205,10 @@ export default class HotelModel {
       rms_automation_enabled: false,
       stars: "0",
       type: "0",
-      bnovobook_uid: "",
+      booking_widget_uid: "",
       marketplace_apps: {},
       is_new_planning_active: false,
-      bnovobookLink: "",
+      booking_widget_link: "",
       rooms_count: 0, // временная переменная, до момента, пока бэкенд не разберется с хелпхиро
       accounting_native_legal_entity_id: 0,
       is_indexed: 0,
@@ -279,7 +279,7 @@ export default class HotelModel {
     this.rplansReady = OSF.formatField(false, data.rplansReady);
 
     this.show_buy_button = OSF.formatField(false, data.show_buy_button);
-    this.is_bnovobook_active = OSF.formatField(false, data.is_bnovobook_active);
+    this.is_booking_widget_active = OSF.formatField(false, data.is_booking_widget_active);
     this.show_competitors_analysis = OSF.formatField(false, data.show_competitors_analysis);
     this.completed_after_qs_settings = OSF.formatField(true, data.completed_after_qs_settings);
     this.rms_forecast_ready = OSF.formatField(false, data.rms_forecast_ready);
@@ -302,7 +302,7 @@ export default class HotelModel {
     }, data.notification_settings);
   }
 
-  PROVIDER_BNOVOBOOK = 2;
+  PROVIDER_BOOKING_WIDGET = 2;
 
   get websocketUrl() {
     // TODO: Корректна ли такая проверка?
@@ -342,7 +342,7 @@ export default class HotelModel {
     return (this.extra.demo && this.extra.demo !== "0") || false;
   };
 
-  get hasBnovoCleaningModuleActive() {
+  get hasCleaningModuleActive() {
     return this.extra.set_cleaning_status;
   };
 
@@ -351,7 +351,7 @@ export default class HotelModel {
   };
 
   get hasCleaningModuleActive() {
-    return Boolean(this.hasTeamjetActive || this.hasBnovoCleaningModuleActive);
+    return Boolean(this.hasTeamjetActive || this.hasCleaningModuleActive);
   };
 
   get cleaningStatusesLimited() {
@@ -362,7 +362,7 @@ export default class HotelModel {
     return this.extra.auto_cleaning_status_enabled;
   };
 
-  get isBnovoSegment() {
+  get isPartnerSegment() {
     return this.segment_id === 1;
   };
 
@@ -446,8 +446,8 @@ export default class HotelModel {
     return this.isFullProductTypeNewOrOldWithIndexed;
   };
 
-  get bnovobookProvider() {
-    return this.providers.find(i => i?.provider_id === this.PROVIDER_BNOVOBOOK) || {};
+  get bookingWidgetProvider() {
+    return this.providers.find(i => i?.provider_id === this.PROVIDER_BOOKING_WIDGET) || {};
   }
 
   get isQuickActionsAvailable() {

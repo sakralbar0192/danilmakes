@@ -42,7 +42,7 @@ export function computeVisibleRectHeightInViewport(rect, windowInnerHeight) {
  * Сколько пикселей от низа viewport занято/недоступно из-за элемента (fixed-футер, клавиатура).
  * Считаем расстояние от низа viewport до верхней границы прямоугольника:
  * этот вариант корректно учитывает `margin-bottom` (например, `headerHeightGroup`
- * сдвигает `b-screen-footer` вверх под `bnovo-mobile-footer--outer`) и любые случаи,
+ * сдвигает `b-screen-footer` вверх под `demo-mobile-footer--outer`) и любые случаи,
  * когда зона недоступна для таблицы между rect.top и низом viewport.
  *
  * @param {DOMRect | { top: number } | null | undefined} rect
@@ -204,7 +204,7 @@ export function clampBottomOcclusionForMinScrollViewport({
   return Math.min(bottomOcclusionPx, cap);
 }
 
-const APP_HEADER_SELECTOR = ".bnovo-header--outer .app-menu--outer, .demo-banner";
+const APP_HEADER_SELECTOR = ".demo-header--outer .app-menu--outer, .demo-banner";
 
 /**
  * Нижняя граница fixed-шапки приложения в координатах viewport (для sticky шапки таблицы в WebKit).

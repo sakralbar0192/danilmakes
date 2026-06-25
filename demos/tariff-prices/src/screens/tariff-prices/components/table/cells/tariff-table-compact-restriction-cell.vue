@@ -357,13 +357,13 @@ export default {
 
   &--error {
     z-index: 2;
-    outline: 1px solid $error;
+    outline: 1px solid $tariff-cell-conflict-outline;
     outline-offset: -1px;
   }
 }
 
 .compact-segment-icon {
-  color: $error !important;
+  color: $tariff-boolean-icon !important;
   pointer-events: none;
 }
 

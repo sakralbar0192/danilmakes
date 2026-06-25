@@ -12,16 +12,19 @@
   >
     <div
       v-if="pricesCalendarModel?.calendar?.length"
-      :class="[
-        $style.tableScrollHost,
+      class="tariff-demo-table-shell"
+    >
+      <div
+        :class="[
+          $style.tableScrollHost,
         { [$style['tableScrollHost--mobile-edit-elevated']]: isMobileTableElevatedOverSticky },
         { [$style.tableScrollHostWithHorizontalScrollbar]: horizontalScrollbarTrackVisible },
-        { 'bnovo-tariff-prices-mobile-edit-elevated-host': isMobileTableElevatedOverSticky },
+        { 'tariff-demo-mobile-edit-elevated-host': isMobileTableElevatedOverSticky },
       ]"
     >
       <div
         ref="tableStickyHeaderMeasure"
-        :class="[$style.tableStickyHeader, 'bnovo-tariff-prices-table-sticky-header']"
+        :class="[$style.tableStickyHeader, 'tariff-demo-table-sticky-header']"
       >
         <div
           ref="tableHeaderHorizontalScrollRef"
@@ -39,7 +42,6 @@
             :is-one-of-prices-modes-enabled="isOneOfPricesModesEnabled"
             :is-combined-mode-enabled="isCombinedModeEnabled"
             :is-restriction-mode-enabled="isRestrictionModeEnabled"
-            :is-availability-editable="isAvailabilityEditable"
             :selected-restrictions="selectedRestrictions"
             :compact-restrictions="compactRestrictions"
             @change-selected-restrictions="setSelectedRestrictions"
@@ -47,9 +49,6 @@
             @change-date="$emit('change-date', $event)"
             @change-mode="$emit('change-mode', $event)"
             @show-restrictions-popup="$emit('show-restrictions-popup')"
-            @update-prices="$emit('update-prices')"
-            @update-restrictions="$emit('update-restrictions')"
-            @update-availability="$emit('update-availability')"
           />
           <months-row
             :style="{ ...gridStylesRow, width: calculatedWidth }"
@@ -155,7 +154,7 @@
             <div
               v-show="selectionActive"
               ref="selectionRangeOverlay"
-              :class="$style['selection-range']"
+              :class="[$style['selection-range'], 'selection-range']"
             >
               <restriction-row-selection-range
                 :to-date="selectionRange.toDate"
@@ -181,6 +180,7 @@
           />
         </div>
       </div>
+    </div>
     </div>
     <v-card v-else height="200">
       <b-screen-overlay :size="64" block :dark="false"/>
@@ -297,15 +297,12 @@ function buildObjectEpochSignature(obj) {
 }
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsTable",
+  name: "TariffPricesTable",
   emits: [
     "change-date",
     "change-mode",
     "show-restrictions-popup",
     "show-categories-popup",
-    "update-prices",
-    "update-restrictions",
-    "update-availability",
     "update-need-hide-footer",
     "update-need-hide-app-footer",
   ],
@@ -409,6 +406,7 @@ export default {
       "selectedCategories",
       "pricesCalendarModel",
       "pricesCalendarModelUpdatedAt",
+      "restrictionDraftIndex",
       "compactMode",
       "selectedRestrictions",
       "enabledCombinedMode",
@@ -462,6 +460,7 @@ export default {
         this.compactRestrictions ? 1 : 0,
         JSON.stringify(this.currentTariff?.dependent_restrictions || {}),
         this.tableContentPartsReadinessToken,
+        buildObjectEpochSignature(this.restrictionDraftIndex),
       ].join("|");
     },
     needShowResetApprovalPopup() {
@@ -606,7 +605,7 @@ export default {
         this.$style["table-container"],
         { [this.$style["selection-active"]]: this.selectionActive },
         { [this.$style["table-container--mobile-edit-elevated"]]: this.isMobileTableElevatedOverSticky },
-        { "bnovo-tariff-prices-table-container--safari-compositing": this.safariStickyCompositingActive },
+        { "tariff-demo-table-container--safari-compositing": this.safariStickyCompositingActive },
       ];
     },
     showOtherPricesTooltip() {
@@ -727,6 +726,12 @@ export default {
     },
     tableContentPartsReadinessToken() {
       this.clearCellVmCache();
+    },
+    restrictionDraftIndex: {
+      handler() {
+        this.clearCellVmCache();
+      },
+      deep: true,
     },
   },
   created() {
@@ -1321,7 +1326,7 @@ export default {
 
 .selection-range {
   position: absolute;
-  background: rgba(24, 117, 240, 0.04);
+  background: rgba(30, 139, 195, 0.08);
   border: 1px solid $primary;
   border-radius: 4px;
   z-index: 10;
@@ -1348,8 +1353,8 @@ $table-horizontal-scrollbar-track-height: 8px;
   height: $table-horizontal-scrollbar-track-height;
   overflow: hidden;
   pointer-events: none;
-  background-color: $white;
-  border-top: 1px solid $border-color;
+  background-color: var(--demo-surface, #fff);
+  border-top: 1px solid var(--demo-border-soft, #e8eef3);
 }
 
 .horizontalScrollbarTrack {

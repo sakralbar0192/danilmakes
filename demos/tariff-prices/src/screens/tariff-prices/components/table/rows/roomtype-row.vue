@@ -1,7 +1,7 @@
 <template>
   <div style="position: relative;" data-test="tariff-table-roomtype-block" :style="{ height: `${rowHeight}px` }">
     <div
-      :class="['d-flex bordered-b bordered-r bordered-l rounded-0 flex-column', vmCss['main-cell'], {
+      :class="['d-flex bordered-b bordered-r bordered-l rounded-0 flex-column tariff-demo-table-name-cell', vmCss['main-cell'], {
         'pa-ingroup pl-groups': !compactMode && !compactRestrictions,
         'pa-typo': compactMode,
         'pl-groups pa-semi-inner': compactRestrictions,
@@ -137,7 +137,7 @@ const CLOSED_STATUS_CELL_HEIGHT = 40;
 const CLOSED_STATUS_CELL_HEIGHT_COMPACT = 24;
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsTableRoomtypeRow",
+  name: "TariffPricesTableRoomtypeRow",
   components: {
     TariffTablePriceCell,
     AvailabilityCell,
@@ -455,7 +455,7 @@ export default {
 .main-cell {
   @include tariff-roomtype-main-column-bg;
 
-  >div:not(:global(.bnovo-tariff-prices-and-restrictions-table-price-cell)) {
+  >div:not(:global(.tariff-demo-and-restrictions-table-price-cell)) {
     background-color: inherit;
   }
 
@@ -471,7 +471,7 @@ export default {
   }
 
   >div.non-availability {
-    background-color: #FF9E94 !important;
+    background-color: $tariff-unavailable-cell-bg !important;
   }
 }
 
@@ -494,13 +494,13 @@ export default {
 
   &[data-closed="1"] {
     &:hover::after {
-      background-color: #FF4433;
+      background-color: $tariff-status-closed;
     }
   }
 
   &[data-closed="0"] {
     &:hover::after {
-      background-color: $success;
+      background-color: $tariff-status-open;
     }
   }
 }
@@ -516,7 +516,7 @@ export default {
 }
 
 .bp-roomtype-name {
-  color: #2fac44;
+  color: $tariff-bp-roomtype-accent;
   font-style: italic;
 }
 </style>

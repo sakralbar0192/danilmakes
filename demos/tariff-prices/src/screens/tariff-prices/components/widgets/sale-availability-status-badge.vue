@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "BnovoTariffPricesAndRestrictionsSaleAvailabilityStatusBadge",
+  name: "TariffPricesSaleAvailabilityStatusBadge",
   props: {
     opened: {
       type: Boolean,
@@ -27,6 +27,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../styles/variables.scss";
+
 .sale-availability-status-badge {
   box-sizing: border-box;
   display: flex;
@@ -38,15 +40,15 @@ export default {
   line-height: 1;
 
   &.positive {
-    color: $success;
-    background: #E5F6E8;
-    border: 1px solid $success;
+    color: $tariff-status-open;
+    background: $tariff-status-open-bg;
+    border: 1px solid $tariff-status-open-border;
   }
 
   &.negative {
-    color: #FF4433;
-    background: #FFF5F2;
-    border: 1px solid #FF4433;
+    color: $tariff-status-closed;
+    background: $tariff-status-closed-bg;
+    border: 1px solid $tariff-status-closed-border;
   }
 }
 </style>

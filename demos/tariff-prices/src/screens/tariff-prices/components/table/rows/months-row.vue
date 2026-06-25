@@ -3,7 +3,7 @@
     <v-card
       :max-width="$options.roomtypeNameCellWidth"
       height="64"
-      :class="['d-flex align-center bordered rounded-0', $style['sticky-cell'], 'bnovo-tariff-prices-table-sticky-header-inner', {
+      :class="['d-flex align-center bordered rounded-0 tariff-demo-table-header-cell', $style['sticky-cell'], 'tariff-demo-table-sticky-header-inner', {
         'pa-ingroup pl-groups justify-space-between': !compactMode,
         'pa-semi-inner justify-center': compactMode,
       }]"
@@ -25,7 +25,6 @@
                 color="secondary"
                 small
                 v-bind="activatorProps"
-                data-tour="prices-and-restrictions-tour-category-filter-step"
                 @click="onCategoriesFilterActivatorClick($event, activatorProps)"
               >
                 <v-icon
@@ -82,14 +81,14 @@
             <v-card
               height="25"
               :width="$options.cellWidth"
-              :class="['d-flex align-center bordered-t rounded-0', {
+              :class="['d-flex align-center bordered-t rounded-0 tariff-demo-table-header-cell tariff-demo-table-month-label', {
                 'bordered-r': monthsRowRightMonthBorder(localIndex),
               }]"
             />
             <v-card
               height="39"
               :width="$options.cellWidth"
-              class="d-flex flex-column justify-center align-center bordered-t bordered-r bordered-b rounded-0"
+              class="d-flex flex-column justify-center align-center bordered-t bordered-r bordered-b rounded-0 tariff-demo-table-header-cell"
               :data-visible-date="day.date"
             >
               <span style="font-size: 12px" class="font-weight-bold">
@@ -113,7 +112,7 @@ import tariffHorizontalCalendarSlice from "../mixins/tariff-horizontal-calendar-
 import { computeVisibleMonthLabelPositions } from "../lib/scroll/resolve-month-label-display.js";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsTableMonthRow",
+  name: "TariffPricesTableMonthRow",
   mixins: [tariffHorizontalCalendarSlice],
   roomtypeNameCellWidth,
   roomtypeNameCellWidthCompact,
@@ -244,7 +243,7 @@ export default {
 
 .monthLabelText {
   white-space: nowrap;
-  background-color: $white;
+  color: var(--demo-primary-deep, #136688);
 }
 
 .badge {

@@ -32,20 +32,20 @@
   $rem-h: rem($height);
   $rem-h-plus: rem($height+10px);
   $rem-h-plus2: rem($height+60px);
-  .bnovo-header-shadow, .bnovo-header--outer .bnovo-navbar, .bnovo-mobile-footer, .bnovo-mobile-screen-head, .bnovo-alerts--separated {
+  .demo-header-shadow, .demo-header--outer .demo-navbar, .demo-mobile-footer, .demo-mobile-screen-head, .demo-alerts--separated {
     height: $rem-h;
   }
-  .bnovo-spa__wrapper {
+  .demo-spa__wrapper {
     padding-top: $rem-h;
   }
-  .bnovo-mobile-footer {
+  .demo-mobile-footer {
     max-height: $rem-h;
   }
-  .bnovo-header-mobile-menu-item--inner {
+  .demo-header-mobile-menu-item--inner {
     min-height: $rem-h;
     max-height: $rem-h;
   }
-  .bnovo-navbar__menu-block button {
+  .demo-navbar__menu-block button {
     min-height: $rem-h;
   }
   .dashboard-fast-filters-nav--outer.is-fixed, .lock-screen-progress-line, .dashboard-fast-filters-nav--box-shadow-layer, .error-page--outer {
@@ -55,9 +55,9 @@
     bottoM: $rem-h;
   }
   .use-subheader-dashboard-nav {
-    .bnovo-alerts--outer {
-      .bnovo-alerts--inner {
-        .bnovo-alerts--separated {
+    .demo-alerts--outer {
+      .demo-alerts--inner {
+        .demo-alerts--separated {
           transform: translateY($rem-h);
         }
       }
@@ -73,7 +73,7 @@
     .mob-menu--bottom-space-plus {
       margin-bottom: $rem-h-plus2 !important;
     }
-    .bnovo-spa__wrapper {
+    .demo-spa__wrapper {
       padding-bottom: $rem-h;
     }
     .b-screen-footer:not(.chm-module-only) {
@@ -91,7 +91,7 @@
     padding-bottom: map-get($gaps, outer);
 
   }
-  .bnovo-mobile-footer--outer {
+  .demo-mobile-footer--outer {
     z-index: 92;
 
     .container.container--fluid {
@@ -113,10 +113,10 @@
   .gantt {
     overflow: hidden !important;
   }
-  .bnovo-communication-navbar {
+  .demo-communication-navbar {
     overflow: hidden !important;
   }
-  .bnovo-communication__navbar {
+  .demo-communication__navbar {
     overflow: hidden !important;
   }
 }

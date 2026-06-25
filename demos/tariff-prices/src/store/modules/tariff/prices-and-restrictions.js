@@ -1,7 +1,7 @@
 import moment from "moment";
 import PriceAndRestrictionsService from "@/services/tariff/price-and-restrictions";
 import TariffPricesCalendarModel from "@/models/tariff/prices-calendar-model";
-import { DEFAULT_INFO_TAB, getDefaultSelectedRestrictionKeys } from "@/screens/tariff-prices/config/screen-config";
+import { getDefaultSelectedRestrictionKeys } from "@/screens/tariff-prices/config/screen-config";
 import { applyRemovePriceDayFromPricesToDelete,
   applySetUpdatingPriceValueInPlace,
   applyRemoveUpdatingPriceValueInPlace,
@@ -17,7 +17,6 @@ import { applySetUpdatingAvailabilityValueInPlace,
 import { defineUnacceptableRestrictions } from "@/screens/tariff-prices/components/table/lib/store/unacceptable-restrictions";
 import { applyUnacceptableRestrictionsInPlace } from "@/screens/tariff-prices/components/table/lib/store/apply-unacceptable-restrictions-in-place";
 import { normalizeRestrictionsForViewMode } from "@/screens/tariff-prices/lib/screen/restriction-view-mode";
-import { syncAllCategoriesPriceWeekdays } from "@/screens/tariff-prices/components/updating-prices/logic/cross-fill-weekday-prices";
 import { mapTariffInterfaceSettingsModelToRequest,
   TariffInterfaceSettingsModel } from "@/models/tariff/tariff-interface-settings-model";
 import TariffInterfaceSettingsService from "@/services/tariff/interface-settings";
@@ -64,7 +63,7 @@ export default {
     dateFrom: moment().format(PriceAndRestrictionsService.sendingDateFormat),
     selectedCategories: [],
     selectedRestrictions: getDefaultSelectedRestrictionKeys(),
-    activeInfoTab: DEFAULT_INFO_TAB,
+    activeInfoTab: "default",
     updatingPrices: {},
     priceDraftIndex: {},
     pricesToDelete: {},
@@ -233,7 +232,7 @@ export default {
       state.selectedCategories = value;
     },
     setActiveInfoTab(state, value) {
-      state.activeInfoTab = value || DEFAULT_INFO_TAB;
+      state.activeInfoTab = value || "default";
     },
     setShowDefaultPrices(state, value) {
       state.massiveUpdatingPricesDrawerShowDefaultPrices = Boolean(value);
@@ -708,13 +707,12 @@ export default {
       }
 
       if (hasSelectedWeekdays && hasSyncValue) {
-        const kind = isAllWeekday ? "allCategoriesAllDays" : "allCategoriesDay";
-        const next = syncAllCategoriesPriceWeekdays({
-          kind,
-          weekday: data.weekday,
-          value: data.value,
-          selectedWeekdays: data.selectedWeekdays,
-        }, state.massiveUpdatingPricesWeekdays);
+        const next = { ...state.massiveUpdatingPricesWeekdays };
+        const weekdays = isAllWeekday ? [1, 2, 3, 4, 5, 6, 7] : data.selectedWeekdays;
+        weekdays.forEach((weekday) => {
+          next[weekday] = data.value || "";
+        });
+        next.all = "";
         commit("setMassiveUpdatingPricesWeekdays", next);
         return;
       }

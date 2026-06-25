@@ -28,7 +28,7 @@ import { restrictionCellPresentationModes } from "../../../config/screen-config.
 import PresentationRestrictionCell from "../../table/cells/presentation-restriction-cell.vue";
 
 export default {
-  name: "BnovoTariffLegendRestrictions",
+  name: "TariffLegendRestrictions",
   components: { PresentationRestrictionCell },
   restrictionCellNonePresentationMode: restrictionCellPresentationModes.none,
   restrictionCellManualPresentationMode: restrictionCellPresentationModes.manual,

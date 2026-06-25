@@ -6,7 +6,6 @@
   >
     <b-btn
       data-test="tariff-restrictions-filter-button"
-      data-tour="prices-and-restrictions-tour-select-restrictions-step"
       squared
       color="secondary"
       @click="$emit('click')"
@@ -20,7 +19,7 @@
 import { hasActiveRestrictionsFilter } from "../../../lib/screen/restriction-filter-active.js";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsRestrictionFilterButton",
+  name: "TariffPricesRestrictionFilterButton",
   props: {
     selectedRestrictions: {
       type: Array,

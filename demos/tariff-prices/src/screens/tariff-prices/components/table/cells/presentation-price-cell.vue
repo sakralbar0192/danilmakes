@@ -28,7 +28,7 @@ import { priceCellPresentationModes } from "../../../config/screen-config.js";
 import getPresentationModeCaption from "../utils/get-presentation-mode-caption.js";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsTablePresentationPriceCell",
+  name: "TariffPricesTablePresentationPriceCell",
   props: {
     withoutCaption: {
       type: Boolean,
@@ -144,7 +144,7 @@ export default {
         content: '*';
         position: relative;
         right: 3px;
-        color: $success;
+        color: $tariff-dynamic-marker;
         text-decoration: none;
         background-color: transparent;
       }

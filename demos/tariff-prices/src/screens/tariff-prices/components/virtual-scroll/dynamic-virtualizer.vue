@@ -40,7 +40,7 @@
 import virtualizer from "./virtualizer.vue";
 
 export default {
-  name: "BnovoPricesAndRestrictionsDynamicVirtualizer",
+  name: "TariffPricesDynamicVirtualizer",
   components: { virtualizer },
   provide() {
     this._initializeResizeObserver();

@@ -1,5 +1,5 @@
 <template>
-  <div data-tour="prices-and-restrictions-tour-select-tariff-step">
+  <div>
     <b-btn
       data-test="tariff-select-trigger"
       text-inline
@@ -15,7 +15,7 @@
     </b-btn>
 
     <b-teleport-wrapper
-      selector="#bnovo-spa"
+      selector="#app-teleport-root"
     >
       <component
         :is="popupComponent"
@@ -93,7 +93,7 @@ import BTeleportWrapper from "@/uikit/b-teleport-wrapper";
 import { getPlanModification } from "../../config/screen-config.js";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsSelectTariffPopup",
+  name: "TariffPricesSelectTariffPopup",
   components: { BTeleportWrapper },
   data() {
     return {

@@ -4,7 +4,6 @@
       <template #activator="{ props: tooltipProps }">
         <b-btn
           v-bind="tooltipProps"
-          data-tour="prices-and-restrictions-tour-fullscreen-step"
           data-test="tariff-toolbar-expand-table"
           squared
           color="secondary"
@@ -55,7 +54,7 @@
           />
         </template>
         <template #end>
-          <div data-tour="prices-and-restrictions-tour-display-mode-step">
+          <div>
             <b-select
               v-model="internalCompactRestrictions"
               item-text="title"

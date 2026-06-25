@@ -20,7 +20,7 @@ import { mapGetters, mapState } from "vuex";
 
 /** «Chrome» экрана — UI shell вокруг контента (панели, переключатели режима). */
 export default {
-  name: "BnovoTariffPricesAndRestrictionsModes",
+  name: "TariffPricesModes",
   modeDefaultPrice: PriceAndRestrictionsService.modeDefaultPrice,
   modeDynamicPrice: PriceAndRestrictionsService.modeDynamicPrice,
   modeRestrictions: PriceAndRestrictionsService.modeRestrictions,

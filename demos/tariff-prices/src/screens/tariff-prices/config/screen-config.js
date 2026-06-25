@@ -1,49 +1,10 @@
 import PriceAndRestrictionsService from "@/services/tariff/price-and-restrictions";
 import i18n from "@/plugins/i18n";
 
-// --- Флаги / фичи UI ---
 export const isDev = false;
 
-/** Массовое изменение цен, ограничений и доступности (drawer’ы). */
-export const massUpdateDrawersEnabled = false;
-
-/** Drawer «Инструкция о ценах и ограничениях». */
-export const infoDrawerEnabled = false;
-
-// --- Гайд-тур страницы ЦиО ---
-export const pricesAndRestrictionsTourId = "prices-and-restrictions-tour";
-
-// --- Размеры: massive updating prices (отдельный UI блок) ---
-export const massiveUpdatingPricesRoomtypeNameCellWidth = 200;
-export const massiveUpdatingPricesCellWidth = 95.88;
-export const massiveUpdatingPricesNameCellStyles = {
-  position: "sticky",
-  left: "-24px",
-  zIndex: 5,
-  backgroundColor: "#FFFFFF",
-};
-
-// --- Форматы отображения ---
 export const viewDateFormat = "DD.MM.YYYY";
-export const massiveUpdatingPricesDatesFormatsDisplay = "DD.MM.YYYY";
 
-// --- Ключи блоков UI ---
-export const updatingPricesInnerBlocks = {
-  dates: "datesPeriods",
-  categories: "categoriesSelect",
-  days: "weekDays",
-  price: "priceCondition",
-};
-export const updatingRestrictionsInnerBlocks = {
-  dates: "datesPeriods",
-  categories: "categoriesSelect",
-  tariff: "tariffSelect",
-  days: "weekDays",
-  stays: "stays",
-  puzzles: "puzzles",
-};
-
-// --- Режимы презентации ---
 export const priceCellPresentationModes = {
   dynamic: "dynamic",
   default: "default",
@@ -58,15 +19,7 @@ export const restrictionCellPresentationModes = {
   copied: "copied",
   closed: "closed",
 };
-export const infoDrawerModes = {
-  dynamic: "dynamic",
-  default: "default",
-  actions: "actions",
-  restrictions: "restrictions",
-};
-export const DEFAULT_INFO_TAB = "default";
 
-// --- Справочники с i18n ---
 const restrictionTypeEnum = PriceAndRestrictionsService.restrictionTypeEnum;
 export const restrictionTypes = {
   [restrictionTypeEnum.minstay]: {
@@ -94,21 +47,6 @@ export const restrictionTypes = {
     alert: i18n.t("Закрытие на выезд"),
   },
 };
-
-export const massiveUpdatingPricesModes = [
-  {
-    id: PriceAndRestrictionsService.manualUpdatingPricesMode,
-    name: i18n.t("Указать цену вручную"),
-  },
-  {
-    id: PriceAndRestrictionsService.discountUpdatingPricesMode,
-    name: i18n.t("Уменьшить цену на"),
-  },
-  {
-    id: PriceAndRestrictionsService.markupUpdatingPricesMode,
-    name: i18n.t("Увеличить цену на"),
-  },
-];
 
 export const bedTypes = [
   i18n.t("основное"),
@@ -164,30 +102,10 @@ export const compactRestrictionGroupItems = Object.freeze([
   }),
 ]);
 
-/** Ключи ограничений по умолчанию (все кроме closed) для selectedRestrictions в store. */
 export function getDefaultSelectedRestrictionKeys() {
   return Object.keys(restrictionTypeEnum).filter(
     (key) => key !== PriceAndRestrictionsService.closedRestrictionName,
   );
-}
-
-// --- Функции UI ---
-
-export function getPageTabs(id) {
-  return [
-    {
-      title: i18n.t("Цены и ограничения"), link: `/tariff/index/${id}`, dataTest: "tariff-tab-prices-restrictions",
-    },
-    {
-      title: i18n.t("Настройки"), link: `/tariff/edit/${id}`, dataTest: "tariff-tab-settings",
-    },
-    {
-      title: i18n.t("Описание"), link: `/tariff/edit_description/${id}`, dataTest: "tariff-tab-description",
-    },
-    {
-      title: i18n.t("Журнал изменений"), link: `/tariff/log/${id}`, dataTest: "tariff-tab-changelog",
-    },
-  ];
 }
 
 export function getExtraChargeName(childrenAgeId, minAge, maxAge, compactMode = false) {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="nowrap pa-ingroup pl-groups d-flex align-center justify-space-between bordered-b bordered-r bordered-l rounded-0"
+      class="nowrap pa-ingroup pl-groups d-flex align-center justify-space-between bordered-b bordered-r bordered-l rounded-0 tariff-demo-table-name-cell"
       :style="[$options.nameStyles, { maxWidth: `${$options.roomtypeNameCellWidth}px`, height: `${rowHeight}px`, boxSizing: 'border-box' }]"
     >
       <span class="text-truncate">
@@ -41,7 +41,7 @@ import TariffTableRestrictionCell from "../cells/tariff-table-restriction-cell.v
 import RestrictionRowHint from "../restriction-row-hints/restriction-row-hint.vue";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsTableRestrictionRow",
+  name: "TariffPricesTableRestrictionRow",
   components: {
     TariffTableRestrictionCell,
     RestrictionRowHint,

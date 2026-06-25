@@ -17,5 +17,5 @@
 </template>
 
 <script>
-export default { name: "BnovoTariffPricesAndRestrictionsMinstayHint" };
+export default { name: "TariffPricesMinstayHint" };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <b-teleport-wrapper selector="#bnovo-spa">
+  <b-teleport-wrapper selector="#app-teleport-root">
     <component
       :is="popupComponent"
       v-model="show"
@@ -71,7 +71,7 @@ import BTeleportWrapper from "@/uikit/b-teleport-wrapper";
 import { restrictionTypes } from "../../config/screen-config.js";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsSelectRestrictionsPopup",
+  name: "TariffPricesSelectRestrictionsPopup",
   components: { BTeleportWrapper },
   restrictionTypeItems: Object.freeze(
     Object.entries(restrictionTypes)

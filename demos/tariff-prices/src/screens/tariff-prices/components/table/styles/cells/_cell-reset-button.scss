@@ -3,6 +3,7 @@
 /** Общая кнопка сброса в ячейках цены и ограничений (таблица). */
 @mixin tariff-cell-reset-button {
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.3s ease;
   position: absolute;
   left: 4px;
@@ -17,4 +18,11 @@
 
 .reset-button {
   @include tariff-cell-reset-button;
+  background-color: transparent !important;
+  box-shadow: none !important;
+
+  &:global(.text-primary.v-btn--variant-flat),
+  &:global(.bg-primary) {
+    background-color: transparent !important;
+  }
 }

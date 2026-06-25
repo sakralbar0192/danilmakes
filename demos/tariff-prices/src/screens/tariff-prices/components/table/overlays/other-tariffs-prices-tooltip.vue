@@ -1,21 +1,10 @@
 <template>
-  <b-menu
-    v-if="shouldRenderTooltip"
-    v-model="show"
-    :close-on-click="false"
-    right
-    :max-width="$options.tooltipWidth"
-    :max-height="$options.tooltipHeight"
-    :position-x="tooltipX"
-    :position-y="tooltipY"
-    absolute
-    offset-x
-    hide-overlay
-  >
+  <Teleport to="body">
     <v-card
+      v-if="show && shouldRenderTooltip"
       data-other-tariffs-prices-tooltip-root
-      :class="$style['card']"
-      :style="{ maxHeight: `${$options.tooltipHeight}px` }"
+      :class="$style.card"
+      :style="tooltipStyle"
     >
       <v-card-text class="px-0 pb-0">
         <div v-if="isLoadingOtherTariffsPrices" class="px-inner py-inner">
@@ -45,7 +34,7 @@
         </div>
       </v-card-text>
     </v-card>
-  </b-menu>
+  </Teleport>
 </template>
 
 <script>
@@ -56,7 +45,7 @@ import { scheduleOtherTariffsTooltipOpen,
 import { resolveOtherTariffsTooltipShouldRender } from "../lib/editing/resolve-other-tariffs-tooltip-should-render.js";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsOtherTariffsPrices",
+  name: "TariffPricesOtherTariffsPrices",
   inject: { findTariffTableCellRootByKey: { default: null } },
   props: {
     cellKey: {
@@ -69,6 +58,7 @@ export default {
       show: false,
       showOpenTimerId: null,
       otherTariffsPricesError: "",
+      positionTick: 0,
     };
   },
   tooltipHeight: 210,
@@ -132,23 +122,42 @@ export default {
       return this.isExtraCharge ? this.partsLoadState.otherTariffsExtraLoaded : this.partsLoadState.otherTariffsPricesLoaded;
     },
     elClientRect() {
-      return this.anchorEl?.getBoundingClientRect?.() || {};
+      void this.positionTick;
+      const rect = this.anchorEl?.getBoundingClientRect?.();
+      if (!rect || (rect.width === 0 && rect.height === 0)) {
+        return null;
+      }
+      return rect;
     },
     tooltipX() {
+      if (!this.elClientRect) {
+        return 0;
+      }
       const rightSpace = window.innerWidth - this.elClientRect.right;
-
       if (rightSpace < this.$options.tooltipWidth) {
-        return this.elClientRect.right - this.$options.tooltipWidth;
+        return Math.max(8, this.elClientRect.right - this.$options.tooltipWidth);
       }
       return this.elClientRect.left;
     },
     tooltipY() {
+      if (!this.elClientRect) {
+        return 0;
+      }
       const spaceBelow = window.innerHeight - this.elClientRect.bottom;
-
       if (spaceBelow < this.$options.tooltipHeight) {
-        return this.elClientRect.top - this.$options.tooltipHeight + 10;
+        return Math.max(8, this.elClientRect.top - this.$options.tooltipHeight + 10);
       }
       return this.elClientRect.bottom;
+    },
+    tooltipStyle() {
+      return {
+        position: "fixed",
+        left: `${this.tooltipX}px`,
+        top: `${this.tooltipY}px`,
+        width: `${this.$options.tooltipWidth}px`,
+        maxHeight: `${this.$options.tooltipHeight}px`,
+        zIndex: 2400,
+      };
     },
   },
   watch: {
@@ -158,11 +167,33 @@ export default {
         this.onCellKeyChange(v, prev);
       },
     },
+    show(v) {
+      this.syncPositionListeners(v);
+    },
   },
   beforeUnmount() {
     this.clearShowOpenTimer();
+    this.syncPositionListeners(false);
   },
   methods: {
+    syncPositionListeners(active) {
+      if (typeof window === "undefined") {
+        return;
+      }
+      if (this._positionListener) {
+        window.removeEventListener("scroll", this._positionListener, true);
+        window.removeEventListener("resize", this._positionListener);
+        this._positionListener = null;
+      }
+      if (!active) {
+        return;
+      }
+      this._positionListener = () => {
+        this.positionTick += 1;
+      };
+      window.addEventListener("scroll", this._positionListener, true);
+      window.addEventListener("resize", this._positionListener);
+    },
     onCellKeyChange(v, prev) {
       this.clearShowOpenTimer();
 
@@ -248,6 +279,8 @@ export default {
 
 .card {
   position: relative;
+  overflow: auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .show-other-prices-hint {

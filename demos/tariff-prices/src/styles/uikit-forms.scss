@@ -1,4 +1,4 @@
-@import "./bnovo-shims";
+@import "./demo-shims";
 @import "./theme/tools/custom-variables";
 
 $tariff-control-height: $input-height;
@@ -100,13 +100,13 @@ $tariff-control-height: $input-height;
 }
 
 /* Ячейки таблицы: контент по центру, box-sizing как в production */
-.bnovo-tariff-prices-and-restrictions-table-price-cell,
+.tariff-demo-and-restrictions-table-price-cell,
 [data-test="tariff-restriction-cell"],
 [data-test="tariff-price-cell"] {
   box-sizing: border-box;
 }
 
-.bnovo-tariff-prices-and-restrictions-table-price-cell input,
+.tariff-demo-and-restrictions-table-price-cell input,
 [data-test="tariff-restriction-cell"] input {
   box-sizing: border-box;
 }

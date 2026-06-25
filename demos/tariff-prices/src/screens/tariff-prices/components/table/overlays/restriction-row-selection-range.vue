@@ -18,7 +18,7 @@ import moment from "moment";
 const format = "DD/MM";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsRestrictionRowSelectionRange",
+  name: "TariffPricesRestrictionRowSelectionRange",
   props: {
     fromDate: {
       type: Object,

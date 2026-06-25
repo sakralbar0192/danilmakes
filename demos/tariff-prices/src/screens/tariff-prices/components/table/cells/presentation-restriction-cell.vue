@@ -41,7 +41,7 @@
           </span>
           <v-icon
             small
-            color="error"
+            color="primary"
             class="icon-minus-circle"
           />
         </template>
@@ -64,7 +64,7 @@ import { restrictionCellPresentationModes } from "../../../config/screen-config.
 import { presentationCellHeight, presentationCellWidth } from "../config/table-grid-metrics.js";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsTablePresentationRestrictionCell",
+  name: "TariffPricesTablePresentationRestrictionCell",
   props: {
     withoutCaption: {
       type: Boolean,
@@ -164,7 +164,7 @@ export default {
     cursor: url("/public/spa/img/not-allowed-pointer.png"), pointer !important;
 
     :global(.v-icon) {
-      color: #FFCDC3 !important
+      color: $tariff-copied-icon-muted !important
     }
   }
 

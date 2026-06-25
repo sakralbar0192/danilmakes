@@ -3,7 +3,7 @@
     <div
       ref="scrollContainerRef"
       :class="[
-        'bnovo-tariff-prices-and-restrictions__scroll-container',
+        'tariff-demo-and-restrictions__scroll-container',
         $style.scrollArea,
         { [safariStickyFixClass]: safariStickyFixActive },
       ]"
@@ -12,27 +12,17 @@
       <div
         v-show="!fullscreenMode"
         ref="pageStickyHeaderMeasure"
-        class="bnovo-tariff-prices-page-sticky-header"
+        class="tariff-demo-page-sticky-header"
       >
         <page-header @change-tariff="$emit('change-tariff', $event)"/>
         <v-row dense class="mb-ingroup">
           <b-col :cols="isDesktopDevice ? 6 : 'auto'">
-            <div class="mb-outer">
-              <div :class="$style['tabs-touch-strip']">
-                <b-layout-tabs :tabs="tabs"/>
-              </div>
-            </div>
             <v-row v-if="!isCombinedModeEnabled" dense class="mb-ingroup">
               <b-col>
                 <page-modes @change-mode="$emit('change-mode', $event)"/>
               </b-col>
             </v-row>
             <tariff-info show-all-info/>
-            <v-row v-if="$options.infoDrawerEnabled" dense>
-              <b-col>
-                <info-drawer ref="infoDrawer"/>
-              </b-col>
-            </v-row>
           </b-col>
           <v-spacer/>
           <b-col
@@ -45,7 +35,7 @@
         </v-row>
       </div>
 
-      <v-row dense>
+      <v-row dense class="tariff-demo-screen-content">
         <b-col>
           <slot name="table"/>
         </b-col>
@@ -76,8 +66,6 @@ import PageFooter from "../chrome/footer.vue";
 import PageModes from "../chrome/modes.vue";
 import TariffInfo from "../chrome/tariff-info.vue";
 import PageLegend from "../chrome/legend.vue";
-import InfoDrawer from "../info-drawer/index.vue";
-import { getPageTabs, infoDrawerEnabled } from "../../config/screen-config.js";
 import { shouldShowPageFooter } from "../../lib/screen/pending-and-footer.js";
 import { MOBILE_EDITING_BODY_CLASS } from "../../lib/screen/mobile-app-footer-controller.js";
 import { createScrollContainerBottomFitController } from "../../lib/screen/scroll-container-bottom-fit-controller.js";
@@ -89,14 +77,12 @@ import { SCROLL_CONTAINER_SAFARI_STICKY_FIX_CLASS,
 
 export default {
   name: "TariffPricesScreenLayout",
-  infoDrawerEnabled,
   components: {
     PageHeader,
     PageFooter,
     PageModes,
     PageLegend,
     TariffInfo,
-    InfoDrawer,
   },
   provide() {
     return {
@@ -119,17 +105,6 @@ export default {
           this.finishMobileEditFooterSession();
         }
       },
-      openInfoDrawer: (tab) => {
-        if (!infoDrawerEnabled) {
-          return;
-        }
-        const drawer = this.$refs.infoDrawer;
-        if (!drawer) {
-          return;
-        }
-
-        drawer.openDrawer(tab);
-      },
     };
   },
   props: {
@@ -144,10 +119,10 @@ export default {
       scrollFitController: null,
       safariStickyFixActive: false,
       /**
-       * Кэшированная ссылка на `.bnovo-mobile-footer--outer`. `document.querySelector` дорогой на каждый
+       * Кэшированная ссылка на `.demo-mobile-footer--outer`. `document.querySelector` дорогой на каждый
        * recompute scroll-fit (на мобилке десятки в секунду при vv/resize). Инвалидируется через
        * MutationObserver контроллера на body class — на этом экране смена видимости app footer
-       * приходит вместе с body-class `bnovo-tariff-prices-mobile-editing`.
+       * приходит вместе с body-class `tariff-demo-mobile-editing`.
        */
       cachedAppMobileFooterEl: null,
     };
@@ -171,9 +146,6 @@ export default {
         hasPendingTariffChanges: this.hasPendingTariffChanges,
         isMobileDevice: this.isMobileDevice,
       });
-    },
-    tabs() {
-      return getPageTabs(this.currentTariff?.id);
     },
     safariStickyFixClass() {
       return SCROLL_CONTAINER_SAFARI_STICKY_FIX_CLASS;
@@ -285,7 +257,7 @@ export default {
       });
     },
     /**
-     * Возвращает закэшированный `.bnovo-mobile-footer--outer`. Если ссылка устарела
+     * Возвращает закэшированный `.demo-mobile-footer--outer`. Если ссылка устарела
      * (элемент detached от DOM — app shell мог пере-рендериться), повторно ищем по селектору.
      */
     resolveAppMobileFooterEl() {
@@ -296,7 +268,7 @@ export default {
       if (cached && cached.isConnected) {
         return cached;
       }
-      const el = document.querySelector(".bnovo-mobile-footer--outer");
+      const el = document.querySelector(".demo-mobile-footer--outer");
       this.cachedAppMobileFooterEl = el || null;
       return el;
     },
@@ -316,14 +288,6 @@ export default {
 .scrollArea {
   flex: 1 1 auto;
   min-height: 0;
-}
-
-.tabs-touch-strip {
-  @include respondBelow(md) {
-    touch-action: pan-x;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-  }
 }
 
 .footerSlot {

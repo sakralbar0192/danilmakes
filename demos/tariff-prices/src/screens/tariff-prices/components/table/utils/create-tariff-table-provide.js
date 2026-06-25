@@ -10,7 +10,7 @@ import { getHorizontalDisplayCalendarFromCache } from "../lib/scroll/tariff-hori
  *
  * Единая фабрика `provide`, чтобы список инжектируемых ключей жил в одном месте без раздувания SFC.
  *
- * @param {object} outer — экземпляр компонента `BnovoTariffPricesAndRestrictionsTable`
+ * @param {object} outer — экземпляр компонента `TariffPricesTable`
  */
 export default function createTariffTableProvide(outer) {
   return {

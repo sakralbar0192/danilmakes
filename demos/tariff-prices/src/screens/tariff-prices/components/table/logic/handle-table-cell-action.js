@@ -21,7 +21,8 @@ import { buildCellKey, isPriceCellType } from "../lib/cell-identity.js";
  *     approvalKind: "price"|"restriction",
  *   }) => void|Promise<void>,
  *   openBooleanRestrictionSheet: (args: object) => void,
- *   toggleClosedArrivalDeparture: (roomtypeId: string, restrictionType: string, date: string, currentValue: string) => void|Promise<void>,
+ *   getEffectiveBooleanRestrictionValue: (roomtypeId: string, restrictionType: string, date: string) => 0|1,
+ *   toggleClosedArrivalDeparture: (roomtypeId: string, restrictionType: string, date: string) => void|Promise<void>,
  * }} ctx
  */
 // eslint-disable-next-line import/prefer-default-export
@@ -35,6 +36,7 @@ export async function runHandleTableCellAction(ctx) {
     runOrDeferMobileApproval,
     openBooleanRestrictionSheet,
     toggleClosedArrivalDeparture,
+    getEffectiveBooleanRestrictionValue,
   } = ctx;
 
   const {
@@ -47,6 +49,12 @@ export async function runHandleTableCellAction(ctx) {
       restrictionValue,
     },
   } = payload;
+
+  const resolveBooleanRestrictionValue = (roomtypeId, restrictionType, date) => (
+    typeof getEffectiveBooleanRestrictionValue === "function"
+      ? getEffectiveBooleanRestrictionValue(roomtypeId, restrictionType, date)
+      : Number(restrictionValue) ? 1 : 0
+  );
 
   switch (action) {
     case priceCellResetDataAttrName:
@@ -119,10 +127,10 @@ export async function runHandleTableCellAction(ctx) {
             roomtypeId,
             restrictionType,
             date,
-            restrictionValue,
+            restrictionValue: resolveBooleanRestrictionValue(roomtypeId, restrictionType, date),
           });
         } else {
-          await toggleClosedArrivalDeparture(roomtypeId, restrictionType, date, restrictionValue);
+          await toggleClosedArrivalDeparture(roomtypeId, restrictionType, date);
         }
         break;
       }

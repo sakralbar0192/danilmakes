@@ -65,7 +65,7 @@ import { resolveBpRuleRoomtypeId } from "../../../lib/flat-roomtypes.js";
 import { resolveExtraChargeCategoryDefaultForPriceId } from "../../../lib/tariff/resolve-extra-charge-category-default.js";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsPriceResetApprovalTooltip",
+  name: "TariffPricesPriceResetApprovalTooltip",
   props: {
     resetApprovalInfo: {
       type: Object,

@@ -1,5 +1,5 @@
 /**
- * Числовые id инструментов — зеркало bnovo_pms/modules/tools/classes/Tools.php (константы TOOL_*).
+ * Числовые id инструментов — зеркало legacy_pms/modules/tools/classes/Tools.php (константы TOOL_*).
  * Соответствует Tools::allKnownToolIds(). При изменении в PMS — обновлять здесь.
  */
 

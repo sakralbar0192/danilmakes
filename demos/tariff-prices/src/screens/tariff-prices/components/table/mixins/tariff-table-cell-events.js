@@ -34,6 +34,7 @@ import { resolveExtraChargeCategoryDefaultForPriceId } from "../../../lib/tariff
 import { resolveOtherTariffsTooltipAnchorAfterPriceCellClick,
   captureOtherTariffsTooltipPointerDownState } from "../lib/editing/resolve-other-tariffs-tooltip-anchor-after-price-cell-click.js";
 import { resolveOtherTariffsTooltipAnchorAfterFocusOut } from "../lib/editing/resolve-other-tariffs-tooltip-open-state.js";
+import { resolveEffectiveBooleanRestrictionValue } from "../lib/editing/resolve-effective-boolean-restriction-value.js";
 
 /** На мобилке Backspace часто не даёт стабильного `keydown`; удаление идёт через `beforeinput`. */
 const MOBILE_BACKSPACE_USES_BEFORE_INPUT = typeof window !== "undefined"
@@ -188,6 +189,7 @@ export default {
         },
         openBooleanRestrictionSheet: (args) => this.openBooleanRestrictionSheet(args),
         toggleClosedArrivalDeparture: (...a) => this.toggleClosedArrivalDeparture(...a),
+        getEffectiveBooleanRestrictionValue: (...a) => this.getEffectiveBooleanRestrictionValue(...a),
       });
     },
     /**
@@ -672,7 +674,6 @@ export default {
         data: {
           id,
           date,
-          restrictionValue,
         },
       } = payload;
       const [roomtypeId, restrictionType] = (id || "").split("_");
@@ -698,44 +699,53 @@ export default {
         await this.$nextTick();
         target?.querySelector?.("input[inputmode=\"numeric\"]")?.focus?.();
       } else if (!isRestrictionDisabled && roomtypeId && isBooleanRestriction) {
+        const effectiveValue = this.getEffectiveBooleanRestrictionValue(roomtypeId, restrictionType, date);
         if (this.isMobileDevice) {
           this.openBooleanRestrictionSheet({
             cellKey,
             roomtypeId,
             restrictionType,
             date,
-            restrictionValue,
+            restrictionValue: effectiveValue,
           });
         } else if (Object.prototype.hasOwnProperty.call(payload.data || {}, "compactBooleanDropdown")) {
           const openDropdownFromMouseClick = Boolean(
             event && event.type === "click" && event.detail >= 1,
           );
           if (openDropdownFromMouseClick) {
+            this.armRestrictionSheetOutsideDismissSuppress();
             this.openCompactBooleanRestrictionDropdown({
               anchorEl: payload.cellRoot || payload.target,
               cellKey,
               roomtypeId,
               restrictionType,
               date,
-              restrictionValue,
+              restrictionValue: effectiveValue,
             });
           } else {
-            await this.toggleClosedArrivalDeparture(roomtypeId, restrictionType, date, restrictionValue);
+            await this.toggleClosedArrivalDeparture(roomtypeId, restrictionType, date);
           }
         } else {
-          await this.toggleClosedArrivalDeparture(roomtypeId, restrictionType, date, restrictionValue);
+          await this.toggleClosedArrivalDeparture(roomtypeId, restrictionType, date);
         }
       }
     },
+    getEffectiveBooleanRestrictionValue(roomtypeId, restrictionType, date) {
+      return resolveEffectiveBooleanRestrictionValue({
+        pricesCalendarModel: this.pricesCalendarModel,
+        updatedRestrictions: this.$store.state.tariffPricesAndRestrictions?.updatedRestrictions,
+        roomtypeId,
+        restrictionType,
+        date,
+      });
+    },
     applyRestrictionBooleanValue(roomtypeId, restrictionType, date, value) {
-      setTimeout(() => {
-        return this.$store.dispatch("tariffPricesAndRestrictions/setUpdatingRestrictions", {
-          type: restrictionType,
-          roomtypeId,
-          day: date,
-          value,
-        });
-      }, 0);
+      return this.$store.dispatch("tariffPricesAndRestrictions/setUpdatingRestrictions", {
+        type: restrictionType,
+        roomtypeId,
+        day: date,
+        value,
+      });
     },
     armRestrictionSheetOutsideDismissSuppress() {
       this.suppressRestrictionSheetOutsideDismissUntilMs = Date.now()
@@ -831,12 +841,13 @@ export default {
       this.applyRestrictionBooleanValue(s.roomtypeId, s.restrictionType, s.date, value);
       this.booleanRestrictionSheet = null;
     },
-    toggleClosedArrivalDeparture(roomtypeId, restrictionType, date, currentValue) {
+    toggleClosedArrivalDeparture(roomtypeId, restrictionType, date) {
+      const currentValue = this.getEffectiveBooleanRestrictionValue(roomtypeId, restrictionType, date);
       this.applyRestrictionBooleanValue(
         roomtypeId,
         restrictionType,
         date,
-        Number(currentValue) ? 0 : 1,
+        currentValue ? 0 : 1,
       );
     },
     async handleCellBlur(e) {

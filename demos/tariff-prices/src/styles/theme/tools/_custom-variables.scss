@@ -75,7 +75,7 @@ $gaps: (
 // Colors
 // ==================================== //
 $main: #3C435A;
-$border-color: #DDDDE3; // $color-шахматка-фон-разлиновка
+$border-color: #e8eef3; // soft grid lines (aligned with report-revenue demo)
 $border-thumb-color: #ECECEF; // $color-шахматка-фон-разлиновка
 $input-border-width: 1px;
 $border: $input-border-width solid $border-color; // $color-шахматка-фон-разлиновка
@@ -97,12 +97,12 @@ $sky: #E4EDFD;
 $sky-hover: #ECF3FF;
 $sky-focus: #D2E1FB;
 $sky-active: #F5F9FE;
-$primary: #1875F0; // $color-кнопка-первичная-норм
-$primary-lighten-4: #E2EEFD; // color accent/lighten 4 from uikit
+$primary: #1e8bc3;
+$primary-lighten-4: #eef6fa;
 
-$primary-hover: #0E67DC; // $color-кнопка-первичная-наведение
-$primary-focus: #1e5bea; // $color-кнопка-первичная-нажатие
-$primary-active: #1e5bea; // $color-кнопка-первичная-нажатие
+$primary-hover: #16739f;
+$primary-focus: #136688;
+$primary-active: #136688;
 
 $secondary: #EEEEF1; // $color-основные-светло-серый
 $secondary-hover: #F7F7F8; // $color-кнопка-третичная-наведение
@@ -194,7 +194,7 @@ $b-text: (
 $text-color: map.get($b-text, default);
 
 // ==================================== //
-// Coloring bnovo-world-map
+// Coloring demo-world-map
 // ==================================== //
 $b-colors: (
   sky: $sky,

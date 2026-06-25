@@ -6,20 +6,34 @@ $tariff-table-cell-inner-height: $cell-height - 1px;
 $updating-price-cell-width: 95.88px;
 $updating-price-cell-height: 48px;
 
-$price-cell-default-text-color: #888B91;
+$price-cell-default-text-color: #6b7c8a;
 
-$main-cell-bg-color: #F7F8FA;
-$sub-cell-bg-color: #FFFFFF;
-$closed-bg-color: #FFF5F2;
+$main-cell-bg-color: #f4f8fb;
+$sub-cell-bg-color: #ffffff;
+$closed-bg-color: #e8f0f6;
+$closed-hover-bg-color: #d9e8f2;
 
-$main-cell-hover-bg-color: #F0F1F5;
-$sub-cell-hover-bg-color: #FAFAFB;
-$closed-hover-bg-color: #FFE2DB;
+$main-cell-hover-bg-color: #eef6fa;
+$sub-cell-hover-bg-color: #eef6fa;
 
-$copied-restriction-cell-background: #F0F1F5;
+$copied-restriction-cell-background: #eef2f6;
 
-$tariff-table-grid-border-color: rgba(0, 0, 0, 0.12);
+$tariff-table-grid-border-color: #e8eef3;
 
-$compact-restriction-filled-bg-color: #FFD38C;
-$compact-restriction-boolean-filled-bg-color: #FFC86F;
-$compact-restriction-copied-filled-bg-color: #FFDBAB;
+$compact-restriction-filled-bg-color: #ffe4b8;
+$compact-restriction-boolean-filled-bg-color: #ffd89a;
+$compact-restriction-copied-filled-bg-color: #ffeccc;
+
+// Семантика таблицы (без зелёного/красного PMS)
+$tariff-dynamic-marker: #16739f;
+$tariff-boolean-icon: #136688;
+$tariff-cell-conflict-outline: #b8864a;
+$tariff-status-open: #16739f;
+$tariff-status-closed: #5b6b7a;
+$tariff-status-open-bg: #eef6fa;
+$tariff-status-open-border: #a8d4e8;
+$tariff-status-closed-bg: #e8f0f6;
+$tariff-status-closed-border: #b8c9d8;
+$tariff-unavailable-cell-bg: #d4dee8;
+$tariff-copied-icon-muted: #9eb8cc;
+$tariff-bp-roomtype-accent: #16739f;

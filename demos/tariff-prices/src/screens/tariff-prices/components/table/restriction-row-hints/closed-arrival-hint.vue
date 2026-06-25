@@ -31,5 +31,5 @@
 </template>
 
 <script>
-export default { name: "BnovoTariffPricesAndRestrictionsClosedArrivalHint" };
+export default { name: "TariffPricesClosedArrivalHint" };
 </script>

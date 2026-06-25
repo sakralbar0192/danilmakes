@@ -92,7 +92,7 @@ import PresentationPriceCell from "../../table/cells/presentation-price-cell.vue
 import LegendPriceTooltipSwatch from "./legend-price-tooltip-swatch.vue";
 
 export default {
-  name: "BnovoTariffLegendPrices",
+  name: "TariffLegendPrices",
   components: {
     LegendPriceTooltipSwatch,
     PresentationPriceCell,

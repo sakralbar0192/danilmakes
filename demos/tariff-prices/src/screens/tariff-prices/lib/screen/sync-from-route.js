@@ -39,7 +39,7 @@ export async function syncTariffPricesFromRoute(vm, { resetChanges = true } = {}
     await vm.$store.dispatch(`${storeNs}/setCurrentMode`, nextMode);
   }
 
-  vm.dispatchInfoTabForMode(nextMode);
+  vm.dispatchInfoTabForMode?.(nextMode);
 
   if (resetChanges) {
     vm.$store.dispatch(`${storeNs}/resetMainChanges`);

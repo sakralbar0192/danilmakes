@@ -8,7 +8,7 @@
     ref="cellRoot"
     :style="[restrictionCellBoxStyle, cursorStyle]"
     :class="[
-      'd-flex flex-column align-center justify-center',
+      'd-flex flex-column align-center justify-center tariff-restriction-cell-root',
       cellClass,
       'bordered-b bordered-r rounded-0',
       { [$style['restriction-cell--boolean-sheet']]: isBooleanSheetHighlight },
@@ -37,8 +37,8 @@
       <v-icon
         v-if="!!Number(cellVm.internalRestriction.value)"
         small
-        color="error"
-        class="icon-minus-circle"
+        color="primary"
+        class="icon-minus-circle tariff-table-boolean-icon"
         style="pointer-events: none;"
       />
     </p>
@@ -72,6 +72,7 @@
       v-if="cellVm.needShowResetButton"
       :class="$style['reset-button']"
       color="primary"
+      text
       text-inline
       squared
       :tabindex="resetButtonTabindex"
@@ -308,7 +309,7 @@ export default {
     }
 
     :global(.v-icon) {
-      color: #FFCDC3 !important;
+      color: $tariff-copied-icon-muted !important;
     }
   }
 
@@ -320,12 +321,12 @@ export default {
 
   &-error {
     .restriction-text {
-      outline: 1px solid $error !important;
+      outline: 1px solid $tariff-cell-conflict-outline !important;
       z-index: 2;
     }
 
     .restriction-text-field {
-      outline: 1px solid $error !important;
+      outline: 1px solid $tariff-cell-conflict-outline !important;
       outline-offset: -1px;
       z-index: 2;
     }
@@ -361,9 +362,6 @@ export default {
 .restriction-cell:hover .reset-button,
 .restriction-cell:focus-within .reset-button {
   opacity: 1;
-}
-
-.restriction-cell:focus-within .reset-button {
   pointer-events: all;
 }
 </style>

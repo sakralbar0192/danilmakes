@@ -75,7 +75,7 @@ import ItemView from "./item-view.vue";
 import resolveElement from "@/utils/resolve-element.js";
 
 const UPDATE_DELAY = 100;
-const COMPONENT_NAME = "BnovoTariffPricesAndRestrictionsTableVirtualizer";
+const COMPONENT_NAME = "TariffPricesTableVirtualizer";
 
 function isWindowContainer(container) {
   return typeof window !== "undefined" && container === window;

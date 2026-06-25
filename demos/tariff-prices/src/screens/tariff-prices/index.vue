@@ -19,9 +19,6 @@
           :is-availability-editable="isAvailabilityEditable"
           @change-mode="changeMode"
           @change-date="changeDate"
-          @update-prices="openPricesDrawer"
-          @update-restrictions="openRestrictionsDrawer"
-          @update-availability="openAvailabilityDrawer"
           @show-categories-popup="categoriesPopupValue = true"
           @show-restrictions-popup="restrictionsPopupValue = true"
           @update-need-hide-footer="needHideFooter = $event"
@@ -30,17 +27,8 @@
       </template>
     </tariff-prices-screen-layout>
     <tariff-prices-screen-modals
-      ref="tariffPricesScreenModals"
-      v-model:massive-updating-prices-drawer-value="massiveUpdatingPricesDrawerValue"
-      v-model:massive-updating-availability-drawer-value="massiveUpdatingAvailabilityDrawerValue"
-      :is-availability-editable="isAvailabilityEditable"
-      v-model:updating-restrictions-modal-value="updatingRestrictionsModalValue"
       v-model:categories-popup-value="categoriesPopupValue"
       v-model:restrictions-popup-value="restrictionsPopupValue"
-      :restrictions-drawer-opened-from-drag-selection="restrictionsDrawerOpenedFromDragSelection"
-      @updated-prices="successUpdatedPrices"
-      @updated-restrictions="notifyUpdatedRestrictions"
-      @updated-availability="successUpdatedAvailability"
     />
   </template>
 </template>
@@ -50,24 +38,19 @@ import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
 import PriceAndRestrictionsService from "@/services/tariff/price-and-restrictions";
 import TariffInterfaceSettingsService from "@/services/tariff/interface-settings";
 import { isEmptyObject } from "@/utils/object";
-import { infoDrawerModes,
-  viewDateFormat,
-  allWeekdayItem,
-  massUpdateDrawersEnabled } from "./config/screen-config.js";
+import { viewDateFormat } from "./config/screen-config.js";
 import TariffPricesScreenLayout from "./components/layout/tariff-prices-screen-layout.vue";
 import TariffPricesScreenModals from "./components/layout/tariff-prices-screen-modals.vue";
 import PageTable from "./components/table/index.vue";
 import { flatMapRoomtypesWithSubrooms } from "./lib/flat-roomtypes.js";
 import { buildRouteDataKey } from "./lib/screen/route-key.js";
 import { normalizeDateFrom } from "./lib/screen/normalize-date-from.js";
-import { resolveActiveInfoTab } from "./lib/screen/active-info-tab.js";
 import { remapModeForCombinedMode } from "./lib/screen/combined-mode.js";
 import { hasInvalidAvailabilityDraftInTree } from "./config/resolve-availability-draft-from-input.js";
 import { hasPendingTariffChanges as computeHasPendingTariffChanges, shouldHideMobileAppFooterBar as computeShouldHideMobileAppFooterBar } from "./lib/screen/pending-and-footer.js";
 import { createMobileAppFooterController } from "./lib/screen/mobile-app-footer-controller.js";
 import { MOBILE_EDIT_POST_SAVE_SCROLL_FIT_DELAY_MS } from "./components/table/config/table-grid-metrics.js";
 import resolveInitialSavedState from "./lib/screen/initialize-saved-state.js";
-import { STATIST_PRICES_DRAWER_COUNTERS, STATIST_RESTRICTIONS_DRAWER_COUNTERS, startStatistCounters, ymGoalRestrictionsMassPopup, YM_GOAL_MASS_PRICES_POPUP } from "./lib/screen/drawer-analytics.js";
 import { buildStayRestrictionDialogTranslationParams } from "./lib/screen/stay-restriction-dialog-content.js";
 import { hasUnacceptablePrices,
   buildUnacceptablePriceCategoryTags,
@@ -81,16 +64,14 @@ import { applyAvailabilitySavedInPlace } from "./components/table/lib/store/appl
 import { fetchTariffPricesCalendarData } from "./lib/screen/fetch-tariff-calendar-data.js";
 import { resolveRefetchPartsForSave } from "./lib/screen/resolve-refetch-parts-after-save.js";
 import { ensureDynamicPartBeforePriceSave } from "./lib/screen/price-save-preflight.js";
-import { captureScrollContainerPosition,
-  restoreScrollContainerPosition,
-  buildMassRestrictionsRefetchParts } from "./lib/screen/preserve-scroll-container-position.js";
+import {   captureScrollContainerPosition,
+  restoreScrollContainerPosition } from "./lib/screen/preserve-scroll-container-position.js";
 import { shouldBlockTariffDiscardWhileMobileCellFocused } from "./lib/screen/footer-discard-guard.js";
 import { applyVirtualKeyboardOverlaysContentOnce } from "./lib/screen/apply-virtual-keyboard-overlays-content.js";
 import { applyRmsDefaultPlanModeMapping } from "./lib/screen/apply-rms-default-plan-mode-mapping.js";
-import ymHelpers from "@/utils/ym-helpers";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictions",
+  name: "TariffPricesScreen",
   components: {
     TariffPricesScreenLayout,
     TariffPricesScreenModals,
@@ -100,10 +81,6 @@ export default {
     return {
       categoriesPopupValue: false,
       restrictionsPopupValue: false,
-      massiveUpdatingPricesDrawerValue: false,
-      massiveUpdatingAvailabilityDrawerValue: false,
-      updatingRestrictionsModalValue: false,
-      restrictionsDrawerOpenedFromDragSelection: false,
       needHideFooter: false,
       tableHideMobileAppFooter: false,
       isMobileFooterHiddenByKeyboard: false,
@@ -200,7 +177,7 @@ export default {
   },
   beforeUnmount() {
     document.removeEventListener("fullscreenchange", this.handleFullscreenChange);
-    document.body.classList.remove("bnovo-tariff-prices-page-fullscreen");
+    document.body.classList.remove("tariff-demo-page-fullscreen");
     this.setFullscreenMode(false);
     if (this.mobileAppFooterController) {
       this.mobileAppFooterController.destroy();
@@ -265,48 +242,12 @@ export default {
         this.enabledCombinedMode,
       );
     },
-    dispatchInfoTabForMode(mode) {
-      const tab = resolveActiveInfoTab(mode, {
-        modeRestrictions: PriceAndRestrictionsService.modeRestrictions,
-        modeDynamicPrice: PriceAndRestrictionsService.modeDynamicPrice,
-        modeRestrictionsWithDynamicPrices: PriceAndRestrictionsService.modeRestrictionsWithDynamicPrices,
-        infoDrawerRestrictions: infoDrawerModes.restrictions,
-        infoDrawerDynamic: infoDrawerModes.dynamic,
-        infoDrawerDefault: infoDrawerModes.default,
-      });
-      this.$store.dispatch("tariffPricesAndRestrictions/setActiveInfoTab", tab);
-    },
     async syncFromRoute(options) {
       return syncTariffPricesFromRoute(this, options);
     },
-    // --- Массовые drawer’ы и попап категорий ---
-    openRestrictionsDrawer(selectionPayload) {
-      if (!massUpdateDrawersEnabled) {
-        return;
-      }
-      startStatistCounters(window.statist, STATIST_RESTRICTIONS_DRAWER_COUNTERS);
-      ymHelpers.reachGoal("main", ymGoalRestrictionsMassPopup(window.location.pathname));
-      this.restrictionsDrawerOpenedFromDragSelection = Boolean(selectionPayload);
-      this.updatingRestrictionsModalValue = true;
-      this.$refs.tariffPricesScreenModals?.prepareRestrictionsDrawer(selectionPayload);
-    },
-    openPricesDrawer() {
-      if (!massUpdateDrawersEnabled) {
-        return;
-      }
-      startStatistCounters(window.statist, STATIST_PRICES_DRAWER_COUNTERS);
-      ymHelpers.reachGoal("main", YM_GOAL_MASS_PRICES_POPUP);
-      this.massiveUpdatingPricesDrawerValue = true;
-    },
-    openAvailabilityDrawer() {
-      if (!massUpdateDrawersEnabled) {
-        return;
-      }
-      this.massiveUpdatingAvailabilityDrawerValue = true;
-    },
     handleFullscreenChange() {
       const isFullscreen = Boolean(document.fullscreenElement);
-      document.body.classList.toggle("bnovo-tariff-prices-page-fullscreen", isFullscreen);
+      document.body.classList.toggle("tariff-demo-page-fullscreen", isFullscreen);
       this.setFullscreenMode(isFullscreen);
       this.$nextTick(() => {
         const pageTable = this.$refs.pageTable;
@@ -585,14 +526,11 @@ export default {
         this.$refs.pageTable?.clearMobileEdit?.({ skipStoreFlush: true });
         this.$refs.pageTable?.scheduleMobileEditLayoutSettle?.();
 
-        this.massiveUpdatingPricesDrawerValue = false;
         if (sendingData) {
           this.$store.dispatch("tariffPricesAndRestrictions/resetDraftsForSendingData", sendingData);
         } else {
           this.$store.dispatch("tariffPricesAndRestrictions/resetPriceDrafts");
         }
-        this.$store.dispatch("tariffPricesAndRestrictions/resetMassiveChanges");
-        this.$store.dispatch("tariffPricesAndRestrictions/setMassiveUpdatingPricesWeekday", { weekday: allWeekdayItem.value });
         this.$dialog.toast({
           content: this.$t("Данные успешно сохранены"),
           type: "success",
@@ -610,61 +548,6 @@ export default {
 
         if (compeleteLoadSignal) {
           compeleteLoadSignal.reject();
-        }
-      }
-    },
-    async successUpdatedAvailability({ response, sendingData = null }) {
-      if (response?.result === "success") {
-        await this.refetchCalendarAfterSavePreservingScroll(sendingData, { explicitParts: ["meta"] });
-        this.$refs.pageTable?.clearCellVmCache?.();
-        this.massiveUpdatingAvailabilityDrawerValue = false;
-        this.$dialog.toast({
-          content: this.$t("Данные успешно сохранены"),
-          type: "success",
-          timeout: 4000,
-        });
-      } else if (response?.result === "error" || response?.result === "permission") {
-        this.$dialog.toast({
-          content: response?.error?.message || response?.error || this.$t("Не удалось сохранить наличие"),
-          type: "error",
-        });
-      }
-    },
-    async notifyUpdatedRestrictions(payload) {
-      const response = payload?.response ?? payload;
-      const sendingData = payload?.sendingData ?? null;
-      if (response?.result === "success") {
-        this.$dialog.toast({
-          content: this.$t("Данные успешно сохранены"),
-          type: "success",
-          timeout: 4000,
-        });
-        const explicitParts = buildMassRestrictionsRefetchParts({ isDependentTariff: this.isCurrentTariffDepend });
-        await this.refetchCalendarAfterSavePreservingScroll(sendingData, { explicitParts });
-        this.$refs.pageTable?.clearCellVmCache?.();
-        if (sendingData) {
-          this.$store.dispatch("tariffPricesAndRestrictions/resetDraftsForSendingData", sendingData);
-        } else {
-          this.$store.dispatch("tariffPricesAndRestrictions/resetRestrictionDrafts");
-        }
-        this.updatingRestrictionsModalValue = false;
-      } else if (payload instanceof Error || response?.result === "error" || payload?.result === "error") {
-        const responseOrError = payload instanceof Error ? payload : (response ?? payload);
-        const suppressParentErrorToast = responseOrError?.suppressParentErrorToast === true;
-        const apiMessage = responseOrError instanceof Error
-          ? responseOrError.message
-          : (responseOrError?.message ?? responseOrError?.error?.message);
-        if (!suppressParentErrorToast && apiMessage === STAY_MIN_MAX_API_ERROR_MESSAGE) {
-          this.showStayCombinationRestrictionError(mergeStayConflictTimestamps({
-            pricesCalendarModel: this.pricesCalendarModel,
-            updatedRestrictions: this.updatedRestrictions,
-            unacceptableRestrictions: this.unacceptableRestrictions,
-          }));
-        } else if (!suppressParentErrorToast) {
-          this.$dialog.toast({
-            content: this.$t("Не удалось сохранить ограничения"),
-            type: "error",
-          });
         }
       }
     },

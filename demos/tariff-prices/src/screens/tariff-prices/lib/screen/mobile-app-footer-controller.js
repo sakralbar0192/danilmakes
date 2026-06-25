@@ -6,7 +6,7 @@
  * эвристики dismiss-клавиатуры; отдельный канал по layout viewport даёт стабильный сигнал
  * «клавиатура ушла» для `onKeyboardHiddenChange` и body-class без гонок с debounce VV (~200ms).
  */
-export const MOBILE_EDITING_BODY_CLASS = "bnovo-tariff-prices-mobile-editing";
+export const MOBILE_EDITING_BODY_CLASS = "tariff-demo-mobile-editing";
 
 /**
  * @param {{

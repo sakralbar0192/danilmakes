@@ -19,12 +19,6 @@
             :src="$localImage('restrictions/compact_restrictions.png')"
             :alt="$t('Редактирование ограничений с помощью выделения ячеек')"
           >
-          <div v-if="$options.infoDrawerEnabled" class="d-flex items-center gap-typo ma-0">
-            {{ $t("Подробнее о видах ограничений в") }}
-            <b-btn primary text-inline @click="openInfoDrawer($options.tabs.restrictions)">
-              {{ $t("Инструкции") }}
-            </b-btn>
-          </div>
         </v-card-text>
       </v-card>
     </template>
@@ -32,13 +26,8 @@
 </template>
 
 <script>
-import { infoDrawerModes, infoDrawerEnabled } from "../../../config/screen-config.js";
-
 export default {
-  name: "BnovoTariffPricesAndRestrictionsCompactRestrictionRowHint",
-  infoDrawerEnabled,
-  inject: { openInfoDrawer: { default: () => {} } },
-  tabs: infoDrawerModes,
+  name: "TariffPricesCompactRestrictionRowHint",
   computed: {
     iconColor() {
       return this.$vuetify?.theme?.themes?.light?.secondary?.darken3 ?? "secondary";

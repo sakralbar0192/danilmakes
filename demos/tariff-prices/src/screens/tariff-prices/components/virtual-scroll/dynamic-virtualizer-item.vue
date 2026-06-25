@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "BnovoPricesAndRestrictionsDynamicVirtualizerItem",
+  name: "TariffPricesDynamicVirtualizerItem",
   inject: [
     "$resizeObserver",
     "getKeyField",

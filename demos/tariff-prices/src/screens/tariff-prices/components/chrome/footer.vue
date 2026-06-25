@@ -26,7 +26,7 @@
 import { mapState } from "vuex";
 
 export default {
-  name: "BnovoTariffPricesAndRestrictionsFooter",
+  name: "TariffPricesFooter",
   computed: { ...mapState("tariffPricesAndRestrictions", ["isLoading"]) },
 };
 </script>

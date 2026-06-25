@@ -237,7 +237,7 @@ const Roomtype = {
           ` (${validationErrorData?.otello_subrooms.ota_hotel_id})` || ""
         } <p>${
           i18n.t("Уберите синхронизацию по вариантам размещения в указанной системе. После чего вернитесь к настройкам категории.")
-        } <a target="_blank" href="https://help.bnovo.ru/knowledgebase/otello-connection/#selection1">${
+        } <a target="_blank" href="https://example.com/help/knowledgebase/otello-connection/#selection1">${
           i18n.t("Пошаговая инструкция")
         }</a></p>`
         : "";

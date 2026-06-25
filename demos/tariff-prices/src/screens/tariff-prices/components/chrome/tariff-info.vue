@@ -3,7 +3,7 @@
     <b-col>
       <component :is="component" v-if="!resetDependentPricesActive && isCurrentTariffDepend && isOneOfPricesModesEnabled" type="warning">
         {{ $t('Если вы указываете цену вручную, то при изменении цены в родительском тарифе') }}
-        <a :href="parentTariffUrl" target="_blank">{{ parentTariff.name }}</a>
+        <router-link :to="parentTariffRoute">{{ parentTariff.name }}</router-link>
         {{ $t('цена в текущем не изменится') }}.
       </component>
       <p v-if="isRestrictionModeEnabled && showAllInfo && isCurrentTariffHasDependedRestrictions">
@@ -12,7 +12,7 @@
         {{ $t('в данном тарифе автоматически') }}
         {{ tariffDependentRestrictionsNames.length === 1 ? $t('копируется') : $t('копируются') }}
         {{ $t('из тарифа') }}
-        <a :href="restrictionsParentTariffUrl" target="_blank">{{ restrictionsParentTariff.name }}</a>
+        <router-link :to="restrictionsParentTariffRoute">{{ restrictionsParentTariff.name }}</router-link>
       </p>
       <template v-if="isOneOfPricesModesEnabled && isRmsPricingEnabled">
         <template v-if="showAllInfo">
@@ -23,9 +23,8 @@
               }} -
             </b>
             {{
-              $t('это цена, по которой продается номер. Рассчитывается согласно настроенному')
+              $t('это цена, по которой продается номер. Рассчитывается согласно настроенному бизнес-правилу.')
             }}
-            <a href="/tariff/automation/advance-in-price" target="blank">{{ $t('Бизнес-правилу') }}</a>.
           </p>
           <p>
             <b>
@@ -41,16 +40,14 @@
         <template v-else>
           <component :is="component" v-if="isOneOfDynamicPricesModesEnabled" type="warning">
             {{
-              $t('Динамические цены рассчитываются согласно настроенному')
+              $t('Динамические цены рассчитываются согласно настроенному правилу.')
             }}
-            <a href="/tariff/automation/advance-in-price" target="blank">{{ $t('правилу') }}</a>.
             {{ $t('Если на определенные даты вы указываете цену вручную, тогда на данные даты цены из правила применяться не будут') }}
           </component>
           <component :is="component" v-else type="warning">
             {{
-              $t('При изменении базовой цены динамические цены будут пересчитаны согласно настроенному')
+              $t('При изменении базовой цены динамические цены будут пересчитаны согласно настроенному правилу.')
             }}
-            <a href="/tariff/automation/advance-in-price" target="blank">{{ $t('Правилу') }}</a>
           </component>
         </template>
       </template>
@@ -64,7 +61,7 @@ import PriceAndRestrictionsService from "@/services/tariff/price-and-restriction
 import { getPlanModification, getTariffDependentRestrictions } from "../../config/screen-config.js";
 
 export default {
-  name: "BnovoUpdatingPricesTariffInfo",
+  name: "TariffPricesTariffInfo",
   props: {
     showAllInfo: {
       type: Boolean,
@@ -85,23 +82,17 @@ export default {
     ...mapState("additionalServices", ["additionalServices"]),
     ...mapState("tariffPricesAndRestrictions", ["currentTariff", "mode"]),
     ...mapGetters("tariffPricesAndRestrictions", ["isOneOfPricesModesEnabled", "isRmsPricingEnabled", "isOneOfDynamicPricesModesEnabled", "isCurrentTariffDepend", "isCurrentTariffHasDependedRestrictions", "isRestrictionModeEnabled"]),
-    ...mapState("additionalServices", ["additionalServices"]),
     restrictionsParentTariff() {
       return this.rplansByIds[this.currentTariff?.dependent_restrictions?.parent_plan_id];
     },
     parentTariff() {
       return this.rplansByIds[this.currentTariff?.parent_id];
     },
-    queryString() {
-      const query = this.$route.query;
-      const params = new URLSearchParams(query).toString();
-      return params ? `?${params}` : "";
+    restrictionsParentTariffRoute() {
+      return this.buildTariffRoute(this.restrictionsParentTariff?.id);
     },
-    restrictionsParentTariffUrl() {
-      return `/tariff/index/${this.restrictionsParentTariff?.id}${this.queryString}`;
-    },
-    parentTariffUrl() {
-      return `/tariff/index/${this.parentTariff?.id}${this.queryString}`;
+    parentTariffRoute() {
+      return this.buildTariffRoute(this.parentTariff?.id);
     },
     component() {
       return this.showAllInfo ? "p" : "b-alert";
@@ -111,6 +102,15 @@ export default {
     },
   },
   methods: {
+    buildTariffRoute(tariffId) {
+      if (!tariffId) {
+        return { path: "/" };
+      }
+      return {
+        path: `/tariff/index/${tariffId}`,
+        query: { ...this.$route.query },
+      };
+    },
     getPlanModification() {
       return getPlanModification(
         this.currentTariff,

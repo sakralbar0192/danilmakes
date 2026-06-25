@@ -1,5 +1,5 @@
-/** Модификатор на `.bnovo-tariff-prices-and-restrictions__scroll-container` (WebKit Safari workaround). */
-export const SCROLL_CONTAINER_SAFARI_STICKY_FIX_CLASS = "bnovo-tariff-prices-and-restrictions__scroll-container--safari-sticky-fix";
+/** Модификатор на `.tariff-demo-and-restrictions__scroll-container` (WebKit Safari workaround). */
+export const SCROLL_CONTAINER_SAFARI_STICKY_FIX_CLASS = "tariff-demo-and-restrictions__scroll-container--safari-sticky-fix";
 
 /**
  * Нужен ли модификатор z-index/compositing/sticky-top для липкой шапки таблицы (баг WebKit).

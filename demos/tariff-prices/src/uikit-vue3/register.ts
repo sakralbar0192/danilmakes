@@ -14,7 +14,6 @@ import BStatus from "./b-status.vue";
 import BScreenHeader from "./b-screen-header.vue";
 import BScreenFooter from "./b-screen-footer.vue";
 import BScreenOverlay from "./b-screen-overlay.vue";
-import BLayoutTabs from "./b-layout-tabs.vue";
 import BAlert from "./b-alert.vue";
 import BInputLabel from "./b-input-label.vue";
 import BTeleportWrapper from "./b-teleport-wrapper.vue";
@@ -41,7 +40,6 @@ const map: Record<string, object> = {
   BScreenHeader,
   BScreenFooter,
   BScreenOverlay,
-  BLayoutTabs,
   BAlert,
   BInputLabel,
   BTeleportWrapper,
