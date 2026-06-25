@@ -1,4 +1,4 @@
-/*! For license information please see 563.6d4857ff7973820675bf.js.LICENSE.txt */
+/*! For license information please see 563.4987a8690ccb9b2dc9d6.js.LICENSE.txt */
 "use strict";(self.webpackChunkdivisions_demo=self.webpackChunkdivisions_demo||[]).push([[563],{655(t,e,i){i.d(e,{A:()=>o});const o=i(4420).JW`<svg height="20" width="20" viewBox="0 0 98 137" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <path d="M75.6,44.8v73c0,3.4-2.8,6.2-6.2,6.2H21.3c-3.4,0-6.2-2.8-6.2-6.2v-73H75.6L75.6,44.8z M59.9,52.9v62.8h3.6V52.9H59.9  L59.9,52.9z M43.6,52.9v62.8h3.6V52.9H43.6L43.6,52.9z M27.3,52.9v62.8h3.6V52.9H27.3L27.3,52.9z M31.3,27.9v-5.2  c0-3.3,2.6-5.9,5.9-5.9h16.4c3.3,0,5.9,2.6,5.9,5.9v5.2h18.1c3.4,0,6.2,2.8,6.2,6.2v4.3H7V34c0-3.4,2.8-6.2,6.2-6.2H31.3L31.3,27.9z   M37.2,20.8c-1,0-1.8,0.8-1.8,1.8v5.2h20.1v-5.2c0-1-0.8-1.8-1.8-1.8H37.2L37.2,20.8z"/>
 </svg>
@@ -13,7 +13,7 @@
     c-9.803-1.335-18.864-5.629-25.972-12.737c-0.682-0.677-0.917-1.596-1.538-2.338L0,485.216l147.748-36.986
     C147.097,447.637,146.36,447.193,145.734,446.572z"/>
 </svg>
-`},8563(t,e,i){i.d(e,{DivisionsLayer:()=>E});var o=i(6161);const n=o.AH`div{display:flex;flex-direction:column;align-items:stretch;max-width:1050px;margin:auto}div divisions-table{margin:0 0 20px}div iceberg-button{align-self:flex-end}`;var s=i(581),r=i(3757),c=i(7843),a=i(2745),d=i(7771),l=i(6312),p=i(8029),v=i(655),h=i(5073),u=i(9574);function m(t){const e=[],i=`Divisions.aspx?mode=${l.b.divisionDetailsLayer}&division_id=${t.Id}`,n={content:o.qy`
+`},8563(t,e,i){i.d(e,{DivisionsLayer:()=>E});var o=i(6161);const n=o.AH`div{display:flex;flex-direction:column;align-items:stretch;width:100%;max-width:1050px;min-width:0;margin:auto;box-sizing:border-box}:host{display:block;width:100%;max-width:100%;min-width:0}div divisions-table{margin:0 0 20px;min-width:0;max-width:100%}div iceberg-button{align-self:flex-end}@media(max-width:768px){div{max-width:100%}div iceberg-button{align-self:stretch}}`;var s=i(581),r=i(3757),c=i(7843),a=i(2745),d=i(7771),l=i(6312),p=i(8029),v=i(655),h=i(5073),u=i(9574);function m(t){const e=[],i=`Divisions.aspx?mode=${l.b.divisionDetailsLayer}&division_id=${t.Id}`,n={content:o.qy`
             <a
                 href=${i}
                 title='View division details'
@@ -45,7 +45,7 @@
                         ${t.map(t=>this.cellTemplate(t))}
                     </tr>
                 </tfoot>
-            `}return o.s6}async countTotal(){return await Promise.resolve(this.displayedEntities).then(t=>{if(t){const e=t.reduce((t,e)=>e.UserCount?t+e.UserCount:t,0);this.totalCount=e}})}}f([(0,a.MZ)({type:Object,reflect:!1,attribute:!1})],y.prototype,"displayedEntities",void 0),f([(0,a.wk)()],y.prototype,"totalCount",void 0);var g=i(7287),b=i(7765);(0,r.X)(c.I.divisionsTable,y),(0,s.Rx)(),(0,g.S)(),(0,b.k)();class E extends o.WF{constructor(){super(...arguments),this.MODIFY_DIVISION_EVENT_NAME="modifyDivision"}render(){return this.divisions?o.qy`
+            `}return o.s6}async countTotal(){return await Promise.resolve(this.displayedEntities).then(t=>{if(t){const e=t.reduce((t,e)=>e.UserCount?t+e.UserCount:t,0);this.totalCount=e}})}}f([(0,a.MZ)({type:Object,reflect:!1,attribute:!1})],y.prototype,"displayedEntities",void 0),f([(0,a.wk)()],y.prototype,"totalCount",void 0);var b=i(7287),g=i(7765);(0,r.X)(c.I.divisionsTable,y),(0,s.Rx)(),(0,b.S)(),(0,g.k)();class E extends o.WF{constructor(){super(...arguments),this.MODIFY_DIVISION_EVENT_NAME="modifyDivision"}render(){return this.divisions?o.qy`
                 <div>
                     <divisions-table
                         .displayedEntities=${this.divisions}
@@ -72,7 +72,7 @@
             </div>
         `}}function l(){(0,o.X)(n.I.errorPlug,d)}d.styles=s.AH`
         ${r}
-    `,function(t,e,i,o){var n,s=arguments.length,r=s<3?e:null===o?o=Object.getOwnPropertyDescriptor(e,i):o;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)r=Reflect.decorate(t,e,i,o);else for(var c=t.length-1;c>=0;c--)(n=t[c])&&(r=(s<3?n(r):s>3?n(e,i,r):n(e,i))||r);s>3&&r&&Object.defineProperty(e,i,r)}([(0,c.MZ)()],d.prototype,"errorMessage",void 0)},7287(t,e,i){i.d(e,{S:()=>d});var o=i(3757),n=i(7843),s=i(6161),r=i(2149);const c=s.AH`div{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;width:100vw;height:100vh;background-color:hsla(0,0%,60%,.5)}span{width:60px;height:60px;border-width:4px}`;class a extends r.H{render(){return s.qy`
+    `,function(t,e,i,o){var n,s=arguments.length,r=s<3?e:null===o?o=Object.getOwnPropertyDescriptor(e,i):o;if("object"==typeof Reflect&&"function"==typeof Reflect.decorate)r=Reflect.decorate(t,e,i,o);else for(var c=t.length-1;c>=0;c--)(n=t[c])&&(r=(s<3?n(r):s>3?n(e,i,r):n(e,i))||r);s>3&&r&&Object.defineProperty(e,i,r)}([(0,c.MZ)()],d.prototype,"errorMessage",void 0)},7287(t,e,i){i.d(e,{S:()=>d});var o=i(3757),n=i(7843),s=i(6161),r=i(2149);const c=s.AH`div{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background-color:hsla(0,0%,60%,.5)}span{width:60px;height:60px;border-width:4px}`;class a extends r.H{render(){return s.qy`
             <div>
                 <span></span>
             </div>

@@ -15,10 +15,18 @@
       html, body {
         margin: 0;
         min-height: 100%;
+        max-width: 100%;
+        overflow-x: clip;
         font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         font-size: var(--text-body);
         color: #3c435a;
         background: #eef4f8;
+      }
+
+      @supports not (overflow-x: clip) {
+        html, body {
+          overflow-x: hidden;
+        }
       }
 
       .demo-banner {
@@ -35,10 +43,45 @@
 
       .demo-content {
         max-width: 1400px;
+        width: 100%;
         margin: 0 auto;
         padding: 16px 24px 24px;
+        box-sizing: border-box;
       }
 
       divisions-page {
         display: block;
-      }</style></head><body><div class="demo-banner">Портфолио-демо · Подразделения · синтетические данные</div><div class="demo-content"><divisions-page></divisions-page></div><script type="module" src="/divisions/assets/main.dd91b8d5d70c859c0e37.js"></script></body></html>
+        min-width: 0;
+      }
+
+      @media (max-width: 768px) {
+        :root {
+          --text-body: 13px;
+          --text-caption: 12px;
+        }
+
+        .demo-banner {
+          font-size: 11px;
+          line-height: 1.35;
+          padding: 8px 12px;
+          padding-top: max(8px, env(safe-area-inset-top));
+        }
+
+        .demo-content {
+          padding: 12px 12px 20px;
+          padding-bottom: max(20px, env(safe-area-inset-bottom));
+        }
+      }
+
+      @media (max-width: 480px) {
+        .demo-banner {
+          font-size: 10px;
+          letter-spacing: 0.01em;
+          padding-left: 8px;
+          padding-right: 8px;
+        }
+
+        .demo-content {
+          padding: 8px 4px 16px;
+        }
+      }</style></head><body><div class="demo-banner">Портфолио-демо · Подразделения · синтетические данные</div><div class="demo-content"><divisions-page></divisions-page></div><script type="module" src="/divisions/assets/main.15e342d851d9c1b319b6.js"></script></body></html>
