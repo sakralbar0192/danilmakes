@@ -1,74 +1,79 @@
-import { type FC, useEffect } from 'react'
+import { type FC, useEffect, useState } from 'react'
+import { Spinner } from 'react-bootstrap'
 import classes from './styles.module.scss'
 import { useParams } from 'react-router'
 import { ECodeExamples, ECodeExamplesLinksHrefs } from 'app/codeExamples'
 import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 
+const IFRAME_LOAD_TIMEOUT_MS = 30_000
+
 const CodeExample: FC = () => {
     const dispatch = useAppDispatch()
     const { choosenExample } = useParams() as { choosenExample: ECodeExamples }
+    const [loadState, setLoadState] = useState<'loading' | 'loaded' | 'error'>('loading')
 
     useEffect(() => {
-        switch (choosenExample) {
-            case ECodeExamples.BICYCLE:
-                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.BICYCLE))
-                break
-
-            case ECodeExamples.EUROPE:
-                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.EUROPE))
-                break
-
-            case ECodeExamples.JEVELLERY:
-                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.JEVELLERY))
-                break
-
-            case ECodeExamples.MISHKA:
-                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.MISHKA))
-                break
-
-            case ECodeExamples.POKEDEX:
-                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.POKEDEX))
-                break
-
-            case ECodeExamples.SMART_DEVICE:
-                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.SMART_DEVICE))
-                break
-
-            case ECodeExamples.KEKSOBOOKING:
-                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.KEKSOBOOKING))
-                break
-
-            case ECodeExamples.TARIFF_PRICES:
-                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.TARIFF_PRICES))
-                break
-
-            case ECodeExamples.REPORT_REVENUE:
-                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.REPORT_REVENUE))
-                break
-
-            case ECodeExamples.DIVISIONS:
-                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.DIVISIONS))
-                break
-
-            case ECodeExamples.FAMILY_MEALS:
-                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.FAMILY_MEALS))
-                break
-        }
+        const sourceLink = ECodeExamplesLinksHrefs[choosenExample as keyof typeof ECodeExamplesLinksHrefs]
+        dispatch(setCodeExampleSourceLinkHref(sourceLink ?? ''))
 
         return () => { dispatch(setCodeExampleSourceLinkHref('')) }
     }, [choosenExample, dispatch])
+
+    useEffect(() => {
+        setLoadState('loading')
+    }, [choosenExample])
+
+    useEffect(() => {
+        if (loadState !== 'loading') {
+            return
+        }
+
+        const timeoutId = window.setTimeout(() => {
+            setLoadState(current => current === 'loading' ? 'error' : current)
+        }, IFRAME_LOAD_TIMEOUT_MS)
+
+        return () => window.clearTimeout(timeoutId)
+    }, [loadState, choosenExample])
 
     if (!choosenExample) {
         return null
     }
 
+    const demoUrl = `/${choosenExample}/`
+
+    const handleIframeLoad = () => {
+        setLoadState('loaded')
+    }
+
+    const handleIframeError = () => {
+        setLoadState('error')
+    }
+
     return (
         <div className={ classes.iframeWrapper }>
+            {loadState === 'loading' && (
+                <div className={ classes.loaderOverlay } aria-live='polite'>
+                    <Spinner animation='grow' variant='primary' />
+                    <p>Загрузка демо…</p>
+                </div>
+            )}
+
+            {loadState === 'error' && (
+                <div className={ classes.errorOverlay } role='alert'>
+                    <p>Не удалось загрузить демо.</p>
+                    <a href={ demoUrl } target='_blank' rel='noreferrer' className={ classes.openLink }>
+                        Открыть в новой вкладке
+                    </a>
+                </div>
+            )}
+
             <iframe
-                className={ classes.iframe }
-                src={ `/${choosenExample}/` }
+                className={ `${classes.iframe} ${loadState !== 'loaded' ? classes.iframeHidden : ''}` }
+                src={ demoUrl }
                 title={ choosenExample }
+                onLoad={ handleIframeLoad }
+                onError={ handleIframeError }
             />
         </div>
     )

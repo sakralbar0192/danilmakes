@@ -10,6 +10,9 @@ else
     echo "    Skipped: not a git repository"
 fi
 
+echo "==> Building portfolio demos..."
+npm run build:all-demos
+
 echo "==> Building frontend..."
 npm ci
 npm run build

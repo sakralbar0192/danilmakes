@@ -15,7 +15,9 @@
         "build:tariff-prices": "cd demos/tariff-prices && npm ci && npm run build && rm -rf ../../public/tariffPrices && cp -r dist ../../public/tariffPrices",
         "build:report-revenue": "cd demos/report-revenue && npm ci && npm run build && rm -rf ../../public/reportRevenue && cp -r dist ../../public/reportRevenue",
         "build:divisions": "cd demos/divisions && npm ci && npm run build && cp public/mockServiceWorker.js dist/mockServiceWorker.js && rm -rf ../../public/divisions && cp -r dist ../../public/divisions",
-        "build:family-meals": "cd ../family_meal-planning/frontend && npm ci && npm run build:demo && rm -rf ../../danilmakes/public/familyMeals && cp -r dist-demo/familyMeals ../../danilmakes/public/familyMeals"
+        "build:family-meals": "cd ../family_meal-planning/frontend && npm ci && npm run build:demo && rm -rf ../../danilmakes/public/familyMeals && cp -r dist-demo/familyMeals ../../danilmakes/public/familyMeals",
+        "build:all-demos": "bash scripts/build-all-demos.sh",
+        "compress:layout-images": "node scripts/compress-layout-images.mjs"
     },
     "dependencies": {
         "@reduxjs/toolkit": "^1.9.5",
@@ -42,6 +44,7 @@
         "eslint-plugin-react-hooks": "^4.6.0",
         "eslint-plugin-react-refresh": "^0.3.4",
         "sass": "^1.62.1",
+        "sharp": "^0.33.5",
         "typescript": "^5.0.2",
         "vite": "^4.3.2",
         "vite-plugin-svgr": "^3.2.0",

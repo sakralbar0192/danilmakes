@@ -1,8 +1,6 @@
 import "./normalize-base-url";
 import { createApp, h } from "vue";
 import { createVuetify } from "vuetify";
-import * as components from "vuetify/components";
-import * as directives from "vuetify/directives";
 import "@mdi/font/css/materialdesignicons.css";
 import "@/styles/icomoon.scss";
 import "vuetify/styles";
@@ -28,8 +26,6 @@ import PriceAndRestrictionsService from "./services/tariff/price-and-restriction
 import TariffInterfaceSettingsService from "./services/tariff/interface-settings";
 
 const vuetify = createVuetify({
-  components,
-  directives,
   icons: {
     defaultSet: "custom",
     aliases: {
@@ -65,16 +61,7 @@ const vuetify = createVuetify({
   },
 });
 
-async function bootstrap() {
-  const { worker } = await import("./mocks/browser");
-  await worker.start({
-    onUnhandledRequest: "bypass",
-    quiet: true,
-    serviceWorker: {
-      url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
-    },
-  });
-
+function bootstrap() {
   HotelService.http = http;
   PriceAndRestrictionsService.http = http;
   TariffInterfaceSettingsService.http = http;
@@ -96,22 +83,33 @@ async function bootstrap() {
   app.config.globalProperties.$externalImage = externalImage;
   registerUIKit(app);
 
-  await store.dispatch("hotel/getCurrentHotel").catch(() => {});
-  await Promise.allSettled([
-    store.dispatch("hotel/getPlans"),
-    store.dispatch("hotelRoom/getRoomTypes"),
-    store.dispatch("additionalServices/getAdditionalServices"),
-  ]);
-
-  const q = getDefaultRouteQuery();
-  if (!router.currentRoute.value.query.dfrom) {
-    await router.replace({
-      path: router.currentRoute.value.path,
-      query: { ...router.currentRoute.value.query, ...q },
-    });
-  }
-
   app.mount("#app");
+
+  void (async () => {
+    const { worker } = await import("./mocks/browser");
+    await worker.start({
+      onUnhandledRequest: "bypass",
+      quiet: true,
+      serviceWorker: {
+        url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
+      },
+    });
+
+    await store.dispatch("hotel/getCurrentHotel").catch(() => {});
+    await Promise.allSettled([
+      store.dispatch("hotel/getPlans"),
+      store.dispatch("hotelRoom/getRoomTypes"),
+      store.dispatch("additionalServices/getAdditionalServices"),
+    ]);
+
+    const q = getDefaultRouteQuery();
+    if (!router.currentRoute.value.query.dfrom) {
+      await router.replace({
+        path: router.currentRoute.value.path,
+        query: { ...router.currentRoute.value.query, ...q },
+      });
+    }
+  })();
 }
 
 bootstrap();

@@ -6,6 +6,7 @@ import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import { PORTFOLIO_LAYOUTS, PORTFOLIO_PRODUCTS, PortfolioItem } from 'shared/consts/portfolio'
 import { getCaseStudyByPortfolioId } from 'shared/consts/case-studies'
+import { prefetchDemo } from 'shared/lib/prefetchDemo'
 
 const PortfolioCard: FC<{ item: PortfolioItem }> = ({ item }) => {
     const caseStudy = getCaseStudyByPortfolioId(item.id)
@@ -36,7 +37,12 @@ const PortfolioCard: FC<{ item: PortfolioItem }> = ({ item }) => {
                             Смотреть
                         </a>
                     ) : (
-                        <Link to={ item.demoLink } className={ classes.demoLink }>
+                        <Link
+                            to={ item.demoLink }
+                            className={ classes.demoLink }
+                            onMouseEnter={ () => prefetchDemo(item.demoLink) }
+                            onFocus={ () => prefetchDemo(item.demoLink) }
+                        >
                             Смотреть
                         </Link>
                     )}

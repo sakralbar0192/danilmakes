@@ -1,7 +1,40 @@
-.iframeWrapper iframe {
+.iframeWrapper {
+    position: relative;
+    min-height: calc(100vh - 60px);
+}
+
+.iframe {
     display: flex;
     align-items: stretch;
     justify-content: stretch;
     min-width: 100vw;
     min-height: calc(100vh - 60px);
+    border: 0;
+}
+
+.iframeHidden {
+    visibility: hidden;
+    position: absolute;
+    inset: 0;
+}
+
+.loaderOverlay,
+.errorOverlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    min-height: calc(100vh - 60px);
+    padding: 2rem;
+    text-align: center;
+}
+
+.errorOverlay p {
+    margin: 0;
+}
+
+.openLink {
+    color: #1e8bc3;
+    text-decoration: underline;
 }

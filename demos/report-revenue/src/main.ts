@@ -1,8 +1,6 @@
 import "./normalize-base-url";
 import { createApp, h } from "vue";
 import { createVuetify } from "vuetify";
-import * as components from "vuetify/components";
-import * as directives from "vuetify/directives";
 import "@mdi/font/css/materialdesignicons.css";
 import "@/styles/icomoon.scss";
 import "vuetify/styles";
@@ -28,8 +26,6 @@ import RevenueReportService from "./services/reports/revenue-report";
 import RevenuePlanService from "./services/reports/revenue-plan";
 
 const vuetify = createVuetify({
-  components,
-  directives,
   icons: {
     defaultSet: "custom",
     aliases: {
@@ -67,16 +63,7 @@ const vuetify = createVuetify({
   },
 });
 
-async function bootstrap() {
-  const { worker } = await import("./mocks/browser");
-  await worker.start({
-    onUnhandledRequest: "bypass",
-    quiet: true,
-    serviceWorker: {
-      url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
-    },
-  });
-
+function bootstrap() {
   HotelService.http = http;
   RevenueReportService.http = http;
   RevenuePlanService.http = http;
@@ -97,12 +84,23 @@ async function bootstrap() {
   app.config.globalProperties.$externalImage = externalImage;
   registerUIKit(app);
 
-  await store.dispatch("hotel/getCurrentHotel").catch(() => {});
-  await store.dispatch("hotelRoom/getRoomTypes").catch(() => {});
-
-  store.dispatch("device/initViewportTracking");
-
   app.mount("#app");
+
+  void (async () => {
+    const { worker } = await import("./mocks/browser");
+    await worker.start({
+      onUnhandledRequest: "bypass",
+      quiet: true,
+      serviceWorker: {
+        url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
+      },
+    });
+
+    await store.dispatch("hotel/getCurrentHotel").catch(() => {});
+    await store.dispatch("hotelRoom/getRoomTypes").catch(() => {});
+
+    store.dispatch("device/initViewportTracking");
+  })();
 }
 
 bootstrap();
