@@ -1,7 +1,7 @@
 import usersFixture from "./fixtures/users.json";
 
-let nextDivisionId = 6;
-let nextPoolId = 9;
+let nextDivisionId = 11;
+let nextPoolId = 19;
 
 const users = usersFixture.map((u) => ({ ...u }));
 
@@ -22,40 +22,65 @@ const branches = [
 ];
 
 const divisionUsers = {
-  1: [101, 102, 104, 107, 110, 113],
-  2: [103, 106, 109, 112],
-  3: [105, 108, 111],
-  4: [114],
-  5: [115],
+  1: [101, 102, 104, 107, 110, 113, 116],
+  2: [103, 106, 109, 112, 117],
+  3: [105, 108, 111, 118],
+  4: [114, 119],
+  5: [115, 120],
+  6: [122, 123, 125],
+  7: [119, 121, 124],
+  8: [117, 120],
+  9: [104, 116, 118],
+  10: [101, 115, 122],
 };
 
 const poolUsers = {
   1: [101, 102, 104],
-  2: [107, 110, 113],
+  2: [107, 110, 113, 116],
   3: [103, 106],
-  4: [109, 112],
+  4: [109, 112, 117],
   5: [105, 108],
-  6: [111],
+  6: [111, 118],
   7: [114],
-  8: [115],
+  8: [115, 120],
+  9: [122, 125],
+  10: [123],
+  11: [119, 121],
+  12: [124],
+  13: [117, 120],
+  14: [104, 116],
+  15: [118],
+  16: [101, 122],
+  17: [115],
+  18: [123, 125],
 };
 
 const pools = [
-  { Id: 1, Name: "Backend Pool", DivisionId: 1, ManagerId: 102, ManagerName: "Maria Chen", UserCount: 3 },
-  { Id: 2, Name: "Frontend Pool", DivisionId: 1, ManagerId: 101, ManagerName: "Alex Morgan", UserCount: 3 },
-  { Id: 3, Name: "Manual QA", DivisionId: 2, ManagerId: 103, ManagerName: "James Wilson", UserCount: 2 },
-  { Id: 4, Name: "Automation", DivisionId: 2, ManagerId: 106, ManagerName: "Anna Volkova", UserCount: 2 },
-  { Id: 5, Name: "iOS", DivisionId: 3, ManagerId: 105, ManagerName: "David Kim", UserCount: 2 },
-  { Id: 6, Name: "Android", DivisionId: 3, ManagerId: 108, ManagerName: "Sophie Martin", UserCount: 1 },
-  { Id: 7, Name: "BA Team", DivisionId: 4, ManagerId: 114, ManagerName: "Laura Brown", UserCount: 1 },
-  { Id: 8, Name: "Platform Team", DivisionId: 5, ManagerId: 115, ManagerName: "Michael Ross", UserCount: 1 },
+  { Id: 1, Name: "Backend Pool", DivisionId: 1, ManagerId: 102, ManagerName: "Maria Chen", UserCount: 0, IsActive: true },
+  { Id: 2, Name: "Frontend Pool", DivisionId: 1, ManagerId: 101, ManagerName: "Alex Morgan", UserCount: 0, IsActive: true },
+  { Id: 3, Name: "Manual QA", DivisionId: 2, ManagerId: 103, ManagerName: "James Wilson", UserCount: 0, IsActive: true },
+  { Id: 4, Name: "Automation", DivisionId: 2, ManagerId: 106, ManagerName: "Anna Volkova", UserCount: 0, IsActive: true },
+  { Id: 5, Name: "iOS", DivisionId: 3, ManagerId: 105, ManagerName: "David Kim", UserCount: 0, IsActive: true },
+  { Id: 6, Name: "Android", DivisionId: 3, ManagerId: 108, ManagerName: "Sophie Martin", UserCount: 0, IsActive: true },
+  { Id: 7, Name: "BA Team", DivisionId: 4, ManagerId: 114, ManagerName: "Laura Brown", UserCount: 0, IsActive: true },
+  { Id: 8, Name: "Platform Team", DivisionId: 5, ManagerId: 115, ManagerName: "Michael Ross", UserCount: 0, IsActive: true },
+  { Id: 9, Name: "Analytics", DivisionId: 6, ManagerId: 122, ManagerName: "Oleg Morozov", UserCount: 0, IsActive: true },
+  { Id: 10, Name: "ETL", DivisionId: 6, ManagerId: 123, ManagerName: "Sara Ali", UserCount: 0, IsActive: true },
+  { Id: 11, Name: "Product Design", DivisionId: 7, ManagerId: 119, ManagerName: "Emma Walsh", UserCount: 0, IsActive: true },
+  { Id: 12, Name: "UX Research", DivisionId: 7, ManagerId: 121, ManagerName: "Hannah Reed", UserCount: 0, IsActive: true },
+  { Id: 13, Name: "AppSec", DivisionId: 8, ManagerId: 117, ManagerName: "Tom Becker", UserCount: 0, IsActive: true },
+  { Id: 14, Name: "Support L1", DivisionId: 9, ManagerId: 116, ManagerName: "Kate Hughes", UserCount: 0, IsActive: true },
+  { Id: 15, Name: "Onboarding", DivisionId: 9, ManagerId: 118, ManagerName: "Yuki Tanaka", UserCount: 0, IsActive: true },
+  { Id: 16, Name: "Solution Architects", DivisionId: 10, ManagerId: 101, ManagerName: "Alex Morgan", UserCount: 0, IsActive: true },
+  { Id: 17, Name: "Cloud Ops", DivisionId: 5, ManagerId: 120, ManagerName: "Lucas Ferreira", UserCount: 0, IsActive: true },
+  { Id: 18, Name: "Data Quality", DivisionId: 6, ManagerId: 125, ManagerName: "Daria Popova", UserCount: 0, IsActive: true },
 ];
 
 const divisions = [
   {
     Id: 1,
     Name: "Development Center",
-    UserCount: 24,
+    UserCount: 0,
     IsProduction: true,
     SendTimeApprovalNotifications: true,
     IsActive: true,
@@ -67,7 +92,7 @@ const divisions = [
   {
     Id: 2,
     Name: "QA Department",
-    UserCount: 11,
+    UserCount: 0,
     IsProduction: false,
     SendTimeApprovalNotifications: false,
     IsActive: true,
@@ -76,7 +101,7 @@ const divisions = [
   {
     Id: 3,
     Name: "Mobile Solutions",
-    UserCount: 8,
+    UserCount: 0,
     IsProduction: true,
     SendTimeApprovalNotifications: true,
     IsActive: true,
@@ -85,7 +110,7 @@ const divisions = [
   {
     Id: 4,
     Name: "Business Analysis",
-    UserCount: 6,
+    UserCount: 0,
     IsProduction: false,
     SendTimeApprovalNotifications: false,
     IsActive: true,
@@ -94,11 +119,59 @@ const divisions = [
   {
     Id: 5,
     Name: "DevOps & Infrastructure",
-    UserCount: 5,
+    UserCount: 0,
     IsProduction: true,
     SendTimeApprovalNotifications: true,
     IsActive: true,
     Managers: [{ Id: 115, Name: "Michael Ross", IsActive: true }],
+  },
+  {
+    Id: 6,
+    Name: "Data Engineering",
+    UserCount: 0,
+    IsProduction: true,
+    SendTimeApprovalNotifications: true,
+    IsActive: true,
+    Managers: [{ Id: 122, Name: "Oleg Morozov", IsActive: true }],
+  },
+  {
+    Id: 7,
+    Name: "UX & Design",
+    UserCount: 0,
+    IsProduction: false,
+    SendTimeApprovalNotifications: false,
+    IsActive: true,
+    Managers: [{ Id: 119, Name: "Emma Walsh", IsActive: true }],
+  },
+  {
+    Id: 8,
+    Name: "Security",
+    UserCount: 0,
+    IsProduction: true,
+    SendTimeApprovalNotifications: true,
+    IsActive: true,
+    Managers: [{ Id: 117, Name: "Tom Becker", IsActive: true }],
+  },
+  {
+    Id: 9,
+    Name: "Customer Success",
+    UserCount: 0,
+    IsProduction: false,
+    SendTimeApprovalNotifications: false,
+    IsActive: true,
+    Managers: [{ Id: 116, Name: "Kate Hughes", IsActive: true }],
+  },
+  {
+    Id: 10,
+    Name: "Architecture",
+    UserCount: 0,
+    IsProduction: true,
+    SendTimeApprovalNotifications: true,
+    IsActive: true,
+    Managers: [
+      { Id: 101, Name: "Alex Morgan", IsActive: true },
+      { Id: 115, Name: "Michael Ross", IsActive: true },
+    ],
   },
 ];
 
@@ -127,6 +200,9 @@ function recalcPoolUserCount(poolId) {
     pool.UserCount = (poolUsers[poolId] || []).length;
   }
 }
+
+Object.keys(divisionUsers).forEach((id) => recalcDivisionUserCount(Number(id)));
+Object.keys(poolUsers).forEach((id) => recalcPoolUserCount(Number(id)));
 
 function asmxSuccess(value) {
   return { d: { IsSucceeded: true, Value: value } };
@@ -213,10 +289,11 @@ export function getPossibleManagers(divisionId) {
   return asmxSuccess(result);
 }
 
-export function setDivisionManagers({ divisionId, managerIds = [] }) {
+export function setDivisionManagers({ divisionId, userIds = [], managerIds = [] }) {
   const division = divisions.find((d) => d.Id === Number(divisionId));
   if (!division) return { d: { IsSucceeded: false, Message: "Division not found" } };
-  division.Managers = managerIds.map((id) => {
+  const ids = userIds.length ? userIds : managerIds;
+  division.Managers = ids.map((id) => {
     const user = findUser(id);
     return { Id: id, Name: user?.Name || `User ${id}`, IsActive: true };
   });
@@ -297,43 +374,97 @@ export function deletePool({ poolId }) {
   return asmxSuccess(true);
 }
 
-export function getNotAssignedUsersByBranch({ branchId, divisionId }) {
-  const assigned = new Set(divisionUsers[Number(divisionId)] || []);
-  const branch = branches.flatMap((g) => g.Branches).find((b) => b.Id === Number(branchId));
-  const branchName = branch?.Name;
-  const result = users
-    .filter((u) => u.BranchName === branchName && !assigned.has(u.Id))
-    .map((u) => clone(u));
-  return asmxSuccess(result);
+export function getNotAssignedUsersByBranch({ branchId, divisionId, assignedDivisionId }) {
+  const targetDivisionId = Number(assignedDivisionId ?? divisionId);
+  const assignedToTarget = new Set(divisionUsers[targetDivisionId] || []);
+
+  let result = users.filter((u) => !assignedToTarget.has(u.Id));
+
+  const branchFilter = Number(branchId);
+  if (branchFilter > 0) {
+    const branch = branches.flatMap((g) => g.Branches).find((b) => b.Id === branchFilter);
+    if (branch?.Name) {
+      result = result.filter((u) => u.BranchName === branch.Name);
+    }
+  }
+
+  const divisionFilter = Number(divisionId);
+  if (divisionFilter === -1) {
+    const assignedAnywhere = new Set(Object.values(divisionUsers).flat());
+    result = result.filter((u) => !assignedAnywhere.has(u.Id));
+  } else if (divisionFilter > 0) {
+    const inSourceDivision = new Set(divisionUsers[divisionFilter] || []);
+    result = result.filter((u) => inSourceDivision.has(u.Id));
+  }
+
+  return asmxSuccess(result.map((u) => clone(u)));
 }
 
-export function getNotAssignedUsersByPool({ poolId, divisionId }) {
-  const assigned = new Set(poolUsers[Number(poolId)] || []);
+export function getNotAssignedUsersByPool({ poolId, divisionId, assignedPoolId }) {
+  const targetPoolId = Number(assignedPoolId ?? poolId);
+  const assignedToPool = new Set(poolUsers[targetPoolId] || []);
   const divisionAssigned = new Set(divisionUsers[Number(divisionId)] || []);
-  const result = users
-    .filter((u) => divisionAssigned.has(u.Id) && !assigned.has(u.Id))
-    .map((u) => clone(u));
-  return asmxSuccess(result);
+
+  let result = users.filter((u) => divisionAssigned.has(u.Id) && !assignedToPool.has(u.Id));
+
+  const poolFilter = Number(poolId);
+  if (poolFilter > 0 && poolFilter !== targetPoolId) {
+    const inSourcePool = new Set(poolUsers[poolFilter] || []);
+    result = result.filter((u) => inSourcePool.has(u.Id));
+  }
+
+  return asmxSuccess(result.map((u) => clone(u)));
 }
 
-export function assignUsersToDivision({ divisionId, userIds = [] }) {
+function extractUserIds({ users = [], userIds = [] }) {
+  if (users.length) {
+    return users.map((entry) => Number(entry.UserId));
+  }
+  return userIds.map(Number);
+}
+
+function applyStartDates(usersPayload, ids) {
+  if (!usersPayload.length) return;
+  ids.forEach((userId) => {
+    const entry = usersPayload.find((u) => Number(u.UserId) === userId);
+    const user = findUser(userId);
+    if (user && entry?.StartDate) {
+      user.StartDate = entry.StartDate;
+    }
+  });
+}
+
+export function assignUsersToDivision({ divisionId, users = [], userIds = [] }) {
   const id = Number(divisionId);
   if (!divisionUsers[id]) divisionUsers[id] = [];
-  userIds.forEach((userId) => {
+  const idsToAdd = extractUserIds({ users, userIds });
+  idsToAdd.forEach((userId) => {
     if (!divisionUsers[id].includes(userId)) divisionUsers[id].push(userId);
   });
+  applyStartDates(users, idsToAdd);
   recalcDivisionUserCount(id);
-  return asmxSuccess(true);
+  return asmxSuccess(usersByIds(idsToAdd));
 }
 
-export function assignUsersToPool({ poolId, userIds = [] }) {
+export function assignUsersToPool({ poolId, users = [], userIds = [] }) {
   const id = Number(poolId);
   if (!poolUsers[id]) poolUsers[id] = [];
-  userIds.forEach((userId) => {
+  const idsToAdd = extractUserIds({ users, userIds });
+  idsToAdd.forEach((userId) => {
     if (!poolUsers[id].includes(userId)) poolUsers[id].push(userId);
   });
+  applyStartDates(users, idsToAdd);
   recalcPoolUserCount(id);
-  return asmxSuccess(true);
+  const division = pools.find((p) => p.Id === id);
+  const divisionName = divisions.find((d) => d.Id === division?.DivisionId)?.Name;
+  return asmxSuccess(
+    usersByIds(idsToAdd).map((u) => ({
+      ...u,
+      PoolId: id,
+      PoolName: division?.Name,
+      Division: divisionName,
+    }))
+  );
 }
 
 export function updatePoolUserDate({ userId, poolId, startDate }) {

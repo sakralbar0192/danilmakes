@@ -13,5 +13,15 @@
   { "Id": 112, "Name": "Nina Kozlova", "Login": "nkozlova", "BranchName": "Moscow", "StartDate": "2019-03-03", "Id1C": "00112", "IsActive": true },
   { "Id": 113, "Name": "Peter Novak", "Login": "pnovak", "BranchName": "Saint Petersburg", "StartDate": "2024-01-08", "Id1C": "00113", "IsActive": true },
   { "Id": 114, "Name": "Laura Brown", "Login": "lbrown", "BranchName": "Remote", "StartDate": "2020-10-30", "Id1C": "00114", "IsActive": true },
-  { "Id": 115, "Name": "Michael Ross", "Login": "mross", "BranchName": "Moscow", "StartDate": "2016-09-15", "Id1C": "00115", "IsActive": true }
+  { "Id": 115, "Name": "Michael Ross", "Login": "mross", "BranchName": "Moscow", "StartDate": "2016-09-15", "Id1C": "00115", "IsActive": true },
+  { "Id": 116, "Name": "Kate Hughes", "Login": "khughes", "BranchName": "Saint Petersburg", "StartDate": "2022-04-18", "Id1C": "00116", "IsActive": true },
+  { "Id": 117, "Name": "Tom Becker", "Login": "tbecker", "BranchName": "Moscow", "StartDate": "2021-11-02", "Id1C": "00117", "IsActive": true },
+  { "Id": 118, "Name": "Yuki Tanaka", "Login": "ytanaka", "BranchName": "Remote", "StartDate": "2023-06-12", "Id1C": "00118", "IsActive": true },
+  { "Id": 119, "Name": "Emma Walsh", "Login": "ewalsh", "BranchName": "Saint Petersburg", "StartDate": "2020-02-25", "Id1C": "00119", "IsActive": true },
+  { "Id": 120, "Name": "Lucas Ferreira", "Login": "lferreira", "BranchName": "Moscow", "StartDate": "2019-08-09", "Id1C": "00120", "IsActive": true },
+  { "Id": 121, "Name": "Hannah Reed", "Login": "hreed", "BranchName": "Remote", "StartDate": "2024-03-01", "Id1C": "00121", "IsActive": true },
+  { "Id": 122, "Name": "Oleg Morozov", "Login": "omorozov", "BranchName": "Saint Petersburg", "StartDate": "2018-12-14", "Id1C": "00122", "IsActive": true },
+  { "Id": 123, "Name": "Sara Ali", "Login": "sali", "BranchName": "Moscow", "StartDate": "2022-10-05", "Id1C": "00123", "IsActive": true },
+  { "Id": 124, "Name": "Mark Jensen", "Login": "mjensen", "BranchName": "Remote", "StartDate": "2021-07-21", "Id1C": "00124", "IsActive": true },
+  { "Id": 125, "Name": "Daria Popova", "Login": "dpopova", "BranchName": "Saint Petersburg", "StartDate": "2023-09-17", "Id1C": "00125", "IsActive": true }
 ]

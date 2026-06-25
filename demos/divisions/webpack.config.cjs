@@ -21,8 +21,10 @@ module.exports = {
     alias: {
       lit: path.resolve(demoRoot, "node_modules/lit"),
       "lit-html": path.resolve(demoRoot, "node_modules/lit-html"),
+      "app/styles/vars": path.resolve(demoRoot, "src/styles/demo-vars.scss"),
       "xlsx-js-style": path.resolve(demoRoot, "src/shims/xlsx-js-style.ts"),
       "shared/helpers/defineCoreHost": path.resolve(demoRoot, "src/shims/defineCoreHost.ts"),
+      "shared/helpers/isPortfolioDemo": path.resolve(demoRoot, "src/shims/isPortfolioDemo.ts"),
       "shared/helpers/serverRequests/requestFromServer": path.resolve(demoRoot, "src/shims/requestFromServer.ts"),
     },
   },

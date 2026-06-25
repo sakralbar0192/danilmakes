@@ -1,4 +1,8 @@
 {
   "exportedAt": "2026-06-24",
-  "notes": "Demo fixtures for Divisions MSW mock API"
+  "notes": "Demo fixtures for Divisions MSW mock API",
+  "defaultDivisionId": 1,
+  "defaultPoolId": 1,
+  "defaultMode": "divisionsLayer",
+  "deepLinkExample": "?mode=divisionDetailsLayer&division_id=1"
 }

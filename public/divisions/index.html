@@ -1,11 +1,44 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Divisions — Demo</title><style>*, *::before, *::after { box-sizing: border-box; }
+<!doctype html><html lang="ru"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Divisions — Demo</title><style>*, *::before, *::after { box-sizing: border-box; }
+
+      :root {
+        --text-xsmall: 10px;
+        --text-small: 12px;
+        --text-caption: 13px;
+        --text-body: 14px;
+        --text-hero: 20px;
+        --text-h1: 24px;
+        --text-h2: 20px;
+        --text-h3: 16px;
+        --text-h4: 14px;
+      }
+
       html, body {
         margin: 0;
         min-height: 100%;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 14px;
-        color: #333;
-        background: #f9f9f9;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: var(--text-body);
+        color: #3c435a;
+        background: #eef4f8;
       }
-      body { padding: 16px; }
-      divisions-page { display: block; }</style></head><body><divisions-page></divisions-page><script type="module" src="/divisions/assets/main.f92f1ffcd5bfdb0f53ea.js"></script></body></html>
+
+      .demo-banner {
+        background: linear-gradient(135deg, #1e8bc3 0%, #16739f 100%);
+        color: #fff;
+        font-size: var(--text-caption);
+        letter-spacing: 0.02em;
+        padding: 8px 16px;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .demo-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 16px 24px 24px;
+      }
+
+      divisions-page {
+        display: block;
+      }</style></head><body><div class="demo-banner">Портфолио-демо · Подразделения · синтетические данные</div><div class="demo-content"><divisions-page></divisions-page></div><script type="module" src="/divisions/assets/main.dd91b8d5d70c859c0e37.js"></script></body></html>

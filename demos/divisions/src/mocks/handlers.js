@@ -1,4 +1,5 @@
 import { http, HttpResponse } from "msw";
+import { DemoApi } from "../config/demo-api.js";
 import * as store from "./store.js";
 
 function matchPath(request, suffix) {
@@ -22,42 +23,30 @@ function serviceHandler(suffix, handler) {
 }
 
 export const handlers = [
-  serviceHandler("/Services/DivisionService.asmx/GetActiveDetails", () => store.getAllDivisions()),
-  serviceHandler("/Services/DivisionService.asmx/GetActiveShort", () => store.getDivisionsShort()),
-  serviceHandler("/Services/DivisionService.asmx/GetDetailsById", (body) =>
-    store.getDivisionDetails(body.divisionId)
-  ),
-  serviceHandler("/Services/DivisionService.asmx/AddDivision", (body) => store.addDivision(body)),
-  serviceHandler("/Services/DivisionService.asmx/UpdateDivision", (body) => store.updateDivision(body)),
-  serviceHandler("/Services/DivisionService.asmx/DeleteDivision", (body) => store.deleteDivision(body)),
-  serviceHandler("/Services/DivisionService.asmx/SelectedManagersList", (body) =>
+  serviceHandler(DemoApi.divisionGetActiveDetails, () => store.getAllDivisions()),
+  serviceHandler(DemoApi.divisionGetActiveShort, () => store.getDivisionsShort()),
+  serviceHandler(DemoApi.divisionGetDetailsById, (body) => store.getDivisionDetails(body.divisionId)),
+  serviceHandler(DemoApi.divisionAdd, (body) => store.addDivision(body)),
+  serviceHandler(DemoApi.divisionUpdate, (body) => store.updateDivision(body)),
+  serviceHandler(DemoApi.divisionDelete, (body) => store.deleteDivision(body)),
+  serviceHandler(DemoApi.divisionSelectedManagersList, (body) =>
     store.getPossibleManagers(body.divisionId)
   ),
-  serviceHandler("/Services/DivisionService.asmx/SetManagers", (body) => store.setDivisionManagers(body)),
-  serviceHandler("/Services/DivisionService.asmx/GetNotAssignedUsersByBranchAndDivision", (body) =>
+  serviceHandler(DemoApi.divisionSetManagers, (body) => store.setDivisionManagers(body)),
+  serviceHandler(DemoApi.divisionGetNotAssignedUsers, (body) =>
     store.getNotAssignedUsersByBranch(body)
   ),
-  serviceHandler("/Services/DivisionService.asmx/AddUsersDivisionHistoryEntries", (body) =>
-    store.assignUsersToDivision(body)
-  ),
-  serviceHandler("/Services/ResourcePoolService.asmx/GetDetailsById", (body) =>
-    store.getPoolDetails(body.poolId)
-  ),
-  serviceHandler("/Services/ResourcePoolService.asmx/GetActiveShortByDivisionId", (body) =>
+  serviceHandler(DemoApi.divisionAssignUsers, (body) => store.assignUsersToDivision(body)),
+  serviceHandler(DemoApi.poolGetDetailsById, (body) => store.getPoolDetails(body.poolId)),
+  serviceHandler(DemoApi.poolGetActiveShortByDivision, (body) =>
     store.getPoolsByDivision(body.divisionId)
   ),
-  serviceHandler("/Services/ResourcePoolService.asmx/GetActiveShort", () => store.getAllPoolsShort()),
-  serviceHandler("/Services/ResourcePoolService.asmx/AddPool", (body) => store.addPool(body)),
-  serviceHandler("/Services/ResourcePoolService.asmx/UpdatePool", (body) => store.updatePool(body)),
-  serviceHandler("/Services/ResourcePoolService.asmx/DeletePool", (body) => store.deletePool(body)),
-  serviceHandler("/Services/ResourcePoolService.asmx/GetNotAssignedUsersByPoolAndDivision", (body) =>
-    store.getNotAssignedUsersByPool(body)
-  ),
-  serviceHandler("/Services/ResourcePoolService.asmx/AddUsersPoolHistoryEntries", (body) =>
-    store.assignUsersToPool(body)
-  ),
-  serviceHandler("/Services/ResourcePoolService.asmx/UpdateUserPoolHistoryDate", (body) =>
-    store.updatePoolUserDate(body)
-  ),
-  serviceHandler("/Services/BranchService.asmx/GetBranchGroupsWithBranchesList", () => store.getBranches()),
+  serviceHandler(DemoApi.poolGetActiveShort, () => store.getAllPoolsShort()),
+  serviceHandler(DemoApi.poolAdd, (body) => store.addPool(body)),
+  serviceHandler(DemoApi.poolUpdate, (body) => store.updatePool(body)),
+  serviceHandler(DemoApi.poolDelete, (body) => store.deletePool(body)),
+  serviceHandler(DemoApi.poolGetNotAssignedUsers, (body) => store.getNotAssignedUsersByPool(body)),
+  serviceHandler(DemoApi.poolAssignUsers, (body) => store.assignUsersToPool(body)),
+  serviceHandler(DemoApi.poolUpdateUserDate, (body) => store.updatePoolUserDate(body)),
+  serviceHandler(DemoApi.branchGetList, () => store.getBranches()),
 ];
