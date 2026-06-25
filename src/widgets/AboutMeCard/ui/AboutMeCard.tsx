@@ -1,7 +1,7 @@
 import { type FC } from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import myAvatarUrl from '../assets/myAvatar.jpeg'
+import myAvatarUrl from '../assets/myAvatar.webp'
 import { SITE_CONTACT } from 'shared/consts/contact'
 
 export const AboutMeCard: FC = () => {

@@ -7,6 +7,7 @@ import { Main } from 'pages/Main'
 import { CodeExample } from 'pages/CodeExample'
 import { Contact } from 'pages/Contact'
 import { Portfolio } from 'pages/Portfolio'
+import { CaseStudy } from 'pages/CaseStudy'
 
 const router = createBrowserRouter([
     {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <AboutMe />
+            },
+            {
+                path: 'portfolio/:slug',
+                element: <CaseStudy />
             },
             {
                 path: 'portfolio',

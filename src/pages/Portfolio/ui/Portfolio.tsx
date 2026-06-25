@@ -5,8 +5,11 @@ import classes from './styles.module.scss'
 import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import { PORTFOLIO_LAYOUTS, PORTFOLIO_PRODUCTS, PortfolioItem } from 'shared/consts/portfolio'
+import { getCaseStudyByPortfolioId } from 'shared/consts/case-studies'
 
 const PortfolioCard: FC<{ item: PortfolioItem }> = ({ item }) => {
+    const caseStudy = getCaseStudyByPortfolioId(item.id)
+
     return (
         <Card className={ classes.card }>
             <Card.Body>
@@ -18,6 +21,11 @@ const PortfolioCard: FC<{ item: PortfolioItem }> = ({ item }) => {
                 <p className={ classes.label }>Результат</p>
                 <Card.Text>{ item.result }</Card.Text>
                 <div className={ classes.links }>
+                    {caseStudy && (
+                        <Link to={ `/portfolio/${caseStudy.slug}` } className={ classes.detailLink }>
+                            Подробнее
+                        </Link>
+                    )}
                     {item.demoExternal ? (
                         <a
                             href={ item.demoLink }

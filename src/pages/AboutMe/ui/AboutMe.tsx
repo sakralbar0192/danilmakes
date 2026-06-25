@@ -7,7 +7,7 @@ import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import { getAvailabilityVariant, SITE_CONTACT } from 'shared/consts/contact'
 import { FAQ_ITEMS } from 'shared/consts/faq'
 import { PRICING_NOTE, PRICING_TIERS } from 'shared/consts/pricing'
-import myAvatarUrl from 'widgets/AboutMeCard/assets/myAvatar.jpeg'
+import myAvatarUrl from 'widgets/AboutMeCard/assets/myAvatar.webp'
 
 const availabilityVariant = getAvailabilityVariant(SITE_CONTACT.availability)
 
@@ -91,22 +91,6 @@ const AboutMe: FC = () => {
                 <p className={ classes.text }>
                     Малый бизнес в Красноярске и по всей России, стартапы на ранней стадии
                     и заказчики, которым нужен один ответственный разработчик без агентской наценки.
-                </p>
-            </section>
-
-            <section className={ classes.section }>
-                <h2>Технологии</h2>
-                <p className={ classes.text }>
-                    Работаю с современным стеком и могу поддерживать legacy-проекты:
-                    разбираться в существующем коде, аккуратно дорабатывать и постепенно улучшать.
-                </p>
-            </section>
-
-            <section className={ classes.section }>
-                <h2>Формат работы</h2>
-                <p className={ classes.text }>
-                    Совмещаю с основной работой, поэтому беру проекты с фиксированным объёмом
-                    и реалистичными сроками: обсуждение → оценка → разработка → сдача.
                 </p>
             </section>
 
