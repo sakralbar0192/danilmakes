@@ -19,20 +19,20 @@ export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
         id: 'danilmakes',
         title: 'danilmakes.ru',
         category: 'product',
-        task: 'Запустить персональный сайт для привлечения небольших заказов: портфолио, контакты, приём заявок без посредников.',
-        solution: 'Full-stack на своём VPS: React SPA, Express API, PostgreSQL в Docker, nginx, уведомления через Яндекс SMTP.',
-        result: 'Сайт в проде по IP, форма сохраняет заявки в БД и дублирует на почту. Готов к домену и SSL.',
+        task: 'Запустить персональный сайт для привлечения заказов: портфолио, цены, FAQ, контакты и приём заявок без посредников.',
+        solution: 'Full-stack на своём VPS: React SPA, Express API, PostgreSQL в Docker, nginx, SSL, уведомления через Яндекс SMTP.',
+        result: 'Сайт на danilmakes.ru с HTTPS, форма сохраняет заявки в БД и дублирует на почту.',
         demoLink: '/',
         sourceLink: 'https://github.com/sakralbar0192/danilmakes'
     },
     {
-        id: 'tariff-prices',
-        title: 'Цены и ограничения',
+        id: 'report-revenue',
+        title: 'Отчёт по доходу',
         category: 'product',
-        task: 'Сложный экран управления ценами и ограничениями тарифа: календарная таблица, inline-редактирование, виртуальный скролл.',
-        solution: 'Vue 3 + Vuex + Vuetify 3, виртуальный скролл, MSW-мок API.',
-        result: 'Интерактивное демо с переключением тарифов, режимов и сохранением без backend.',
-        demoLink: `/CodeExample/${ECodeExamples.TARIFF_PRICES}`
+        task: 'Аналитический экран отеля: метрики ADR, RevPAR, загрузка, графики и таблица по категориям номеров.',
+        solution: 'Vue 3 + Chart.js + Vuex, фильтры по периоду, группировка данных, MSW с синтетическими ответами API.',
+        result: 'Интерактивное демо с графиками, метриками и таблицей без backend.',
+        demoLink: `/CodeExample/${ECodeExamples.REPORT_REVENUE}`
     },
     {
         id: 'divisions',
@@ -45,13 +45,22 @@ export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
         sourceLink: 'https://github.com/sakralbar0192/Divisions'
     },
     {
-        id: 'report-revenue',
-        title: 'Отчёт по доходу',
+        id: 'tariff-prices',
+        title: 'Цены и ограничения',
         category: 'product',
-        task: 'Аналитический экран отеля: метрики ADR, RevPAR, загрузка, графики и таблица по категориям номеров.',
-        solution: 'Vue 3 + Chart.js + Vuex, фильтры по периоду, группировка данных, MSW с синтетическими ответами API.',
-        result: 'Интерактивное демо с графиками, метриками и таблицей без backend.',
-        demoLink: `/CodeExample/${ECodeExamples.REPORT_REVENUE}`
+        task: 'Сложный экран управления ценами и ограничениями тарифа: календарная таблица, inline-редактирование, виртуальный скролл.',
+        solution: 'Vue 3 + Vuex + Vuetify 3, виртуальный скролл, MSW-мок API.',
+        result: 'Интерактивное демо с переключением тарифов, режимов и сохранением без backend.',
+        demoLink: `/CodeExample/${ECodeExamples.TARIFF_PRICES}`
+    },
+    {
+        id: 'family-meals',
+        title: 'Family Meal Planning',
+        category: 'product',
+        task: 'Семейное приложение: библиотека рецептов, недельный план питания и автоматический список покупок на выбранный период.',
+        solution: 'Vue 3, Module Federation, microservices (PHP/Go), BFF. Портфолио-демо — MSW с синтетическими данными без backend.',
+        result: 'Полный UX-сценарий: рецепты → план → покупки в интерактивном iframe.',
+        demoLink: `/CodeExample/${ECodeExamples.FAMILY_MEALS}`
     },
     {
         id: 'racketmate',

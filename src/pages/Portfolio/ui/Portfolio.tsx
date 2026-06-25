@@ -1,6 +1,6 @@
-import { FC, useEffect } from 'react'
+import { FC, KeyboardEvent, ReactNode, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Card, Col, Row } from 'react-bootstrap'
+import { Card, Col, Collapse, Row } from 'react-bootstrap'
 import classes from './styles.module.scss'
 import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
@@ -43,6 +43,70 @@ const PortfolioCard: FC<{ item: PortfolioItem }> = ({ item }) => {
     )
 }
 
+interface PortfolioSectionProps {
+    title: string
+    note?: string
+    defaultOpen?: boolean
+    columns: { xs: number; sm?: number; md?: number; lg?: number }
+    children: ReactNode
+}
+
+const PortfolioSection: FC<PortfolioSectionProps> = ({
+    title,
+    note,
+    defaultOpen = true,
+    columns,
+    children
+}) => {
+    const [open, setOpen] = useState(defaultOpen)
+    const sectionId = title.replace(/\s+/g, '-').toLowerCase()
+
+    const toggle = () => setOpen(prev => !prev)
+
+    const handleKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault()
+            toggle()
+        }
+    }
+
+    return (
+        <section className={ classes.section }>
+            <div className={ classes.sectionHeader }>
+                <div className={ classes.sectionHeaderText }>
+                    <h2 id={ `${sectionId}-title` }>{ title }</h2>
+                    {note && <p className={ classes.sectionNote }>{ note }</p>}
+                </div>
+                <button
+                    type='button'
+                    className={ classes.sectionToggle }
+                    onClick={ toggle }
+                    onKeyDown={ handleKeyDown }
+                    aria-expanded={ open }
+                    aria-controls={ `${sectionId}-content` }
+                    aria-labelledby={ `${sectionId}-title` }
+                >
+                    <span className={ `${classes.chevron} ${open ? classes.chevronOpen : ''}` } aria-hidden='true' />
+                    <span className='visually-hidden'>{ open ? 'Свернуть' : 'Развернуть' } { title }</span>
+                </button>
+            </div>
+            <Collapse in={ open }>
+                <div id={ `${sectionId}-content` }>
+                    <Row
+                        xs={ columns.xs }
+                        sm={ columns.sm }
+                        md={ columns.md }
+                        lg={ columns.lg }
+                        className='g-4'
+                    >
+                        {children}
+                    </Row>
+                </div>
+            </Collapse>
+        </section>
+    )
+}
+
 const Portfolio: FC = () => {
     const dispatch = useAppDispatch()
 
@@ -54,33 +118,31 @@ const Portfolio: FC = () => {
         <div className={ classes.wrapper }>
             <h1>Портфолио</h1>
             <p className={ classes.intro }>
-                Проекты и макеты, которые показывают уровень работы. Каждый пункт — живая демонстрация.
+                Макеты и приложения, которые показывают уровень работы. Каждый пункт — живая демонстрация.
             </p>
 
-            <section className={ classes.section }>
-                <h2>Проекты</h2>
-                <Row xs={ 1 } md={ 2 } className='g-4'>
-                    {PORTFOLIO_PRODUCTS.map(item => (
-                        <Col key={ item.id }>
-                            <PortfolioCard item={ item } />
-                        </Col>
-                    ))}
-                </Row>
-            </section>
+            <PortfolioSection
+                title='Вёрстка'
+                note='Полноценные адаптивные макеты: от лендингов до многостраничных каталогов.'
+                columns={ { xs: 1, sm: 2, lg: 3 } }
+            >
+                {PORTFOLIO_LAYOUTS.map(item => (
+                    <Col key={ item.id }>
+                        <PortfolioCard item={ item } />
+                    </Col>
+                ))}
+            </PortfolioSection>
 
-            <section className={ classes.section }>
-                <h2>Вёрстка</h2>
-                <p className={ classes.sectionNote }>
-                    Полноценные адаптивные макеты: от лендингов до многостраничных каталогов.
-                </p>
-                <Row xs={ 1 } sm={ 2 } lg={ 3 } className='g-4'>
-                    {PORTFOLIO_LAYOUTS.map(item => (
-                        <Col key={ item.id }>
-                            <PortfolioCard item={ item } />
-                        </Col>
-                    ))}
-                </Row>
-            </section>
+            <PortfolioSection
+                title='Приложения'
+                columns={ { xs: 1, md: 2 } }
+            >
+                {PORTFOLIO_PRODUCTS.map(item => (
+                    <Col key={ item.id }>
+                        <PortfolioCard item={ item } />
+                    </Col>
+                ))}
+            </PortfolioSection>
 
             <div className={ classes.cta }>
                 <p>Нужен похожий проект?</p>
