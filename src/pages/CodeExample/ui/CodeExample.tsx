@@ -50,6 +50,10 @@ const CodeExample: FC = () => {
             case ECodeExamples.DIVISIONS:
                 dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.DIVISIONS))
                 break
+
+            case ECodeExamples.FAMILY_MEALS:
+                dispatch(setCodeExampleSourceLinkHref(ECodeExamplesLinksHrefs.FAMILY_MEALS))
+                break
         }
 
         return () => { dispatch(setCodeExampleSourceLinkHref('')) }

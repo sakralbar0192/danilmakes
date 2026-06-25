@@ -10,7 +10,8 @@ export const ECodeExamples = {
     POKEDEX: 'pokedex',
     TARIFF_PRICES: 'tariffPrices',
     REPORT_REVENUE: 'reportRevenue',
-    DIVISIONS: 'divisions'
+    DIVISIONS: 'divisions',
+    FAMILY_MEALS: 'familyMeals'
 } as const
 export type ECodeExamples = TValueOf<typeof ECodeExamples>
 
@@ -25,6 +26,7 @@ export const ECodeExamplesLinksHrefs = {
     POSTS_LIST: 'https://github.com/sakralbar0192/danilmakes',
     TARIFF_PRICES: '',
     REPORT_REVENUE: '',
-    DIVISIONS: 'https://github.com/sakralbar0192/Divisions'
+    DIVISIONS: 'https://github.com/sakralbar0192/Divisions',
+    FAMILY_MEALS: ''
 } as const
 export type ECodeExamplesLinksHrefs = TValueOf<typeof ECodeExamplesLinksHrefs>

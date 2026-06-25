@@ -14,7 +14,8 @@
         "preview": "vite preview",
         "build:tariff-prices": "cd demos/tariff-prices && npm ci && npm run build && rm -rf ../../public/tariffPrices && cp -r dist ../../public/tariffPrices",
         "build:report-revenue": "cd demos/report-revenue && npm ci && npm run build && rm -rf ../../public/reportRevenue && cp -r dist ../../public/reportRevenue",
-        "build:divisions": "cd demos/divisions && npm ci && npm run build && cp public/mockServiceWorker.js dist/mockServiceWorker.js && rm -rf ../../public/divisions && cp -r dist ../../public/divisions"
+        "build:divisions": "cd demos/divisions && npm ci && npm run build && cp public/mockServiceWorker.js dist/mockServiceWorker.js && rm -rf ../../public/divisions && cp -r dist ../../public/divisions",
+        "build:family-meals": "cd ../family_meal-planning/frontend && npm ci && npm run build:demo && rm -rf ../../danilmakes/public/familyMeals && cp -r dist-demo/familyMeals ../../danilmakes/public/familyMeals"
     },
     "dependencies": {
         "@reduxjs/toolkit": "^1.9.5",
