@@ -11,7 +11,9 @@ export default class Tooltip {
     this.outerDiv = outerDiv;
   }
 
-  static isMobile = store.state.device.isMobile;
+  static get isMobile() {
+    return Boolean(store.state.device?.isMobile);
+  }
 
   // как близко будет находиться тултип к бару
   static standartOffset = 20;

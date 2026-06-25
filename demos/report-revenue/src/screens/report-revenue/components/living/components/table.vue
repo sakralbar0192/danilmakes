@@ -516,7 +516,17 @@ export default {
 .report-revenue__sticky--default {
   position: sticky !important;
   left: 0;
-  z-index: 2;
+  z-index: 4;
+  background-color: var(--demo-surface, #fff);
+}
+
+.report-revenue__table thead .report-revenue__sticky--default {
+  z-index: 8;
+  background: linear-gradient(180deg, #e8f4fb 0%, #dceef8 100%);
+}
+
+.report-revenue__table tfoot .report-revenue__sticky--default {
+  z-index: 7;
 }
 
 .report-revenue__table-header--no-border {
@@ -577,6 +587,7 @@ export default {
   background: #f0f7fc !important;
   border-top: 2px solid var(--demo-primary, #1e8bc3);
   border-bottom: 1px solid var(--demo-border, #d8e8f2);
+  z-index: 5;
 }
 
 .report-revenue__table-summary-label,
@@ -609,6 +620,7 @@ export default {
   min-width: 124px;
   border-right: 1px solid #b8dce8;
   box-shadow: 4px 0 8px rgba(19, 102, 136, 0.08);
+  background: linear-gradient(180deg, #dceef8 0%, #e8f4fb 100%) !important;
 }
 
 .report-revenue__text--trunc {
@@ -617,12 +629,8 @@ export default {
   overflow: hidden;
 }
 
-.report-revenue__table-cell--first {
-  background-color: inherit;
-}
-
 .report-revenue__table-cell-footer--first {
-  z-index: 5 !important;
+  z-index: 8 !important;
 }
 
 table tr td:nth-child(2) {

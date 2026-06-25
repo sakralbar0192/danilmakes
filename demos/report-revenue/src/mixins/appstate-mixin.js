@@ -15,6 +15,12 @@ export default {
     isTabletDevice() {
       return Boolean(this.device?.breakpoint?.tablet);
     },
+    isMobile() {
+      return Boolean(this.device?.isMobile);
+    },
+    isNarrowViewport() {
+      return !this.isDesktopDevice;
+    },
     isDragging() {
       return Boolean(this.device?.isDragging);
     },

@@ -84,6 +84,9 @@ export default {
 }
 
 :deep(.report-revenue__sticky--default) {
-  z-index: 2;
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  background-color: var(--demo-surface, #fff);
 }
 </style>

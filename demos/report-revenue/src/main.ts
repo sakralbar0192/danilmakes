@@ -100,6 +100,8 @@ async function bootstrap() {
   await store.dispatch("hotel/getCurrentHotel").catch(() => {});
   await store.dispatch("hotelRoom/getRoomTypes").catch(() => {});
 
+  store.dispatch("device/initViewportTracking");
+
   app.mount("#app");
 }
 
