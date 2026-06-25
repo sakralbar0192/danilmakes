@@ -1,19 +1,19 @@
 <template>
   <v-card
     ref="graphWrapper"
-    color="#F7F7F8"
+    color="var(--demo-surface, #fff)"
     elevation="1"
     :class="[
-      'pa-4 rounded-lg bnovo-report-revenue__sheet-graph bnovo-report-revenue__card-graph-wrapper',
+      'pa-4 rounded-lg report-revenue__sheet-graph report-revenue__card-graph-wrapper',
       {'overflow-x-auto': isTabletDevice || isMobileDevice}
     ]"
   >
     <v-card-title v-if="!hideTitle" class="py-0" :style="isTabletDevice || isMobileDevice ? 'width: 1000px' : ''">
-      <h3 class="bnovo-report-revenue__header">
+      <h3 class="report-revenue__header">
         {{ title }}
       </h3>
       <div class="d-flex justify-space-between" style="flex-basis: 100%;">
-        <b class="bnovo-report-revenue__header bnovo-report-revenue__bold">{{ caption }}</b>
+        <b class="report-revenue__header report-revenue__bold">{{ caption }}</b>
         <b-btn
           color="tertiary"
           text
@@ -45,7 +45,7 @@ import uid from "@/utils/uid";
 import i18n from "@/plugins/i18n";
 
 export default {
-  name: "BnovoReportRevenueGraphTemplate",
+  name: "ReportRevenueGraphTemplate",
   components: {},
   props: {
     hideTitle: {
@@ -111,11 +111,12 @@ export default {
 </script>
 
 <style lang="scss">
-.bnovo-report-revenue__card-graph-wrapper.v-card {
-    background-color: $secondary-hover;
+.report-revenue__card-graph-wrapper.v-card {
+    background-color: var(--demo-surface, #fff);
 }
 
-.bnovo-report-revenue__sheet-graph {
-    border: 1px solid $skeleton;
+.report-revenue__sheet-graph {
+    border: 1px solid var(--demo-border, #d8e8f2);
+    box-shadow: 0 2px 12px rgba(30, 139, 195, 0.06);
 }
 </style>

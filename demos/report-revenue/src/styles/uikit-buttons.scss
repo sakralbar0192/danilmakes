@@ -1,4 +1,4 @@
-@import "./bnovo-shims";
+@import "./demo-shims";
 @import "./theme/tools/custom-variables";
 
 .v-btn {
@@ -108,7 +108,7 @@
   }
 }
 
-.bnovo-btn,
+.demo-btn,
 .b-screen-footer .v-btn {
   min-height: $input-height;
   font-size: map-get($text-sizes, body);

@@ -1,5 +1,6 @@
 import OSF from "@/utils/object-structure-formatter";
-import RoomtypeModel from "@/models/roomtype";
+import RoomtypeModel from "@/models/demo/roomtype";
+import { DemoApi } from "@/config/demo-api";
 
 export default {
   namespaced: true,
@@ -19,7 +20,7 @@ export default {
       if (state.roomtypesReady) return state.roomtypes;
       commit("setHotelRoomData", { roomtypesLoading: true });
       const http = (await import("@/utils/http")).default;
-      const response = await http.get("/roomTypes/get", { params: { with_rooms: 1 } });
+      const response = await http.get(DemoApi.roomTypes, { params: { with_rooms: 1 } });
       const rawRoomtypes = response?.roomtypes || [];
       const clearRoom = RoomtypeModel.getClearRoomtype();
       const roomtypes = rawRoomtypes.map((item) => OSF.format(clearRoom, item, { deep: true }));

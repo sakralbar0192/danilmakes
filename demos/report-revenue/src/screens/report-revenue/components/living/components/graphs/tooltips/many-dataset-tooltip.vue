@@ -15,7 +15,7 @@
           <p class="font-weight-bold mb-0">
             {{ currentDateInTooltipFormatted }}
           </p>
-          <span v-if="isGroupedByDates" class="bnovo-report-revenue__text--dark ml-1">
+          <span v-if="isGroupedByDates" class="report-revenue__text--dark ml-1">
             {{ currentWeekDayInTooltipFormatted }}
           </span>
         </div>
@@ -33,13 +33,13 @@
             <div class="d-flex align-center">
               <div
                 :class="{
-                  'bnovo-report-revenue__square': getType(data) === defaultValue.square,
-                  'bnovo-report-revenue__dashed': getType(data) === defaultValue.dot}"
+                  'report-revenue__square': getType(data) === defaultValue.square,
+                  'report-revenue__dashed': getType(data) === defaultValue.dot}"
                 :style="`background-color: ${getColor(data)}; border-color: ${getColor(data)};`"
               />
               {{ data.title }}
             </div>
-            <small v-if="isShowSubhintToday(data.phase)" class="bnovo-report-revenue__text--dark mt-n1"> {{ $t("к") }} {{ currentDay }}</small>
+            <small v-if="isShowSubhintToday(data.phase)" class="report-revenue__text--dark mt-n1"> {{ $t("к") }} {{ currentDay }}</small>
           </div>
           <span
             :style="{marginRight: data.graphema === 'percent' ? '-2px' : null}"
@@ -71,7 +71,7 @@ import strategiesDatasetDictionary from "../dictionaries/strategiesDatasetDictio
 import SharedTooltipView from "../mixins/sharedTooltipView";
 
 export default {
-  name: "BnovoReportRevenueManyDatasetTooltip",
+  name: "ReportRevenueManyDatasetTooltip",
   mixins: [SharedTooltipView],
   props: {
     tooltipDataProps: {

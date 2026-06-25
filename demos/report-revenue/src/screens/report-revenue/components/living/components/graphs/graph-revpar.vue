@@ -38,7 +38,7 @@ import SharedPlanGraphSettings from "./mixins/sharedPlanGraphSettings";
 import PlanTooltipContent from "./tooltips/plan-tooltip-content.vue";
 
 export default {
-  name: "BnovoReportRevenueGraphRevPAR",
+  name: "ReportRevenueGraphRevPAR",
   components: {
     PlanTooltipContent,
     GraphTemplate,

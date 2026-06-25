@@ -82,7 +82,7 @@ $btn-group-separated-gap: (
   'between': auto,
 );
 
-.bnovo-v-app {
+.demo-v-app {
   .v-btn-toggle {
     &--separated {
       > .v-btn.v-btn {

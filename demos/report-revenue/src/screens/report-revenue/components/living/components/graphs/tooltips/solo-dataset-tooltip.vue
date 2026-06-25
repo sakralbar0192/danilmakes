@@ -15,15 +15,15 @@
           <div
             v-if="currentPhase === 'today'"
             :class="{
-              'bnovo-report-revenue__square': currentTooltipData[0].type === defaultValue.square,
-              'bnovo-report-revenue__dashed': currentTooltipData[0].type === defaultValue.dot
+              'report-revenue__square': currentTooltipData[0].type === defaultValue.square,
+              'report-revenue__dashed': currentTooltipData[0].type === defaultValue.dot
             }"
             :style="{backgroundColor: currentTooltipData[0].color, borderColor: currentTooltipData[0].color}"
           />
           <p class="font-weight-bold mb-0">
             {{ currentDateInTooltipFormatted }}
           </p>
-          <span class="bnovo-report-revenue__text--dark ml-1">
+          <span class="report-revenue__text--dark ml-1">
             {{ currentWeekDayInTooltipFormatted }}
           </span>
         </div>
@@ -36,14 +36,14 @@
             <div
               v-if="data.phase !== 'today'"
               :class="{
-                'bnovo-report-revenue__square': data.type === defaultValue.square,
-                'bnovo-report-revenue__dashed': data.type === defaultValue.dot
+                'report-revenue__square': data.type === defaultValue.square,
+                'report-revenue__dashed': data.type === defaultValue.dot
               }"
               :style="{backgroundColor: data.color, borderColor: data.color}"
             />
             {{ data.title }}
           </div>
-          <small v-if="data.type === defaultValue.dot" class="bnovo-report-revenue__text--dark mt-n1"> {{ $t("к") }} {{ currentDay }}</small>
+          <small v-if="data.type === defaultValue.dot" class="report-revenue__text--dark mt-n1"> {{ $t("к") }} {{ currentDay }}</small>
         </div>
         <span class="font-weight-bold">{{ formatTooltipValue(data.value, data.graphema === defaultValue.percent) }}</span>
       </div>
@@ -55,7 +55,7 @@
 import SharedTooltipView from "../mixins/sharedTooltipView";
 
 export default {
-  name: "BnovoReportRevenueSoloDatasetTooltip",
+  name: "ReportRevenueSoloDatasetTooltip",
   mixins: [SharedTooltipView],
   props: {
     tooltipDataProps: {

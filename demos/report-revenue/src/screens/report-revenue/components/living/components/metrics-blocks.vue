@@ -2,11 +2,10 @@
   <v-row
     dense
     :class="[
-      'set set_ingroup bnovo-report-revenue-metrics-block--total',
+      'set set_ingroup report-revenue-metrics-block--total',
       {
-        'bnovo-report-revenue-metrics-block--separated': isSagComponent,
-        'bnovo-report-revenue-metrics-block--with-doughnut': hasDoughnutLayout,
-        'bnovo-report-revenue-metrics-block--row': shouldUseRowLayout,
+        'report-revenue-metrics-block--separated': isSagComponent,
+        'report-revenue-metrics-block--row': shouldUseRowLayout,
       },
     ]"
   >
@@ -78,7 +77,7 @@ import MetricBlock from "../../metric-block.vue";
 import PlanMetricInfo from "./plan-metric-info.vue";
 
 export default {
-  name: "BnovoReportRevenueMetricsBlock",
+  name: "ReportRevenueMetricsBlock",
   components: {
     FactMetricInfo,
     MetricBlock,
@@ -92,20 +91,20 @@ export default {
   },
   metricTestAttributes: {
     [RevenueReportService.metricsBlockTypes.amount.key]: {
-      period: "bnovo-report-revenue-widget-accommodation-period",
-      sum: "bnovo-report-revenue-widget-accommodation-sum",
+      period: "report-revenue-widget-accommodation-period",
+      sum: "report-revenue-widget-accommodation-sum",
     },
     [RevenueReportService.metricsBlockTypes.revpar.key]: {
-      period: "bnovo-report-revenue-widget-revpar-period",
-      sum: "bnovo-report-revenue-widget-revpar-sum",
+      period: "report-revenue-widget-revpar-period",
+      sum: "report-revenue-widget-revpar-sum",
     },
     [RevenueReportService.metricsBlockTypes.adr.key]: {
-      period: "bnovo-report-revenue-widget-adr-period",
-      sum: "bnovo-report-revenue-widget-adr-sum",
+      period: "report-revenue-widget-adr-period",
+      sum: "report-revenue-widget-adr-sum",
     },
     [RevenueReportService.metricsBlockTypes.load.key]: {
-      period: "bnovo-report-revenue-widget-loading-period",
-      sum: "bnovo-report-revenue-widget-loading-sum",
+      period: "report-revenue-widget-loading-period",
+      sum: "report-revenue-widget-loading-sum",
     },
   },
   computed: {
@@ -113,12 +112,11 @@ export default {
       "externalFilters",
       "isReportActual",
       "metrics",
-      "servicesData",
       "selectedCategories",
       "selectedMetrics",
       "yearsRevenuePlan",
     ]),
-    ...mapGetters("revenueReport", ["canShowPlanData", "isAllAvailableCategorySelected", "isFullCurrentMonthChosen"]),
+    ...mapGetters("revenueReport", ["canShowPlanData", "isFullCurrentMonthChosen"]),
     ...mapGetters("user", ["isGuest"]),
     selectedMetricsSet() {
       return new Set(this.selectedMetrics || []);
@@ -142,14 +140,8 @@ export default {
     isSagComponent() {
       return this.context === "separated";
     },
-    hasDoughnutLayout() {
-      return !this.isSagComponent
-        && this.isReportActual
-        && this.isAllAvailableCategorySelected
-        && this.selectedMetricsSet.has(RevenueReportService.metricsBlockTypes.amount.key);
-    },
     shouldUseRowLayout() {
-      return !this.isSagComponent && !this.hasDoughnutLayout;
+      return !this.isSagComponent;
     },
     displayedMetrics() {
       return [
@@ -198,14 +190,6 @@ export default {
           hidden: !this.selectedMetricsSet.has(RevenueReportService.metricsBlockTypes.load.key),
           format: (value, forceShowFractions = false) => this.formattedValue(value, RevenueReportService.metricsBlockTypes.load.key, 1, forceShowFractions),
           planValue: this.getPlanMetricValue(RevenueReportService.metricsBlockTypes.load.key),
-        },
-        {
-          type: RevenueReportService.metricsBlockTypes.services.key,
-          value: this.servicesData?.total || 0,
-          isPercentType: false,
-          hintComponent: RevenueReportService.metricsBlockTypes.services.hintComponent,
-          format: (value, forceShowFractions = false) => this.formattedValue(value, 2, forceShowFractions),
-          hidden: false || !this.isSagComponent,
         },
       ].filter(metric => !metric.hidden);
     },
@@ -260,36 +244,37 @@ export default {
 </script>
 
 <style lang="scss">
-.bnovo-report-revenue-metrics-block {
+.report-revenue-metrics-block {
   max-width: 1350px;
   grid-template-columns: repeat(4, 1fr);
 }
 
-.bnovo-report-revenue-metrics-block--total {
+.report-revenue-metrics-block--total {
   grid-template-columns: repeat(2, 1fr);
   row-gap: 16px !important;
 }
 
-section .bnovo-report-revenue-metrics-block--separated {
+section .report-revenue-metrics-block--separated {
   display: grid;
 }
 
 @media #{map-get($display-breakpoints, lg-and-up)} {
-  .bnovo-report-revenue-metrics-block--total.bnovo-report-revenue-metrics-block--with-doughnut {
+  .report-revenue-metrics-block--total.report-revenue-metrics-block--with-doughnut {
     display: grid !important;
     align-self: stretch;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
   }
 
-  .bnovo-report-revenue-metrics-block--total.bnovo-report-revenue-metrics-block--row {
+  .report-revenue-metrics-block--total.report-revenue-metrics-block--row {
     display: flex !important;
     align-items: start;
+    gap: map-get($gaps, groups);
   }
 }
 
 @media (max-width: map-get($grid-breakpoints-custom, xl)) {
-  .bnovo-report-revenue-metrics-block {
+  .report-revenue-metrics-block {
     max-width: 50%;
     grid-template-columns: repeat(2, 1fr);
     row-gap: 16px !important;
@@ -297,18 +282,18 @@ section .bnovo-report-revenue-metrics-block--separated {
 }
 
 @media (max-width: map-get($grid-breakpoints-custom, lg)) {
-  .bnovo-report-revenue-metrics-block {
+  .report-revenue-metrics-block {
     max-width: 1000px;
     grid-template-columns: 1fr 1fr;
     row-gap: 16px !important;
   }
-  .bnovo-report-revenue-metrics-block--no-adr-revpar {
+  .report-revenue-metrics-block--no-adr-revpar {
     gap: 0px !important;
   }
 
-  .bnovo-report-revenue-metrics-block--total {
+  .report-revenue-metrics-block--total {
     width: 1000px;
-    & > div > .bnovo-report-revenue__card-wrapper {
+    & > div > .report-revenue__card-wrapper {
       min-width: 280px;
     }
   }
@@ -316,23 +301,23 @@ section .bnovo-report-revenue-metrics-block--separated {
 }
 
 @media (max-width: map-get($grid-breakpoints-custom, sm)) {
-  .bnovo-report-revenue-metrics-block {
+  .report-revenue-metrics-block {
     grid-template-columns: 1fr;
   }
 
-  .bnovo-report-revenue__metrics-section {
+  .report-revenue__metrics-section {
     flex-direction: column;
   }
 
-  section > .bnovo-report-revenue__metrics-section {
+  section > .report-revenue__metrics-section {
     max-width: none;
-    & > .bnovo-report-revenue-metrics-block--total {
+    & > .report-revenue-metrics-block--total {
       width: auto;
       grid-template-columns: repeat(2, 1fr);
-      .bnovo-report-revenue__card-wrapper--total {
+      .report-revenue__card-wrapper--total {
         min-width: auto;
       }
-      & .bnovo-report-revenue__card-wrapper {
+      & .report-revenue__card-wrapper {
         max-width: 480px;
       }
     }
@@ -340,7 +325,7 @@ section .bnovo-report-revenue-metrics-block--separated {
 }
 
 @media (max-width: 480px) {
-  section > .bnovo-report-revenue__metrics-section > .bnovo-report-revenue-metrics-block--total {
+  section > .report-revenue__metrics-section > .report-revenue-metrics-block--total {
     width: auto;
     grid-template-columns: repeat(1, 1fr);
   }

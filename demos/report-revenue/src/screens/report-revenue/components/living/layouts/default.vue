@@ -1,15 +1,15 @@
 <template>
   <div
-    class="mb-ingroup bnovo-report-revenue__graph-layout--multiply"
-    :class="{ 'bnovo-report-revenue__graph-layout--single': isSingleGraphVisible }"
+    class="report-revenue__graph-layout report-revenue__graph-layout--multiply"
+    :class="{ 'report-revenue__graph-layout--single': isSingleGraphVisible }"
   >
-    <div v-if="isAmountSelected" class="bnovo-report-revenue__graph-wrapper">
+    <div v-if="isAmountSelected" class="report-revenue__graph-wrapper">
       <graph-revenue
         v-if="!isReportDataFetching"
         @toggle-full-screen="showGraphModalEmit(graphRevenue)"
       />
     </div>
-    <div v-if="isAdrRevparLoadSelected" class="bnovo-report-revenue__graph-wrapper">
+    <div v-if="isAdrRevparLoadSelected" class="report-revenue__graph-wrapper">
       <graph-adr-revpar-load
         v-if="!isReportDataFetching"
         @toggle-full-screen="showGraphModalEmit(GraphAdrRevparLoad)"
@@ -25,7 +25,7 @@ import GraphRevenue from "../components/graphs/graph-revenue.vue";
 import GraphAdrRevparLoad from "../components/graphs/graph-adr-revpar-load.vue";
 
 export default {
-  name: "BnovoReportRevenueDefaultGraphLayout",
+  name: "ReportRevenueDefaultGraphLayout",
   components: { GraphRevenue, GraphAdrRevparLoad },
   computed: {
     ...mapState("revenueReport", ["isReportDataFetching", "selectedMetrics"]),
@@ -62,27 +62,27 @@ export default {
 
 <style lang="scss">
 
-.bnovo-report-revenue__graph-layout--multiply {
+.report-revenue__graph-layout--multiply {
   display: flex;
-  gap: 16px;
+  gap: map-get($gaps, groups);
 
-  & .bnovo-report-revenue__graph-wrapper {
+  & .report-revenue__graph-wrapper {
     flex-grow: 1;
     max-width: 50%;
   }
 }
 
-.bnovo-report-revenue__graph-layout--single {
-  & .bnovo-report-revenue__graph-wrapper {
+.report-revenue__graph-layout--single {
+  & .report-revenue__graph-wrapper {
     max-width: 100%;
   }
 }
 
 @media (max-width: map-get($grid-breakpoints-custom, lg)) {
-  .bnovo-report-revenue__graph-layout--multiply {
+  .report-revenue__graph-layout--multiply {
     flex-direction: column;
 
-    & .bnovo-report-revenue__graph-wrapper {
+    & .report-revenue__graph-wrapper {
       max-width: 100%;
     }
   }

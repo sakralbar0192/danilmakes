@@ -1,12 +1,12 @@
 <template>
   <div
-    :class="['bnovo-report-revenue__card-wrapper',
-             {'pa-4 bnovo-report-revenue__card-wrapper--alternate': alternateMode,
-              'bnovo-report-revenue__card-wrapper--total': !isSagComponent }]"
+    :class="['report-revenue__card-wrapper',
+             {'pa-4 report-revenue__card-wrapper--alternate': alternateMode,
+              'report-revenue__card-wrapper--total': !isSagComponent }]"
   >
-    <v-card outlined class="bnovo-report-revenue__card rounded-lg pa-6" elevation="1">
+    <v-card outlined class="report-revenue__card rounded-lg pa-6" elevation="1">
       <v-card-title class="pa-0 d-flex align-baseline">
-        <h4 class="bnovo-report-revenue__header">
+        <h4 class="report-revenue__header">
           <slot name="title"/>
         </h4>
         <slot name="hint"/>
@@ -21,7 +21,7 @@
             <v-sheet
               v-bind="activatorProps"
               :color="getBackgroundSheetColor"
-              class="bnovo-report-revenue__card-sheet d-flex flex-column rounded-lg pt-2 pr-4 pb-4 pl-5"
+              class="report-revenue__card-sheet d-flex flex-column rounded-lg pt-2 pr-4 pb-4 pl-5"
               :style="{ border: getBorderStyle }"
             >
               <slot name="text"/>
@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  name: "BnovoReportRevenueMetricBlock",
+  name: "ReportRevenueMetricBlock",
   props: {
     alternateMode: {
       type: Boolean,
@@ -55,26 +55,27 @@ export default {
       return this.context === "separated";
     },
     getBackgroundSheetColor() {
-      return this.alternateMode ? "#F5F9FE" : "#EFFBF1";
+      return this.alternateMode ? "#f0f7fc" : "#eef6fa";
     },
     getBorderStyle() {
-      return this.alternateMode ? "1px solid #E2EEFD" : "1px solid #2FAC4429";
+      return this.alternateMode ? "1px solid #c5e0ef" : "1px solid #b8dce8";
     },
   },
 };
 </script>
 
 <style lang="scss">
-  .bnovo-report-revenue__header {
+  .report-revenue__header {
     font-weight: 600;
     font-size: 16px;
+    color: #2d3748;
   }
 
-  .bnovo-report-revenue__bold {
+  .report-revenue__bold {
     font-size: 14px;
   }
 
-  .bnovo-report-revenue__card-wrapper {
+  .report-revenue__card-wrapper {
     max-width: 320px;
 
     &--alternate {
@@ -86,19 +87,20 @@ export default {
     }
   }
 
-  .bnovo-report-revenue__card.rounded-lg.v-card {
-    border: 1px solid $border-color;
+  .report-revenue__card.rounded-lg.v-card {
+    border: 1px solid var(--demo-border, #d8e8f2);
+    box-shadow: 0 2px 12px rgba(30, 139, 195, 0.06);
   }
 
-  .bnovo-report-revenue__card-sheet {
-    border: 1px solid rgba(47, 172, 68, 0.16);
+  .report-revenue__card-sheet {
+    border: 1px solid rgba(30, 139, 195, 0.18);
     gap: 12px;
     small {
-      color: var(--v-secondary-darken3);
+      color: var(--demo-text-muted, #6b7c8a);
     }
   }
 
-  .bnovo-report-revenue__card-sheet-sign {
+  .report-revenue__card-sheet-sign {
     color: var(--v-secondary-darken3);
   }
 
@@ -107,13 +109,13 @@ export default {
   }
 
   @media #{map-get($display-breakpoints, 'lg-and-up')} {
-    .bnovo-report-revenue__card-wrapper--total {
+    .report-revenue__card-wrapper--total {
       height: 100%;
-      & > .bnovo-report-revenue__card {
+      & > .report-revenue__card {
         height: 100%;
         & > .v-card__text {
           height: calc(100% - 32px);
-          & > .bnovo-report-revenue__card-sheet {
+          & > .report-revenue__card-sheet {
             height: 100%;
           }
         }
@@ -122,14 +124,14 @@ export default {
   }
 
   @media (max-width: map-get($grid-breakpoints-custom, lg)) {
-    .bnovo-report-revenue__card-wrapper {
+    .report-revenue__card-wrapper {
       max-width: 100%;
       width: 100%;
       height: auto;
     }
-    .bnovo-report-revenue__card-wrapper--total {
+    .report-revenue__card-wrapper--total {
       height: 100%;
-      & .bnovo-report-revenue__card-sheet {
+      & .report-revenue__card-sheet {
         min-height: 140px;
       }
     }
@@ -137,12 +139,12 @@ export default {
 
 
   @media (max-width: map-get($grid-breakpoints-custom, sm)) {
-    .bnovo-report-revenue__card-wrapper {
+    .report-revenue__card-wrapper {
       max-width: 480px;
     }
-    .bnovo-report-revenue__card-wrapper--total {
+    .report-revenue__card-wrapper--total {
       height: 100%;
-      & .bnovo-report-revenue__card-sheet {
+      & .report-revenue__card-sheet {
         min-height: auto;
       }
     }

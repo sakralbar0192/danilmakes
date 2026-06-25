@@ -11,15 +11,6 @@ import { isStartAndEndOfSameMonth } from "@/utils/date";
 export default {
   namespaced: true,
   state: {
-    // Фильтры для внутреннего использования компонентами (реактивно обновляются в filters.vue)
-    internalFilters: {
-      periodOfStay: [
-        moment().startOf("month").format(RevenueReportService.sendingDataFormat),
-        moment().endOf("month").format(RevenueReportService.sendingDataFormat),
-      ],
-      compare: [],
-    },
-    // Значения фильтров для запроса на бек (обновляется после нажатия кнопки показать, значения приходят из internalFilters)
     externalFilters: {
       periodOfStay: [
         moment().startOf("month").format(RevenueReportService.sendingDataFormat),
@@ -27,17 +18,9 @@ export default {
       ],
       compare: [],
     },
-    localSelectedCategories: [],
-    localSelectedServices: [],
-    localSelectedMetrics: [],
-    // Данные для отчет, хранящиеся во внешнем хранилище на сервере
     selectedCategories: [],
-    selectedServices: [],
     selectedMetrics: [],
-    // Все категории и доп услуги доступные для выбора. Нужны, если пользователь не выбрал ничего
-    additionalServices: [],
     availableCategories: [],
-    availableServices: [],
     availableMetrics: [],
     // Данные для отображения отчета
     metrics: {
@@ -48,10 +31,6 @@ export default {
     },
     tableData: {
       total: {},
-      data: {},
-    },
-    servicesData: {
-      total: 0,
       data: {},
     },
     yearsRevenuePlan: { categories: [] },
@@ -66,7 +45,6 @@ export default {
     loadPlan: [],
     // Статус загрузки данных для отчета
     isReportDataFetching: false,
-    servicesReady: false,
     // Тип группировки данных
     groupType: 1,
     // Копия ответа с бека
@@ -75,54 +53,25 @@ export default {
     isReportActual: false,
   },
   mutations: {
-    resetFilters(state) {
-      state.internalFilters.periodOfStay = [
-        moment().startOf("month").format(RevenueReportService.sendingDataFormat),
-        moment().endOf("month").format(RevenueReportService.sendingDataFormat),
-      ];
-    },
     setExternalData(state, externalData) {
       state.selectedCategories = [...(externalData?.selectedCategories || state.availableCategories)];
-      state.selectedServices = [...(externalData?.selectedServices || state.availableServices)];
       state.selectedMetrics = [...(externalData?.selectedMetrics || state.availableMetrics)];
-      state.localSelectedCategories = [...state.selectedCategories];
-      state.localSelectedServices = [...state.selectedServices];
-      state.localSelectedMetrics = [...state.selectedMetrics];
     },
     setGroupedType(state, value) {
       state.groupType = value;
-    },
-    setInternalFilters(state, value) {
-      state.internalFilters = { ...value };
     },
     setExternalFilters(state, value) {
       state.externalFilters = { ...value };
     },
     setSelectedCategories(state, value) {
       state.selectedCategories = [...value];
-      state.localSelectedCategories = [...value];
-    },
-    setLocalSelectedCategories(state, value) {
-      state.localSelectedCategories = [...value];
-    },
-    setLocalSelectedServices(state, value) {
-      state.localSelectedServices = [...value];
-    },
-    setLocalSelectedMetrics(state, value) {
-      state.localSelectedMetrics = [...value];
-    },
-    setSelectedServices(state, value) {
-      state.selectedServices = [...value];
-      state.localSelectedServices = [...value];
     },
     setSelectedMetrics(state, value) {
       state.selectedMetrics = [...value];
-      state.localSelectedMetrics = [...value];
     },
     setPrimaryReportData(state, value) {
       state.metrics = value.metrics;
       state.tableData = value.tableData;
-      state.servicesData = value.servicesData;
       state.revenueData = value.revenueData;
       state.revenuePlan = value.revenuePlan;
       state.adrData = value.adrData;
@@ -132,21 +81,14 @@ export default {
       state.loadData = value.loadData;
       state.loadPlan = value.loadPlan;
     },
-    setAvailableCategoriesAndServices(state, value) {
+    setAvailableCategories(state, value) {
       state.availableCategories = value.availableCategories || [];
-      state.availableServices = value.availableServices || [];
     },
     setAvailableMetrics(state, value) {
       state.availableMetrics = value.availableMetrics || [];
     },
     updateReportDataFetchedStatus(state, value) {
       state.isReportDataFetching = value;
-    },
-    setAdditionalServices(state, value) {
-      state.additionalServices = value;
-    },
-    setServicesLoadingStatus(state, value) {
-      state.servicesReady = !!value.servicesReady;
     },
     setResponse(state, value) {
       state.response = value;
@@ -159,40 +101,6 @@ export default {
     },
     setPlanResponse(state, value) {
       state.planResponse = value;
-    },
-    activateService(state, serviceIds) {
-      const found = [];
-
-      for (const service of state.additionalServices) {
-        if (!service.active && serviceIds.includes(service.id)) {
-          found.push(service);
-        }
-      }
-
-      found.forEach((service) => {
-        service.activate();
-      });
-
-      state.availableServices = state.additionalServices
-        .filter(service => service.active)
-        .map(service => service.id);
-    },
-    deactivateService(state, serviceIds) {
-      const found = [];
-
-      for (const service of state.additionalServices) {
-        if (service.active && serviceIds.includes(service.id)) {
-          found.push(service);
-        }
-      }
-
-      found.forEach((service) => {
-        service.deactivate();
-      });
-
-      state.availableServices = state.additionalServices
-        .filter(service => service.active)
-        .map(service => service.id);
     },
   },
   getters: {
@@ -383,14 +291,6 @@ export default {
         commit("updateReportDataFetchedStatus", false);
       });
     },
-    async getAdditionalServices({ state, commit }) {
-      if (!state.servicesReady) {
-        const servicesModel = await RevenueReportService.getAllServicesWithDeleted(state.externalFilters.periodOfStay);
-
-        commit("setServicesLoadingStatus", { servicesReady: true });
-        commit("setAdditionalServices", servicesModel);
-      }
-    },
     async getReportData({
       commit, state, getters, dispatch, rootGetters, rootState,
     }) {
@@ -403,7 +303,7 @@ export default {
         from: state.externalFilters?.periodOfStay?.[0],
         to: state.externalFilters?.periodOfStay?.[1],
         roomtypesIds: state.selectedCategories.length ? state.selectedCategories : state.availableCategories,
-        servicesIds: state.selectedServices.length ? state.selectedServices : state.availableServices,
+        servicesIds: [],
         groupBy: groupByMethod,
       };
 
@@ -417,15 +317,6 @@ export default {
       commit("setResponse", reportResp);
       commit("setPlanResponse", planResp);
       commit("setIsReportActual", true);
-
-      const canRequestTour = window.$scenario && !rootGetters["user/isGuest"];
-      if (canRequestTour && !rootState.device.breakpoint.mobile) {
-        nextTick(() => {
-          if (getters.canShowReport) {
-            window.$scenario.open("revenue-report-intro-tour");
-          }
-        });
-      }
 
       return reportResp?.result;
     },
@@ -450,112 +341,23 @@ export default {
       commit("setPrimaryReportData", reportModel);
       commit("setYearsRevenuePlan", planModel);
     },
-    async saveExternalData({
-      commit, dispatch, state, rootState,
-    }, reportData) {
-      commit("setIsReportActual", false);
-      const {
-        selectedCategories = [],
-        selectedServices = [],
-        selectedMetrics = [],
-      } = reportData;
-      if (!rootState?.user?.extra?.is_readonly) {
-        if (selectedCategories.length === 0) {
-          reportData.selectedCategories = state.availableCategories;
-        }
-        if (selectedServices.length === 0) {
-          reportData.selectedServices = state.availableServices;
-        }
-        if (selectedMetrics.length === 0) {
-          reportData.selectedMetrics = state.availableMetrics;
-        }
-        const isSucceeded = await RevenueReportService.saveReportFilters(reportData);
-        if (isSucceeded) {
-          commit("setExternalData", reportData);
-        }
-      }
-      dispatch("getReportData");
-    },
-    saveFilters({
-      state, dispatch, commit,
-    }) {
-      commit("updateReportDataFetchedStatus", true);
-      dispatch("saveExternalData", {
-        selectedCategories: state.selectedCategories,
-        selectedServices: state.selectedServices,
-        selectedMetrics: state.selectedMetrics,
-      });
-      commit("setExternalFilters", { ...state.internalFilters });
-    },
     setExternalFilters({ commit }, externalFilters) {
       commit("setExternalFilters", externalFilters);
     },
-    setInternalFilters({ commit }, value) {
-      commit("setInternalFilters", value);
-    },
-    saveSelectedCategories({ state, dispatch }, selectedCategories) {
-      dispatch("saveExternalData", {
-        selectedServices: state.selectedServices,
-        selectedMetrics: state.selectedMetrics,
-        selectedCategories,
-      });
-    },
-    saveSelectedServices({ state, dispatch }, selectedServices) {
-      dispatch("saveExternalData", {
-        selectedCategories: state.selectedCategories,
-        selectedServices,
-        selectedMetrics: state.selectedMetrics,
-      });
-    },
-    saveSelectedMetrics({ state, dispatch }, selectedMetrics) {
-      dispatch("saveExternalData", {
-        selectedCategories: state.selectedCategories,
-        selectedServices: state.selectedServices,
-        selectedMetrics,
-      });
-    },
     setExternalData({ commit }, value) {
       commit("setExternalData", value);
-      commit("resetFilters");
     },
     setPrimaryReportData({ commit }, value) {
       commit("setPrimaryReportData", value);
     },
-    setSelectedCategories({ commit, dispatch }, value) {
+    setSelectedCategories({ commit }, value) {
       commit("setSelectedCategories", value);
-      dispatch("saveSelectedCategories", value);
     },
-    setLocalSelectedCategories({ commit }, value) {
-      commit("setLocalSelectedCategories", value);
-    },
-    setLocalSelectedServices({ commit }, value) {
-      commit("setLocalSelectedServices", value);
-    },
-    setSelectedServices({ commit, dispatch }, value) {
-      commit("setSelectedServices", value);
-      dispatch("saveSelectedServices", value);
-    },
-    setLocalSelectedMetrics({ commit }, value) {
-      commit("setLocalSelectedMetrics", value);
-    },
-    setSelectedMetrics({ commit, dispatch }, value) {
+    setSelectedMetrics({ commit }, value) {
       commit("setSelectedMetrics", value);
-      dispatch("saveSelectedMetrics", value);
     },
-    async resetFilters({ commit }) {
-      commit("resetFilters");
-    },
-    setAvailableCategoriesAndServices({ commit }, value) {
-      commit("setAvailableCategoriesAndServices", value);
-    },
-    activateService({ commit }, serviceIds) {
-      commit("activateService", serviceIds);
-    },
-    deactivateService({ commit }, serviceIds) {
-      commit("deactivateService", serviceIds);
-    },
-    removeServiceFromSelection({ commit, state }, id) {
-      commit("setSelectedServices", state.selectedServices.filter((it) => it !== id));
+    setAvailableCategories({ commit }, value) {
+      commit("setAvailableCategories", value);
     },
     setAvailableMetrics({ commit }, value) {
       commit("setAvailableMetrics", value);

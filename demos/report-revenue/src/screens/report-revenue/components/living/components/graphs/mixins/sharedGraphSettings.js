@@ -26,7 +26,7 @@ const SEGMENT_OBJECT = Object.seal({
     const phaseColor = {
       future: "rgba(0, 0, 0, 0)",
       today: "rgba(0, 0, 0, 0)",
-      past: modules.greenGradient(ctx),
+      past: modules.primaryGradient(ctx),
     };
     return phaseColor[ctx.p0.raw.phase];
   },

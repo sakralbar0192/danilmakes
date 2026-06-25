@@ -21,5 +21,5 @@
 <script>
 import BaseHintTemplate from "../../../hints/base-hint-template.vue";
 
-export default { name: "BnovoReportRevenueLoadingHint", components: { BaseHintTemplate } };
+export default { name: "ReportRevenueLoadingHint", components: { BaseHintTemplate } };
 </script>

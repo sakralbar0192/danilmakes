@@ -3,7 +3,7 @@
     <div class="d-flex flex-column justify-space-between">
       <div class="d-flex align-center">
         <div
-          class="bnovo-report-revenue__square"
+          class="report-revenue__square"
           :style="{
             backgroundColor: data.color,
             borderColor: data.color,
@@ -11,7 +11,7 @@
         />
         {{ data.title }}
       </div>
-      <small v-if="todayOrFuture" class="bnovo-report-revenue__text--dark mt-n1">
+      <small v-if="todayOrFuture" class="report-revenue__text--dark mt-n1">
         {{ subTitle }}
       </small>
     </div>
@@ -35,7 +35,7 @@
 import RevenueReportModel from "@/models/reports/revenue/revenue-report";
 
 export default {
-  name: "BnovoPlanTooltipContent",
+  name: "ReportRevenuePlanTooltipContent",
   props: {
     data: {
       type: Object,

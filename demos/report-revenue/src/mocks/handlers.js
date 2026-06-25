@@ -1,10 +1,10 @@
 import { http, HttpResponse } from "msw";
+import { DemoApi } from "@/config/demo-api";
 import hotelGet from "./fixtures/hotel-get.json";
 import roomtypesGet from "./fixtures/roomtypes-get.json";
 import {
   buildRevenuePlanResponse,
   buildRevenueReportResponse,
-  buildRevenueServicesResponse,
 } from "./revenue-fixture";
 
 function matchPath(request, suffix) {
@@ -13,32 +13,20 @@ function matchPath(request, suffix) {
 }
 
 export const handlers = [
-  http.get(({ request }) => matchPath(request, "/hotel/get"), () => HttpResponse.json(hotelGet)),
-  http.get(({ request }) => matchPath(request, "/roomTypes/get"), () => HttpResponse.json(roomtypesGet)),
+  http.get(({ request }) => matchPath(request, DemoApi.hotel), () => HttpResponse.json(hotelGet)),
+  http.get(({ request }) => matchPath(request, DemoApi.roomTypes), () => HttpResponse.json(roomtypesGet)),
 
-  http.get(({ request }) => matchPath(request, "/reports/revenueGetServices"), () => (
-    HttpResponse.json(buildRevenueServicesResponse())
-  )),
-
-  http.get(({ request }) => matchPath(request, "/reports/get_plan_data"), () => (
+  http.get(({ request }) => matchPath(request, DemoApi.revenuePlan), () => (
     HttpResponse.json(buildRevenuePlanResponse())
   )),
 
-  http.post(({ request }) => matchPath(request, "/reports/get_revenue"), async ({ request: req }) => {
+  http.post(({ request }) => matchPath(request, DemoApi.revenueReport), async ({ request: req }) => {
     const body = await req.json().catch(() => ({}));
     return HttpResponse.json(buildRevenueReportResponse(body));
   }),
 
-  http.post(({ request }) => matchPath(request, "/reports/save_revenue_report_data"), () => (
-    HttpResponse.json({ result: "success" })
-  )),
-
-  http.post(({ request }) => matchPath(request, "/reports/save_plan_data"), async ({ request: req }) => {
+  http.post(({ request }) => matchPath(request, DemoApi.savePlan), async ({ request: req }) => {
     const body = await req.json().catch(() => ({}));
     return HttpResponse.json({ result: "success", data: body });
   }),
-
-  http.post(({ request }) => matchPath(request, "/reports/get_revenue_xlsx"), () => (
-    HttpResponse.json({ result: "success" })
-  )),
 ];

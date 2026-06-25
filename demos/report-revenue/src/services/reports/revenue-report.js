@@ -2,8 +2,7 @@ import CoreService from "@/services/core";
 import moment from "moment";
 import i18n from "@/plugins/i18n";
 import { defineAsyncComponent } from "vue";
-import baseUrl from "@/config/environment";
-import ServiceModel from "@/models/service";
+import { DemoApi } from "@/config/demo-api";
 import { isStartAndEndOfSameMonth } from "@/utils/date";
 
 const adr = defineAsyncComponent(() => import("@/screens/report-revenue/components/living/components/hints/adr-hint-body.vue"));
@@ -22,8 +21,6 @@ export default class RevenueReportService extends CoreService {
 
   static urlDatesFormat = "DD-MM-YYYY";
 
-  static resortFeeId = "222222";
-
   static sendingFiltersFormat = {
     primary: {
       from: "",
@@ -32,11 +29,6 @@ export default class RevenueReportService extends CoreService {
       roomtypes_ids: [],
     },
     comparable: {},
-  };
-
-  static typesExcelReports = {
-    incomes: "incomes",
-    services: "services",
   };
 
   static metricsBlockTypes = {
@@ -62,31 +54,22 @@ export default class RevenueReportService extends CoreService {
       name: i18n.t("Загрузка"),
       hintComponent: loading,
     },
-    services: {
-      key: "services",
-      name: i18n.t("Доход от доп. услуг"),
-      hintComponent: null,
-    },
   };
 
   static get metricsSelectionOptions() {
     return Object.fromEntries(
-      Object.entries(this.metricsBlockTypes)
-        .filter(([key]) => key !== "services")
-        .map(([key, metric]) => [
-          key,
-          {
-            key: metric.key,
-            name: metric.name,
-            shortName: metric.shortName,
-          },
-        ]),
+      Object.entries(this.metricsBlockTypes).map(([key, metric]) => [
+        key,
+        {
+          key: metric.key,
+          name: metric.name,
+          shortName: metric.shortName,
+        },
+      ]),
     );
   }
 
   // для 1 итерации сравниваемый период отключен
-  static isComparedPeriodOn = false;
-
   static startDateInterval() {
     const firstDayOfMonth = moment().startOf("month").format(this.sendingDataFormat);
     const lastDayOfMonth = moment().endOf("month").format(this.sendingDataFormat);
@@ -242,33 +225,6 @@ export default class RevenueReportService extends CoreService {
   // API - методы для взаимодействия с сервером
 
   /**
-     * Метод получения всех доп услуг, учитывая удаленные
-     * @param {string[]} periodOfStay - Текущий выбранный период для фильтрации услуги "Курортный сбор".
-     * @see canUseService
-     * @returns ServiceModel[]
-     */
-  static async getAllServicesWithDeleted(periodOfStay) {
-    const response = await this.http.get("/reports/revenueGetServices");
-    const services = response?.services || [];
-    const servicesDeleted = response?.services_deleted || [];
-
-    const result = [];
-
-    for (const service of services) {
-      service.active = this.canUseService(service.id, periodOfStay);
-      result.push(new ServiceModel(service));
-    }
-
-    for (const service of servicesDeleted) {
-      service.active = this.canUseService(service.id, periodOfStay);
-      service.deleted = true;
-      result.push(new ServiceModel(service));
-    }
-
-    return result;
-  }
-
-  /**
    * Метод получения данных для отчета
    */
   static async getReportResponse(data = {}) {
@@ -282,85 +238,10 @@ export default class RevenueReportService extends CoreService {
       comparable: {},
       groupBy: data.groupBy,
     };
-    const url = this.getUrl("/reports/get_revenue");
+    const url = this.getUrl(DemoApi.revenueReport);
     const response = await this.http[this.getLocalPostProd](url, payload, true);
     if (this.isDev) await this.delay();
     return response;
-  }
-
-  /**
-   * Метод для сохранения пользовательского ввода в хранилище на сервере
-   */
-  static async saveReportFilters(reportData = {}) {
-    const response = await this.http.post("/reports/save_revenue_report_data", { reportData, type: "filters" });
-    return response?.result === "success";
-  }
-
-  /**
-   * Метод для обновления состояния блоков с метриками на странице тарифов
-   */
-  static async saveBlockStatus(isHidden) {
-    const response = await this.http.post("/reports/save_revenue_report_data", { isHidden, type: "block" });
-    return response?.result === "success";
-  }
-
-  /**
-   * Метод для получения отчета Excel
-   */
-  static async getExcel({
-    type, to, from, roomtypeIds, servicesIds, metrics,
-  }) {
-    const typeValue = this.typesExcelReports?.[type] || this.typesExcelReports.incomes;
-    const url = this.getUrl("/reports/get_revenue_xlsx");
-    const query = {
-      type: typeValue,
-      primary: {
-        ...this.sendingFiltersFormat.primary,
-        to,
-        from,
-        metrics: metrics || [],
-        roomtypes_ids: roomtypeIds || [],
-        services_ids: servicesIds || [],
-      },
-      comparable: {},
-    };
-    if (this.isDev) await this.delay();
-    const response = await this.http[this.getLocalPostProd](url, query, true);
-    if (typeof response === "string"){
-      window.open(baseUrl + response, "_blank");
-    }
-  }
-
-  /**
-   * Проверяет, нужно ли скрывать услугу "Курортный сбор".
-   * Услуга скрывается, если выбранный период полностью находится после 31 декабря 2024 года.
-   * @param {string[]} periodOfStay - Массив дат в формате строки
-   * @returns {boolean} - true, если услуга должна быть скрыта, иначе false
-   */
-  static shouldHideResortFee(periodOfStay) {
-    if (!Array.isArray(periodOfStay) || periodOfStay.length !== 2) {
-      return false;
-    }
-
-    const start = periodOfStay[0];
-    return moment(start, this.sendingDataFormat).isAfter("2024-12-31", "day");
-  }
-
-  /**
-   * Проверяет, можно ли использовать услугу.
-   * Все услуги доступны без ограничений, кроме "Курортный сбор", который доступен только для периодов до 31 декабря 2024 года.
-   * @param {string} id
-   * @param {string[]} periodOfStay
-   * @returns {boolean}
-   */
-  static canUseService(id, periodOfStay = []) {
-    // если услуга не является "Курортный сбор", используется без ограничений
-    if (id !== this.resortFeeId) {
-      return true;
-    }
-
-    // если услуга является "Курортный сбор", используется только для периодов до 31 декабря 2024 года
-    return !this.shouldHideResortFee(periodOfStay);
   }
 
   static mapMetricKeyToServer(key) {

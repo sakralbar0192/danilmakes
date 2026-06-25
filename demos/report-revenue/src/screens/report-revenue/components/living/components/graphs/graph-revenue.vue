@@ -8,7 +8,7 @@
     :title="title"
     :additional-classes="additionalClasses"
     :in-modal="inModal"
-    data-test="bnovo-report-revenue-graph-accommodation"
+    data-test="report-revenue-graph-accommodation"
     @toggle-full-screen="toggleFullScreen"
   >
     <template #tooltip="{ slotProps: wrapperRef }">
@@ -18,7 +18,7 @@
         :position="tooltipPosition"
         :graph-id="chartId"
         :wrapper-ref="wrapperRef"
-        data-test="bnovo-report-revenue-graph-accommodation-tooltip"
+        data-test="report-revenue-graph-accommodation-tooltip"
       >
         <template #(plan)-content="props">
           <plan-tooltip-content v-bind="props"/>
@@ -46,7 +46,7 @@ import PlanTooltipContent from "./tooltips/plan-tooltip-content.vue";
  * - Верхняя линия всегда выше максимального значения данных
  */
 export default {
-  name: "BnovoReportRevenueGraphRevenue",
+  name: "ReportRevenueGraphRevenue",
   components: {
     PlanTooltipContent,
     GraphTemplate,

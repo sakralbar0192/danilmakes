@@ -1,15 +1,9 @@
 import moment from "moment";
 
 const ROOMTYPES = [
-  { id: "742915", name: "Стандарт" },
-  { id: "742920", name: "Комфорт" },
-  { id: "742925", name: "Люкс" },
-];
-
-const SERVICES = [
-  { id: "1001", name: "Завтрак", type: "1", is_package: "0", daily: "0", max_quantity: "0", max_quantity_enabled: "0", package: [] },
-  { id: "1002", name: "Парковка", type: "1", is_package: "0", daily: "0", max_quantity: "0", max_quantity_enabled: "0", package: [] },
-  { id: "1003", name: "Трансфер", type: "1", is_package: "0", daily: "0", max_quantity: "0", max_quantity_enabled: "0", package: [] },
+  { id: "101", name: "Стандарт" },
+  { id: "102", name: "Комфорт" },
+  { id: "103", name: "Люкс" },
 ];
 
 function seededValue(seed) {
@@ -63,13 +57,6 @@ function sumRows(rows, key) {
     return totalIncome ? Math.round(weighted / totalIncome) : 0;
   }
   return rows.reduce((s, r) => s + (r[key] || 0), 0);
-}
-
-export function buildRevenueServicesResponse() {
-  return {
-    services: SERVICES,
-    services_deleted: [],
-  };
 }
 
 export function buildRevenuePlanResponse() {
@@ -200,13 +187,6 @@ export function buildRevenueReportResponse(payload = {}) {
   const pastRows = Object.values(tableDates.past || {});
   const futureRows = Object.values(tableDates.future || {}).filter((r) => r.income !== undefined);
 
-  const serviceData = {
-    selected: SERVICES.reduce((sum, s, i) => sum + 12000 + i * 8000, 0),
-  };
-  SERVICES.forEach((s, i) => {
-    serviceData[s.id] = { income: 12000 + i * 8000, name: s.name };
-  });
-
   const primary = {
     metrics: {
       selected: {
@@ -231,10 +211,6 @@ export function buildRevenueReportResponse(payload = {}) {
     table: {
       dates: tableDates,
       total,
-    },
-    service: {
-      total: serviceData,
-      all: serviceData.selected + 5000,
     },
     revenue: { dates: revenueDates },
     adr: { dates: adrDates },

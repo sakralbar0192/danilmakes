@@ -10,7 +10,6 @@
 
 @function rem($pxValue) {
   @return $pxValue;
-  //@return #{stripUnit($pxValue) / stripUnit(var(--text-body, 14px))}rem;
 }
 
 @function createOrderedBreakpoints() {
@@ -26,99 +25,6 @@
   }
 
   @return $ordered-breakpoints;
-}
-
-@mixin headerHeightGroup($height) {
-  $rem-h: rem($height);
-  $rem-h-plus: rem($height+10px);
-  $rem-h-plus2: rem($height+60px);
-  .bnovo-header-shadow, .bnovo-header--outer .bnovo-navbar, .bnovo-mobile-footer, .bnovo-mobile-screen-head, .bnovo-alerts--separated {
-    height: $rem-h;
-  }
-  .bnovo-spa__wrapper {
-    padding-top: $rem-h;
-  }
-  .bnovo-mobile-footer {
-    max-height: $rem-h;
-  }
-  .bnovo-header-mobile-menu-item--inner {
-    min-height: $rem-h;
-    max-height: $rem-h;
-  }
-  .bnovo-navbar__menu-block button {
-    min-height: $rem-h;
-  }
-  .dashboard-fast-filters-nav--outer.is-fixed, .lock-screen-progress-line, .dashboard-fast-filters-nav--box-shadow-layer, .error-page--outer {
-    top: $rem-h;
-  }
-  .b-navigation-drawer {
-    bottoM: $rem-h;
-  }
-  .use-subheader-dashboard-nav {
-    .bnovo-alerts--outer {
-      .bnovo-alerts--inner {
-        .bnovo-alerts--separated {
-          transform: translateY($rem-h);
-        }
-      }
-    }
-  }
-  @media(max-width: 1000px) {
-    .full-screen-preloader--outer {
-      bottom: $rem-h-plus !important;
-    }
-    .mob-menu--bottom-space {
-      margin-bottom: $rem-h-plus !important;
-    }
-    .mob-menu--bottom-space-plus {
-      margin-bottom: $rem-h-plus2 !important;
-    }
-    .bnovo-spa__wrapper {
-      padding-bottom: $rem-h;
-    }
-    .b-screen-footer:not(.chm-module-only) {
-      margin-bottom: $rem-h;
-    }
-  }
-}
-
-@mixin headerPaddingGroup($paddingSide) {
-  $remPaddingSide: rem($paddingSide);
-  .container.container--fluid:not(.pa-0) {
-    padding-left: $remPaddingSide !important;
-    padding-right: $remPaddingSide !important;
-    padding-top: map-get($gaps, outer);
-    padding-bottom: map-get($gaps, outer);
-
-  }
-  .bnovo-mobile-footer--outer {
-    z-index: 92;
-
-    .container.container--fluid {
-      padding: 0 $remPaddingSide !important;
-    }
-  }
-  .header-padding-group {
-    padding-left: $remPaddingSide !important;
-    padding-right: $remPaddingSide !important;
-  }
-}
-
-@mixin lockOverflow() {
-  overflow: hidden !important;
-  body {
-    overflow: hidden !important;
-    height: 100% !important;
-  }
-  .gantt {
-    overflow: hidden !important;
-  }
-  .bnovo-communication-navbar {
-    overflow: hidden !important;
-  }
-  .bnovo-communication__navbar {
-    overflow: hidden !important;
-  }
 }
 
 @mixin transitionDefault($property) {

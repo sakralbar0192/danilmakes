@@ -1,19 +1,19 @@
 <template>
-  <b-data-table
-    v-if="items.length"
-    item-key="id"
-    :headers="headers"
-    :items="items"
-    :has-actions="false"
-    hide-default-header
-    fixed-header
-    :height="heightTable"
-    group-by="timePeriod"
-    class="bnovo-report-revenue__table"
-    :items-per-page="-1"
-  >
+  <div v-if="items.length" class="report-revenue__table-shell">
+    <b-data-table
+      item-key="id"
+      :headers="headers"
+      :items="items"
+      :has-actions="false"
+      hide-default-header
+      fixed-header
+      :height="heightTable"
+      group-by="timePeriod"
+      class="report-revenue__table"
+      :items-per-page="-1"
+    >
     <template #header="{props}">
-      <thead id="bnovo-report-revenue-table-header" class="v-data-table-header">
+      <thead id="report-revenue-table-header" class="v-data-table-header">
         <tr>
           <th
             v-for="(header, index) in props.headers"
@@ -22,14 +22,14 @@
             :colspan="header.value !== 'date' ? visibleSubHeaders.length : 1"
             :style="{width: header.width, minWidth: header.width, whiteSpace: header.whiteSpace, minHeight: header.height, verticalAlign: 'baseline' }"
             :class="['text-center',
-                     {'bnovo-report-revenue__text--trunc': header.isNeedHideTitle},
+                     {'report-revenue__text--trunc': header.isNeedHideTitle},
                      header.customClasses
             ]"
           >
             <p
               :ref="`titleRefs_${index}`"
               :title="shouldShowTooltip[index] ? header.text : null"
-              :class="{'text-truncate': header.isNeedHideTitle, 'bnovo-report-revenue__header--trunc': header.isNeedHideTitle}"
+              :class="{'text-truncate': header.isNeedHideTitle, 'report-revenue__header--trunc': header.isNeedHideTitle}"
             >
               {{ header.text }}
             </p>
@@ -43,14 +43,13 @@
               <th
                 v-for="(subHeader, subIndex) in visibleSubHeaders"
                 :key="`${header.value}-${subHeader.value}`"
-                :class="['text-center', {'bnovo-report-revenue__table-header--no-border': isShowBorderInHeader(index, subIndex)}]"
+                :class="['text-center', {'report-revenue__table-header--no-border': isShowBorderInHeader(index, subIndex)}]"
                 :style="{maxWidth: subHeader.width, verticalAlign: 'baseline'}"
               >
                 {{ subHeader.text }}
                 <span
                   v-if="subHeader.bracketText"
-                  class="bnovo-report-revenue__text--dark"
-                  :style="{whiteSpace: subHeader.bracketText ? 'pre' : null, fontWeight: '400' }"
+                  class="report-revenue__text--muted report-revenue__table-subheader-hint"
                 >
                   {{ `(${subHeader.bracketText})` }}
                 </span>
@@ -62,7 +61,7 @@
     </template>
     <template #item="{item}">
       <tr>
-        <td class="text-start bnovo-report-revenue__table-cell--first bnovo-report-revenue__sticky--default">
+        <td class="text-start report-revenue__table-cell--first report-revenue__sticky--default report-revenue__table-date">
           {{ formatDate(item.date) }}
         </td>
         <template
@@ -71,10 +70,10 @@
           <td
             v-for="subHeader in visibleSubHeaders"
             :key="`${value}-${subHeader.value}`"
-            class="text-center"
+            class="text-center report-revenue__table-cell"
           >
-            {{ formatMetricCellValue(item[value], subHeader.value) }}
-            <span v-if="subHeader.value === 'load'" class="bnovo-report-revenue__text--dark">
+            <span class="report-revenue__table-value">{{ formatMetricCellValue(item[value], subHeader.value) }}</span>
+            <span v-if="subHeader.value === 'load'" class="report-revenue__text--muted report-revenue__table-secondary">
               {{ `(${item[value]?.rooms || 0})` }}
             </span>
           </td>
@@ -85,15 +84,14 @@
       <td
         v-if="isSplittedByTwoSection"
         :colspan="colsCount"
-        class="font-weight-bold bnovo-report-revenue__table-cell--first bnovo-report-revenue__sticky--default"
+        class="report-revenue__table-group-label report-revenue__sticky--default"
       >
         {{ group === $options.periodIndexes.future ? $t('Забронировано на будущий период') : $t('Прошедший период') }}
       </td>
     </template>
     <template #group.summary="{group}">
       <td
-        style="background-color: white; max-width: 124px"
-        class="text-start bnovo-report-revenue__sticky--default bnovo-report-revenue__table-cell-footer--first font-weight-bold pr-8"
+        class="text-start report-revenue__sticky--default report-revenue__table-summary-label"
       >
         {{ group === $options.periodIndexes.future ? $t('Итого на будущий период') : $t('Итого за прошедший период') }}
       </td>
@@ -103,20 +101,19 @@
         <td
           v-for="subHeader in visibleSubHeaders"
           :key="`${value}-${subHeader.value}`"
-          style="background-color: white;"
-          class="text-center font-weight-bold"
+          class="text-center report-revenue__table-summary-cell"
         >
-          {{ getFormattedTableValue(group, value, subHeader.value) }}
-          <span v-if="subHeader.value === 'load'" class="bnovo-report-revenue__text--dark">
+          <span class="report-revenue__table-value">{{ getFormattedTableValue(group, value, subHeader.value) }}</span>
+          <span v-if="subHeader.value === 'load'" class="report-revenue__text--muted report-revenue__table-secondary">
             ({{ getFormattedTableValue(group, value, 'rooms') }})
           </span>
         </td>
       </template>
     </template>
     <template #body.append>
-      <tfoot class="bnovo-report-revenue__table-footer">
-        <tr class="font-weight-bold">
-          <td class="text-start nowrap bnovo-report-revenue__sticky--default bnovo-report-revenue__table-cell-footer--first">
+      <tfoot class="report-revenue__table-footer">
+        <tr class="report-revenue__table-footer-row">
+          <td class="text-start nowrap report-revenue__sticky--default report-revenue__table-footer-label">
             {{ $t('Итого за весь период') }}
           </td>
           <template
@@ -125,15 +122,18 @@
             <td
               v-for="subHeader in visibleSubHeaders"
               :key="`${value}-${subHeader.value}`"
-              class="text-center"
+              class="text-center report-revenue__table-footer-cell"
             >
-              <span :data-test="getFooterDataTestAttribute(value, subHeader.value, 'value')">
+              <span
+                class="report-revenue__table-value"
+                :data-test="getFooterDataTestAttribute(value, subHeader.value, 'value')"
+              >
                 {{ formatMetricCellValue(tableData?.total?.[value], subHeader.value) }}
               </span>
               <span
                 v-if="subHeader.value === 'load'"
                 :data-test="getFooterDataTestAttribute(value, subHeader.value, 'secondaryValue')"
-                class="bnovo-report-revenue__text--dark"
+                class="report-revenue__text--muted report-revenue__table-secondary"
               >
                 {{ `(${tableData?.total?.[value]?.rooms || 0})` }}
               </span>
@@ -143,6 +143,7 @@
       </tfoot>
     </template>
   </b-data-table>
+  </div>
   <div v-else class="d-flex justify-center align-center py-8">
     <v-icon class="icon-alert-circle" left color="primary"/>
     {{ $t("Данные за выбранный период отсутствуют") }}
@@ -158,7 +159,7 @@ import RevenueReportService from "@/services/reports/revenue-report";
 import periodDictionary from "./graphs/dictionaries/periodDictionary";
 
 export default {
-  name: "BnovoReportRevenueLivingPageTable",
+  name: "ReportRevenueLivingPageTable",
   periodIndexes: {
     [periodDictionary.past]: 1,
     [periodDictionary.future]: 2,
@@ -167,20 +168,20 @@ export default {
   defaultHeightTable: 760,
   footerTestAttributes: {
     [RevenueReportService.metricsBlockTypes.amount.key]: {
-      value: "bnovo-report-revenue-table-total-revenue",
+      value: "report-revenue-table-total-revenue",
       secondaryValue: null,
     },
     [RevenueReportService.metricsBlockTypes.revpar.key]: {
-      value: "bnovo-report-revenue-table-total-revpar",
+      value: "report-revenue-table-total-revpar",
       secondaryValue: null,
     },
     [RevenueReportService.metricsBlockTypes.adr.key]: {
-      value: "bnovo-report-revenue-table-total-adr",
+      value: "report-revenue-table-total-adr",
       secondaryValue: null,
     },
     [RevenueReportService.metricsBlockTypes.load.key]: {
-      value: "bnovo-report-revenue-table-total-load",
-      secondaryValue: "bnovo-report-revenue-table-total-load-rooms",
+      value: "report-revenue-table-total-load",
+      secondaryValue: "report-revenue-table-total-load-rooms",
     },
   },
   data() {
@@ -253,7 +254,7 @@ export default {
           height: `${this.$options.defaultHeightCell}px`,
           whiteSpace: "normal",
           isNeedHideTitle: false,
-          customClasses: "bnovo-report-revenue__table-cell-footer--first bnovo-report-revenue__sticky--default",
+          customClasses: "report-revenue__table-cell-footer--first report-revenue__sticky--default",
         },
       ];
 
@@ -266,7 +267,7 @@ export default {
         height: `${this.$options.defaultHeightCell}px`,
         whiteSpace: "normal",
         isNeedHideTitle: false,
-        customClasses: "bnovo-report-revenue__table-header--no-border",
+        customClasses: "report-revenue__table-header--no-border",
       });
 
       this.selectedRoomtypeIds.forEach(roomtypeId => {
@@ -401,7 +402,7 @@ export default {
     },
     updateStickyOffsetTr() {
       this.$nextTick().then(() => {
-        const element = document.getElementById("bnovo-report-revenue-table-header");
+        const element = document.getElementById("report-revenue-table-header");
         if (element) {
           const height = element.getBoundingClientRect().height;
           document.querySelectorAll(".v-row-group__header").forEach(header => {
@@ -466,59 +467,169 @@ export default {
 
 <style lang="scss">
 
-.bnovo-report-revenue__table {
+.report-revenue__table-shell {
+  border: 1px solid var(--demo-border, #d8e8f2);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--demo-shadow, 0 4px 24px rgba(30, 139, 195, 0.08));
+  background: var(--demo-surface, #fff);
+}
+
+.report-revenue__table {
   width: 100%;
 }
 
-.v-data-table__wrapper {
-  overflow: scroll !important;
-  max-height: calc(100vh - 100px);
+.report-revenue__table-shell .v-data-table__wrapper,
+.report-revenue__table-shell .b-data-table__scroll-area {
+  overflow: auto !important;
+  max-height: calc(100vh - 140px);
 }
 
-.bnovo-report-revenue__table thead {
+.report-revenue__table thead {
   position: sticky !important;
-  top: 0px !important;
+  top: 0 !important;
   z-index: 6;
 }
 
-.bnovo-report-revenue__sticky--default {
+.report-revenue__table thead th {
+  background: linear-gradient(180deg, #e8f4fb 0%, #dceef8 100%);
+  color: var(--demo-primary-deep, #136688);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  padding: 10px 12px;
+  border-bottom: 2px solid #b8dce8;
+  vertical-align: middle;
+}
+
+.report-revenue__table thead th p {
+  margin: 0;
+}
+
+.report-revenue__table-subheader-hint {
+  display: block;
+  white-space: pre;
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.report-revenue__sticky--default {
   position: sticky !important;
-  left: 0px;
+  left: 0;
+  z-index: 2;
 }
 
-.bnovo-report-revenue__table-header--no-border {
-  border-left: 0px !important;
+.report-revenue__table-header--no-border {
+  border-left: 0 !important;
 }
 
-.bnovo-report-revenue__table-footer {
+.report-revenue__table tbody tr:nth-child(even) td {
+  background-color: var(--demo-surface-muted, #f4f8fb);
+}
+
+.report-revenue__table tbody tr:hover td {
+  background-color: var(--demo-primary-light, #eef6fa);
+}
+
+.report-revenue__table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--demo-border-soft, #e8eef3);
+  font-variant-numeric: tabular-nums;
+  transition: background-color 0.15s ease;
+}
+
+.report-revenue__table-value {
+  font-weight: 500;
+  color: #2d3748;
+}
+
+.report-revenue__table-secondary {
+  margin-left: 4px;
+}
+
+.report-revenue__text--muted {
+  color: var(--demo-text-muted, #6b7c8a);
+  font-size: 12px;
+}
+
+.report-revenue__table-date {
+  font-weight: 500;
+  color: #334155;
+  min-width: 124px;
+  background-color: var(--demo-surface, #fff);
+  border-right: 1px solid var(--demo-border-soft, #e8eef3);
+  box-shadow: 4px 0 8px rgba(19, 102, 136, 0.06);
+}
+
+.report-revenue__table tbody tr:nth-child(even) .report-revenue__table-date {
+  background-color: var(--demo-surface-muted, #f4f8fb);
+}
+
+.report-revenue__table tbody tr:hover .report-revenue__table-date {
+  background-color: var(--demo-primary-light, #eef6fa);
+}
+
+.report-revenue__table-group-label {
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--demo-primary-dark, #16739f);
+  padding: 12px 16px;
+  background: #f0f7fc !important;
+  border-top: 2px solid var(--demo-primary, #1e8bc3);
+  border-bottom: 1px solid var(--demo-border, #d8e8f2);
+}
+
+.report-revenue__table-summary-label,
+.report-revenue__table-summary-cell {
+  background: #f0f7fc !important;
+  font-weight: 600;
+  color: var(--demo-primary-dark, #16739f);
+}
+
+.report-revenue__table-summary-label {
+  min-width: 124px;
+  border-right: 1px solid var(--demo-border-soft, #e8eef3);
+  box-shadow: 4px 0 8px rgba(19, 102, 136, 0.06);
+}
+
+.report-revenue__table-footer {
   position: sticky;
-  bottom: 0px;
-  background-color: $secondary-hover;
+  bottom: 0;
   z-index: 6;
 }
 
-.bnovo-report-revenue__text--trunc {
+.report-revenue__table-footer-row td {
+  background: linear-gradient(180deg, #dceef8 0%, #e8f4fb 100%) !important;
+  border-top: 2px solid #b8dce8;
+  font-weight: 600;
+  color: var(--demo-primary-deep, #136688);
+}
+
+.report-revenue__table-footer-label {
+  min-width: 124px;
+  border-right: 1px solid #b8dce8;
+  box-shadow: 4px 0 8px rgba(19, 102, 136, 0.08);
+}
+
+.report-revenue__text--trunc {
   max-width: 124px;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-.bnovo-report-revenue__table-cell--first {
-  background-color: $white;
-  border-right: thin solid $border-color;
+.report-revenue__table-cell--first {
+  background-color: inherit;
 }
 
-.bnovo-report-revenue__table-cell-footer--first {
-  background-color: $secondary-hover;
-  border-right: thin solid $border-color;
+.report-revenue__table-cell-footer--first {
   z-index: 5 !important;
 }
 
 table tr td:nth-child(2) {
-  border-left: 0px !important;
+  border-left: 0 !important;
 }
 
-.bnovo-report-revenue__text--trunc p.bnovo-report-revenue__header--trunc {
+.report-revenue__text--trunc p.report-revenue__header--trunc {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -530,8 +641,11 @@ table tr td:nth-child(2) {
 <style scoped lang="scss">
 section .b-data-table::v-deep tr.v-row-group__header {
   position: sticky;
-  top: 114px;
+  top: 96px;
   z-index: 4;
-  background-color: $white !important;
+}
+
+section .b-data-table::v-deep tr.v-row-group__summary td {
+  border-bottom: 1px solid var(--demo-border, #d8e8f2);
 }
 </style>

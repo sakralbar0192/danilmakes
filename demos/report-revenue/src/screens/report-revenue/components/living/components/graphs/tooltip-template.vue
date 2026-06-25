@@ -1,5 +1,5 @@
 <template>
-  <article ref="tooltip" class="bnovo-report-revenue__tooltip" :style="isVisibleStyle">
+  <article ref="tooltip" class="report-revenue__tooltip" :style="isVisibleStyle">
     <slot>
       <component :is="tooltipComponent" :tooltip-data-props="tooltipData">
         <template v-for="(_, slotName) in $slots" #[slotName]="props">
@@ -19,7 +19,7 @@ import ManyDatasetTooltip from "./tooltips/many-dataset-tooltip.vue";
 const STANDART_OFFSET = 20;
 
 export default {
-  name: "BnovoReportRevenueTooltipTemplate",
+  name: "ReportRevenueTooltipTemplate",
   props: {
     graphId: {
       type: String,
@@ -132,7 +132,7 @@ export default {
 
 <style lang="scss">
 
-.bnovo-report-revenue__tooltip {
+.report-revenue__tooltip {
   position: absolute;
   width: max-content;
   min-width: 240px;
@@ -148,13 +148,13 @@ export default {
   box-shadow: $box-shadow;
 }
 
-.bnovo-report-revenue__square {
+.report-revenue__square {
   margin-right: 8px;
   width: 10px;
   height: 10px;
 }
 
-.bnovo-report-revenue__dashed {
+.report-revenue__dashed {
   min-width: 14px;
   border-top: 1px dashed;
   border-width: 2px;
@@ -162,7 +162,7 @@ export default {
   background-color: transparent !important;
 }
 
-.bnovo-report-revenue__text--dark {
+.report-revenue__text--dark {
   color: $disabled;
 }
 

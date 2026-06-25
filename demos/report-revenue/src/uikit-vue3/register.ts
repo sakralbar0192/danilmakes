@@ -27,7 +27,6 @@ import BChart from "./b-chart.vue";
 import BMixedChart from "./b-mixed-chart.vue";
 import BDataTable from "./b-data-table.vue";
 import BWidgetWrapper from "./b-widget-wrapper.vue";
-import BBtnDownload from "./b-btn-download.vue";
 import BBtnGroupSeparate from "./b-btn-group-separate.vue";
 
 const map: Record<string, object> = {
@@ -59,7 +58,6 @@ const map: Record<string, object> = {
   BMixedChart,
   BDataTable,
   BWidgetWrapper,
-  BBtnDownload,
   BBtnGroupSeparate,
 };
 

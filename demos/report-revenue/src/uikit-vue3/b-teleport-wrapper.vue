@@ -12,7 +12,7 @@ export default {
   },
   computed: {
     target() {
-      return this.selector === "#bnovo-spa" ? "#app-teleport-root" : this.selector;
+      return this.selector === "#app-teleport-root" ? "#app-teleport-root" : this.selector;
     },
   },
 };

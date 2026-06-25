@@ -163,32 +163,6 @@ export default class RevenueReportPrimaryModel extends CoreModel {
       };
     }
 
-    // Блок доп услуг
-    const servicesData = OSF.format({}, reportData?.service?.total);
-    if (Array.isArray(servicesData)) {
-      console.log("Получен неверный формат данных для доп услуг");
-      this.servicesData = {
-        total: {},
-        data: {},
-      };
-    } else {
-      const data = Object.keys(servicesData).reduce((obj, item) => {
-        if (item !== "selected") {
-          obj[item] = {
-            amount: OSF.formatField(0, servicesData[item].income),
-            name: OSF.formatField("", servicesData[item].name),
-          };
-        }
-        return obj;
-      }, {});
-
-      this.servicesData = {
-        total: OSF.formatField(0, reportData?.service?.total?.selected),
-        all: OSF.formatField(0, reportData?.service?.all),
-        data,
-      };
-    }
-
     this.plan = OSF.format({}, plan);
 
     // Блок графиков

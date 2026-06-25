@@ -13,11 +13,10 @@ import "@/styles/uikit-toolbar.scss";
 import "@/styles/uikit-tooltips.scss";
 
 import App from "./App.vue";
-import router, { getDefaultRouteQuery } from "./router";
+import router from "./router";
 import store from "./store";
 import i18n from "./plugins/i18n";
 import { createDialogPlugin } from "./plugins/dialog";
-import { installScenario } from "./plugins/scenario";
 import { installVuetifyCompat } from "./plugins/vuetify-compat";
 import { registerUIKit } from "./uikit-vue3/register";
 import appStateMixin from "./mixins/appstate-mixin";
@@ -55,13 +54,13 @@ const vuetify = createVuetify({
     themes: {
       light: {
         colors: {
-          primary: "#1875F0",
-          secondary: "#E2EEFD",
-          tertiary: "#EEEEF1",
-          error: "#C23C28",
-          success: "#2FAC44",
-          info: "#3C435A",
-          sand: "#F39509",
+          primary: "#1e8bc3",
+          secondary: "#eef6fa",
+          tertiary: "#F5F9FE",
+          error: "#DC2626",
+          success: "#16A34A",
+          info: "#334155",
+          sand: "#D97706",
         },
       },
     },
@@ -88,7 +87,6 @@ async function bootstrap() {
   app.use(router);
   app.use(i18n);
   app.use(createDialogPlugin());
-  installScenario(app);
   installVuetifyCompat(app);
   app.mixin(appStateMixin);
   app.mixin(vue2ListenersCompat);
@@ -101,14 +99,6 @@ async function bootstrap() {
 
   await store.dispatch("hotel/getCurrentHotel").catch(() => {});
   await store.dispatch("hotelRoom/getRoomTypes").catch(() => {});
-
-  const q = getDefaultRouteQuery();
-  if (!router.currentRoute.value.query.dfrom) {
-    await router.replace({
-      path: router.currentRoute.value.path,
-      query: { ...router.currentRoute.value.query, ...q },
-    });
-  }
 
   app.mount("#app");
 }

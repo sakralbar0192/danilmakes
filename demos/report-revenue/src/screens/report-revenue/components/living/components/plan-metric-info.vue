@@ -34,7 +34,7 @@ import RevenueReportService from "@/services/reports/revenue-report";
 import RevenueReportModel from "@/models/reports/revenue/revenue-report";
 
 export default {
-  name: "BnovoReportRevenuePlanMetricInfo",
+  name: "ReportRevenuePlanMetricInfo",
   props: {
     metricType: {
       type: String,

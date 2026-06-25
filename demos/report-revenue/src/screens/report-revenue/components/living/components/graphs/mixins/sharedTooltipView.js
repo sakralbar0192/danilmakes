@@ -19,7 +19,7 @@ export default {
         today: "today",
         past: "past",
         future: "future",
-        color: colors.success.light,
+        color: colors.primary.base,
       }),
     };
   },

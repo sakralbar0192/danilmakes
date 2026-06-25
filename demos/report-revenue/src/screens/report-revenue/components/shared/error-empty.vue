@@ -1,22 +1,14 @@
 <template>
-  <div class="set justify-items-center">
+  <div class="set justify-items-center text-center">
+    <v-icon class="icon-alert-circle mb-3" size="48" color="primary"/>
     <span>
       <slot/>
     </span>
-    <b-btn :href="hrefProp" target="_blank">
-      <slot name="button"/>
-    </b-btn>
   </div>
 </template>
 
 <script>
 export default {
-  name: "BnovoReportRevenueErrorEmptyBox",
-  props: {
-    hrefProp: {
-      type: String,
-      default: "/roomTypes",
-    },
-  },
+  name: "ReportRevenueErrorEmptyBox",
 };
 </script>

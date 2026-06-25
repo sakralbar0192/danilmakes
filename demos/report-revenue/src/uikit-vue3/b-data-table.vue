@@ -1,6 +1,6 @@
 <template>
   <div
-    class="b-data-table bnovo-report-revenue__table-wrapper"
+    class="b-data-table report-revenue__table-wrapper"
     :class="$attrs.class"
     :style="wrapperStyle"
   >
@@ -70,7 +70,8 @@ export default {
 <style lang="scss" scoped>
 .b-data-table__table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 .b-data-table__scroll-area {
@@ -78,14 +79,11 @@ export default {
 }
 
 :deep(tr.v-row-group__header td) {
-  background: #f5f6f8;
-  font-weight: 600;
+  padding: 0;
+  border: 0;
 }
 
-:deep(.bnovo-report-revenue__sticky--default) {
-  position: sticky;
-  left: 0;
-  background: #fff;
-  z-index: 1;
+:deep(.report-revenue__sticky--default) {
+  z-index: 2;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="d-inline-flex align-baseline">
+  <div class="d-inline-flex align-baseline report-revenue__metric-value">
     <span class="font-weight-bold hero-34" :data-test="dataTestSum">{{ numberPart }}</span>
     <span v-if="fractionPart" class="text-secondary text-body-1">{{ fractionPart }}</span>
     <span class="text-secondary ml-typo">{{ valueSign }}</span>
@@ -10,7 +10,7 @@
 import RevenueReportModel from "@/models/reports/revenue/revenue-report";
 
 export default {
-  name: "BnovoRevenueReportFactMetricInfo",
+  name: "ReportRevenueFactMetricInfo",
   props: {
     value: {
       type: Number,
@@ -53,3 +53,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.report-revenue__metric-value .hero-34 {
+  color: var(--demo-primary, #1e8bc3);
+}
+</style>

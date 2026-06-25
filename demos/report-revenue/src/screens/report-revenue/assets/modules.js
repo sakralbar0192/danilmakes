@@ -111,16 +111,18 @@ const barPosition = {
   },
 };
 
-const greenGradient = (context) => {
+const primaryGradient = (context) => {
   if (!context.chart.chartArea) return;
   const {
-    ctx, data, chartArea: { top, bottom },
+    ctx, chartArea: { top, bottom },
   } = context.chart;
   const gradientBg = ctx.createLinearGradient(0, top, 0, bottom);
-  gradientBg.addColorStop(0.48, "rgba(47, 172, 68, 0.12)");
+  gradientBg.addColorStop(0.48, "rgba(30, 139, 195, 0.22)");
   gradientBg.addColorStop(1, "rgba(255, 255, 255, 0)");
   return gradientBg;
 };
+
+const greenGradient = primaryGradient;
 
 const blueGradient = (context) => {
   if (!context.chart.chartArea) return;
@@ -128,7 +130,7 @@ const blueGradient = (context) => {
     ctx, data, chartArea: { top, bottom },
   } = context.chart;
   const gradientBg = ctx.createLinearGradient(0, top, 0, bottom);
-  gradientBg.addColorStop(0.48, "rgba(24, 117, 240, 0.48)");
+  gradientBg.addColorStop(0.48, "rgba(30, 139, 195, 0.35)");
   gradientBg.addColorStop(1, "rgba(255, 255, 255, 0)");
   return gradientBg;
 };
@@ -595,6 +597,7 @@ export default {
   barBox,
   formatNumberWithSuffix,
   greenGradient,
+  primaryGradient,
   blueGradient,
   customLabels,
   hideLegendItem,

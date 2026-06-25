@@ -11,13 +11,13 @@ export default {
           type: "line",
           label: data.label,
           data: vm.getChartDataSource,
-          borderColor: vm?.$vuetify?.theme?.currentTheme?.success,
+          borderColor: vm?.$vuetify?.theme?.currentTheme?.primary,
           borderSkipped: true,
           borderWidth: 2,
           fill: true,
           pointRadius: 0,
           spanGaps: true,
-          backgroundColor: modules.greenGradient,
+          backgroundColor: modules.primaryGradient,
           segment: vm.getSegmentObjectFunction(),
           specType: "",
           order: orderStrategies[orderDictionary.first],
@@ -30,7 +30,7 @@ export default {
           // specType для отображения в легенде
           specType: "future",
           data: [],
-          borderColor: vm?.$vuetify?.theme?.currentTheme?.success,
+          borderColor: vm?.$vuetify?.theme?.currentTheme?.primary,
           order: orderStrategies[orderDictionary.third],
         });
       },
@@ -41,13 +41,13 @@ export default {
           type: "line",
           label: data.label,
           data: vm.getChartDataSource,
-          borderColor: vm?.$vuetify?.theme?.currentTheme?.success,
+          borderColor: vm?.$vuetify?.theme?.currentTheme?.primary,
           borderSkipped: true,
           fill: false,
           borderWidth: 2,
           pointRadius: 0,
           spanGaps: true,
-          backgroundColor: modules.greenGradient,
+          backgroundColor: modules.primaryGradient,
           segment: vm.getSegmentObjectFunction(),
           specType: "",
           order: orderStrategies[orderDictionary.first],
@@ -60,7 +60,7 @@ export default {
           // specType для отображения в легенде
           specType: "future",
           data: [],
-          borderColor: vm?.$vuetify?.theme?.currentTheme?.success,
+          borderColor: vm?.$vuetify?.theme?.currentTheme?.primary,
           order: orderStrategies[orderDictionary.third],
         });
       },
@@ -73,16 +73,16 @@ export default {
           type: "bar",
           label: data.label,
           data: vm.getChartDataSource,
-          borderColor: vm?.$vuetify?.theme?.currentTheme?.success,
+          borderColor: vm?.$vuetify?.theme?.currentTheme?.primary,
           borderRadius: 5,
           borderSkipped: false,
           maxBarThickness: 23,
           datasetKey: "fact",
           backgroundColor: (element) => {
             if (["future", "today"].includes(element?.raw?.phase)) {
-              return "#69D67B";
+              return "#7ec8ea";
             }
-            return vm.$vuetify.theme.currentTheme.success;
+            return vm.$vuetify.theme.currentTheme.primary;
           },
           specType: "",
           order: orderStrategies[orderDictionary.first],
@@ -95,7 +95,7 @@ export default {
           // specType для отображения в легенде
           specType: "box",
           data: [],
-          borderColor: "#69D67B",
+          borderColor: "#7ec8ea",
           order: orderStrategies[orderDictionary.third],
         });
       },

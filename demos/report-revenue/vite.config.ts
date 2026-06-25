@@ -41,7 +41,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@use "@/styles/vuetify-settings.scss" as *;\n@import "@/styles/bnovo-shims.scss";\n`,
+        additionalData: `@use "@/styles/vuetify-settings.scss" as *;\n@import "@/styles/demo-shims.scss";\n`,
       },
     },
   },

@@ -91,36 +91,36 @@ export default Object.seal({
     phase: {
       [periodDictionary.past]: {
         [strategiesDatasetDictionary.dates]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("Итог Доход"),
           type: "square",
         },
         [strategiesDatasetDictionary.months]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("Итог Доход"),
           type: "square",
         },
       },
       [periodDictionary.today]: {
         [strategiesDatasetDictionary.dates]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("Сумма броней"),
           type: "dot",
         },
         [strategiesDatasetDictionary.months]: {
-          color: "#69D67B",
+          color: "#7ec8ea",
           title: i18n.t("Сумма броней"),
           type: "square",
         },
       },
       [periodDictionary.future]: {
         [strategiesDatasetDictionary.dates]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("Сумма броней"),
           type: "dot",
         },
         [strategiesDatasetDictionary.months]: {
-          color: "#69D67B",
+          color: "#7ec8ea",
           title: i18n.t("Сумма броней"),
           type: "square",
         },
@@ -134,36 +134,36 @@ export default Object.seal({
     phase: {
       [periodDictionary.past]: {
         [strategiesDatasetDictionary.dates]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("Итог ADR"),
           type: "square",
         },
         [strategiesDatasetDictionary.months]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("Итог ADR"),
           type: "square",
         },
       },
       [periodDictionary.today]: {
         [strategiesDatasetDictionary.dates]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("ADR"),
           type: "dot",
         },
         [strategiesDatasetDictionary.months]: {
-          color: "#69D67B",
+          color: "#7ec8ea",
           title: i18n.t("ADR"),
           type: "square",
         },
       },
       [periodDictionary.future]: {
         [strategiesDatasetDictionary.dates]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("ADR"),
           type: "dot",
         },
         [strategiesDatasetDictionary.months]: {
-          color: "#69D67B",
+          color: "#7ec8ea",
           title: i18n.t("ADR"),
           type: "square",
         },
@@ -176,36 +176,36 @@ export default Object.seal({
     phase: {
       [periodDictionary.past]: {
         [strategiesDatasetDictionary.dates]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("Итог Загрузка"),
           type: "square",
         },
         [strategiesDatasetDictionary.months]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("Итог Загрузка"),
           type: "square",
         },
       },
       [periodDictionary.today]: {
         [strategiesDatasetDictionary.dates]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("Загрузка"),
           type: "dot",
         },
         [strategiesDatasetDictionary.months]: {
-          color: "#69D67B",
+          color: "#7ec8ea",
           title: i18n.t("Загрузка"),
           type: "square",
         },
       },
       [periodDictionary.future]: {
         [strategiesDatasetDictionary.dates]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("Загрузка"),
           type: "dot",
         },
         [strategiesDatasetDictionary.months]: {
-          color: "#69D67B",
+          color: "#7ec8ea",
           title: i18n.t("Загрузка"),
           type: "square",
         },
@@ -218,36 +218,36 @@ export default Object.seal({
     phase: {
       [periodDictionary.past]: {
         [strategiesDatasetDictionary.dates]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("Итог RevPAR"),
           type: "square",
         },
         [strategiesDatasetDictionary.months]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("Итог RevPAR"),
           type: "square",
         },
       },
       [periodDictionary.today]: {
         [strategiesDatasetDictionary.dates]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("RevPAR"),
           type: "dot",
         },
         [strategiesDatasetDictionary.months]: {
-          color: "#69D67B",
+          color: "#7ec8ea",
           title: i18n.t("RevPAR"),
           type: "square",
         },
       },
       [periodDictionary.future]: {
         [strategiesDatasetDictionary.dates]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("RevPAR"),
           type: "dot",
         },
         [strategiesDatasetDictionary.months]: {
-          color: "#69D67B",
+          color: "#7ec8ea",
           title: i18n.t("RevPAR"),
           type: "square",
         },
@@ -303,17 +303,17 @@ export default Object.seal({
       graphema: "percent",
       phase: {
         [periodDictionary.past]: {
-          color: colors.success.light,
+          color: colors.primary.base,
           title: i18n.t("Итог Загрузка"),
           type: "square",
         },
         [periodDictionary.today]: {
-          color: "#69D67B",
+          color: "#7ec8ea",
           title: i18n.t("Загрузка"),
           type: "square",
         },
         [periodDictionary.future]: {
-          color: "#69D67B",
+          color: "#7ec8ea",
           title: i18n.t("Загрузка"),
           type: "square",
         },

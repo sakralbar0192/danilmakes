@@ -8,7 +8,7 @@
     :additional-classes="additionalClasses"
     :in-modal="inModal"
     :caption="captionWithoutCount"
-    data-test="bnovo-report-revenue-graph-revpar-adr-load"
+    data-test="report-revenue-graph-revpar-adr-load"
     @toggle-full-screen="toggleFullScreen"
   >
     <template #tooltip="{ slotProps: wrapperRef }">
@@ -17,7 +17,7 @@
         :position="tooltipPosition"
         :graph-id="chartId"
         :wrapper-ref="wrapperRef"
-        data-test="bnovo-report-revenue-graph-revpar-adr-load-tooltip"
+        data-test="report-revenue-graph-revpar-adr-load-tooltip"
       >
         <many-dataset-tooltip :tooltip-data-props="tooltipData"/>
       </tooltip-template>
@@ -52,7 +52,7 @@ const PHASE_WIDTH = {
 };
 
 export default {
-  name: "BnovoReportRevenueADRRevParGraph",
+  name: "ReportRevenueADRRevParGraph",
   components: {
     GraphTemplate, TooltipTemplate, ManyDatasetTooltip,
   },
@@ -280,15 +280,15 @@ export default {
           type: "bar",
           label: isNeedChangeLabels ? this.$t("Загрузка на будущие даты") : this.$t("Итог Загрузка"),
           data: this.loadData,
-          borderColor: isNeedChangeLabels ? "#69D67B" : this.$vuetify.theme.currentTheme.success,
+          borderColor: isNeedChangeLabels ? "#7ec8ea" : this.$vuetify.theme.currentTheme.primary,
           categoryPercentage: 0.8,
           maxBarThickness: 24,
           backgroundColor: (element) => {
             if (element?.raw?.phase === "future" || element?.raw?.phase === "today") {
               // todo: заменить на переменные sass/vuetify цвета
-              return "#69D67B";
+              return "#7ec8ea";
             }
-            return this.$vuetify.theme.currentTheme.success;
+            return this.$vuetify.theme.currentTheme.primary;
           },
           specType: "future-box",
           borderRadius: 2,
@@ -331,7 +331,7 @@ export default {
           data: [],
           specType: "future-box",
           // todo: заменить на переменные sass/vuetify цвета
-          borderColor: "#69D67B",
+          borderColor: "#7ec8ea",
           filterType: "future",
         });
       }

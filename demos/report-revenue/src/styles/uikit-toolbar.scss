@@ -1,10 +1,10 @@
-@import "./bnovo-shims";
+@import "./demo-shims";
 @import "./theme/tools/custom-variables";
 
 $tariff-toolbar-control-height: $input-height;
 
 .tariff-prices-and-restrictions-table-toolbar {
-  .bnovo-tariff-prices-table-sticky-header-inner {
+  .demo-table-sticky-header-inner {
     min-height: $tariff-toolbar-control-height;
   }
 
@@ -45,7 +45,7 @@ $tariff-toolbar-control-height: $input-height;
   }
 }
 
-.bnovo-tariff-prices-table-sticky-header {
+.demo-table-sticky-header {
   .v-card.pa-ingroup {
     box-sizing: border-box;
   }

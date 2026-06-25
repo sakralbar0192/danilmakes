@@ -1,5 +1,5 @@
 <template>
-  <div class="bnovo-checkbox-group">
+  <div class="demo-checkbox-group">
     <v-text-field
       v-if="showSearch && editable"
       v-model="internalSearchString"
@@ -335,7 +335,7 @@ export default {
 </script>
 
 <style lang="scss">
-.bnovo-checkbox-group {
+.demo-checkbox-group {
   background: #fff;
 }
 </style>

@@ -1,9 +1,9 @@
 const primary = Object.freeze({
-  base: "#1E9FF5",
-  darken1: "#316AEF",
-  darken2: "#00449D",
+  base: "#1e8bc3",
+  darken1: "#16739f",
+  darken2: "#136688",
   info: "#3C435A",
-  blue: "#1875F0",
+  blue: "#1e8bc3",
 });
 const warning = Object.freeze({
   base: "#F7875B",
@@ -45,4 +45,3 @@ export default Object.freeze({
   error,
   shades,
 });
-// # sourceMappingURL=colors.js.map

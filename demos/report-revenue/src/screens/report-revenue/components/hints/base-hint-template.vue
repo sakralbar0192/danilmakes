@@ -19,7 +19,7 @@
 </template>
 <script>
 export default {
-  name: "BnovoReportRevenueHintTemplate",
+  name: "ReportRevenueHintTemplate",
   props: {
     maxWidtdh: {
       type: String,

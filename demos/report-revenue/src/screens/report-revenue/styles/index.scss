@@ -1,13 +1,47 @@
-.bnovo-report-revenue__filters {
-  flex-wrap: wrap;
+@import "@/styles/demo-shims";
+
+.report-revenue-screen {
+  --demo-primary: #1e8bc3;
+  --demo-primary-dark: #16739f;
+  --demo-primary-deep: #136688;
+  --demo-primary-light: #eef6fa;
+  --demo-primary-tint: #e8f4fb;
+  --demo-surface: #ffffff;
+  --demo-surface-muted: #f4f8fb;
+  --demo-border: #d8e8f2;
+  --demo-border-soft: #e8eef3;
+  --demo-text-muted: #6b7c8a;
+  --demo-shadow: 0 4px 24px rgba(30, 139, 195, 0.08);
 }
 
-.bnovo-report-revenue__metrics-section {
+.report-revenue__intro {
+  color: #4a5568;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.report-revenue__content-panel {
+  background: var(--demo-surface) !important;
+  border: 1px solid var(--demo-border);
+  border-radius: 12px;
+  box-shadow: var(--demo-shadow);
+  overflow: hidden;
+}
+
+.report-revenue__intro-row {
+  margin-bottom: map-get($gaps, outer) !important;
+}
+
+.report-revenue__panel-row {
+  margin-top: 0 !important;
+}
+
+.report-revenue__metrics-section {
   gap: 16px;
   flex-wrap: wrap;
 }
 
-.bnovo-report-revenue__widget-doughunt {
+.report-revenue__widget-doughunt {
   flex: 0 0 320px;
   max-width: 100%;
 }
