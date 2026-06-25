@@ -50,9 +50,14 @@
     background: linear-gradient(180deg, #e8f4fb 0%, #dceef8 100%);
   }
 
-  .tariff-demo-table-sticky-header-inner,
   .tariff-demo-table-header-cell {
     background: transparent !important;
+  }
+
+  .tariff-demo-table-category-sticky-cell {
+    background: linear-gradient(180deg, #e8f4fb 0%, #dceef8 100%) !important;
+    z-index: 6;
+    box-shadow: 4px 0 8px rgba(19, 102, 136, 0.08);
   }
 
   .tariff-demo-table-header-cell.v-card,

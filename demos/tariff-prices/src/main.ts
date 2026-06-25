@@ -82,6 +82,7 @@ async function bootstrap() {
   const app = createApp(App);
   app.use(vuetify);
   app.use(store);
+  store.dispatch("device/initViewportTracking");
   app.use(router);
   app.use(i18n);
   app.use(createDialogPlugin());

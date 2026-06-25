@@ -618,6 +618,12 @@ export default {
   },
 
   watch: {
+    isMobileDevice(isMobile) {
+      if (isMobile) {
+        this.tooltipAnchorCellKey = null;
+        this.priceCellTooltipController?.hide?.();
+      }
+    },
     horizontalDayWindow: {
       handler() {
         this.syncHorizontalDisplayCalendarCache();

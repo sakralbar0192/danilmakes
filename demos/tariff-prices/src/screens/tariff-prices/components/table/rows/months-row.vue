@@ -3,7 +3,7 @@
     <v-card
       :max-width="$options.roomtypeNameCellWidth"
       height="64"
-      :class="['d-flex align-center bordered rounded-0 tariff-demo-table-header-cell', $style['sticky-cell'], 'tariff-demo-table-sticky-header-inner', {
+      :class="['d-flex align-center bordered rounded-0 tariff-demo-table-header-cell', $style['sticky-cell'], 'tariff-demo-table-sticky-header-inner', 'tariff-demo-table-category-sticky-cell', {
         'pa-ingroup pl-groups justify-space-between': !compactMode,
         'pa-semi-inner justify-center': compactMode,
       }]"
@@ -218,7 +218,7 @@ export default {
 .sticky-cell {
   position: sticky;
   left: 0px;
-  z-index: 4;
+  z-index: 6;
 }
 
 .daysWrapper {

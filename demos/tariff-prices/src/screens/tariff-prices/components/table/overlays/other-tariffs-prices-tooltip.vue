@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <v-card
-      v-if="show && shouldRenderTooltip"
+      v-if="show && shouldRenderTooltip && !isMobileDevice"
       data-other-tariffs-prices-tooltip-root
       :class="$style.card"
       :style="tooltipStyle"
@@ -196,6 +196,11 @@ export default {
     },
     onCellKeyChange(v, prev) {
       this.clearShowOpenTimer();
+
+      if (this.isMobileDevice) {
+        this.show = false;
+        return;
+      }
 
       if (v) {
         if (v !== prev) {
