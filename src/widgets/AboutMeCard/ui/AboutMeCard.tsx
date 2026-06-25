@@ -12,6 +12,11 @@ export const AboutMeCard: FC = () => {
                 <Card.Title>{ SITE_CONTACT.name }</Card.Title>
                 <Card.Text>{ SITE_CONTACT.city }</Card.Text>
                 <Card.Text className='text-muted'>{ SITE_CONTACT.status }</Card.Text>
+                <Card.Text>
+                    <a href={ SITE_CONTACT.telegramUrl } target='_blank' rel='noreferrer'>
+                        { SITE_CONTACT.telegram }
+                    </a>
+                </Card.Text>
                 <Link to='/contact'>Контакты</Link>
             </Card.Body>
         </Card>

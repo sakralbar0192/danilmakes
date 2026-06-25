@@ -39,7 +39,7 @@ const Contact: FC = () => {
             if (axios.isAxiosError(error) && error.response?.data?.message) {
                 setErrorMessage(String(error.response.data.message))
             } else {
-                setErrorMessage('Не удалось отправить заявку. Попробуйте позже или напишите на почту.')
+                setErrorMessage('Не удалось отправить заявку. Попробуйте позже или напишите на почту / в Telegram.')
             }
         }
     }
@@ -49,6 +49,7 @@ const Contact: FC = () => {
             <h1>Контакты</h1>
             <p className={ classes.intro }>
                 Расскажите о задаче — отвечу в течение 1–2 рабочих дней.
+                База в Красноярске, работаю с заказчиками по всей России.
             </p>
 
             <div className={ classes.contactInfo }>
@@ -62,6 +63,12 @@ const Contact: FC = () => {
                         <a href={ `tel:${SITE_CONTACT.phone.replace(/\s/g, '')}` }>{ SITE_CONTACT.phone }</a>
                     </p>
                 )}
+                <p>
+                    <strong>Telegram:</strong>{' '}
+                    <a href={ SITE_CONTACT.telegramUrl } target='_blank' rel='noreferrer'>
+                        { SITE_CONTACT.telegram }
+                    </a>
+                </p>
                 <p><strong>Город:</strong> { SITE_CONTACT.city }</p>
             </div>
 
@@ -82,7 +89,7 @@ const Contact: FC = () => {
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='contactContact'>
-                    <Form.Label>Email или телефон</Form.Label>
+                    <Form.Label>Email, телефон или Telegram</Form.Label>
                     <Form.Control name='contact' required maxLength={ 255 } disabled={ formState === 'loading' } />
                 </Form.Group>
 
