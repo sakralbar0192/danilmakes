@@ -29,8 +29,8 @@ export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
         id: 'tariff-prices',
         title: 'Цены и ограничения',
         category: 'product',
-        task: 'Сложный экран управления ценами и ограничениями тарифа: календарная таблица, inline-редактирование, массовые обновления.',
-        solution: 'Vue 3 + Vuex + Vuetify 3, виртуальный скролл, drag-selection, MSW-мок API.',
+        task: 'Сложный экран управления ценами и ограничениями тарифа: календарная таблица, inline-редактирование, виртуальный скролл.',
+        solution: 'Vue 3 + Vuex + Vuetify 3, виртуальный скролл, MSW-мок API.',
         result: 'Интерактивное демо с переключением тарифов, режимов и сохранением без backend.',
         demoLink: `/CodeExample/${ECodeExamples.TARIFF_PRICES}`
     },
@@ -48,9 +48,9 @@ export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
         id: 'report-revenue',
         title: 'Отчёт по доходу',
         category: 'product',
-        task: 'Аналитический экран отеля: метрики ADR, RevPAR, загрузка, графики и таблица по категориям номеров и доп. услугам.',
+        task: 'Аналитический экран отеля: метрики ADR, RevPAR, загрузка, графики и таблица по категориям номеров.',
         solution: 'Vue 3 + Chart.js + Vuex, фильтры по периоду, группировка данных, MSW с синтетическими ответами API.',
-        result: 'Интерактивное демо с графиками, метриками и вкладкой доп. услуг без backend.',
+        result: 'Интерактивное демо с графиками, метриками и таблицей без backend.',
         demoLink: `/CodeExample/${ECodeExamples.REPORT_REVENUE}`
     },
     {
