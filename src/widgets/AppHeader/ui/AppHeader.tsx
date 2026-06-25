@@ -8,8 +8,6 @@ import classes from './style.module.scss'
 
 import { NavLink } from 'react-router-dom'
 
-import { AboutMeCard } from 'widgets/AboutMeCard'
-
 import { useAppSelector } from 'app/hooks'
 
 export const AppHeader = () => {
@@ -101,8 +99,6 @@ export const AppHeader = () => {
                         Контакты
 
                     </NavLink>
-
-                    <AboutMeCard />
 
                 </Offcanvas.Body>
 

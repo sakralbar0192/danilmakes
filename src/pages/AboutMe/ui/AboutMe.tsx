@@ -9,25 +9,6 @@ import { FAQ_ITEMS } from 'shared/consts/faq'
 import { PRICING_NOTE, PRICING_TIERS } from 'shared/consts/pricing'
 import myAvatarUrl from 'widgets/AboutMeCard/assets/myAvatar.jpeg'
 
-const SERVICES = [
-    {
-        title: 'Сайты и лендинги',
-        text: 'Визитки, промо-страницы, адаптивная вёрстка под мобильные устройства.'
-    },
-    {
-        title: 'Доработка проектов',
-        text: 'Новые функции, исправление багов, поддержка legacy-кода.'
-    },
-    {
-        title: 'MVP и прототипы',
-        text: 'Быстрый запуск идеи для проверки гипотезы с минимальным бюджетом.'
-    },
-    {
-        title: 'Интеграции',
-        text: 'Формы, API, личные кабинеты, уведомления на почту и в мессенджеры.'
-    }
-] as const
-
 const availabilityVariant = getAvailabilityVariant(SITE_CONTACT.availability)
 
 const AboutMe: FC = () => {
@@ -72,20 +53,6 @@ const AboutMe: FC = () => {
                             </Link>
                         </div>
                     </Col>
-                </Row>
-            </section>
-
-            <section className={ classes.section }>
-                <h2>Услуги</h2>
-                <Row xs={ 1 } sm={ 2 } className='g-3'>
-                    {SERVICES.map(service => (
-                        <Col key={ service.title }>
-                            <div className={ classes.serviceCard }>
-                                <h3>{ service.title }</h3>
-                                <p>{ service.text }</p>
-                            </div>
-                        </Col>
-                    ))}
                 </Row>
             </section>
 
