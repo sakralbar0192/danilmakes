@@ -8,10 +8,12 @@ const App: FC = () => {
     useYandexMetrika()
 
     return (
-        <Suspense fallback={ <Loader /> }>
+        <>
             <AppHeader />
-            <Outlet />
-        </Suspense>
+            <Suspense fallback={ <Loader /> }>
+                <Outlet />
+            </Suspense>
+        </>
     )
 }
 
