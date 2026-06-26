@@ -9,6 +9,7 @@ import { PRICING_TIERS } from 'shared/consts/pricing'
 
 const PRINT_CASE_SLUGS = [
     'local-landing',
+    'clinic-landing',
     'form-integration',
     'danilmakes',
     'tariff-prices',

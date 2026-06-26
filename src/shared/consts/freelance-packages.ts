@@ -1,3 +1,8 @@
+export interface FreelancePackageLink {
+    href: string
+    label: string
+}
+
 export interface FreelancePackage {
     id: string
     title: string
@@ -5,7 +10,7 @@ export interface FreelancePackage {
     summary: string
     includes: string[]
     demoLink?: string
-    caseLink?: string
+    caseLinks?: FreelancePackageLink[]
 }
 
 export const FREELANCE_INTRO =
@@ -24,7 +29,11 @@ export const FREELANCE_PACKAGES: FreelancePackage[] = [
             'Базовое SEO: title, description'
         ],
         demoLink: '/CodeExample/localLanding',
-        caseLink: '/portfolio/local-landing'
+        caseLinks: [
+            { href: '/portfolio/local-landing', label: 'Салон' },
+            { href: '/portfolio/clinic-landing', label: 'Стоматология' },
+            { href: '/portfolio/booking-admin', label: 'Панель заявок' }
+        ]
     },
     {
         id: 'fix',
@@ -37,7 +46,10 @@ export const FREELANCE_PACKAGES: FreelancePackage[] = [
             '1–2 раунда правок по согласованному ТЗ',
             'Передача исходников после оплаты'
         ],
-        caseLink: '/portfolio/tariff-prices'
+        caseLinks: [
+            { href: '/portfolio/booking-admin', label: 'Панель заявок' },
+            { href: '/portfolio/tariff-prices', label: 'Сложная таблица' }
+        ]
     },
     {
         id: 'integration',
@@ -51,7 +63,9 @@ export const FREELANCE_PACKAGES: FreelancePackage[] = [
             'Деплой на ваш хостинг или VPS'
         ],
         demoLink: '/CodeExample/formIntegration',
-        caseLink: '/portfolio/form-integration'
+        caseLinks: [
+            { href: '/portfolio/form-integration', label: 'Кейс' }
+        ]
     }
 ]
 

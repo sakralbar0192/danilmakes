@@ -49,9 +49,9 @@ const ForFreelance: FC = () => {
                                     ))}
                                 </ul>
                                 <div className={ classes.packageLinks }>
-                                    {pkg.caseLink && (
-                                        <Link to={ pkg.caseLink }>Кейс</Link>
-                                    )}
+                                    {pkg.caseLinks?.map(link => (
+                                        <Link key={ link.href } to={ link.href }>{ link.label }</Link>
+                                    ))}
                                     {pkg.demoLink && (
                                         <Link to={ pkg.demoLink }>Демо</Link>
                                     )}
