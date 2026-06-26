@@ -13,6 +13,7 @@ export const ECodeExamples = {
     DIVISIONS: 'divisions',
     FAMILY_MEALS: 'familyMeals',
     LOCAL_LANDING: 'localLanding',
+    CLINIC_LANDING: 'clinicLanding',
     FORM_INTEGRATION: 'formIntegration',
     BOOKING_ADMIN: 'bookingAdmin'
 } as const

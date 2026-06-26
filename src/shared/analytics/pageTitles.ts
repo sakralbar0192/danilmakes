@@ -10,6 +10,7 @@ const DEMO_TITLES: Record<string, string> = {
     [ECodeExamples.DIVISIONS]: 'Divisions',
     [ECodeExamples.FAMILY_MEALS]: 'Family Meal Planning',
     [ECodeExamples.LOCAL_LANDING]: 'Студия «Линия»',
+    [ECodeExamples.CLINIC_LANDING]: 'Стоматология «Дента+»',
     [ECodeExamples.FORM_INTEGRATION]: 'Форма → Telegram + почта',
     [ECodeExamples.BOOKING_ADMIN]: 'Админка записей',
     [ECodeExamples.EUROPE]: 'Европа',
