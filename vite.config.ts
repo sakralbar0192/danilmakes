@@ -49,7 +49,7 @@ export default defineConfig({
         svgr({ exportAsDefault: true }),
         servePortfolioDemos(),
     ],
-    base: '',
+    base: '/',
     server: {
         proxy: {
             '/api': {

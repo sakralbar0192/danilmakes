@@ -1,3 +1,6 @@
+const DEMO_ID = 'clinicLanding'
+const SOURCE = 'clinic-landing'
+
 const form = document.getElementById('booking-form')
 const statusEl = document.getElementById('form-status')
 const burger = document.querySelector('.burger')
@@ -42,12 +45,13 @@ form?.addEventListener('submit', async (event) => {
     phone: String(formData.get('phone') ?? '').trim(),
     message: String(formData.get('message') ?? '').trim() || undefined,
     website: String(formData.get('website') ?? ''),
-    source: 'clinic-landing'
+    source: SOURCE
   }
 
   if (!payload.name || !payload.phone) {
     statusEl.textContent = 'Заполните имя и телефон.'
     statusEl.className = 'form__status form__status--error'
+    window.trackDemoLeadError?.(DEMO_ID, SOURCE, 'validation')
     return
   }
 
@@ -67,9 +71,11 @@ form?.addEventListener('submit', async (event) => {
     }
 
     statusEl.className = 'form__status form__status--success'
+    window.trackDemoLeadSubmit?.(DEMO_ID, SOURCE, result.demoMode)
     form.reset()
   } catch (error) {
     statusEl.textContent = error instanceof Error ? error.message : 'Ошибка отправки.'
     statusEl.className = 'form__status form__status--error'
+    window.trackDemoLeadError?.(DEMO_ID, SOURCE, 'submit')
   }
 })

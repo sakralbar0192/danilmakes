@@ -1,3 +1,5 @@
+const DEMO_ID = 'bookingAdmin'
+
 const STATUS_LABELS = {
   new: 'Новая',
   confirmed: 'Подтверждена',
@@ -15,6 +17,7 @@ const seedBookings = [
 ]
 
 let bookings = [...seedBookings]
+let searchDebounceId = null
 
 const rowsEl = document.getElementById('rows')
 const statsEl = document.getElementById('stats')
@@ -85,6 +88,7 @@ function renderRows() {
       const id = Number(target.dataset.id)
       const nextStatus = target.value
       bookings = bookings.map(item => item.id === id ? { ...item, status: nextStatus } : item)
+      window.trackDemoEvent?.(DEMO_ID, 'status_change', { status: nextStatus })
       renderStats()
       renderRows()
     })
@@ -96,8 +100,26 @@ function formatDate(isoDate) {
   return `${day}.${month}.${year}`
 }
 
-statusFilter.addEventListener('change', renderRows)
-searchInput.addEventListener('input', renderRows)
+statusFilter.addEventListener('change', () => {
+  window.trackDemoEvent?.(DEMO_ID, 'filter_change', {
+    filter: 'status',
+    value: statusFilter.value
+  })
+  renderRows()
+})
+
+searchInput.addEventListener('input', () => {
+  if (searchDebounceId) {
+    clearTimeout(searchDebounceId)
+  }
+
+  searchDebounceId = setTimeout(() => {
+    if (searchInput.value.trim()) {
+      window.trackDemoEvent?.(DEMO_ID, 'filter_change', { filter: 'search' })
+    }
+    renderRows()
+  }, 600)
+})
 
 renderStats()
 renderRows()

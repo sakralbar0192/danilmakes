@@ -1,3 +1,6 @@
+const DEMO_ID = 'formIntegration'
+const SOURCE = 'form-integration'
+
 const form = document.getElementById('demo-form')
 const statusEl = document.getElementById('form-status')
 const resultPanel = document.getElementById('result-panel')
@@ -15,12 +18,13 @@ form?.addEventListener('submit', async (event) => {
     phone: String(formData.get('phone') ?? '').trim(),
     message: String(formData.get('message') ?? '').trim() || undefined,
     website: String(formData.get('website') ?? ''),
-    source: 'form-integration'
+    source: SOURCE
   }
 
   if (!payload.name || !payload.phone) {
     statusEl.textContent = 'Заполните имя и телефон.'
     statusEl.className = 'form__status form__status--error'
+    window.trackDemoLeadError?.(DEMO_ID, SOURCE, 'validation')
     return
   }
 
@@ -52,9 +56,11 @@ form?.addEventListener('submit', async (event) => {
     }
 
     statusEl.className = 'form__status form__status--success'
+    window.trackDemoLeadSubmit?.(DEMO_ID, SOURCE, data.demoMode)
     form.reset()
   } catch (error) {
     statusEl.textContent = error instanceof Error ? error.message : 'Не удалось отправить.'
     statusEl.className = 'form__status form__status--error'
+    window.trackDemoLeadError?.(DEMO_ID, SOURCE, 'submit')
   }
 })
