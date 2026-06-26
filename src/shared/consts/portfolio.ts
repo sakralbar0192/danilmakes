@@ -17,6 +17,16 @@ export interface PortfolioItem {
 export const PORTFOLIO_ENTERPRISE_UI_NOTE =
     'Сложные интерфейсы (опыт в продуктовой разработке). Демо на синтетических данных — тот же подход применим к расписанию, заказам, каталогу и внутренним панелям.'
 
+export const PORTFOLIO_BUSINESS_FUNNEL = {
+    title: 'Для бизнеса: полный путь клиента',
+    steps: [
+        { label: 'Лендинг салона', href: '/portfolio/local-landing' },
+        { label: 'Лендинг клиники', href: '/portfolio/clinic-landing' },
+        { label: 'Форма → Telegram', href: '/portfolio/form-integration' },
+        { label: 'Панель заявок', href: '/portfolio/booking-admin' }
+    ]
+} as const
+
 export const PORTFOLIO_PRODUCTS_PRIMARY: PortfolioItem[] = [
     {
         id: 'danilmakes',
@@ -34,7 +44,7 @@ export const PORTFOLIO_PRODUCTS_PRIMARY: PortfolioItem[] = [
         category: 'product',
         task: 'Витринный лендинг для бизнеса услуг: салон, барбершоп, косметолог — услуги, отзывы, форма записи и контакты.',
         solution: 'Адаптивная вёрстка HTML/CSS/JS, mobile-first, форма с отправкой на API. Связан с демо интеграции и панелью заявок.',
-        result: 'Портфолио-демо под типовый заказ «лендинг от 15 000 ₽» — часть воронки «сайт → заявка → панель».',
+        result: 'Готовый одностраничник с онлайн-записью и адаптивом — можно собрать под ваш бренд и тексты.',
         demoLink: `/CodeExample/${ECodeExamples.LOCAL_LANDING}`
     },
     {
@@ -43,7 +53,7 @@ export const PORTFOLIO_PRODUCTS_PRIMARY: PortfolioItem[] = [
         category: 'product',
         task: 'Витринный лендинг для клиники: услуги, врачи, акции, отзывы, форма записи и контакты — другая ниша, тот же типовой заказ.',
         solution: 'Адаптивная вёрстка HTML/CSS/JS, medical-стилистика, форма с POST на `/api/demo-lead`.',
-        result: 'Портфолио-демо для стоматологии и медицинских услуг — открывается с телефона, форма работает.',
+        result: 'Лендинг для клиники с блоком врачей и формой записи — работает с телефона, заявки уходят на почту.',
         demoLink: `/CodeExample/${ECodeExamples.CLINIC_LANDING}`
     },
     {
@@ -82,7 +92,7 @@ export const PORTFOLIO_PRODUCTS_ENTERPRISE_UI: PortfolioItem[] = [
         title: 'Отчёт по доходу',
         category: 'product',
         task: 'Аналитический экран: выручка, загрузка, динамика по периодам, графики и таблица по категориям.',
-        solution: 'Vue 3 + Chart.js + Vuex, фильтры по периоду, группировка данных. Метрики ADR и RevPAR — в отельном контексте.',
+        solution: 'Vue 3 + Chart.js + Vuex, фильтры по периоду, группировка данных. Метрики ADR и RevPAR — в контексте отельной аналитики.',
         result: 'Интерактивное демо с графиками, метриками и таблицей без backend.',
         demoLink: `/CodeExample/${ECodeExamples.REPORT_REVENUE}`
     },
