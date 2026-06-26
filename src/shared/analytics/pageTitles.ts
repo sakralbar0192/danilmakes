@@ -9,6 +9,8 @@ const DEMO_TITLES: Record<string, string> = {
     [ECodeExamples.REPORT_REVENUE]: 'Отчёт по доходу',
     [ECodeExamples.DIVISIONS]: 'Divisions',
     [ECodeExamples.FAMILY_MEALS]: 'Family Meal Planning',
+    [ECodeExamples.LOCAL_LANDING]: 'Студия «Линия»',
+    [ECodeExamples.FORM_INTEGRATION]: 'Форма → Telegram + почта',
     [ECodeExamples.EUROPE]: 'Европа',
     [ECodeExamples.BICYCLE]: 'Велосипеды',
     [ECodeExamples.MISHKA]: 'Mishka',

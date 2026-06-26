@@ -29,6 +29,24 @@ export const PORTFOLIO_PRODUCTS_PRIMARY: PortfolioItem[] = [
         sourceLink: 'https://github.com/sakralbar0192/danilmakes'
     },
     {
+        id: 'local-landing',
+        title: 'Студия «Линия»',
+        category: 'product',
+        task: 'Витринный лендинг для локального бизнеса: салон красоты с услугами, отзывами, формой записи и контактами.',
+        solution: 'Адаптивная вёрстка HTML/CSS/JS, mobile-first, форма с отправкой на API.',
+        result: 'Портфолио-демо под типовый заказ «лендинг от 15 000 ₽» — открывается с телефона.',
+        demoLink: `/CodeExample/${ECodeExamples.LOCAL_LANDING}`
+    },
+    {
+        id: 'form-integration',
+        title: 'Форма → Telegram + почта',
+        category: 'product',
+        task: 'Показать интеграцию заявок: форма на сайте сразу уведомляет владельца в Telegram и на email.',
+        solution: 'Express endpoint `/api/demo-lead`, Nodemailer, Telegram Bot API, rate limit и валидация Zod.',
+        result: 'Живое демо со схемой потока данных и тестовой отправкой.',
+        demoLink: `/CodeExample/${ECodeExamples.FORM_INTEGRATION}`
+    },
+    {
         id: 'vball-agregator',
         title: 'VBallAgregator',
         category: 'bot',

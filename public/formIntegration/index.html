@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Форма → Telegram + почта — демо интеграции</title>
+  <meta name="description" content="Портфолио-демо: заявка с формы уходит в Express API, затем в Telegram и на почту.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="demo-banner">Портфолио-демо · Интеграция формы · учебный проект</div>
+
+  <main class="page">
+    <header class="hero">
+      <h1>Форма → Telegram + почта</h1>
+      <p class="lead">Минимальный пример интеграции для малого бизнеса: заявка с сайта сразу попадает владельцу в мессенджер и на email.</p>
+    </header>
+
+    <section class="flow" aria-label="Схема потока данных">
+      <h2>Как это работает</h2>
+      <ol class="flow__steps">
+        <li>
+          <span class="flow__box">Форма на сайте</span>
+          <span class="flow__arrow" aria-hidden="true">→</span>
+        </li>
+        <li>
+          <span class="flow__box flow__box--accent">POST /api/demo-lead</span>
+          <span class="flow__arrow" aria-hidden="true">→</span>
+        </li>
+        <li>
+          <span class="flow__box">Express API</span>
+          <span class="flow__arrow" aria-hidden="true">→</span>
+        </li>
+        <li class="flow__split">
+          <span class="flow__box">Telegram</span>
+          <span class="flow__box">Почта SMTP</span>
+        </li>
+      </ol>
+      <p class="flow__note">Тот же паттерн используется на лендинге «Студия Линия» и в danilmakes.ru для контактной формы.</p>
+    </section>
+
+    <section class="try">
+      <h2>Попробовать</h2>
+      <p>Отправьте тестовую заявку — в продакшене она придёт в Telegram и на почту владельца сайта.</p>
+
+      <form class="form" id="demo-form" novalidate>
+        <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label>
+          Имя
+          <input type="text" name="name" required maxlength="100" placeholder="Иван">
+        </label>
+        <label>
+          Телефон
+          <input type="tel" name="phone" required maxlength="30" placeholder="+7 900 000-00-00">
+        </label>
+        <label>
+          Комментарий
+          <textarea name="message" rows="3" maxlength="1000" placeholder="Тестовая заявка с демо"></textarea>
+        </label>
+        <button class="btn" type="submit">Отправить тест</button>
+        <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="result" id="result-panel" hidden>
+        <h3>Ответ сервера</h3>
+        <pre id="result-json"></pre>
+      </div>
+    </section>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

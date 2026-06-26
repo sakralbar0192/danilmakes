@@ -4,6 +4,7 @@ import express from 'express'
 import rateLimit from 'express-rate-limit'
 import helmet from 'helmet'
 import { contactRouter } from './routes/contact.js'
+import { demoLeadRouter } from './routes/demo-lead.js'
 
 dotenv.config({ path: process.env.ENV_FILE ?? '../.env' })
 
@@ -28,6 +29,7 @@ app.get('/api/health', (_req, res) => {
 })
 
 app.use('/api/contact', contactLimiter, contactRouter)
+app.use('/api/demo-lead', contactLimiter, demoLeadRouter)
 
 app.listen(port, () => {
     console.log(`API listening on port ${port}`)

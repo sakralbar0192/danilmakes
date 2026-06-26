@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Студия «Линия» — салон красоты в Красноярске</title>
+  <meta name="description" content="Салон красоты в Красноярске: стрижки, окрашивание, маникюр. Онлайн-запись. Портфолио-демо.">
+  <meta property="og:title" content="Студия «Линия» — салон красоты">
+  <meta property="og:description" content="Услуги, цены и онлайн-запись. Учебный лендинг для портфолио.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="demo-banner">Портфолио-демо · Лендинг салона · учебный проект</div>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="#top">Студия <span>Линия</span></a>
+      <nav class="nav" aria-label="Основное меню">
+        <a href="#services">Услуги</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#booking">Запись</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <a class="header__cta" href="#booking">Записаться</a>
+      <button class="burger" type="button" aria-label="Меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <p class="eyebrow">Красноярск · с 2018 года</p>
+          <h1>Салон, где вас ждут — без суеты и навязчивых продаж</h1>
+          <p class="hero__lead">Стрижки, окрашивание и уход за волосами. Мастера с опытом от 5 лет, уютная атмосфера и онлайн-запись за минуту.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#booking">Записаться онлайн</a>
+            <a class="btn btn--ghost" href="#services">Смотреть услуги</a>
+          </div>
+        </div>
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__card">
+            <p class="hero__stat">4.9</p>
+            <p class="hero__stat-label">средняя оценка</p>
+            <p class="hero__stat-note">по 120+ отзывам</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <h2>Услуги и цены</h2>
+        <p class="section__lead">Популярные позиции — полный прайс у администратора.</p>
+        <ul class="services">
+          <li class="service-card">
+            <h3>Стрижка женская</h3>
+            <p>Мытьё, консультация, укладка</p>
+            <span class="price">от 1 800 ₽</span>
+          </li>
+          <li class="service-card">
+            <h3>Окрашивание</h3>
+            <p>Тонирование, сложное окрашивание</p>
+            <span class="price">от 3 500 ₽</span>
+          </li>
+          <li class="service-card">
+            <h3>Маникюр</h3>
+            <p>Гель-лак, укрепление</p>
+            <span class="price">от 1 600 ₽</span>
+          </li>
+          <li class="service-card">
+            <h3>Уход за волосами</h3>
+            <p>Восстановление, ботокс для волос</p>
+            <span class="price">от 2 200 ₽</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section--muted" id="reviews">
+      <div class="container">
+        <h2>Отзывы</h2>
+        <ul class="reviews">
+          <li class="review-card">
+            <p>«Записалась через сайт вечером — утром уже подтвердили время. Стрижка аккуратная, мастер всё объяснила по уходу.»</p>
+            <cite>Анна, постоянный клиент</cite>
+          </li>
+          <li class="review-card">
+            <p>«Делала окрашивание впервые — боялась, что будет кричаще, чем хотела. Результат ровный, оттенок как на фото.»</p>
+            <cite>Мария</cite>
+          </li>
+          <li class="review-card">
+            <p>«Удобно, что не нужно звонить: оставил заявку, перезвонили в течение часа. Салон чистый, кофе предложили.»</p>
+            <cite>Елена</cite>
+          </li>
+        </ul>
+        <p class="reviews__note">Отзывы вымышленные — демонстрация блока для портфолио.</p>
+      </div>
+    </section>
+
+    <section class="section" id="booking">
+      <div class="container booking">
+        <div class="booking__info">
+          <h2>Онлайн-запись</h2>
+          <p>Оставьте контакты — администратор перезвонит и подберёт удобное время. Заявка уходит на почту и в Telegram владельца сайта.</p>
+        </div>
+        <form class="form" id="booking-form" novalidate>
+          <input type="text" name="website" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label>
+            Имя
+            <input type="text" name="name" required maxlength="100" placeholder="Как к вам обращаться">
+          </label>
+          <label>
+            Телефон
+            <input type="tel" name="phone" required maxlength="30" placeholder="+7 (___) ___-__-__">
+          </label>
+          <label>
+            Комментарий
+            <textarea name="message" rows="3" maxlength="1000" placeholder="Услуга, удобное время"></textarea>
+          </label>
+          <button class="btn btn--primary btn--block" type="submit">Отправить заявку</button>
+          <p class="form__status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="section section--muted" id="contacts">
+      <div class="container contacts">
+        <h2>Контакты</h2>
+        <ul>
+          <li>Красноярск, ул. Примерная, 12</li>
+          <li>Ежедневно 10:00–21:00</li>
+          <li><a href="tel:+73901234567">+7 (390) 123-45-67</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Студия «Линия» — портфолио-демо · данные вымышленные</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

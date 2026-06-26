@@ -53,6 +53,60 @@ export const CASE_STUDIES: CaseStudy[] = [
         ]
     },
     {
+        slug: 'local-landing',
+        portfolioId: 'local-landing',
+        title: 'Студия «Линия»',
+        metaDescription: 'Кейс: витринный лендинг салона красоты — услуги, отзывы, форма записи, адаптив.',
+        lead: 'Учебный лендинг под типовый заказ малого бизнеса: один экран, понятная структура, рабочая форма.',
+        context: 'Для портфолио не хватало коммерчески узнаваемого примера — «сайт для такого же бизнеса, как у заказчика», а не учебного макета HTML Academy.',
+        challenge: 'Собрать лендинг, который выглядит как реальный салон, корректно работает на телефоне и содержит форму с интеграцией в backend.',
+        solution: 'Статический лендинг в `public/localLanding/`: hero, услуги, отзывы (вымышленные), форма записи, контакты. Форма отправляет POST на `/api/demo-lead`.',
+        stack: [
+            'HTML5',
+            'CSS',
+            'JavaScript',
+            'Express API',
+            'Адаптивная вёрстка'
+        ],
+        results: [
+            'Одностраничник с 5 блоками под типовый заказ «лендинг от 15 000 ₽»',
+            'Адаптив: mobile-first, бургер-меню',
+            'Форма записи связана с Telegram и почтой через API',
+            'Помечен как портфолио-демо с вымышленными данными'
+        ],
+        links: [
+            { label: 'Демо', href: `/CodeExample/${ECodeExamples.LOCAL_LANDING}` },
+            { label: 'Портфолио', href: '/portfolio' }
+        ]
+    },
+    {
+        slug: 'form-integration',
+        portfolioId: 'form-integration',
+        title: 'Форма → Telegram + почта',
+        metaDescription: 'Кейс: интеграция заявок с сайта — Express API, Telegram Bot API и SMTP.',
+        lead: 'Заявка с формы уходит владельцу в Telegram и на почту — с наглядной схемой потока данных.',
+        context: 'Услуга «интеграции от 5 000 ₽» нуждалась в наглядном примере: заказчик должен увидеть, что происходит после нажатия «Отправить».',
+        challenge: 'Сделать минимальный, но рабочий pipeline: валидация, защита от спама, два канала уведомлений и понятный demo-режим без настроенных credentials.',
+        solution: 'Endpoint `POST /api/demo-lead` на Express: Zod-валидация, honeypot, rate limit. Параллельная отправка в Telegram Bot API и через Nodemailer. Отдельная демо-страница со схемой и JSON-ответом сервера.',
+        stack: [
+            'Express',
+            'Zod',
+            'Telegram Bot API',
+            'Nodemailer',
+            'express-rate-limit'
+        ],
+        results: [
+            'Схема потока: форма → API → Telegram + почта',
+            'Тестовая форма с отображением ответа сервера',
+            'Используется на лендинге «Студия Линия»',
+            'В демо-режиме заявка принимается даже без настроенных каналов'
+        ],
+        links: [
+            { label: 'Демо', href: `/CodeExample/${ECodeExamples.FORM_INTEGRATION}` },
+            { label: 'Лендинг', href: `/CodeExample/${ECodeExamples.LOCAL_LANDING}` }
+        ]
+    },
+    {
         slug: 'report-revenue',
         portfolioId: 'report-revenue',
         title: 'Отчёт по доходу',

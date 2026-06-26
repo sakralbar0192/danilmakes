@@ -11,7 +11,9 @@ export const ECodeExamples = {
     TARIFF_PRICES: 'tariffPrices',
     REPORT_REVENUE: 'reportRevenue',
     DIVISIONS: 'divisions',
-    FAMILY_MEALS: 'familyMeals'
+    FAMILY_MEALS: 'familyMeals',
+    LOCAL_LANDING: 'localLanding',
+    FORM_INTEGRATION: 'formIntegration'
 } as const
 export type ECodeExamples = TValueOf<typeof ECodeExamples>
 
