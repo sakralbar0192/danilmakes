@@ -1,0 +1,189 @@
+@use '../../../shared/styles/tokens' as t;
+
+.page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+}
+
+.hero {
+    margin-bottom: t.$section-gap;
+    padding: 32px 28px;
+    background: linear-gradient(135deg, #f8fbfd 0%, t.$color-primary-light 100%);
+    border-radius: t.$radius-lg;
+}
+
+.eyebrow {
+    margin: 0 0 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: t.$color-primary;
+}
+
+.hero h1 {
+    margin: 0 0 12px;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+}
+
+.lead {
+    margin: 0 0 8px;
+    color: t.$color-text-muted;
+    line-height: 1.6;
+}
+
+.note {
+    margin: 0 0 24px;
+    font-size: 0.95rem;
+    color: t.$color-text-muted;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.ctaPrimary {
+    @include t.cta-primary;
+}
+
+.ctaSecondary {
+    @include t.cta-secondary;
+}
+
+.section {
+    margin-bottom: t.$section-gap;
+
+    h2 {
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
+}
+
+.packageCard {
+    height: 100%;
+    padding: 22px;
+    background: #fff;
+    border: 1px solid t.$color-border;
+    border-radius: t.$radius-md;
+
+    p {
+        color: t.$color-text-muted;
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+
+    ul {
+        margin: 0 0 16px;
+        padding-left: 1.2rem;
+        color: t.$color-text-muted;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+}
+
+.packageHeader {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+
+    h3 {
+        margin: 0;
+        font-size: 1.15rem;
+    }
+}
+
+.price {
+    font-weight: 700;
+    color: t.$color-primary;
+}
+
+.packageLinks {
+    display: flex;
+    gap: 16px;
+
+    a {
+        font-weight: 600;
+        color: t.$color-primary;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.platformCard {
+    height: 100%;
+    padding: 20px;
+    background: t.$color-bg-muted;
+    border-radius: t.$radius-md;
+
+    h3 {
+        margin: 0 0 8px;
+        font-size: 1.05rem;
+    }
+
+    p {
+        margin: 0;
+        color: t.$color-text-muted;
+        font-size: 0.95rem;
+    }
+}
+
+.process {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: t.$color-text-muted;
+    line-height: 1.8;
+}
+
+.ctaBlock {
+    padding: 36px 28px;
+    text-align: center;
+    background: t.$color-bg-muted;
+    border-radius: t.$radius-lg;
+
+    h2 {
+        margin-bottom: 8px;
+        font-size: 1.5rem;
+    }
+
+    p {
+        margin-bottom: 24px;
+        color: t.$color-text-muted;
+    }
+
+    .actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .page {
+        padding: 20px 16px 48px;
+    }
+
+    .hero {
+        padding: 24px 20px;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ctaPrimary,
+    .ctaSecondary {
+        text-align: center;
+    }
+}
+
+@media print {
+    .actions {
+        display: none;
+    }
+}

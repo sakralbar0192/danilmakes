@@ -47,6 +47,15 @@ export const PORTFOLIO_PRODUCTS_PRIMARY: PortfolioItem[] = [
         demoLink: `/CodeExample/${ECodeExamples.FORM_INTEGRATION}`
     },
     {
+        id: 'booking-admin',
+        title: 'Админка записей',
+        category: 'product',
+        task: 'Витринная панель для услуг: список заявок на запись, фильтр по статусу и смена статуса без backend.',
+        solution: 'Статическое демо на HTML/CSS/JS с синтетическими данными и локальным состоянием.',
+        result: 'Понятный сценарий для салона или мастера — расписание и статусы в одном экране.',
+        demoLink: `/CodeExample/${ECodeExamples.BOOKING_ADMIN}`
+    },
+    {
         id: 'vball-agregator',
         title: 'VBallAgregator',
         category: 'bot',
@@ -92,7 +101,7 @@ export const PORTFOLIO_PRODUCTS_ENTERPRISE_UI: PortfolioItem[] = [
 export const PORTFOLIO_PRODUCTS_OTHER: PortfolioItem[] = [
     {
         id: 'family-meals',
-        title: 'Family Meal Planning',
+        title: 'Family Meal Planning (pet-project)',
         category: 'product',
         task: 'Pet-project: библиотека рецептов, недельный план питания и автоматический список покупок на выбранный период.',
         solution: 'Vue 3, Module Federation, microservices (PHP/Go), BFF. Портфолио-демо — MSW с синтетическими данными без backend.',

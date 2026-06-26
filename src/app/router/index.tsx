@@ -8,6 +8,8 @@ import { CodeExample } from 'pages/CodeExample'
 import { Contact } from 'pages/Contact'
 import { Portfolio } from 'pages/Portfolio'
 import { CaseStudy } from 'pages/CaseStudy'
+import { ForFreelance } from 'pages/ForFreelance'
+import { PortfolioPrint } from 'pages/PortfolioPrint'
 
 const router = createBrowserRouter([
     {
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
             {
                 path: 'contact',
                 element: <Contact />
+            },
+            {
+                path: 'for-freelance',
+                element: <ForFreelance />
+            },
+            {
+                path: 'portfolio-print',
+                element: <PortfolioPrint />
             },
             {
                 path: 'PostsList/UserInfo/:userId',

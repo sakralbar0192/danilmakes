@@ -1,3 +1,5 @@
+@use '../../../shared/styles/tokens' as t;
+
 .page {
     max-width: 960px;
     margin: 0 auto;
@@ -71,34 +73,11 @@
 }
 
 .ctaPrimary {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #1e8bc3;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-
-    &:hover {
-        background-color: #16739f;
-        color: #fff;
-    }
+    @include t.cta-primary;
 }
 
 .ctaSecondary {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #fff;
-    color: #1e8bc3;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    border: 2px solid #1e8bc3;
-
-    &:hover {
-        background-color: #eef6fa;
-        color: #16739f;
-    }
+    @include t.cta-secondary;
 }
 
 .section {

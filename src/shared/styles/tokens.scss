@@ -1,0 +1,44 @@
+$color-primary: #1e8bc3;
+$color-primary-dark: #16739f;
+$color-primary-light: #eef6fa;
+$color-text: #222;
+$color-text-muted: #555;
+$color-border: #e8e8e8;
+$color-bg-muted: #f8f9fa;
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$section-gap: 48px;
+
+@mixin cta-primary {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: $color-primary;
+    color: #fff;
+    text-decoration: none;
+    border-radius: $radius-sm;
+    font-weight: 600;
+    border: 0;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $color-primary-dark;
+        color: #fff;
+    }
+}
+
+@mixin cta-secondary {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #fff;
+    color: $color-primary;
+    text-decoration: none;
+    border-radius: $radius-sm;
+    font-weight: 600;
+    border: 2px solid $color-primary;
+
+    &:hover {
+        background-color: $color-primary-light;
+        color: $color-primary-dark;
+    }
+}

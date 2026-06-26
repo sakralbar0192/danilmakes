@@ -13,7 +13,8 @@ export const ECodeExamples = {
     DIVISIONS: 'divisions',
     FAMILY_MEALS: 'familyMeals',
     LOCAL_LANDING: 'localLanding',
-    FORM_INTEGRATION: 'formIntegration'
+    FORM_INTEGRATION: 'formIntegration',
+    BOOKING_ADMIN: 'bookingAdmin'
 } as const
 export type ECodeExamples = TValueOf<typeof ECodeExamples>
 

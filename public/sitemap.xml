@@ -16,6 +16,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://danilmakes.ru/for-freelance</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danilmakes.ru/portfolio-print</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://danilmakes.ru/portfolio/danilmakes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -27,6 +37,11 @@
   </url>
   <url>
     <loc>https://danilmakes.ru/portfolio/form-integration</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://danilmakes.ru/portfolio/booking-admin</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -171,6 +171,29 @@
     }
 }
 
+.ctaLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.ctaSecondary {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: #fff;
+    color: #1e8bc3;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    border: 2px solid #1e8bc3;
+
+    &:hover {
+        background-color: #eef6fa;
+        color: #16739f;
+    }
+}
+
 .ctaButton {
     display: inline-block;
     padding: 12px 28px;

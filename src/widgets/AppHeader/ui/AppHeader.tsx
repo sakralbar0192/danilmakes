@@ -22,7 +22,7 @@ export const AppHeader = () => {
 
     return (
 
-        <div className={ classes.header }>
+        <div className={ classes.header } data-app-header>
 
             <button
 

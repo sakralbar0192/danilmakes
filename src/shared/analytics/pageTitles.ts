@@ -11,6 +11,7 @@ const DEMO_TITLES: Record<string, string> = {
     [ECodeExamples.FAMILY_MEALS]: 'Family Meal Planning',
     [ECodeExamples.LOCAL_LANDING]: 'Студия «Линия»',
     [ECodeExamples.FORM_INTEGRATION]: 'Форма → Telegram + почта',
+    [ECodeExamples.BOOKING_ADMIN]: 'Админка записей',
     [ECodeExamples.EUROPE]: 'Европа',
     [ECodeExamples.BICYCLE]: 'Велосипеды',
     [ECodeExamples.MISHKA]: 'Mishka',
@@ -46,6 +47,14 @@ export function getPageTitle(pathname: string): string {
 
     if (pathname === '/contact') {
         return 'Контакты | danilmakes.ru'
+    }
+
+    if (pathname === '/for-freelance') {
+        return 'Сотрудничество | danilmakes.ru'
+    }
+
+    if (pathname === '/portfolio-print') {
+        return 'Портфолио PDF | danilmakes.ru'
     }
 
     if (pathname === '/PostsList') {
