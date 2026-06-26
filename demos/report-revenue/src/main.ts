@@ -24,6 +24,7 @@ import http from "./utils/http";
 import HotelService from "./services/hotel";
 import RevenueReportService from "./services/reports/revenue-report";
 import RevenuePlanService from "./services/reports/revenue-plan";
+import { trackDemoEvent } from "../../shared/analytics/demo-analytics.ts";
 
 const vuetify = createVuetify({
   icons: {
@@ -63,10 +64,22 @@ const vuetify = createVuetify({
   },
 });
 
-function bootstrap() {
+async function bootstrap() {
   HotelService.http = http;
   RevenueReportService.http = http;
   RevenuePlanService.http = http;
+
+  const { worker } = await import("./mocks/browser");
+  await worker.start({
+    onUnhandledRequest: "bypass",
+    quiet: true,
+    serviceWorker: {
+      url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
+      options: {
+        scope: import.meta.env.BASE_URL,
+      },
+    },
+  });
 
   const app = createApp(App);
   app.use(vuetify);
@@ -86,21 +99,11 @@ function bootstrap() {
 
   app.mount("#app");
 
-  void (async () => {
-    const { worker } = await import("./mocks/browser");
-    await worker.start({
-      onUnhandledRequest: "bypass",
-      quiet: true,
-      serviceWorker: {
-        url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
-      },
-    });
+  await store.dispatch("hotel/getCurrentHotel").catch(() => {});
+  await store.dispatch("hotelRoom/getRoomTypes").catch(() => {});
 
-    await store.dispatch("hotel/getCurrentHotel").catch(() => {});
-    await store.dispatch("hotelRoom/getRoomTypes").catch(() => {});
-
-    store.dispatch("device/initViewportTracking");
-  })();
+  store.dispatch("device/initViewportTracking");
+  trackDemoEvent("reportRevenue", "demo_ready");
 }
 
-bootstrap();
+void bootstrap();

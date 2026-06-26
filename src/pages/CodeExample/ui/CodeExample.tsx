@@ -5,6 +5,7 @@ import { useParams } from 'react-router'
 import { ECodeExamples, ECodeExamplesLinksHrefs } from 'app/codeExamples'
 import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
+import { trackDemoLoadError, trackDemoOpen } from 'shared/analytics/events'
 
 const IFRAME_LOAD_TIMEOUT_MS = 30_000
 
@@ -30,10 +31,23 @@ const CodeExample: FC = () => {
         }
 
         const timeoutId = window.setTimeout(() => {
-            setLoadState(current => current === 'loading' ? 'error' : current)
+            setLoadState(current => {
+                if (current === 'loading') {
+                    trackDemoLoadError(choosenExample)
+                    return 'error'
+                }
+
+                return current
+            })
         }, IFRAME_LOAD_TIMEOUT_MS)
 
         return () => window.clearTimeout(timeoutId)
+    }, [loadState, choosenExample])
+
+    useEffect(() => {
+        if (loadState === 'loaded') {
+            trackDemoOpen(choosenExample)
+        }
     }, [loadState, choosenExample])
 
     if (!choosenExample) {
@@ -47,6 +61,7 @@ const CodeExample: FC = () => {
     }
 
     const handleIframeError = () => {
+        trackDemoLoadError(choosenExample)
         setLoadState('error')
     }
 

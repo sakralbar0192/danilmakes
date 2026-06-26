@@ -5,6 +5,7 @@ import classes from './styles.module.scss'
 import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import { SITE_CONTACT, hasPublicPhone } from 'shared/consts/contact'
+import { trackContactError, trackContactSubmit, trackExternalClick } from 'shared/analytics/events'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
 
@@ -34,8 +35,11 @@ const Contact: FC = () => {
             })
             setFormState('success')
             form.reset()
+            trackContactSubmit()
         } catch (error) {
             setFormState('error')
+            const status = axios.isAxiosError(error) ? error.response?.status : undefined
+            trackContactError(status)
             if (axios.isAxiosError(error) && error.response?.data?.message) {
                 setErrorMessage(String(error.response.data.message))
             } else {
@@ -65,7 +69,12 @@ const Contact: FC = () => {
                 )}
                 <p>
                     <strong>Telegram:</strong>{' '}
-                    <a href={ SITE_CONTACT.telegramUrl } target='_blank' rel='noreferrer'>
+                    <a
+                        href={ SITE_CONTACT.telegramUrl }
+                        target='_blank'
+                        rel='noreferrer'
+                        onClick={ () => trackExternalClick('telegram') }
+                    >
                         { SITE_CONTACT.telegram }
                     </a>
                 </p>

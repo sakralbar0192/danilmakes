@@ -24,6 +24,7 @@ import http from "./utils/http";
 import HotelService from "./services/hotel";
 import PriceAndRestrictionsService from "./services/tariff/price-and-restrictions";
 import TariffInterfaceSettingsService from "./services/tariff/interface-settings";
+import { trackDemoEvent } from "../../shared/analytics/demo-analytics.ts";
 
 const vuetify = createVuetify({
   icons: {
@@ -61,10 +62,22 @@ const vuetify = createVuetify({
   },
 });
 
-function bootstrap() {
+async function bootstrap() {
   HotelService.http = http;
   PriceAndRestrictionsService.http = http;
   TariffInterfaceSettingsService.http = http;
+
+  const { worker } = await import("./mocks/browser");
+  await worker.start({
+    onUnhandledRequest: "bypass",
+    quiet: true,
+    serviceWorker: {
+      url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
+      options: {
+        scope: import.meta.env.BASE_URL,
+      },
+    },
+  });
 
   const app = createApp(App);
   app.use(vuetify);
@@ -85,31 +98,22 @@ function bootstrap() {
 
   app.mount("#app");
 
-  void (async () => {
-    const { worker } = await import("./mocks/browser");
-    await worker.start({
-      onUnhandledRequest: "bypass",
-      quiet: true,
-      serviceWorker: {
-        url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
-      },
+  await store.dispatch("hotel/getCurrentHotel").catch(() => {});
+  await Promise.allSettled([
+    store.dispatch("hotel/getPlans"),
+    store.dispatch("hotelRoom/getRoomTypes"),
+    store.dispatch("additionalServices/getAdditionalServices"),
+  ]);
+
+  const q = getDefaultRouteQuery();
+  if (!router.currentRoute.value.query.dfrom) {
+    await router.replace({
+      path: router.currentRoute.value.path,
+      query: { ...router.currentRoute.value.query, ...q },
     });
+  }
 
-    await store.dispatch("hotel/getCurrentHotel").catch(() => {});
-    await Promise.allSettled([
-      store.dispatch("hotel/getPlans"),
-      store.dispatch("hotelRoom/getRoomTypes"),
-      store.dispatch("additionalServices/getAdditionalServices"),
-    ]);
-
-    const q = getDefaultRouteQuery();
-    if (!router.currentRoute.value.query.dfrom) {
-      await router.replace({
-        path: router.currentRoute.value.path,
-        query: { ...router.currentRoute.value.query, ...q },
-      });
-    }
-  })();
+  trackDemoEvent("tariffPrices", "demo_ready");
 }
 
-bootstrap();
+void bootstrap();

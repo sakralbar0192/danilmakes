@@ -60,6 +60,7 @@ import { hasUnacceptablePrices,
   mergeStayConflictTimestamps,
   STAY_MIN_MAX_API_ERROR_MESSAGE } from "./lib/screen/save-flow.js";
 import { syncTariffPricesFromRoute } from "./lib/screen/sync-from-route.js";
+import { trackDemoEvent } from "../../../../shared/analytics/demo-analytics.ts";
 import { applyAvailabilitySavedInPlace } from "./components/table/lib/store/apply-availability-saved-in-place.js";
 import { fetchTariffPricesCalendarData } from "./lib/screen/fetch-tariff-calendar-data.js";
 import { resolveRefetchPartsForSave } from "./lib/screen/resolve-refetch-parts-after-save.js";
@@ -325,6 +326,7 @@ export default {
     changeDate(dfrom) {
       dfrom = this.normalizeQueryDateFrom(dfrom);
       if (dfrom !== this.dateFrom) {
+        trackDemoEvent("tariffPrices", "period_change", { dfrom });
         this.$router.push({ query: { ...this.$route.query, dfrom } });
       }
     },

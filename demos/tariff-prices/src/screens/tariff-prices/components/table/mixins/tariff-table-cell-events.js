@@ -13,6 +13,7 @@ import { cellTypes } from "../config/cell-types.js";
 import { buildCellKey, isPriceCellType, isEditableCellType } from "../lib/cell-identity.js";
 import { runHandleTableCellAction } from "../logic/handle-table-cell-action.js";
 import { buildEventTargetPayload } from "../utils/cell-event-target.js";
+import { trackDemoEvent } from "../../../../../../../shared/analytics/demo-analytics.ts";
 import { resolvePriceDraftFromInput,
   finalizePriceDraftFromInput,
   isPriceDraftEqualToSaved } from "../../../config/resolve-price-draft-from-input.js";
@@ -634,6 +635,7 @@ export default {
         return;
       }
       if (ct !== cellTypes.price && ct !== cellTypes.extraPrice) return;
+      trackDemoEvent("tariffPrices", "price_edit_start", { mobile: false });
       if (e.target?.closest?.("[data-price-reset-anchor]")) {
         const rootCellKey = root.getAttribute("data-cell-key") || "";
         if (this.tooltipAnchorCellKey === rootCellKey) {

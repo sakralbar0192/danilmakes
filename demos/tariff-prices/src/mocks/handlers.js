@@ -35,7 +35,12 @@ function mergeCalendarParts(parts) {
 
 function matchPath(request, suffix) {
   const { pathname } = new URL(request.url);
-  return pathname === suffix || pathname.endsWith(suffix);
+  const base = (import.meta.env.BASE_URL || "/").replace(/\/$/, "");
+  return (
+    pathname === suffix
+    || pathname.endsWith(suffix)
+    || (base && pathname.endsWith(`${base}${suffix}`))
+  );
 }
 
 export const handlers = [

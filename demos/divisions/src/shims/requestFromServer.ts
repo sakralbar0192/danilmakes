@@ -9,8 +9,33 @@ import {
 import { defineRequestType } from "shared/helpers/serverRequests/defineRequestType";
 import { requestFromApi } from "shared/helpers/serverRequests/requestFromApi";
 import { requestFromService } from "shared/helpers/serverRequests/requestFromService";
+import { trackDivisionsEvent } from "../utils/demo-analytics";
 
 declare const __DEMO_BASE__: string;
+
+function trackDivisionsRequest(url: string, data: Record<string, unknown> = {}) {
+  if (url.includes("GetDetailsById")) {
+    trackDivisionsEvent("division_open", {
+      divisionId: Number(data.divisionId ?? 0),
+    });
+    return;
+  }
+
+  if (
+    url.includes("AddUsersDivisionHistoryEntries")
+    || url.includes("AddUsersPoolHistoryEntries")
+  ) {
+    trackDivisionsEvent("user_assign", {
+      divisionId: Number(data.divisionId ?? 0),
+      poolId: Number(data.poolId ?? 0),
+      count: Array.isArray(data.users)
+        ? data.users.length
+        : Array.isArray(data.userIds)
+          ? data.userIds.length
+          : 0,
+    });
+  }
+}
 
 export async function requestFromServer<T>({
   url,
@@ -44,6 +69,7 @@ export async function requestFromServer<T>({
   })
     .then((res) => {
       if (res.status === SUCCESS_RESPONSE_STATUS) {
+        trackDivisionsRequest(url, { ...data, ...params });
         switch (requestType) {
           case EServerRequestTypes.FROM_SERVICE:
             return requestFromService<T>(res);

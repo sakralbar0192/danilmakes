@@ -6,7 +6,10 @@ import strategiesDatasetDictionary from "@/screens/report-revenue/components/liv
 import { nextTick } from "vue";
 import RevenuePlanModel from "@/models/reports/revenue/revenue-plan";
 import RevenuePlanService from "@/services/reports/revenue-plan";
+import { trackReportRevenueEvent } from "@/utils/demo-analytics.js";
 import { isStartAndEndOfSameMonth } from "@/utils/date";
+
+let skipNextReportLoadedEvent = true;
 
 export default {
   namespaced: true,
@@ -318,6 +321,12 @@ export default {
       commit("setPlanResponse", planResp);
       commit("setIsReportActual", true);
 
+      if (skipNextReportLoadedEvent) {
+        skipNextReportLoadedEvent = false;
+      } else {
+        trackReportRevenueEvent("report_loaded");
+      }
+
       return reportResp?.result;
     },
     async saveYearsRevenuePlan({ dispatch, state }, data) {
@@ -341,8 +350,17 @@ export default {
       commit("setPrimaryReportData", reportModel);
       commit("setYearsRevenuePlan", planModel);
     },
-    setExternalFilters({ commit }, externalFilters) {
+    setExternalFilters({ commit, state }, externalFilters) {
+      const previousPeriod = state.externalFilters?.periodOfStay ?? [];
       commit("setExternalFilters", externalFilters);
+
+      const nextPeriod = externalFilters?.periodOfStay ?? [];
+      if (
+        nextPeriod.length === 2
+        && (nextPeriod[0] !== previousPeriod[0] || nextPeriod[1] !== previousPeriod[1])
+      ) {
+        trackReportRevenueEvent("period_change", { from: nextPeriod[0], to: nextPeriod[1] });
+      }
     },
     setExternalData({ commit }, value) {
       commit("setExternalData", value);
@@ -350,8 +368,13 @@ export default {
     setPrimaryReportData({ commit }, value) {
       commit("setPrimaryReportData", value);
     },
-    setSelectedCategories({ commit }, value) {
+    setSelectedCategories({ commit, state }, value) {
+      const changed = JSON.stringify(value) !== JSON.stringify(state.selectedCategories);
       commit("setSelectedCategories", value);
+
+      if (changed) {
+        trackReportRevenueEvent("category_filter", { count: value.length });
+      }
     },
     setSelectedMetrics({ commit }, value) {
       commit("setSelectedMetrics", value);

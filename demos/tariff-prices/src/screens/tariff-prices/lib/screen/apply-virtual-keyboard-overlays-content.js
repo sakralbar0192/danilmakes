@@ -9,6 +9,9 @@ export function applyVirtualKeyboardOverlaysContentOnce(nav) {
   if (overlaysContentApplied) {
     return;
   }
+  if (typeof window !== "undefined" && window.self !== window.top) {
+    return;
+  }
   const vk = nav?.virtualKeyboard;
   if (!vk) {
     return;

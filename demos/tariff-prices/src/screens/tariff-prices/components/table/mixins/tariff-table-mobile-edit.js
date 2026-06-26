@@ -9,6 +9,7 @@ import { MOBILE_EDIT_FOCUS_IN_SESSION_MS,
   MOBILE_KEYBOARD_VV_COOLDOWN_MS } from "../config/table-grid-metrics.js";
 import { disarmMobileEditFocusRestoreGrace } from "../lib/editing/disarm-mobile-edit-focus-restore-grace.js";
 import { logMobileEditError } from "../lib/editing/log-mobile-edit-error.js";
+import { trackDemoEvent } from "../../../../../../../shared/analytics/demo-analytics.ts";
 import { resetPriceTextSelectGestureState } from "../lib/editing/price-text-selection-gesture.js";
 import { getMobileEditLayoutSettleDelayedMs,
   shouldCancelDelayedLayoutSettle } from "../lib/editing/mobile-edit-layout-settle.js";
@@ -218,6 +219,7 @@ export default {
       }
       this.armMobileEditKeyboardDismissGuards({ resetGeometry: true });
       this.mobileTableCellInputFocused = true;
+      trackDemoEvent("tariffPrices", "price_edit_start", { mobile: true });
       this.attachMobileTableVisualViewport();
       this.scheduleMobileEditStickyOverlapCheck();
       this.scheduleMobileEditCellScrollIntoView?.();
