@@ -8,6 +8,10 @@ export const METRIKA_GOALS = {
     CASE_STUDY_VIEW: 'case_study_view',
     EXTERNAL_CLICK: 'external_click',
     DEMO_ACTION: 'demo_action',
+    DEMO_LEAD_SUBMIT: 'demo_lead_submit',
+    DEMO_LEAD_ERROR: 'demo_lead_error',
+    PRICING_EXAMPLE_CLICK: 'pricing_example_click',
+    CTA_CLICK: 'cta_click',
 } as const
 
 type MetrikaParams = Record<string, string | number | boolean>

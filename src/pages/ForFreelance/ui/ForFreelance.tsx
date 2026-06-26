@@ -11,6 +11,7 @@ import {
     FREELANCE_PLATFORMS
 } from 'shared/consts/freelance-packages'
 import { PRICING_NOTE } from 'shared/consts/pricing'
+import { trackCtaClick } from 'shared/analytics/events'
 
 const ForFreelance: FC = () => {
     const dispatch = useAppDispatch()
@@ -27,8 +28,20 @@ const ForFreelance: FC = () => {
                 <p className={ classes.lead }>{ FREELANCE_INTRO }</p>
                 <p className={ classes.note }>{ PRICING_NOTE }</p>
                 <div className={ classes.actions }>
-                    <Link to='/contact' className={ classes.ctaPrimary }>Обсудить задачу</Link>
-                    <Link to='/portfolio-print' className={ classes.ctaSecondary }>Скачать PDF</Link>
+                    <Link
+                        to='/contact'
+                        className={ classes.ctaPrimary }
+                        onClick={ () => trackCtaClick('for_freelance', '/contact') }
+                    >
+                        Обсудить задачу
+                    </Link>
+                    <Link
+                        to='/portfolio-print'
+                        className={ classes.ctaSecondary }
+                        onClick={ () => trackCtaClick('for_freelance', '/portfolio-print') }
+                    >
+                        Скачать PDF
+                    </Link>
                 </div>
             </header>
 
@@ -50,10 +63,21 @@ const ForFreelance: FC = () => {
                                 </ul>
                                 <div className={ classes.packageLinks }>
                                     {pkg.caseLinks?.map(link => (
-                                        <Link key={ link.href } to={ link.href }>{ link.label }</Link>
+                                        <Link
+                                            key={ link.href }
+                                            to={ link.href }
+                                            onClick={ () => trackCtaClick('for_freelance', link.href) }
+                                        >
+                                            { link.label }
+                                        </Link>
                                     ))}
                                     {pkg.demoLink && (
-                                        <Link to={ pkg.demoLink }>Демо</Link>
+                                        <Link
+                                            to={ pkg.demoLink }
+                                            onClick={ () => trackCtaClick('for_freelance', pkg.demoLink!) }
+                                        >
+                                            Демо
+                                        </Link>
                                     )}
                                 </div>
                             </article>
@@ -94,8 +118,20 @@ const ForFreelance: FC = () => {
                     { SITE_CONTACT.responseTime }
                 </p>
                 <div className={ classes.actions }>
-                    <Link to='/portfolio' className={ classes.ctaSecondary }>Портфолио</Link>
-                    <Link to='/contact' className={ classes.ctaPrimary }>Написать</Link>
+                    <Link
+                        to='/portfolio'
+                        className={ classes.ctaSecondary }
+                        onClick={ () => trackCtaClick('for_freelance', '/portfolio') }
+                    >
+                        Портфолио
+                    </Link>
+                    <Link
+                        to='/contact'
+                        className={ classes.ctaPrimary }
+                        onClick={ () => trackCtaClick('for_freelance', '/contact') }
+                    >
+                        Написать
+                    </Link>
                 </div>
             </section>
         </div>

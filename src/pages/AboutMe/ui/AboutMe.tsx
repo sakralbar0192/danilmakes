@@ -7,6 +7,7 @@ import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import { getAvailabilityVariant, SITE_CONTACT } from 'shared/consts/contact'
 import { FAQ_ITEMS } from 'shared/consts/faq'
 import { PRICING_NOTE, PRICING_TIERS } from 'shared/consts/pricing'
+import { trackCtaClick, trackPricingExampleClick } from 'shared/analytics/events'
 import myAvatarUrl from 'widgets/AboutMeCard/assets/myAvatar.webp'
 
 const availabilityVariant = getAvailabilityVariant(SITE_CONTACT.availability)
@@ -45,10 +46,18 @@ const AboutMe: FC = () => {
                             рабочим UX и честными сроками.
                         </p>
                         <div className={ classes.heroActions }>
-                            <Link to='/contact' className={ classes.ctaPrimary }>
+                            <Link
+                                to='/contact'
+                                className={ classes.ctaPrimary }
+                                onClick={ () => trackCtaClick('hero', '/contact') }
+                            >
                                 Обсудить проект
                             </Link>
-                            <Link to='/portfolio' className={ classes.ctaSecondary }>
+                            <Link
+                                to='/portfolio'
+                                className={ classes.ctaSecondary }
+                                onClick={ () => trackCtaClick('hero', '/portfolio') }
+                            >
                                 Смотреть работы
                             </Link>
                         </div>
@@ -75,6 +84,7 @@ const AboutMe: FC = () => {
                                                 key={ example.href }
                                                 to={ example.href }
                                                 className={ classes.exampleLink }
+                                                onClick={ () => trackPricingExampleClick(tier.id, example.href) }
                                             >
                                                 Пример: { example.label }
                                             </Link>
@@ -112,10 +122,18 @@ const AboutMe: FC = () => {
                 <h2>Есть задача?</h2>
                 <p>Расскажите о проекте — отвечу в течение 1–2 рабочих дней.</p>
                 <div className={ classes.heroActions }>
-                    <Link to='/contact' className={ classes.ctaPrimary }>
+                    <Link
+                        to='/contact'
+                        className={ classes.ctaPrimary }
+                        onClick={ () => trackCtaClick('cta_block', '/contact') }
+                    >
                         Написать
                     </Link>
-                    <Link to='/portfolio' className={ classes.ctaSecondary }>
+                    <Link
+                        to='/portfolio'
+                        className={ classes.ctaSecondary }
+                        onClick={ () => trackCtaClick('cta_block', '/portfolio') }
+                    >
                         Портфолио
                     </Link>
                 </div>
