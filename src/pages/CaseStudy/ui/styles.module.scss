@@ -73,6 +73,33 @@
     }
 }
 
+.relatedLead {
+    margin: 0 0 12px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.relatedDemos {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: #444;
+    line-height: 1.6;
+
+    li + li {
+        margin-top: 8px;
+    }
+
+    a {
+        color: #1e8bc3;
+        font-weight: 500;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
 .links {
     display: flex;
     flex-wrap: wrap;

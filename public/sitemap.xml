@@ -36,6 +36,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://danilmakes.ru/portfolio/clinic-landing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://danilmakes.ru/portfolio/form-integration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

@@ -85,6 +85,22 @@ const CaseStudy: FC = () => {
                 </ul>
             </section>
 
+            {caseStudy.relatedDemos && caseStudy.relatedDemos.length > 0 && (
+                <section className={ classes.block }>
+                    <h2>Связанные демо</h2>
+                    <p className={ classes.relatedLead }>
+                        Полный путь клиента: лендинг → форма записи → уведомление в Telegram → панель заявок.
+                    </p>
+                    <ol className={ classes.relatedDemos }>
+                        {caseStudy.relatedDemos.map(demo => (
+                            <li key={ demo.href }>
+                                <Link to={ demo.href }>{ demo.label }</Link>
+                            </li>
+                        ))}
+                    </ol>
+                </section>
+            )}
+
             <section className={ classes.block }>
                 <h2>Ссылки</h2>
                 <div className={ classes.links }>

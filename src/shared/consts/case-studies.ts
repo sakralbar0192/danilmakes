@@ -6,6 +6,11 @@ export interface CaseStudyLink {
     external?: boolean
 }
 
+export interface CaseStudyRelatedDemo {
+    label: string
+    href: string
+}
+
 export interface CaseStudy {
     slug: string
     portfolioId: string
@@ -17,6 +22,7 @@ export interface CaseStudy {
     solution: string
     stack: string[]
     results: string[]
+    relatedDemos?: CaseStudyRelatedDemo[]
     links: CaseStudyLink[]
 }
 
@@ -56,11 +62,11 @@ export const CASE_STUDIES: CaseStudy[] = [
         slug: 'local-landing',
         portfolioId: 'local-landing',
         title: 'Студия «Линия»',
-        metaDescription: 'Кейс: витринный лендинг салона красоты — услуги, отзывы, форма записи, адаптив.',
-        lead: 'Учебный лендинг под типовый заказ малого бизнеса: один экран, понятная структура, рабочая форма.',
-        context: 'Для портфолио не хватало коммерчески узнаваемого примера — «сайт для такого же бизнеса, как у заказчика», а не учебного макета HTML Academy.',
-        challenge: 'Собрать лендинг, который выглядит как реальный салон, корректно работает на телефоне и содержит форму с интеграцией в backend.',
-        solution: 'Статический лендинг в `public/localLanding/`: hero, услуги, отзывы (вымышленные), форма записи, контакты. Форма отправляет POST на `/api/demo-lead`.',
+        metaDescription: 'Кейс: витринный лендинг для услуг — салон, барбершоп, косметолог. Услуги, отзывы, форма записи, адаптив.',
+        lead: 'Учебный лендинг под типовый заказ малого бизнеса: подходит для салона, барбершопа, косметолога и маникюрного кабинета.',
+        context: 'Для портфолио не хватало коммерчески узнаваемого примера — «сайт для такого же бизнеса, как у заказчика», а не учебного макета HTML Academy. Ниша услуг с онлайн-записью — один из самых частых запросов на биржах.',
+        challenge: 'Собрать лендинг, который выглядит как реальный бизнес услуг, корректно работает на телефоне и содержит форму с интеграцией в backend.',
+        solution: 'Статический лендинг в `public/localLanding/`: hero, услуги, отзывы (вымышленные), форма записи, контакты. Форма отправляет POST на `/api/demo-lead`. Связан с демо интеграции и панелью заявок как единая воронка.',
         stack: [
             'HTML5',
             'CSS',
@@ -70,13 +76,72 @@ export const CASE_STUDIES: CaseStudy[] = [
         ],
         results: [
             'Одностраничник с 5 блоками под типовый заказ «лендинг от 15 000 ₽»',
+            'Подходит для салона красоты, барбершопа, косметолога, маникюрного кабинета',
             'Адаптив: mobile-first, бургер-меню',
             'Форма записи связана с Telegram и почтой через API',
             'Помечен как портфолио-демо с вымышленными данными'
         ],
+        relatedDemos: [
+            {
+                label: 'Лендинг «Студия Линия»',
+                href: `/CodeExample/${ECodeExamples.LOCAL_LANDING}`
+            },
+            {
+                label: 'Форма → Telegram + почта',
+                href: '/portfolio/form-integration'
+            },
+            {
+                label: 'Панель заявок',
+                href: '/portfolio/booking-admin'
+            }
+        ],
         links: [
             { label: 'Демо', href: `/CodeExample/${ECodeExamples.LOCAL_LANDING}` },
-            { label: 'Портфолио', href: '/portfolio' }
+            { label: 'Интеграция', href: '/portfolio/form-integration' },
+            { label: 'Панель заявок', href: '/portfolio/booking-admin' }
+        ]
+    },
+    {
+        slug: 'clinic-landing',
+        portfolioId: 'clinic-landing',
+        title: 'Стоматология «Дента+»',
+        metaDescription: 'Кейс: витринный лендинг стоматологии — услуги, врачи, акции, форма записи, адаптив.',
+        lead: 'Учебный лендинг для медицинской ниши: доверие, врачи, прозрачные цены и онлайн-запись — отдельно от салона красоты.',
+        context: 'После лендинга «Студия Линия» портфолио закрывало только нишу beauty. На биржах часто ищут «сайт для стоматологии / клиники» — нужен второй узнаваемый пример с другим визуалом и структурой.',
+        challenge: 'Собрать medical-лендинг: блок врачей, акцент на доверии и лицензии, форма записи с тем же API — без копирования дизайна салона.',
+        solution: 'Статический лендинг в `public/clinicLanding/`: hero, услуги с ценами, врачи, отзывы (вымышленные), форма записи, контакты. Teal-палитра, mobile-first. Форма — POST на `/api/demo-lead` с `source: clinic-landing`.',
+        stack: [
+            'HTML5',
+            'CSS',
+            'JavaScript',
+            'Express API',
+            'Адаптивная вёрстка'
+        ],
+        results: [
+            'Лендинг для стоматологии и клиник с блоком врачей',
+            'Подходит для стоматологии, стоматологии-ортопедии, детской стоматологии',
+            'Адаптив: mobile-first, бургер-меню',
+            'Форма записи связана с Telegram и почтой через общий API',
+            'Помечен как портфолио-демо с вымышленными данными'
+        ],
+        relatedDemos: [
+            {
+                label: 'Лендинг «Дента+»',
+                href: `/CodeExample/${ECodeExamples.CLINIC_LANDING}`
+            },
+            {
+                label: 'Форма → Telegram + почта',
+                href: '/portfolio/form-integration'
+            },
+            {
+                label: 'Лендинг салона (другая ниша)',
+                href: '/portfolio/local-landing'
+            }
+        ],
+        links: [
+            { label: 'Демо', href: `/CodeExample/${ECodeExamples.CLINIC_LANDING}` },
+            { label: 'Интеграция', href: '/portfolio/form-integration' },
+            { label: 'Лендинг салона', href: '/portfolio/local-landing' }
         ]
     },
     {
@@ -98,12 +163,13 @@ export const CASE_STUDIES: CaseStudy[] = [
         results: [
             'Схема потока: форма → API → Telegram + почта',
             'Тестовая форма с отображением ответа сервера',
-            'Используется на лендинге «Студия Линия»',
+            'Используется на лендингах «Студия Линия» и «Дента+»',
             'В демо-режиме заявка принимается даже без настроенных каналов'
         ],
         links: [
             { label: 'Демо', href: `/CodeExample/${ECodeExamples.FORM_INTEGRATION}` },
-            { label: 'Лендинг', href: `/CodeExample/${ECodeExamples.LOCAL_LANDING}` }
+            { label: 'Лендинг салона', href: `/CodeExample/${ECodeExamples.LOCAL_LANDING}` },
+            { label: 'Лендинг клиники', href: `/CodeExample/${ECodeExamples.CLINIC_LANDING}` }
         ]
     },
     {
