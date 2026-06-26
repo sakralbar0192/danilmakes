@@ -7,7 +7,6 @@ import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import { getAvailabilityVariant, SITE_CONTACT } from 'shared/consts/contact'
 import { FAQ_ITEMS } from 'shared/consts/faq'
 import { PRICING_NOTE, PRICING_TIERS } from 'shared/consts/pricing'
-import { WORK_EXAMPLES } from 'shared/consts/work-examples'
 import myAvatarUrl from 'widgets/AboutMeCard/assets/myAvatar.webp'
 
 const availabilityVariant = getAvailabilityVariant(SITE_CONTACT.availability)
@@ -58,37 +57,31 @@ const AboutMe: FC = () => {
             </section>
 
             <section className={ classes.section }>
-                <h2>Примеры работ</h2>
-                <p className={ classes.workExamplesIntro }>
-                    Три направления — с кейсами и демо. Подробности в портфолио.
-                </p>
-                <Row xs={ 1 } md={ 3 } className='g-3'>
-                    {WORK_EXAMPLES.map(example => (
-                        <Col key={ example.id }>
-                            <Link to={ example.href } className={ classes.workExampleCard }>
-                                <span className={ classes.workExampleService }>{ example.service }</span>
-                                <h3 className={ classes.workExampleTitle }>{ example.title }</h3>
-                                <p className={ classes.workExampleDescription }>{ example.description }</p>
-                                <span className={ classes.workExampleLink }>Смотреть кейс</span>
-                            </Link>
-                        </Col>
-                    ))}
-                </Row>
-            </section>
-
-            <section className={ classes.section }>
-                <h2>Услуги и цены</h2>
+                <h2>Услуги и примеры</h2>
                 <p className={ classes.pricingNote }>{ PRICING_NOTE }</p>
                 <Row xs={ 1 } sm={ 2 } className='g-3'>
                     {PRICING_TIERS.map(tier => (
-                        <Col key={ tier.title }>
-                            <div className={ classes.pricingCard }>
+                        <Col key={ tier.id }>
+                            <article className={ classes.pricingCard }>
                                 <div className={ classes.pricingHeader }>
                                     <h3>{ tier.title }</h3>
                                     <span className={ classes.price }>{ tier.price }</span>
                                 </div>
                                 <p>{ tier.description }</p>
-                            </div>
+                                {tier.examples.length > 0 && (
+                                    <div className={ classes.exampleLinks }>
+                                        {tier.examples.map(example => (
+                                            <Link
+                                                key={ example.href }
+                                                to={ example.href }
+                                                className={ classes.exampleLink }
+                                            >
+                                                Пример: { example.label }
+                                            </Link>
+                                        ))}
+                                    </div>
+                                )}
+                            </article>
                         </Col>
                     ))}
                 </Row>
