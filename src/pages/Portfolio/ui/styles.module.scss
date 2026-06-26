@@ -4,9 +4,55 @@
 }
 
 .intro {
-    margin-bottom: 40px;
+    margin-bottom: 24px;
     color: #444;
     font-size: 1.1rem;
+}
+
+.funnel {
+    margin-bottom: 40px;
+    padding: 16px 20px;
+    background: #f8fbfd;
+    border: 1px solid #dceef7;
+    border-radius: 12px;
+}
+
+.funnelTitle {
+    margin: 0 0 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.funnelSteps {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 4px;
+}
+
+.funnelStep {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    a {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #1e8bc3;
+        text-decoration: none;
+
+        &:hover {
+            color: #16739f;
+            text-decoration: underline;
+        }
+    }
+}
+
+.funnelArrow {
+    color: #999;
+    font-size: 0.85rem;
+    user-select: none;
 }
 
 .section {

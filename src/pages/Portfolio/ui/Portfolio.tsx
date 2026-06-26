@@ -5,6 +5,7 @@ import classes from './styles.module.scss'
 import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import {
+    PORTFOLIO_BUSINESS_FUNNEL,
     PORTFOLIO_ENTERPRISE_UI_NOTE,
     PORTFOLIO_LAYOUTS,
     PORTFOLIO_PRODUCTS_ENTERPRISE_UI,
@@ -170,6 +171,18 @@ const Portfolio: FC = () => {
                 Приложения и макеты, которые показывают уровень работы. Каждый пункт — живая демонстрация или развёрнутый кейс.
             </p>
 
+            <div className={ classes.funnel }>
+                <p className={ classes.funnelTitle }>{ PORTFOLIO_BUSINESS_FUNNEL.title }</p>
+                <div className={ classes.funnelSteps }>
+                    {PORTFOLIO_BUSINESS_FUNNEL.steps.map((step, index) => (
+                        <span key={ step.href } className={ classes.funnelStep }>
+                            {index > 0 && <span className={ classes.funnelArrow } aria-hidden='true'>→</span>}
+                            <Link to={ step.href }>{ step.label }</Link>
+                        </span>
+                    ))}
+                </div>
+            </div>
+
             <PortfolioSection title='Приложения'>
                 {renderProductRow(PORTFOLIO_PRODUCTS_PRIMARY, { xs: 1, md: 2 })}
                 <p className={ classes.groupNote }>{ PORTFOLIO_ENTERPRISE_UI_NOTE }</p>
@@ -206,4 +219,4 @@ const Portfolio: FC = () => {
 }
 
 export default Portfolio
-
+
