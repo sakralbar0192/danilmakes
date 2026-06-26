@@ -21,6 +21,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://danilmakes.ru/portfolio/report-revenue</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://danilmakes.ru/portfolio/tariff-prices</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -32,6 +37,11 @@
   </url>
   <url>
     <loc>https://danilmakes.ru/portfolio/family-meals</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://danilmakes.ru/portfolio/vball-agregator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

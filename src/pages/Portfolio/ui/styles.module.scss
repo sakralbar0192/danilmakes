@@ -61,6 +61,17 @@
     color: #555;
 }
 
+.groupNote {
+    margin: 32px 0 24px;
+    padding: 16px 20px;
+    color: #444;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    background: #f8f9fa;
+    border-left: 3px solid #1e8bc3;
+    border-radius: 0 8px 8px 0;
+}
+
 .chevron {
     flex-shrink: 0;
     width: 10px;

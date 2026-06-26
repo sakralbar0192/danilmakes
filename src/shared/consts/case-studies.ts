@@ -48,8 +48,36 @@ export const CASE_STUDIES: CaseStudy[] = [
             'Обновление продакшена через rsync-deploy.sh'
         ],
         links: [
-            { label: 'Сайт', href: 'https://danilmakes.ru', external: true },
-            { label: 'GitHub', href: 'https://github.com/sakralbar0192/danilmakes', external: true }
+            { label: 'GitHub', href: 'https://github.com/sakralbar0192/danilmakes', external: true },
+            { label: 'Сайт', href: 'https://danilmakes.ru', external: true }
+        ]
+    },
+    {
+        slug: 'report-revenue',
+        portfolioId: 'report-revenue',
+        title: 'Отчёт по доходу',
+        metaDescription: 'Кейс: аналитический экран с графиками, метриками ADR и RevPAR — портфолио-демо на MSW.',
+        lead: 'Аналитика с графиками, KPI и таблицей по категориям — демо на синтетических данных без backend.',
+        context: 'В продуктовой разработке нужен был экран аналитики дохода: ключевые метрики, динамика по периодам и детализация по категориям номеров.',
+        challenge: 'Свести несколько источников данных в понятные графики и таблицу, дать фильтры по периоду и вынести экран в автономное портфолио-демо без production API.',
+        solution: 'Vue 3 + Chart.js + Vuex, фильтры и группировка данных, MSW с синтетическими ответами. Сборка в статику под `/reportRevenue/`, встраивание через iframe на danilmakes.ru.',
+        stack: [
+            'Vue 3',
+            'Chart.js',
+            'Vuex',
+            'MSW',
+            'Vite',
+            'TypeScript'
+        ],
+        results: [
+            'Интерактивные графики загрузки, выручки и RevPAR',
+            'Таблица с группировкой по категориям номеров',
+            'Фильтры по периоду без backend в портфолио',
+            'Подход применим к дашбордам, отчётам и внутренней аналитике'
+        ],
+        links: [
+            { label: 'Демо', href: `/CodeExample/${ECodeExamples.REPORT_REVENUE}` },
+            { label: 'Портфолио', href: '/portfolio' }
         ]
     },
     {
@@ -132,6 +160,35 @@ export const CASE_STUDIES: CaseStudy[] = [
         ],
         links: [
             { label: 'Демо', href: `/CodeExample/${ECodeExamples.FAMILY_MEALS}` },
+            { label: 'Портфолио', href: '/portfolio' }
+        ]
+    },
+    {
+        slug: 'vball-agregator',
+        portfolioId: 'vball-agregator',
+        title: 'VBallAgregator',
+        metaDescription: 'Кейс: pet-project — мульти-спорт Telegram-сервис для волейбола и тенниса. Эволюция RacketMate, стадия тестирования.',
+        lead: 'От бота для теннисных кортов до агрегатора спортивных игр — pet-project с полным циклом разработки и тестирования.',
+        context: 'RacketMate закрывал запись на корты через Telegram. Идею расширили: один сервис для волейбола и большого тенниса — поиск игр, подбор по уровню и расписанию, роли игрока и организатора.',
+        challenge: 'Объединить два спортивных домена в одной архитектуре, сохранить удобный UX в Telegram, покрыть сценарии тестами и довести прототип до стадии, готовой к проверке с реальными пользователями.',
+        solution: 'Monorepo: общее ядро на TypeScript, Prisma + PostgreSQL, отдельные боты для волейбола и тенниса, scheduler-service, интеграционные и e2e-тесты. RacketMate вошёл в модуль теннисного подбора.',
+        stack: [
+            'TypeScript',
+            'Telegraf',
+            'Prisma',
+            'PostgreSQL',
+            'Jest',
+            'Docker'
+        ],
+        results: [
+            'Мульти-спорт прототип: волейбол и большой теннис в одном backend',
+            'RacketMate эволюционировал в часть VBallAgregator',
+            'Проект дошёл до стадии тестирования с регрессионным чеклистом',
+            'Дальнейшая доработка и вывод на рынок признаны нецелесообразными',
+            'Опыт применим к Telegram-ботам, записи и подбору для сервисов'
+        ],
+        links: [
+            { label: 'GitHub', href: 'https://github.com/sakralbar0192/VBallAgregator', external: true },
             { label: 'Портфолио', href: '/portfolio' }
         ]
     }

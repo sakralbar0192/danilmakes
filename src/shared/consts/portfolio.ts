@@ -14,7 +14,10 @@ export interface PortfolioItem {
     sourceLink?: string
 }
 
-export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
+export const PORTFOLIO_ENTERPRISE_UI_NOTE =
+    'Сложные интерфейсы (опыт в продуктовой разработке). Демо на синтетических данных — тот же подход применим к расписанию, заказам, каталогу и внутренним панелям.'
+
+export const PORTFOLIO_PRODUCTS_PRIMARY: PortfolioItem[] = [
     {
         id: 'danilmakes',
         title: 'danilmakes.ru',
@@ -26,6 +29,19 @@ export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
         sourceLink: 'https://github.com/sakralbar0192/danilmakes'
     },
     {
+        id: 'vball-agregator',
+        title: 'VBallAgregator',
+        category: 'bot',
+        task: 'Pet-project: объединить запись на теннис (RacketMate) и поиск волейбольных игр в один Telegram-сервис для игроков и организаторов.',
+        solution: 'Monorepo, Prisma + PostgreSQL, два бота, подбор игроков по расписанию и уровню, интеграционные и e2e-тесты.',
+        result: 'Прототип дошёл до стадии тестирования; дальнейшее развитие признано нецелесообразным.',
+        demoLink: '/portfolio/vball-agregator',
+        sourceLink: 'https://github.com/sakralbar0192/VBallAgregator'
+    }
+]
+
+export const PORTFOLIO_PRODUCTS_ENTERPRISE_UI: PortfolioItem[] = [
+    {
         id: 'report-revenue',
         title: 'Отчёт по доходу',
         category: 'product',
@@ -33,16 +49,6 @@ export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
         solution: 'Vue 3 + Chart.js + Vuex, фильтры по периоду, группировка данных, MSW с синтетическими ответами API.',
         result: 'Интерактивное демо с графиками, метриками и таблицей без backend.',
         demoLink: `/CodeExample/${ECodeExamples.REPORT_REVENUE}`
-    },
-    {
-        id: 'divisions',
-        title: 'Divisions',
-        category: 'product',
-        task: 'Модуль администрирования организационной структуры: подразделения, ресурсные пулы, назначение сотрудников и менеджеров.',
-        solution: 'TypeScript, Lit Web Components, Feature-Sliced Design, интеграция с legacy ASMX API. Демо на оригинальных компонентах с MSW-моками.',
-        result: 'Интерактивное демо со списком подразделений, CRUD, навигацией по пулам и пользователям без backend.',
-        demoLink: `/CodeExample/${ECodeExamples.DIVISIONS}`,
-        sourceLink: 'https://github.com/sakralbar0192/Divisions'
     },
     {
         id: 'tariff-prices',
@@ -54,24 +60,33 @@ export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
         demoLink: `/CodeExample/${ECodeExamples.TARIFF_PRICES}`
     },
     {
+        id: 'divisions',
+        title: 'Divisions',
+        category: 'product',
+        task: 'Модуль администрирования организационной структуры: подразделения, ресурсные пулы, назначение сотрудников и менеджеров.',
+        solution: 'TypeScript, Lit Web Components, Feature-Sliced Design, интеграция с legacy ASMX API. Демо на оригинальных компонентах с MSW-моками.',
+        result: 'Интерактивное демо со списком подразделений, CRUD, навигацией по пулам и пользователям без backend.',
+        demoLink: `/CodeExample/${ECodeExamples.DIVISIONS}`,
+        sourceLink: 'https://github.com/sakralbar0192/Divisions'
+    }
+]
+
+export const PORTFOLIO_PRODUCTS_OTHER: PortfolioItem[] = [
+    {
         id: 'family-meals',
         title: 'Family Meal Planning',
         category: 'product',
-        task: 'Семейное приложение: библиотека рецептов, недельный план питания и автоматический список покупок на выбранный период.',
+        task: 'Pet-project: библиотека рецептов, недельный план питания и автоматический список покупок на выбранный период.',
         solution: 'Vue 3, Module Federation, microservices (PHP/Go), BFF. Портфолио-демо — MSW с синтетическими данными без backend.',
         result: 'Полный UX-сценарий: рецепты → план → покупки в интерактивном iframe.',
         demoLink: `/CodeExample/${ECodeExamples.FAMILY_MEALS}`
-    },
-    {
-        id: 'racketmate',
-        title: 'RacketMate',
-        category: 'bot',
-        task: 'Упростить запись на теннисные корты — бронирование через Telegram без звонков и таблиц.',
-        solution: 'Бот на bun + Telegraf, PostgreSQL для расписания и броней, деплой в прод.',
-        result: 'Бот работает в продакшене, записи через @RacketMateBot.',
-        demoLink: 'https://t.me/RacketMateBot',
-        demoExternal: true
     }
+]
+
+export const PORTFOLIO_PRODUCTS: PortfolioItem[] = [
+    ...PORTFOLIO_PRODUCTS_PRIMARY,
+    ...PORTFOLIO_PRODUCTS_ENTERPRISE_UI,
+    ...PORTFOLIO_PRODUCTS_OTHER
 ]
 
 export const PORTFOLIO_LAYOUTS: PortfolioItem[] = [
@@ -94,35 +109,5 @@ export const PORTFOLIO_LAYOUTS: PortfolioItem[] = [
         result: 'Согласованный дизайн на всех страницах, удобная навигация по каталогу.',
         demoLink: `/CodeExample/${ECodeExamples.JEVELLERY}`,
         sourceLink: 'https://github.com/sakralbar0192/Jewellery'
-    },
-    {
-        id: 'europe',
-        title: 'Europe',
-        category: 'layout',
-        task: 'Промо-лендинг турагентства: слайдеры, табы, интерактивные формы.',
-        solution: 'Сложная страничная структура, JS-анимации, валидация полей форм.',
-        result: 'Интерактивный лендинг с рабочими UI-элементами и формами.',
-        demoLink: `/CodeExample/${ECodeExamples.EUROPE}`,
-        sourceLink: 'https://github.com/sakralbar0192/Europe'
-    },
-    {
-        id: 'smartdevice',
-        title: 'SmartDevice',
-        category: 'layout',
-        task: 'Лендинг tech-продукта с акцентом на типографику и модульную сетку.',
-        solution: 'Модульная сетка, SCSS, адаптив под breakpoints desktop/tablet/mobile.',
-        result: 'Чистая вёрстка с акцентом на контент и читаемость на всех экранах.',
-        demoLink: `/CodeExample/${ECodeExamples.SMART_DEVICE}`,
-        sourceLink: 'https://github.com/sakralbar0192/smart-device'
-    },
-    {
-        id: 'bicycle',
-        title: 'Bicycle',
-        category: 'layout',
-        task: 'Промо-сайт веломагазина с каталогом и блоком преимуществ.',
-        solution: 'Семантическая разметка, оптимизация изображений, доступные интерактивные элементы.',
-        result: 'Быстрая загрузка, понятная структура, адаптив под мобильные.',
-        demoLink: `/CodeExample/${ECodeExamples.BICYCLE}`,
-        sourceLink: 'https://github.com/sakralbar0192/uhov-bicycles'
     }
 ]

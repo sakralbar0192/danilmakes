@@ -4,13 +4,17 @@ import classes from './styles.module.scss'
 import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import { getCaseStudyBySlug } from 'shared/consts/case-studies'
+import { trackCaseStudyView, trackExternalClick } from 'shared/analytics/events'
 
-const DEFAULT_TITLE = 'danilmakes.ru — разработчик, Красноярск'
+const CASE_STUDY_SLUG_ALIASES: Record<string, string> = {
+    racketmate: 'vball-agregator'
+}
 
 const CaseStudy: FC = () => {
     const { slug } = useParams() as { slug: string }
+    const resolvedSlug = CASE_STUDY_SLUG_ALIASES[slug] ?? slug
     const dispatch = useAppDispatch()
-    const caseStudy = getCaseStudyBySlug(slug)
+    const caseStudy = getCaseStudyBySlug(resolvedSlug)
 
     useEffect(() => {
         dispatch(setCodeExampleSourceLinkHref(''))
@@ -21,7 +25,7 @@ const CaseStudy: FC = () => {
             return
         }
 
-        document.title = `${caseStudy.title} — кейс | danilmakes.ru`
+        trackCaseStudyView(caseStudy.slug)
 
         const meta = document.querySelector('meta[name="description"]')
         const previousDescription = meta?.getAttribute('content') ?? ''
@@ -31,12 +35,15 @@ const CaseStudy: FC = () => {
         }
 
         return () => {
-            document.title = DEFAULT_TITLE
             if (meta && previousDescription) {
                 meta.setAttribute('content', previousDescription)
             }
         }
     }, [caseStudy])
+
+    if (resolvedSlug !== slug) {
+        return <Navigate to={ `/portfolio/${resolvedSlug}` } replace />
+    }
 
     if (!caseStudy) {
         return <Navigate to='/portfolio' replace />
@@ -89,6 +96,10 @@ const CaseStudy: FC = () => {
                                 target='_blank'
                                 rel='noreferrer'
                                 className={ classes.externalLink }
+                                onClick={ () => trackExternalClick(
+                                    link.href.includes('github.com') ? 'github' : 'demo',
+                                    link.label,
+                                ) }
                             >
                                 { link.label }
                             </a>

@@ -7,6 +7,7 @@ import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import { getAvailabilityVariant, SITE_CONTACT } from 'shared/consts/contact'
 import { FAQ_ITEMS } from 'shared/consts/faq'
 import { PRICING_NOTE, PRICING_TIERS } from 'shared/consts/pricing'
+import { WORK_EXAMPLES } from 'shared/consts/work-examples'
 import myAvatarUrl from 'widgets/AboutMeCard/assets/myAvatar.webp'
 
 const availabilityVariant = getAvailabilityVariant(SITE_CONTACT.availability)
@@ -39,10 +40,10 @@ const AboutMe: FC = () => {
                             {' · '}
                             { SITE_CONTACT.responseTime }
                         </p>
-                        <h1 className={ classes.title }>Разработчик в Красноярске для небольших проектов</h1>
+                        <h1 className={ classes.title }>Продуктовый разработчик в Красноярске</h1>
                         <p className={ classes.lead }>
-                            Помогаю малому бизнесу и частным заказчикам запускать сайты,
-                            приложения и другие IT-решения — с понятным объёмом и честными сроками.
+                            Делаю сайты и небольшие приложения для бизнеса — с понятным объёмом,
+                            рабочим UX и честными сроками.
                         </p>
                         <div className={ classes.heroActions }>
                             <Link to='/contact' className={ classes.ctaPrimary }>
@@ -53,6 +54,25 @@ const AboutMe: FC = () => {
                             </Link>
                         </div>
                     </Col>
+                </Row>
+            </section>
+
+            <section className={ classes.section }>
+                <h2>Примеры работ</h2>
+                <p className={ classes.workExamplesIntro }>
+                    Три направления — с кейсами и демо. Подробности в портфолио.
+                </p>
+                <Row xs={ 1 } md={ 3 } className='g-3'>
+                    {WORK_EXAMPLES.map(example => (
+                        <Col key={ example.id }>
+                            <Link to={ example.href } className={ classes.workExampleCard }>
+                                <span className={ classes.workExampleService }>{ example.service }</span>
+                                <h3 className={ classes.workExampleTitle }>{ example.title }</h3>
+                                <p className={ classes.workExampleDescription }>{ example.description }</p>
+                                <span className={ classes.workExampleLink }>Смотреть кейс</span>
+                            </Link>
+                        </Col>
+                    ))}
                 </Row>
             </section>
 
@@ -89,8 +109,9 @@ const AboutMe: FC = () => {
             <section className={ classes.section }>
                 <h2>Для кого</h2>
                 <p className={ classes.text }>
-                    Малый бизнес в Красноярске и по всей России, стартапы на ранней стадии
-                    и заказчики, которым нужен один ответственный разработчик без агентской наценки.
+                    Малый бизнес и стартапы на ранней стадии в Красноярске и по России,
+                    а также команды, которым нужна доработка сложных интерфейсов —
+                    один ответственный разработчик без агентской наценки.
                 </p>
             </section>
 
