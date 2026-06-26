@@ -42,8 +42,9 @@ const AboutMe: FC = () => {
                         </p>
                         <h1 className={ classes.title }>Продуктовый разработчик в Красноярске</h1>
                         <p className={ classes.lead }>
-                            Делаю сайты и небольшие приложения для бизнеса — с понятным объёмом,
-                            рабочим UX и честными сроками.
+                            Сайты для салонов, клиник и локального бизнеса — с формой записи,
+                            уведомлениями в Telegram и понятными сроками. Также доработка сложных
+                            интерфейсов для продуктовых команд.
                         </p>
                         <div className={ classes.heroActions }>
                             <Link
@@ -77,6 +78,13 @@ const AboutMe: FC = () => {
                                     <span className={ classes.price }>{ tier.price }</span>
                                 </div>
                                 <p>{ tier.description }</p>
+                                {tier.includes && tier.includes.length > 0 && (
+                                    <ul className={ classes.pricingIncludes }>
+                                        {tier.includes.map(item => (
+                                            <li key={ item }>{ item }</li>
+                                        ))}
+                                    </ul>
+                                )}
                                 {tier.examples.length > 0 && (
                                     <div className={ classes.exampleLinks }>
                                         {tier.examples.map(example => (
