@@ -23,7 +23,7 @@ export const PORTFOLIO_PRODUCTS_PRIMARY: PortfolioItem[] = [
         title: 'danilmakes.ru',
         category: 'product',
         task: 'Запустить персональный сайт для привлечения заказов: портфолио, цены, FAQ, контакты и приём заявок без посредников.',
-        solution: 'Full-stack на своём VPS: React SPA, Express API, PostgreSQL в Docker, nginx, SSL, уведомления через Яндекс SMTP.',
+        solution: 'Сайт с портфолио, ценами, FAQ и формой заявок на своём хостинге с защищённым соединением и уведомлениями на почту.',
         result: 'Сайт на danilmakes.ru с HTTPS, форма сохраняет заявки в БД и дублирует на почту.',
         demoLink: '/',
         sourceLink: 'https://github.com/sakralbar0192/danilmakes'
@@ -51,7 +51,7 @@ export const PORTFOLIO_PRODUCTS_PRIMARY: PortfolioItem[] = [
         title: 'Форма → Telegram + почта',
         category: 'product',
         task: 'Показать интеграцию заявок: форма на сайте сразу уведомляет владельца в Telegram и на email.',
-        solution: 'Express endpoint `/api/demo-lead`, Nodemailer, Telegram Bot API, rate limit и валидация Zod.',
+        solution: 'Форма на сайте → API → уведомление в Telegram и на почту. Валидация полей и защита от спама.',
         result: 'Живое демо со схемой потока данных и тестовой отправкой.',
         demoLink: `/CodeExample/${ECodeExamples.FORM_INTEGRATION}`
     },
@@ -60,7 +60,7 @@ export const PORTFOLIO_PRODUCTS_PRIMARY: PortfolioItem[] = [
         title: 'Админка записей',
         category: 'product',
         task: 'Витринная панель для услуг: список заявок на запись, фильтр по статусу и смена статуса без backend.',
-        solution: 'Статическое демо на HTML/CSS/JS с синтетическими данными и локальным состоянием.',
+        solution: 'Статическое демо на HTML/CSS/JS с демо-данными и локальным состоянием.',
         result: 'Понятный сценарий для салона или мастера — расписание и статусы в одном экране.',
         demoLink: `/CodeExample/${ECodeExamples.BOOKING_ADMIN}`
     },
@@ -81,8 +81,8 @@ export const PORTFOLIO_PRODUCTS_ENTERPRISE_UI: PortfolioItem[] = [
         id: 'report-revenue',
         title: 'Отчёт по доходу',
         category: 'product',
-        task: 'Аналитический экран отеля: метрики ADR, RevPAR, загрузка, графики и таблица по категориям номеров.',
-        solution: 'Vue 3 + Chart.js + Vuex, фильтры по периоду, группировка данных, MSW с синтетическими ответами API.',
+        task: 'Аналитический экран: выручка, загрузка, динамика по периодам, графики и таблица по категориям.',
+        solution: 'Vue 3 + Chart.js + Vuex, фильтры по периоду, группировка данных. Метрики ADR и RevPAR — в отельном контексте.',
         result: 'Интерактивное демо с графиками, метриками и таблицей без backend.',
         demoLink: `/CodeExample/${ECodeExamples.REPORT_REVENUE}`
     },
