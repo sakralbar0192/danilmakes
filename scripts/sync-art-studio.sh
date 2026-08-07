@@ -46,6 +46,7 @@ for path in dest.glob("*.html"):
         '<a href="design-system/index.html">Дизайн-система</a>',
         '<a href="https://vk.ru/club238305506" target="_blank" rel="noopener">VK студии</a>',
     )
+    # Keep danilmakes credit as-is; drop internal questionnaire if still present
     text = text.replace(
         '<a href="gallery.html">Опросник</a>',
         "",

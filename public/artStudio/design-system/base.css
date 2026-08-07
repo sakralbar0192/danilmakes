@@ -22,10 +22,15 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Large banner-style accents — above section paints, below content */
+/* Decorative accents: fixed to small viewport so mobile chrome show/hide
+   doesn't resize the layer and "jump" bottom-anchored art. */
 .site-accents {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh; /* fallback for older browsers */
+  height: 100svh; /* stable when mobile browser chrome hides */
   z-index: 2;
   pointer-events: none;
   overflow: hidden;
@@ -34,30 +39,30 @@ body {
 .site-accents .accent {
   position: absolute;
   display: block;
-  opacity: 0.92;
+  opacity: 0.88;
   user-select: none;
   height: auto;
   object-fit: contain;
 }
 
 .site-accents .accent-sprig {
-  left: max(1.25rem, 3.5vw);
-  bottom: max(5.5rem, 11vh);
+  left: max(1rem, 2.5vw);
+  bottom: 2rem;
   width: min(120px, 14vw);
 }
 
-/* Keep off the right-side hero photos */
+/* Mid-left, clear of the bottom sprig */
 .site-accents .accent-palette {
-  left: max(1.5rem, 5vw);
+  left: max(1.5rem, 4vw);
   right: auto;
-  top: auto;
-  bottom: max(36vh, 16rem);
-  width: min(130px, 14vw);
+  top: 38%;
+  bottom: auto;
+  width: min(120px, 13vw);
 }
 
 .site-accents .accent-pencils {
-  right: max(1.25rem, 4vw);
-  bottom: max(5.5rem, 11vh);
+  right: max(1rem, 2.5vw);
+  bottom: 2rem;
   width: min(140px, 15vw);
 }
 
@@ -68,7 +73,7 @@ body {
   top: 5rem;
   width: min(220px, 26vw);
   aspect-ratio: 240 / 230;
-  opacity: 0.95;
+  opacity: 0.92;
 }
 
 .site-accents .accent-corner-bg {
@@ -91,16 +96,16 @@ body {
 
 .site-accents .accent-heart {
   left: max(1.5rem, 12vw);
-  top: max(7rem, 14vh);
+  top: 7.5rem;
   width: min(72px, 9vw);
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 .site-accents .accent-flower {
-  left: max(1.5rem, 9vw);
-  bottom: max(26vh, 12rem);
+  left: max(1.25rem, 8vw);
+  bottom: 14rem;
   width: min(88px, 11vw);
-  opacity: 0.9;
+  opacity: 0.85;
 }
 
 @media (max-width: 700px) {
@@ -111,23 +116,24 @@ body {
   }
 
   .site-accents .accent-sprig {
-    left: 1.25rem;
-    bottom: 6.5rem;
-    width: 78px;
-    opacity: 0.85;
+    left: 0.65rem;
+    bottom: 0.75rem;
+    width: 72px;
+    opacity: 0.32;
   }
 
   .site-accents .accent-pencils {
-    right: 1.25rem;
-    bottom: 6.5rem;
-    width: 86px;
-    opacity: 0.85;
+    right: 0.65rem;
+    bottom: 0.75rem;
+    width: 78px;
+    opacity: 0.32;
   }
 
   .site-accents .accent-corner {
-    right: 0.85rem;
-    top: 4.75rem;
-    width: 112px;
+    right: 0.5rem;
+    top: 4.5rem;
+    width: 80px;
+    opacity: 0.4;
   }
 }
 
