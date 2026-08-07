@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Работы учеников — Мама, я рисую</title>
+    <link rel="stylesheet" href="design-system/base.css" />
+    <link rel="stylesheet" href="site.css" />
+  </head>
+  <body class="grain">
+    <div class="site-accents" aria-hidden="true">
+      <div class="accent accent-corner">
+        <svg class="accent-corner-bg" viewBox="0 0 240 230" xmlns="http://www.w3.org/2000/svg">
+          <path
+            fill="#d8c6ea"
+            d="M240 0H62C36 0 14 16 6 40 0 58 0 88 16 118c20 36 62 82 124 90 40 5 74-12 90-40 12-20 10-48 10-78V0Z"
+          />
+        </svg>
+        <img src="assets/brand/accent-corner.png" alt="" />
+      </div>
+      <img class="accent accent-heart" src="assets/brand/accent-heart.png" alt="" />
+      <img class="accent accent-palette" src="assets/brand/accent-palette.png" alt="" />
+      <img class="accent accent-sprig" src="assets/brand/accent-sprig.png" alt="" />
+      <img class="accent accent-pencils" src="assets/brand/accent-pencils.png" alt="" />
+      <img class="accent accent-flower" src="assets/brand/accent-flower.png" alt="" />
+    </div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="Мама, я рисую — на главную">
+          <img
+            class="brand-logo"
+            src="assets/brand/logo.jpg"
+            width="64"
+            height="64"
+            alt=""
+          />
+          <span class="brand-text">
+            <span class="brand-line-1">мама,</span>
+            <span class="brand-line-2">я рисую<span class="heart">❤</span></span>
+            <small>детская студия · Красноярск</small>
+          </span>
+        </a>
+        <nav class="nav" aria-label="Основное">
+          <a href="index.html#directions">Направления</a>
+          <a href="gallery.html" aria-current="page">Работы</a>
+          <a href="index.html#prices">Цены</a>
+          <a href="index.html#contact">Контакты</a>
+        </nav>
+        <a class="btn btn-primary header-cta" href="index.html#trial">Пробное</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="container stack-lg">
+          <div class="section-head">
+            <p class="eyebrow">Галерея</p>
+            <h1>Работы и жизнь студии</h1>
+            <p class="prose">
+              Фото из сообщества
+              <a href="https://vk.ru/club238305506" target="_blank" rel="noopener">VK · Мама, я рисую</a>.
+              Фильтры помогают быстро найти детские работы или атмосферу занятий.
+            </p>
+          </div>
+
+          <div class="filters row" role="group" aria-label="Фильтр">
+            <button class="chip is-active" type="button" data-filter="all">Все</button>
+            <button class="chip" type="button" data-filter="works">Работы</button>
+            <button class="chip" type="button" data-filter="kids">Дети</button>
+            <button class="chip" type="button" data-filter="studio">Студия</button>
+            <button class="chip" type="button" data-filter="adults">Взрослые</button>
+          </div>
+
+          <div class="gallery-masonry" id="gallery">
+            <figure class="gallery-item tall" data-tags="works kids">
+              <div class="work-tile"><img src="assets/works/vk-10.jpg" alt="Ёжик в тумане" /></div>
+              <figcaption>Ёжик в тумане · гуашь</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works kids">
+              <div class="work-tile"><img src="assets/works/vk-30.jpg" alt="Морковки" /></div>
+              <figcaption>Огород · гуашь на чёрном</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works adults">
+              <div class="work-tile"><img src="assets/works/vk-15.jpg" alt="Акварель" /></div>
+              <figcaption>Акварель · зайчик и цветы</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="studio kids">
+              <div class="work-tile"><img src="assets/studio/kids-lesson.jpg" alt="Занятие с детьми" /></div>
+              <figcaption>Занятие с педагогом</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="studio kids">
+              <div class="work-tile"><img src="assets/studio/group-class.jpg" alt="Групповое занятие" /></div>
+              <figcaption>Группа за общим столом</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="studio adults">
+              <div class="work-tile"><img src="assets/studio/adult-workshop.jpg" alt="Мастер-класс для взрослых" /></div>
+              <figcaption>Мастер-класс · акварель</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="kids">
+              <div class="work-tile"><img src="assets/works/vk-35.jpg" alt="Девочка с краской на ладонях" /></div>
+              <figcaption>Творчество руками</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="studio">
+              <div class="work-tile"><img src="assets/studio/bust-reference.jpg" alt="Гипсовая голова и материалы" /></div>
+              <figcaption>Постановка и материалы</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="studio works">
+              <div class="work-tile"><img src="assets/studio/teacher-exhibition.jpg" alt="Выставка работ" /></div>
+              <figcaption>Выставка в студии</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works">
+              <div class="work-tile"><img src="assets/works/vk-04.jpg" alt="Работа ученика" /></div>
+              <figcaption>Работа ученика</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works">
+              <div class="work-tile"><img src="assets/works/vk-07.jpg" alt="Работа ученика" /></div>
+              <figcaption>Работа ученика</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works">
+              <div class="work-tile"><img src="assets/works/vk-09.jpg" alt="Работа ученика" /></div>
+              <figcaption>Работа ученика</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works kids">
+              <div class="work-tile"><img src="assets/works/vk-11.jpg" alt="Работа ученика" /></div>
+              <figcaption>Работа ученика</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works">
+              <div class="work-tile"><img src="assets/works/vk-18.jpg" alt="Работа ученика" /></div>
+              <figcaption>Работа ученика</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works">
+              <div class="work-tile"><img src="assets/works/vk-23.jpg" alt="Работа ученика" /></div>
+              <figcaption>Работа ученика</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works kids">
+              <div class="work-tile"><img src="assets/works/vk-26.jpg" alt="Работа ученика" /></div>
+              <figcaption>Работа ученика</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works">
+              <div class="work-tile"><img src="assets/works/vk-31.jpg" alt="Работа ученика" /></div>
+              <figcaption>Работа ученика</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works">
+              <div class="work-tile"><img src="assets/works/vk-34.jpg" alt="Работа ученика" /></div>
+              <figcaption>Работа ученика</figcaption>
+            </figure>
+            <figure class="gallery-item" data-tags="studio">
+              <div class="work-tile"><img src="assets/works/vk-17.jpg" alt="Процесс в студии" /></div>
+              <figcaption>Процесс</figcaption>
+            </figure>
+            <figure class="gallery-item" data-tags="studio">
+              <div class="work-tile"><img src="assets/works/vk-28.jpg" alt="Детали студии" /></div>
+              <figcaption>Детали студии</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works kids">
+              <div class="work-tile"><img src="assets/works/vk-02.jpg" alt="Работа ученика" /></div>
+              <figcaption>Работа ученика</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works">
+              <div class="work-tile"><img src="assets/works/vk-41.jpg" alt="Работа ученика" /></div>
+              <figcaption>Работа ученика</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <a href="index.html">← На главную</a>
+        <a href="https://vk.ru/club238305506" target="_blank" rel="noopener">Источник: VK</a>
+      </div>
+    </footer>
+
+    <script>
+      const chips = document.querySelectorAll(".chip");
+      const items = document.querySelectorAll(".gallery-item");
+
+      chips.forEach((chip) => {
+        chip.addEventListener("click", () => {
+          chips.forEach((c) => c.classList.remove("is-active"));
+          chip.classList.add("is-active");
+          const filter = chip.dataset.filter;
+          items.forEach((item) => {
+            const tags = item.dataset.tags.split(/\s+/);
+            item.hidden = !(filter === "all" || tags.includes(filter));
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

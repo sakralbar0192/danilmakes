@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /artStudio/
+Disallow: /p/art-studio/
 
 Sitemap: https://danilmakes.ru/sitemap.xml

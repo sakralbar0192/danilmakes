@@ -5,6 +5,7 @@ import rateLimit from 'express-rate-limit'
 import helmet from 'helmet'
 import { contactRouter } from './routes/contact.js'
 import { demoLeadRouter } from './routes/demo-lead.js'
+import { previewArtStudioRouter } from './routes/preview-art-studio.js'
 
 dotenv.config({ path: process.env.ENV_FILE ?? '../.env' })
 
@@ -13,7 +14,7 @@ const port = Number(process.env.PORT ?? 3000)
 const corsOrigin = process.env.CORS_ORIGIN ?? 'http://localhost:5173'
 
 app.use(helmet())
-app.use(cors({ origin: corsOrigin }))
+app.use(cors({ origin: corsOrigin, credentials: true }))
 app.use(express.json({ limit: '32kb' }))
 
 const contactLimiter = rateLimit({
@@ -24,12 +25,21 @@ const contactLimiter = rateLimit({
     message: { message: 'Слишком много запросов. Попробуйте позже.' }
 })
 
+const previewUnlockLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 20,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { message: 'Слишком много попыток. Попробуйте позже.' }
+})
+
 app.get('/api/health', (_req, res) => {
     res.json({ status: 'ok' })
 })
 
 app.use('/api/contact', contactLimiter, contactRouter)
 app.use('/api/demo-lead', contactLimiter, demoLeadRouter)
+app.use('/api/preview/art-studio', previewUnlockLimiter, previewArtStudioRouter)
 
 app.listen(port, () => {
     console.log(`API listening on port ${port}`)

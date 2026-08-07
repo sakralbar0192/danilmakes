@@ -1,0 +1,91 @@
+/**
+ * Art Studio Design Tokens
+ * Direction: "atelier" — paper, charcoal ink, pigment accents.
+ * Use these variables in mockups, site pages, and print materials.
+ */
+
+:root {
+  /* ——— Surfaces (paper) ——— */
+  --color-paper: #f7f3eb;
+  --color-paper-warm: #f0e9de;
+  --color-paper-deep: #e5dccf;
+  --color-ink: #3a342c;
+  --color-ink-soft: #5a534a;
+  --color-ink-muted: #7a7268;
+  --color-line: rgba(90, 83, 74, 0.14);
+  --color-line-strong: rgba(90, 83, 74, 0.28);
+
+  /* ——— Brand pastels (from logo / banner) ——— */
+  --color-brand-blue: #6b9bc2;
+  --color-brand-blue-deep: #547fa3;
+  --color-brand-pink: #e07b86;
+  --color-brand-pink-deep: #c96570;
+  --color-brand-green: #8fb89a;
+  --color-brand-lilac: #c9b6e0;
+  --color-brand-yellow: #f0d77a;
+
+  /* ——— Pigments / CTA ——— */
+  --color-cadmium: var(--color-brand-pink);
+  --color-cadmium-deep: var(--color-brand-pink-deep);
+  --color-ultramarine: var(--color-brand-blue);
+  --color-ochre: #d4a84b;
+  --color-sap: var(--color-brand-green);
+
+  /* ——— Semantic ——— */
+  --color-bg: var(--color-paper);
+  --color-bg-elevated: #fffcf7;
+  --color-fg: var(--color-ink);
+  --color-fg-muted: var(--color-ink-muted);
+  --color-accent: var(--color-cadmium);
+  --color-accent-hover: var(--color-cadmium-deep);
+  --color-focus: var(--color-brand-blue);
+
+  /* ——— Typography ——— */
+  --font-display: "Nunito", "Onest", "Segoe UI", sans-serif;
+  --font-body: "Onest", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --text-hero: clamp(2.75rem, 6vw, 5.5rem);
+  --text-h1: clamp(2rem, 3.5vw, 3.25rem);
+  --text-h2: clamp(1.5rem, 2.4vw, 2.25rem);
+  --text-h3: clamp(1.125rem, 1.5vw, 1.375rem);
+  --text-body: 1.0625rem;
+  --text-small: 0.875rem;
+  --text-caption: 0.75rem;
+
+  --leading-tight: 1.05;
+  --leading-snug: 1.25;
+  --leading-body: 1.6;
+
+  --tracking-display: -0.02em;
+  --tracking-label: 0.08em;
+
+  /* ——— Space ——— */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+
+  --page-pad: clamp(1.25rem, 4vw, 3.5rem);
+  --content-max: 72rem;
+  --prose-max: 38rem;
+
+  /* ——— Radius / elevation ——— */
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+  /* Prefer flat surfaces; soft radius only for interactive controls */
+
+  /* ——— Motion ——— */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 180ms;
+  --duration-med: 420ms;
+
+  /* ——— Brand names (placeholders until client confirms) ——— */
+  --brand-name: "Мама, я рисую";
+}

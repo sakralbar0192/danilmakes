@@ -1,0 +1,398 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&family=Onest:wght@400;500;600;700&display=swap");
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-fg);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Large banner-style accents — above section paints, below content */
+.site-accents {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.site-accents .accent {
+  position: absolute;
+  display: block;
+  opacity: 0.92;
+  user-select: none;
+  height: auto;
+  object-fit: contain;
+}
+
+.site-accents .accent-sprig {
+  left: max(1.25rem, 3.5vw);
+  bottom: max(5.5rem, 11vh);
+  width: min(120px, 14vw);
+}
+
+/* Keep off the right-side hero photos */
+.site-accents .accent-palette {
+  left: max(1.5rem, 5vw);
+  right: auto;
+  top: auto;
+  bottom: max(36vh, 16rem);
+  width: min(130px, 14vw);
+}
+
+.site-accents .accent-pencils {
+  right: max(1.25rem, 4vw);
+  bottom: max(5.5rem, 11vh);
+  width: min(140px, 15vw);
+}
+
+.site-accents .accent-corner {
+  position: absolute;
+  right: max(0.75rem, 2vw);
+  /* Below sticky header so it isn't clipped by the opaque bar */
+  top: 5rem;
+  width: min(220px, 26vw);
+  aspect-ratio: 240 / 230;
+  opacity: 0.95;
+}
+
+.site-accents .accent-corner-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+}
+
+.site-accents .accent-corner img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 1;
+}
+
+.site-accents .accent-heart {
+  left: max(1.5rem, 12vw);
+  top: max(7rem, 14vh);
+  width: min(72px, 9vw);
+  opacity: 0.9;
+}
+
+.site-accents .accent-flower {
+  left: max(1.5rem, 9vw);
+  bottom: max(26vh, 12rem);
+  width: min(88px, 11vw);
+  opacity: 0.9;
+}
+
+@media (max-width: 700px) {
+  .site-accents .accent-palette,
+  .site-accents .accent-heart,
+  .site-accents .accent-flower {
+    display: none;
+  }
+
+  .site-accents .accent-sprig {
+    left: 1.25rem;
+    bottom: 6.5rem;
+    width: 78px;
+    opacity: 0.85;
+  }
+
+  .site-accents .accent-pencils {
+    right: 1.25rem;
+    bottom: 6.5rem;
+    width: 86px;
+    opacity: 0.85;
+  }
+
+  .site-accents .accent-corner {
+    right: 0.85rem;
+    top: 4.75rem;
+    width: 112px;
+  }
+}
+
+/* Content sits above doodle accents; section backgrounds stay below.
+   Include stacking parents (e.g. .hero-media) — child z-index cannot escape them. */
+.site-header,
+.hero-media,
+.hero-content,
+.hero-art,
+.section-head,
+.audience-list,
+.works-rail,
+.atmosphere-photo,
+.atmosphere-grid > .stack,
+.steps,
+.teachers,
+.price-board,
+.schedule-list,
+.trial-grid > :not(.trial-form),
+.trial-form,
+.contact-grid > .stack,
+.contact-photo,
+.gallery-masonry,
+.filters,
+.brand,
+.nav,
+.header-cta,
+.site-footer .footer-inner,
+.btn {
+  position: relative;
+  z-index: 3;
+}
+
+.site-header {
+  z-index: 50;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--color-ultramarine);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--color-cadmium);
+}
+
+h1,
+h2,
+h3,
+.display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
+  color: var(--color-ink);
+}
+
+h1 {
+  font-size: var(--text-h1);
+  margin: 0 0 var(--space-4);
+}
+
+h2 {
+  font-size: var(--text-h2);
+  margin: 0 0 var(--space-3);
+}
+
+h3 {
+  font-size: var(--text-h3);
+  line-height: var(--leading-snug);
+  margin: 0 0 var(--space-2);
+}
+
+p {
+  margin: 0 0 var(--space-4);
+  color: var(--color-ink-soft);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  margin: 0 0 var(--space-3);
+}
+
+.container {
+  width: min(100% - 2 * var(--page-pad), var(--content-max));
+  margin-inline: auto;
+}
+
+.prose {
+  max-width: var(--prose-max);
+}
+
+/* ——— Buttons ——— */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.35rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: #fffaf5;
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+  color: #fffaf5;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-line-strong);
+}
+
+.btn-ghost:hover {
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+}
+
+.btn-link {
+  background: transparent;
+  color: var(--color-ink);
+  border: none;
+  padding-inline: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  min-height: auto;
+}
+
+/* ——— Forms ——— */
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.field label {
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  color: var(--color-ink);
+  font: inherit;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: 2px solid color-mix(in srgb, var(--color-focus) 45%, transparent);
+  outline-offset: 1px;
+  border-color: var(--color-focus);
+}
+
+.field textarea {
+  min-height: 6.5rem;
+  resize: vertical;
+}
+
+.form-note {
+  font-size: var(--text-caption);
+  color: var(--color-ink-muted);
+}
+
+/* ——— Layout helpers ——— */
+.section {
+  padding-block: var(--space-8);
+}
+
+.section-tight {
+  padding-block: var(--space-7);
+}
+
+.stack {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.stack-lg {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Soft paper grain over pastel doodles */
+.grain::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

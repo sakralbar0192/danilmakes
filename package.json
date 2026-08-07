@@ -17,6 +17,7 @@
         "build:divisions": "cd demos/divisions && npm ci && npm run build && cp public/mockServiceWorker.js dist/mockServiceWorker.js && rm -rf ../../public/divisions && cp -r dist ../../public/divisions",
         "build:family-meals": "cd ../family_meal-planning/frontend && npm ci && npm run build:demo && rm -rf ../../danilmakes/public/familyMeals && cp -r dist-demo/familyMeals ../../danilmakes/public/familyMeals",
         "build:all-demos": "bash scripts/build-all-demos.sh",
+        "sync:art-studio": "bash scripts/sync-art-studio.sh",
         "compress:layout-images": "node scripts/compress-layout-images.mjs"
     },
     "dependencies": {
