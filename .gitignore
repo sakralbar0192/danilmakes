@@ -18,6 +18,10 @@ dist-ssr
 docker/nginx/htpasswd/artstudio
 docker/nginx/htpasswd/*.credentials
 
+# Generated on VPS by init-ssl / rsync-deploy (do not wipe with rsync --delete)
+docker/nginx/conf.d/site.conf
+docker/nginx/conf.d/site.http.conf.disabled
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
