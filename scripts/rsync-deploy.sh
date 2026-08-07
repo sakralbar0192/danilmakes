@@ -13,6 +13,7 @@ rsync -avz --delete \
   --exclude server/node_modules \
   --exclude .git \
   --exclude dist \
+  --exclude tmp \
   --exclude .env \
   --exclude docker/nginx/conf.d/site.conf \
   --exclude docker/nginx/conf.d/site.http.conf.disabled \
