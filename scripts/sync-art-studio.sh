@@ -21,6 +21,9 @@ cp "$SRC/examples/site.css" "$DEST/site.css"
 cp "$SRC/design-system/base.css" "$DEST/design-system/"
 cp "$SRC/design-system/tokens.css" "$DEST/design-system/"
 cp -a "$SRC/assets/brand" "$SRC/assets/works" "$SRC/assets/studio" "$DEST/assets/"
+# nginx (non-root) must be able to read static files
+find "$DEST" -type f -exec chmod a+r {} +
+find "$DEST" -type d -exec chmod a+rx {} +
 
 python3 - "$DEST" <<'PY'
 import sys
