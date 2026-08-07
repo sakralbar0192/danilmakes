@@ -39,7 +39,9 @@ app.get('/api/health', (_req, res) => {
 
 app.use('/api/contact', contactLimiter, contactRouter)
 app.use('/api/demo-lead', contactLimiter, demoLeadRouter)
-app.use('/api/preview/art-studio', previewUnlockLimiter, previewArtStudioRouter)
+// Rate-limit only password attempts — /auth is hit by nginx once per asset
+app.use('/api/preview/art-studio/unlock', previewUnlockLimiter)
+app.use('/api/preview/art-studio', previewArtStudioRouter)
 
 app.listen(port, () => {
     console.log(`API listening on port ${port}`)
