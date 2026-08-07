@@ -2,7 +2,7 @@
 
 Счётчик: **110107124** ([metrika.yandex.ru](https://metrika.yandex.ru))
 
-**Связанные документы:** [IMPROVEMENT-PLAN.md](./IMPROVEMENT-PLAN.md) (фаза 10.3)
+**Связанные документы:** [IMPROVEMENT-PLAN.md](./IMPROVEMENT-PLAN.md) (фаза 10.3) · [SEO.md](./SEO.md)
 
 ---
 
@@ -268,6 +268,41 @@ M4 сегменты              │ Server-side лог заявок
 - Мост iframe: `src/app/hooks/useDemoAnalyticsBridge.ts`
 - Vue-демо: `demos/shared/analytics/demo-analytics.ts`
 - Статика (после M1): `public/shared/demo-analytics.js`
+
+---
+
+## Выгрузка через API
+
+Локальный скрипт (токен только в `.env`, не в git):
+
+```bash
+# .env
+YANDEX_METRIKA_TOKEN=...
+YANDEX_METRIKA_COUNTER_ID=110107124
+
+npm run metrika:fetch
+# или: npm run metrika:fetch -- --date1=2025-01-01 --date2=today
+```
+
+Файлы (в `.gitignore` → `tmp/`):
+
+| Файл | Содержимое |
+| ---- | ---------- |
+| `tmp/metrika/report-summary.json` | Обзор + сжатые таблицы — читать его |
+| `tmp/metrika/report-full.json` | Сырые ответы Reports API |
+
+### Как читать summary
+
+1. **overview** — визиты, пользователи, отказы, длительность, глубина. При сильном engagement и малом Search — узкое место discovery, не UX.
+2. **trafficSources / searchEngines** — есть ли органика; Direct ≫ Search = почти только прямые заходы и свои визиты.
+3. **regions + newVsReturning** — Красноярск + длинные returning-сессии → фильтруйте себя в Метрике, иначе KPI врут.
+4. **entryPages / popularPages** — куда заходят и что реально листают (кейсы vs демо).
+5. **goalReaches** — воронка интереса → контакт:
+   - интерес: `case_study_view`, `demo_open`, `cta_click`, `pricing_example_click`
+   - конверсия: `contact_submit`, `demo_lead_submit`
+6. **devices** — доля mobile; отказы 0% при малой выборке ненадёжны.
+
+Целевая картина после фильтров: рост Search/Link, рост `contact_submit` относительно `case_study_view`. SEO-чеклист: [SEO.md](./SEO.md).
 
 ---
 

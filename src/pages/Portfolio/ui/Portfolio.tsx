@@ -15,7 +15,7 @@ import {
 } from 'shared/consts/portfolio'
 import { getCaseStudyByPortfolioId } from 'shared/consts/case-studies'
 import { prefetchDemo } from 'shared/lib/prefetchDemo'
-import { trackExternalClick } from 'shared/analytics/events'
+import { trackExternalClick, trackCtaClick } from 'shared/analytics/events'
 
 const trackPortfolioExternalClick = (item: PortfolioItem, target: 'github' | 'demo') => {
     trackExternalClick(target, item.id)
@@ -204,12 +204,20 @@ const Portfolio: FC = () => {
             </PortfolioSection>
 
             <div className={ classes.cta }>
-                <p>Нужен похожий проект?</p>
+                <p>Понравился формат — лендинг, админка или интеграция?</p>
                 <div className={ classes.ctaLinks }>
-                    <Link to='/contact' className={ classes.ctaButton }>
-                        Обсудить задачу
+                    <Link
+                        to='/contact'
+                        className={ classes.ctaButton }
+                        onClick={ () => trackCtaClick('portfolio', '/contact') }
+                    >
+                        Обсудить такой же проект
                     </Link>
-                    <Link to='/for-freelance' className={ classes.ctaSecondary }>
+                    <Link
+                        to='/for-freelance'
+                        className={ classes.ctaSecondary }
+                        onClick={ () => trackCtaClick('portfolio', '/for-freelance') }
+                    >
                         Для бирж
                     </Link>
                 </div>

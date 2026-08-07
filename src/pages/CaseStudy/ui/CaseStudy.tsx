@@ -4,7 +4,7 @@ import classes from './styles.module.scss'
 import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import { getCaseStudyBySlug } from 'shared/consts/case-studies'
-import { trackCaseStudyView, trackExternalClick } from 'shared/analytics/events'
+import { trackCaseStudyView, trackCtaClick, trackExternalClick } from 'shared/analytics/events'
 
 const CASE_STUDY_SLUG_ALIASES: Record<string, string> = {
     racketmate: 'vball-agregator'
@@ -26,19 +26,6 @@ const CaseStudy: FC = () => {
         }
 
         trackCaseStudyView(caseStudy.slug)
-
-        const meta = document.querySelector('meta[name="description"]')
-        const previousDescription = meta?.getAttribute('content') ?? ''
-
-        if (meta) {
-            meta.setAttribute('content', caseStudy.metaDescription)
-        }
-
-        return () => {
-            if (meta && previousDescription) {
-                meta.setAttribute('content', previousDescription)
-            }
-        }
     }, [caseStudy])
 
     if (resolvedSlug !== slug) {
@@ -48,6 +35,10 @@ const CaseStudy: FC = () => {
     if (!caseStudy) {
         return <Navigate to='/portfolio' replace />
     }
+
+    const demoLink = caseStudy.links.find(
+        link => !link.external && link.href.startsWith('/CodeExample/'),
+    )
 
     return (
         <div className={ classes.wrapper }>
@@ -129,10 +120,25 @@ const CaseStudy: FC = () => {
             </section>
 
             <div className={ classes.cta }>
-                <p>Нужен похожий проект?</p>
-                <Link to='/contact' className={ classes.ctaButton }>
-                    Обсудить задачу
-                </Link>
+                <p>{ caseStudy.ctaPrompt ?? 'Нужен похожий проект?' }</p>
+                <div className={ classes.ctaActions }>
+                    <Link
+                        to='/contact'
+                        className={ classes.ctaButton }
+                        onClick={ () => trackCtaClick('case_study', '/contact') }
+                    >
+                        Обсудить такой же проект
+                    </Link>
+                    {demoLink && (
+                        <Link
+                            to={ demoLink.href }
+                            className={ classes.ctaSecondary }
+                            onClick={ () => trackCtaClick('case_study', demoLink.href) }
+                        >
+                            Открыть демо
+                        </Link>
+                    )}
+                </div>
             </div>
         </div>
     )

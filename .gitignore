@@ -13,6 +13,7 @@ dist
 dist-ssr
 *.local
 .env
+tmp/
 
 # Private preview credentials (nginx auth_basic)
 docker/nginx/htpasswd/artstudio

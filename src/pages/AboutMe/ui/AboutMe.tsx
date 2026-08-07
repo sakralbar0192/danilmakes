@@ -135,14 +135,14 @@ const AboutMe: FC = () => {
                         className={ classes.ctaPrimary }
                         onClick={ () => trackCtaClick('cta_block', '/contact') }
                     >
-                        Написать
+                        Обсудить проект
                     </Link>
                     <Link
                         to='/portfolio'
                         className={ classes.ctaSecondary }
                         onClick={ () => trackCtaClick('cta_block', '/portfolio') }
                     >
-                        Портфолио
+                        Смотреть работы
                     </Link>
                 </div>
             </section>

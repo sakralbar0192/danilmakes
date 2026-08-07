@@ -18,7 +18,8 @@
         "build:family-meals": "cd ../family_meal-planning/frontend && npm ci && npm run build:demo && rm -rf ../../danilmakes/public/familyMeals && cp -r dist-demo/familyMeals ../../danilmakes/public/familyMeals",
         "build:all-demos": "bash scripts/build-all-demos.sh",
         "sync:art-studio": "bash scripts/sync-art-studio.sh",
-        "compress:layout-images": "node scripts/compress-layout-images.mjs"
+        "compress:layout-images": "node scripts/compress-layout-images.mjs",
+        "metrika:fetch": "node scripts/fetch-metrika.mjs"
     },
     "dependencies": {
         "@reduxjs/toolkit": "^1.9.5",

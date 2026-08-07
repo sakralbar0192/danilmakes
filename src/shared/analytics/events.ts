@@ -52,6 +52,9 @@ export function trackPricingExampleClick(tier: string, href: string) {
     reachGoal(METRIKA_GOALS.PRICING_EXAMPLE_CLICK, { tier, href })
 }
 
-export function trackCtaClick(place: 'hero' | 'cta_block' | 'for_freelance', target: string) {
+export function trackCtaClick(
+    place: 'hero' | 'cta_block' | 'for_freelance' | 'case_study' | 'portfolio',
+    target: string,
+) {
     reachGoal(METRIKA_GOALS.CTA_CLICK, { place, target })
 }
