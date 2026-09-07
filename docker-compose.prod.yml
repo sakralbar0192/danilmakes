@@ -20,7 +20,9 @@ services:
       retries: 5
 
   api:
-    build: ./server
+    build:
+      context: .
+      dockerfile: server/Dockerfile
     restart: unless-stopped
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-danilmakes}
@@ -35,10 +37,61 @@ services:
       TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID:-}
       ART_STUDIO_PREVIEW_PASSWORD: ${ART_STUDIO_PREVIEW_PASSWORD:-}
       ART_STUDIO_PREVIEW_SECRET: ${ART_STUDIO_PREVIEW_SECRET:-}
+      DEMO_TARIFF_FIXTURES: /app/fixtures/tariffs
       NODE_ENV: production
     depends_on:
       postgres:
         condition: service_healthy
+
+  # Art-studio CMS — frozen by default (saves ~400MB RAM on 1GB VPS).
+  # Unfreeze: docker compose --profile art-studio up -d directus
+  # Then restore nginx art-studio/cms locations from docs/DIRECTUS-DEMO.md
+  directus:
+    profiles: ['art-studio']
+    image: directus/directus:11.5.1
+    restart: unless-stopped
+    expose:
+      - '8055'
+    ports:
+      # Localhost-only for setup scripts on the VPS
+      - '127.0.0.1:8055:8055'
+    environment:
+      SECRET: ${DIRECTUS_SECRET}
+      KEY: ${DIRECTUS_KEY}
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL:-admin@danilmakes.ru}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+      PUBLIC_URL: ${DIRECTUS_PUBLIC_URL:-https://danilmakes.ru/cms}
+      DB_CLIENT: sqlite3
+      DB_FILENAME: /directus/database/data.db
+      WEBSOCKETS_ENABLED: 'false'
+      CACHE_ENABLED: 'false'
+      TELEMETRY: 'false'
+      EMAIL_VERIFY_SETUP: 'false'
+      MARKETPLACE_TRUST: sandbox
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: ${CORS_ORIGIN:-https://danilmakes.ru}
+      # Keep Node heap small on 1 GB VPS
+      NODE_OPTIONS: --max-old-space-size=256
+    volumes:
+      - directus-database:/directus/database
+      - directus-uploads:/directus/uploads
+      - directus-extensions:/directus/extensions
+    # compose (non-swarm): deploy.resources is ignored — use mem_limit
+    mem_limit: 400m
+    mem_reservation: 192m
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'wget',
+          '-q',
+          '--spider',
+          'http://127.0.0.1:8055/server/health',
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
 
   nginx:
     image: nginx:1.27-alpine
@@ -67,3 +120,6 @@ volumes:
   pgdata:
   certbot-www:
   certbot-certs:
+  directus-database:
+  directus-uploads:
+  directus-extensions:

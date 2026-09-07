@@ -5,6 +5,11 @@ upstream api {
     server api:3000;
 }
 
+# Art-studio Directus — frozen (profile art-studio). Uncomment when unfreezing:
+# upstream directus {
+#     server directus:8055;
+# }
+
 server {
     listen 443 ssl;
     http2 on;
@@ -36,23 +41,25 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
-    # Cookie check for private art-studio preview (password-only gate at /p/art-studio/)
-    location = /__auth_art_studio {
-        internal;
-        proxy_pass http://api/api/preview/art-studio/auth;
-        proxy_pass_request_body off;
-        proxy_set_header Content-Length "";
-        proxy_set_header Cookie $http_cookie;
+    # Art-studio preview + CMS — frozen to free VPS RAM (~400MB Directus).
+    # Data volumes are kept; see docs/DIRECTUS-DEMO.md to unfreeze.
+    location ^~ /p/art-studio/ {
+        default_type text/plain;
+        return 503 'Art studio preview is temporarily frozen.\n';
     }
 
     location ^~ /artStudio/ {
-        auth_request /__auth_art_studio;
-        error_page 401 = @art_studio_gate;
-        try_files $uri $uri/ =404;
+        default_type text/plain;
+        return 503 'Art studio demo is temporarily frozen.\n';
     }
 
-    location @art_studio_gate {
-        return 302 /p/art-studio/;
+    location = /cms {
+        return 302 /cms/;
+    }
+
+    location ^~ /cms/ {
+        default_type text/plain;
+        return 503 'Art studio CMS is temporarily frozen.\n';
     }
 
     location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2)$ {

@@ -1,5 +1,7 @@
 # Закрытый пример изостудии «Мама, я рисую»
 
+> **Статус:** frozen на проде (Directus не запущен, nginx → 503). См. [DIRECTUS-DEMO.md](./DIRECTUS-DEMO.md).
+
 ## Для заказчика
 
 1. Ссылка (открывает только поле пароля): **https://danilmakes.ru/p/art-studio/**
