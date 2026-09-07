@@ -1,5 +1,10 @@
 /// <reference types="vite/client" />
 
-interface Window {
-    ym?: (id: number, method: string, ...args: unknown[]) => void
+interface ImportMetaEnv {
+    readonly VITE_SITE_MODE?: string
+    readonly VITE_DEMO_API?: string
+}
+
+interface ImportMeta {
+    readonly env: ImportMetaEnv
 }

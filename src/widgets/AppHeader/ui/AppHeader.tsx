@@ -1,112 +1,86 @@
 import { useState } from 'react'
-
 import Offcanvas from 'react-bootstrap/Offcanvas'
-
 import Burger_menu from '../assets/menu_burger.svg'
-
 import classes from './style.module.scss'
-
-import { NavLink } from 'react-router-dom'
-
+import { Link, NavLink } from 'react-router-dom'
 import { useAppSelector } from 'app/hooks'
+import { SITE_CONTENT } from 'shared/content'
+import { SITE_CONTACT } from 'shared/consts/contact'
 
 export const AppHeader = () => {
-
     const codeExampleSourceLinkHref = useAppSelector(state => state.main.codeExampleSourceLinkHref)
-
     const [show, setShow] = useState(false)
-
     const handleClose = () => setShow(false)
-
     const handleShow = () => setShow(true)
 
     return (
-
-        <div className={ classes.header } data-app-header>
-
+        <header className={ classes.header } data-app-header>
             <button
-
                 type='button'
-
                 onClick={ handleShow }
-
                 className={ classes.burgerMenuButton }
-
                 aria-label='Меню'
-
             >
-
                 <Burger_menu />
-
             </button>
 
-            {codeExampleSourceLinkHref && (
+            <Link to='/' className={ classes.brand } onClick={ handleClose }>
+                { SITE_CONTENT.hero.brand }
+            </Link>
 
-                <a href={ codeExampleSourceLinkHref } target='_blank' rel='noreferrer'>
+            <nav className={ classes.desktopNav } aria-label='Основная навигация'>
+                {SITE_CONTENT.nav.map(item => (
+                    <NavLink
+                        key={ item.to }
+                        className={ ({ isActive }) => (isActive ? classes.active : undefined) }
+                        to={ item.to }
+                        end={ item.end }
+                    >
+                        { item.label }
+                    </NavLink>
+                ))}
+            </nav>
 
-                    Исходный код
-
+            <div className={ classes.headerAside }>
+                {codeExampleSourceLinkHref && (
+                    <a href={ codeExampleSourceLinkHref } target='_blank' rel='noreferrer'>
+                        Исходный код
+                    </a>
+                )}
+                <a
+                    href={ SITE_CONTACT.github }
+                    target='_blank'
+                    rel='noreferrer'
+                    className={ classes.ghostLink }
+                >
+                    GitHub
                 </a>
-
-            )}
+            </div>
 
             <Offcanvas show={ show } onHide={ handleClose }>
-
                 <Offcanvas.Header closeButton />
-
                 <Offcanvas.Body className={ classes.sidebarContainer }>
-
-                    <NavLink
-
-                        className={ ({ isActive, isPending }) => isPending ? 'pending' : isActive ? classes.active : '' }
-
-                        to='/'
-
-                        end
-
-                        onClick={ handleClose }
-
-                    >
-
-                        Главная
-
-                    </NavLink>
-
-                    <NavLink
-
-                        className={ ({ isActive, isPending }) => isPending ? 'pending' : isActive ? classes.active : '' }
-
-                        to='/portfolio'
-
-                        onClick={ handleClose }
-
-                    >
-
-                        Портфолио
-
-                    </NavLink>
-
-                    <NavLink
-
-                        className={ ({ isActive, isPending }) => isPending ? 'pending' : isActive ? classes.active : '' }
-
-                        to='/contact'
-
-                        onClick={ handleClose }
-
-                    >
-
-                        Контакты
-
-                    </NavLink>
-
+                    {SITE_CONTENT.nav.map(item => (
+                        <NavLink
+                            key={ item.to }
+                            className={ ({ isActive, isPending }) =>
+                                (isPending ? 'pending' : isActive ? classes.active : '')
+                            }
+                            to={ item.to }
+                            end={ item.end }
+                            onClick={ handleClose }
+                        >
+                            { item.label }
+                        </NavLink>
+                    ))}
+                    <a href={ SITE_CONTACT.github } target='_blank' rel='noreferrer' onClick={ handleClose }>
+                        GitHub
+                    </a>
+                    <a href={ SITE_CONTACT.telegramUrl } target='_blank' rel='noreferrer' onClick={ handleClose }>
+                        Telegram
+                    </a>
                 </Offcanvas.Body>
-
             </Offcanvas>
-
-        </div>
-
+        </header>
     )
-
 }
-

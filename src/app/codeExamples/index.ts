@@ -15,7 +15,9 @@ export const ECodeExamples = {
     LOCAL_LANDING: 'localLanding',
     CLINIC_LANDING: 'clinicLanding',
     FORM_INTEGRATION: 'formIntegration',
-    BOOKING_ADMIN: 'bookingAdmin'
+    BOOKING_ADMIN: 'bookingAdmin',
+    XLSX_PIPELINE: 'xlsxPipeline',
+    ONCE_MIGRATION: 'onceMigration'
 } as const
 export type ECodeExamples = TValueOf<typeof ECodeExamples>
 

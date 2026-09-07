@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate, useParams } from 'react-router-dom'
 import { ErrorBoundary } from 'pages/ErrorBoundary'
 import App from 'app/App'
 import { AboutMe } from 'pages/AboutMe'
@@ -10,6 +10,19 @@ import { Portfolio } from 'pages/Portfolio'
 import { CaseStudy } from 'pages/CaseStudy'
 import { ForFreelance } from 'pages/ForFreelance'
 import { PortfolioPrint } from 'pages/PortfolioPrint'
+import { Work } from 'pages/Work'
+import { WorkCase } from 'pages/WorkCase'
+import { PORTFOLIO_TO_WORK_SLUG } from 'shared/consts/work-cases'
+import { isHiringMode } from 'shared/config/siteMode'
+
+function PortfolioSlugRedirect() {
+    const { slug = '' } = useParams()
+    const mapped = PORTFOLIO_TO_WORK_SLUG[slug]
+    if (mapped) {
+        return <Navigate to={ `/work/${mapped}` } replace />
+    }
+    return <Navigate to='/work' replace />
+}
 
 const router = createBrowserRouter([
     {
@@ -21,12 +34,20 @@ const router = createBrowserRouter([
                 element: <AboutMe />
             },
             {
+                path: 'work/:slug',
+                element: <WorkCase />
+            },
+            {
+                path: 'work',
+                element: <Work />
+            },
+            {
                 path: 'portfolio/:slug',
-                element: <CaseStudy />
+                element: isHiringMode ? <PortfolioSlugRedirect /> : <CaseStudy />
             },
             {
                 path: 'portfolio',
-                element: <Portfolio />
+                element: isHiringMode ? <Navigate to='/work' replace /> : <Portfolio />
             },
             {
                 path: 'contact',
@@ -34,11 +55,11 @@ const router = createBrowserRouter([
             },
             {
                 path: 'for-freelance',
-                element: <ForFreelance />
+                element: isHiringMode ? <Navigate to='/contact' replace /> : <ForFreelance />
             },
             {
                 path: 'portfolio-print',
-                element: <PortfolioPrint />
+                element: isHiringMode ? <Navigate to='/work' replace /> : <PortfolioPrint />
             },
             {
                 path: 'PostsList/UserInfo/:userId',
@@ -47,6 +68,10 @@ const router = createBrowserRouter([
             {
                 path: 'PostsList',
                 element: <Main />
+            },
+            {
+                path: 'demo/:choosenExample',
+                element: <CodeExample />
             },
             {
                 path: 'CodeExample/:choosenExample',

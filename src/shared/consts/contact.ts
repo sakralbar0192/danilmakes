@@ -1,3 +1,5 @@
+import { SITE_CONTENT } from 'shared/content'
+
 export const SITE_CONTACT = {
     name: 'Данил Ухов',
     city: 'Красноярск',
@@ -5,11 +7,12 @@ export const SITE_CONTACT = {
     phone: '+7 (950) 103-73-48',
     telegram: '@danilmakes',
     telegramUrl: 'https://t.me/danilmakes',
-    status: 'Принимаю небольшие заказы',
-    availability: 'Свободен',
-    availabilityDetail: '',
-    responseTime: 'Отвечаю за 1–2 рабочих дня'
-} as const
+    github: 'https://github.com/sakralbar0192',
+    status: SITE_CONTENT.contact.status,
+    availability: SITE_CONTENT.contact.availability,
+    availabilityDetail: SITE_CONTENT.contact.availabilityDetail,
+    responseTime: SITE_CONTENT.contact.responseTime,
+}
 
 export type AvailabilityVariant = 'free' | 'limited' | 'busy'
 

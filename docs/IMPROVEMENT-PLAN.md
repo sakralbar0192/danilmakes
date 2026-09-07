@@ -1,12 +1,14 @@
 # План улучшений [danilmakes.ru](https://danilmakes.ru)
 
-Стратегический план для выхода на фриланс: продуктовый разработчик без коммерческих кейсов под малый бизнес.
+**Актуально (сен 2026):** dual-mode hiring ↔ freelance. По умолчанию — hiring-портфолио с Bnovo-кейсами и live demo API. Freelance-пакет сохраняется для обратного флипа (`VITE_SITE_MODE=freelance`). Подробности: [DUAL-MODE.md](./DUAL-MODE.md).
 
-**Связанные документы:** [ROADMAP.md](./ROADMAP.md) · [SPEC-BACKLOG.md](./SPEC-BACKLOG.md) · [METRIKA.md](./METRIKA.md)
+Исторический план ниже — про SMB/freelance-волну (июнь 2026); не удалять как справочник.
+
+**Связанные документы:** [ROADMAP.md](./ROADMAP.md) · [SPEC-BACKLOG.md](./SPEC-BACKLOG.md) · [METRIKA.md](./METRIKA.md) · [DUAL-MODE.md](./DUAL-MODE.md)
 
 **Прод:** [https://danilmakes.ru](https://danilmakes.ru)
 
-**Обновлено:** июнь 2026 — после оценки релевантности портфолио целевой аудитории.
+**Обновлено:** сентябрь 2026 — hiring pivot + demo platform.
 
 ---
 
@@ -16,8 +18,8 @@
 
 | Сегмент | Запрос | Канал |
 | ------- | ------ | ----- |
-| **Малый бизнес** (салон, мастер, клиника, локальный сервис) | Лендинг, форма, Telegram-уведомления | Главная, Kwork, локальные контакты |
-| **Продуктовые команды** | Сложные таблицы, доработка SaaS, legacy API | FL.ru, портфолио Bnovo-демо |
+| **Hiring** (default) | Сложные UI / Travel / B2B SaaS | `/`, `/work`, контакты |
+| **Freelance** (flip) | Лендинг, форма, Telegram | `VITE_SITE_MODE=freelance` |
 
 ### Оценка (июнь 2026)
 

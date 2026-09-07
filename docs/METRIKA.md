@@ -25,7 +25,7 @@
 | ------- | --- | ---- |
 | Отправка `/contact` | `Contact.tsx` | `contact_submit` / `contact_error` |
 | Загрузка iframe-демо | `CodeExample.tsx` | `demo_open` / `demo_load_error` |
-| Просмотр кейса | `CaseStudy.tsx` | `case_study_view` |
+| Просмотр кейса | `CaseStudy.tsx` / `WorkCase.tsx` (`/work/:slug`) | `case_study_view` |
 | GitHub / Telegram / внешнее демо | `Portfolio`, `CaseStudy`, `Contact` | `external_click` |
 | Действия в Vue-демо | postMessage → `useDemoAnalyticsBridge` | `demo_action` |
 | Просмотры SPA | `useYandexMetrika` | `hit` |

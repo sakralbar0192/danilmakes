@@ -5,6 +5,7 @@ import classes from './styles.module.scss'
 import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import { SITE_CONTACT, hasPublicPhone } from 'shared/consts/contact'
+import { SITE_CONTENT } from 'shared/content'
 import { trackContactError, trackContactSubmit, trackExternalClick } from 'shared/analytics/events'
 
 type FormState = 'idle' | 'loading' | 'success' | 'error'
@@ -13,6 +14,7 @@ const Contact: FC = () => {
     const dispatch = useAppDispatch()
     const [formState, setFormState] = useState<FormState>('idle')
     const [errorMessage, setErrorMessage] = useState('')
+    const { contact } = SITE_CONTENT
 
     useEffect(() => {
         dispatch(setCodeExampleSourceLinkHref(''))
@@ -43,7 +45,7 @@ const Contact: FC = () => {
             if (axios.isAxiosError(error) && error.response?.data?.message) {
                 setErrorMessage(String(error.response.data.message))
             } else {
-                setErrorMessage('Не удалось отправить заявку. Попробуйте позже или напишите на почту / в Telegram.')
+                setErrorMessage('Не удалось отправить. Попробуйте позже или напишите на почту / в Telegram.')
             }
         }
     }
@@ -51,12 +53,17 @@ const Contact: FC = () => {
     return (
         <div className={ classes.wrapper }>
             <h1>Контакты</h1>
-            <p className={ classes.intro }>
-                Расскажите о задаче — отвечу в течение 1–2 рабочих дней.
-                База в Красноярске, работаю с заказчиками по всей России.
-            </p>
+            <p className={ classes.intro }>{ contact.intro }</p>
 
             <div className={ classes.contactInfo }>
+                <p>
+                    <strong>Статус:</strong> { SITE_CONTACT.status }
+                </p>
+                {SITE_CONTACT.availabilityDetail && (
+                    <p>
+                        <strong>Формат:</strong> { SITE_CONTACT.availabilityDetail }
+                    </p>
+                )}
                 <p>
                     <strong>Email:</strong>{' '}
                     <a href={ `mailto:${SITE_CONTACT.email}` }>{ SITE_CONTACT.email }</a>
@@ -78,13 +85,25 @@ const Contact: FC = () => {
                         { SITE_CONTACT.telegram }
                     </a>
                 </p>
+                <p>
+                    <strong>GitHub:</strong>{' '}
+                    <a
+                        href={ SITE_CONTACT.github }
+                        target='_blank'
+                        rel='noreferrer'
+                        onClick={ () => trackExternalClick('github') }
+                    >
+                        sakralbar0192
+                    </a>
+                </p>
                 <p><strong>Город:</strong> { SITE_CONTACT.city }</p>
+                <p><strong>Ответ:</strong> { SITE_CONTACT.responseTime }</p>
             </div>
 
-            <h2>Форма заявки</h2>
+            <h2>{ contact.formTitle }</h2>
 
             {formState === 'success' && (
-                <Alert variant='success'>Заявка отправлена. Спасибо!</Alert>
+                <Alert variant='success'>{ contact.successMessage }</Alert>
             )}
 
             {formState === 'error' && (
@@ -103,7 +122,7 @@ const Contact: FC = () => {
                 </Form.Group>
 
                 <Form.Group className='mb-3' controlId='contactMessage'>
-                    <Form.Label>Описание задачи</Form.Label>
+                    <Form.Label>{ contact.messageLabel }</Form.Label>
                     <Form.Control
                         as='textarea'
                         name='message'
@@ -114,10 +133,12 @@ const Contact: FC = () => {
                     />
                 </Form.Group>
 
-                <Form.Group className='mb-3' controlId='contactBudget'>
-                    <Form.Label>Бюджет (необязательно)</Form.Label>
-                    <Form.Control name='budget' maxLength={ 100 } disabled={ formState === 'loading' } />
-                </Form.Group>
+                {contact.showBudgetField && (
+                    <Form.Group className='mb-3' controlId='contactBudget'>
+                        <Form.Label>Бюджет (необязательно)</Form.Label>
+                        <Form.Control name='budget' maxLength={ 100 } disabled={ formState === 'loading' } />
+                    </Form.Group>
+                )}
 
                 <Button type='submit' disabled={ formState === 'loading' }>
                     {formState === 'loading' ? (
@@ -126,7 +147,7 @@ const Contact: FC = () => {
                             Отправка…
                         </>
                     ) : (
-                        'Отправить'
+                        contact.submitLabel
                     )}
                 </Button>
             </Form>

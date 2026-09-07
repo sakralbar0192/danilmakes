@@ -1,0 +1,106 @@
+@use '../../../shared/styles/tokens' as t;
+
+.wrapper {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 32px 24px 72px;
+}
+
+.intro {
+    margin: 8px 0 36px;
+    max-width: 42rem;
+    color: t.$color-text-muted;
+    line-height: 1.6;
+}
+
+.section {
+    margin-bottom: 48px;
+
+    h2 {
+        margin-bottom: 16px;
+        font-size: 1.35rem;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+
+    @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.card {
+    padding: 20px 22px;
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid t.$color-border;
+    border-radius: t.$radius-md;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+        border-color: t.$color-primary;
+        transform: translateY(-2px);
+    }
+
+    h3 {
+        margin: 4px 0 10px;
+        font-size: 1.15rem;
+
+        a {
+            color: t.$color-ink;
+            text-decoration: none;
+
+            &:hover {
+                color: t.$color-primary;
+            }
+        }
+    }
+}
+
+.order {
+    font-family: t.$font-display;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: t.$color-primary;
+}
+
+.hook {
+    margin: 0 0 10px;
+    color: t.$color-text;
+    line-height: 1.55;
+    font-size: 0.95rem;
+}
+
+.role {
+    margin: 0 0 14px;
+    color: t.$color-text-muted;
+    font-size: 0.85rem;
+}
+
+.links {
+    display: flex;
+    gap: 16px;
+
+    a {
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-decoration: none;
+    }
+}
+
+.cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.ctaButton {
+    @include t.cta-primary;
+}
+
+.ctaSecondary {
+    @include t.cta-secondary;
+}

@@ -1,7 +1,7 @@
 const prefetched = new Set<string>()
 
 export const getDemoPrefetchUrl = (demoLink: string): string | null => {
-    const match = demoLink.match(/^\/CodeExample\/([^/]+)$/)
+    const match = demoLink.match(/^\/(?:CodeExample|demo)\/([^/]+)$/)
     if (!match) {
         return null
     }

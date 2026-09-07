@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://schemas.openxmlformats.org/schemas/sitemap/0.9">
   <url>
     <loc>https://danilmakes.ru/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/portfolio</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://danilmakes.ru/work</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://danilmakes.ru/contact</loc>
@@ -16,63 +16,53 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/for-freelance</loc>
+    <loc>https://danilmakes.ru/work/tariff-calendar</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/portfolio-print</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://danilmakes.ru/portfolio/danilmakes</loc>
+    <loc>https://danilmakes.ru/work/mobile-webview-edit</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/portfolio/local-landing</loc>
+    <loc>https://danilmakes.ru/work/availability-spa</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/portfolio/clinic-landing</loc>
+    <loc>https://danilmakes.ru/work/xlsx-streaming</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/portfolio/form-integration</loc>
+    <loc>https://danilmakes.ru/work/revenue-report</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://danilmakes.ru/work/once-migration</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/portfolio/booking-admin</loc>
+    <loc>https://danilmakes.ru/work/rms-layers</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/portfolio/report-revenue</loc>
+    <loc>https://danilmakes.ru/work/divisions</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/portfolio/tariff-prices</loc>
+    <loc>https://danilmakes.ru/work/family-meals</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/portfolio/divisions</loc>
+    <loc>https://danilmakes.ru/work/vball-agregator</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://danilmakes.ru/portfolio/family-meals</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://danilmakes.ru/portfolio/vball-agregator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.5</priority>
   </url>
 </urlset>

@@ -16,6 +16,12 @@ export const METRIKA_GOALS = {
 
 type MetrikaParams = Record<string, string | number | boolean>
 
+declare global {
+    interface Window {
+        ym?: (id: number, method: string, ...args: unknown[]) => void
+    }
+}
+
 function callYm(method: string, ...args: unknown[]) {
     if (typeof window.ym !== 'function') {
         return
