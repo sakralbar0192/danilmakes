@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Streaming XLSX pipeline — demo</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <header>
+      <p class="eyebrow">Full-stack demo · /api/demos/xlsx</p>
+      <h1>Streaming XLSX pipeline</h1>
+      <p class="lead">Идея из продакшена (PHP StreamingExporter): окно → dayVector → sparse write → discard. Без полной CellDto-матрицы.</p>
+    </header>
+
+    <section class="controls">
+      <label>
+        Дней
+        <input id="days" type="number" min="7" max="365" value="90" />
+      </label>
+      <button id="preview" type="button">Сравнить память</button>
+      <button id="export" type="button" class="primary">Скачать XLSX</button>
+    </section>
+
+    <section class="compare">
+      <article>
+        <h2>Stream</h2>
+        <ol id="streamStages"></ol>
+        <p class="peak" id="streamPeak"></p>
+      </article>
+      <article>
+        <h2>Naive (полная матрица)</h2>
+        <ol id="naiveStages"></ol>
+        <p class="peak" id="naivePeak"></p>
+      </article>
+    </section>
+
+    <p id="status" class="status" aria-live="polite"></p>
+  </main>
+  <script src="./app.js" type="module"></script>
+</body>
+</html>

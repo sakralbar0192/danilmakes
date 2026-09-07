@@ -3,11 +3,19 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-echo "==> Building tariff-prices demo..."
+export VITE_DEMO_API="${VITE_DEMO_API:-live}"
+
+echo "==> Building tariff-prices demo (API=$VITE_DEMO_API)..."
 npm run build:tariff-prices
 
-echo "==> Building report-revenue demo..."
+echo "==> Building report-revenue demo (API=$VITE_DEMO_API)..."
 npm run build:report-revenue
+
+echo "==> Building xlsx-pipeline demo..."
+npm run build:xlsx-pipeline
+
+echo "==> Building once-migration demo..."
+npm run build:once-migration
 
 echo "==> Building divisions demo..."
 npm run build:divisions

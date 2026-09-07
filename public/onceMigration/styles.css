@@ -1,0 +1,113 @@
+:root {
+  --ink: #0f172a;
+  --muted: #64748b;
+  --teal: #0f766e;
+  --bg: #f8fafc;
+  --line: #e2e8f0;
+  --warn: #ea580c;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(700px 360px at 100% 0%, rgba(234, 88, 12, 0.1), transparent 55%),
+    var(--bg);
+}
+
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+.eyebrow { color: var(--teal); font-weight: 600; margin: 0 0 8px; }
+h1, h2 { font-family: Syne, "Segoe UI", sans-serif; letter-spacing: -0.03em; }
+h1 { margin: 0 0 12px; }
+.lead { color: var(--muted); line-height: 1.6; max-width: 42rem; }
+code { background: #e2e8f0; padding: 1px 6px; border-radius: 4px; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 24px 0;
+}
+
+.stat {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.stat strong { display: block; font-size: 1.4rem; }
+.stat span { color: var(--muted); font-size: 0.85rem; }
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+button {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.primary {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+}
+
+.jobs { display: flex; flex-direction: column; gap: 10px; }
+
+.job {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.job header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.job ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  max-height: 140px;
+  overflow: auto;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: #ccfbf1;
+  color: var(--teal);
+}
+
+.badge.paused { background: #ffedd5; color: var(--warn); }
+.badge.done { background: #dcfce7; color: #166534; }
+
+.status { margin-top: 16px; color: var(--muted); min-height: 1.4em; }
+
+@media (max-width: 640px) {
+  .stats { grid-template-columns: 1fr; }
+}

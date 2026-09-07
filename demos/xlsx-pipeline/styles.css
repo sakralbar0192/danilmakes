@@ -1,0 +1,112 @@
+:root {
+  --ink: #0f172a;
+  --muted: #64748b;
+  --teal: #0f766e;
+  --bg: #f8fafc;
+  --line: #e2e8f0;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(800px 400px at 0% 0%, rgba(15, 118, 110, 0.12), transparent 60%),
+    var(--bg);
+}
+
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+.eyebrow {
+  color: var(--teal);
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+h1 {
+  font-family: Syne, "Segoe UI", sans-serif;
+  margin: 0 0 12px;
+  letter-spacing: -0.03em;
+}
+
+.lead {
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 40rem;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: end;
+  margin: 28px 0;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+input {
+  width: 120px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+button {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.primary {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+}
+
+.compare {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 720px) {
+  .compare { grid-template-columns: 1fr 1fr; }
+}
+
+article {
+  background: rgba(255,255,255,0.85);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px 20px;
+}
+
+ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  line-height: 1.7;
+}
+
+.peak {
+  margin: 12px 0 0;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.status {
+  margin-top: 20px;
+  color: var(--muted);
+  min-height: 1.4em;
+}

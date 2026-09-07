@@ -69,17 +69,19 @@ async function bootstrap() {
   RevenueReportService.http = http;
   RevenuePlanService.http = http;
 
-  const { worker } = await import("./mocks/browser");
-  await worker.start({
-    onUnhandledRequest: "bypass",
-    quiet: true,
-    serviceWorker: {
-      url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
-      options: {
-        scope: import.meta.env.BASE_URL,
+  if (import.meta.env.VITE_DEMO_API === "msw") {
+    const { worker } = await import("./mocks/browser");
+    await worker.start({
+      onUnhandledRequest: "bypass",
+      quiet: true,
+      serviceWorker: {
+        url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
+        options: {
+          scope: import.meta.env.BASE_URL,
+        },
       },
-    },
-  });
+    });
+  }
 
   const app = createApp(App);
   app.use(vuetify);
