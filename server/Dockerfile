@@ -2,11 +2,11 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json ./
+COPY server/package.json ./
 RUN npm install
 
-COPY tsconfig.json ./
-COPY src ./src
+COPY server/tsconfig.json ./
+COPY server/src ./src
 RUN npm run build
 
 FROM node:20-alpine
@@ -15,11 +15,14 @@ WORKDIR /app
 
 ENV NODE_ENV=production
 
-COPY package.json ./
+COPY server/package.json ./
 RUN npm install --omit=dev
 
 COPY --from=builder /app/dist ./dist
-COPY src/db/migrations ./dist/db/migrations
+COPY server/src/db/migrations ./dist/db/migrations
+COPY demos/tariff-prices/src/mocks/fixtures ./fixtures/tariffs
+
+ENV DEMO_TARIFF_FIXTURES=/app/fixtures/tariffs
 
 EXPOSE 3000
 

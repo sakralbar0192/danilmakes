@@ -16,7 +16,9 @@ services:
       retries: 5
 
   api:
-    build: ./server
+    build:
+      context: .
+      dockerfile: server/Dockerfile
     ports:
       - '3000:3000'
     environment:
@@ -28,6 +30,7 @@ services:
       SMTP_USER: ${SMTP_USER:-}
       SMTP_PASS: ${SMTP_PASS:-}
       NOTIFY_EMAIL: ${NOTIFY_EMAIL:-}
+      DEMO_TARIFF_FIXTURES: /app/fixtures/tariffs
       NODE_ENV: development
     depends_on:
       postgres:
