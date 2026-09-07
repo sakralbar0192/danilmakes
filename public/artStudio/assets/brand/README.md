@@ -13,6 +13,11 @@
   accent-sprig.png    — веточка с листьями
   accent-pencils.png  — карандаши
   accent-flower.png   — цветок
+  hero.png            — заголовок hero
+  logo.jpg            — круглый логотип в шапке
+  logo-illustration.jpg — квадратная иллюстрация из материалов заказчика
+
+Исходные макеты VK/баннеры — в `../materials/` (см. README там).
 
 Требования к файлам:
   - прозрачный фон (PNG-24 / PNG с alpha)

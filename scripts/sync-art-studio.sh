@@ -18,6 +18,7 @@ mkdir -p "$DEST/design-system" "$DEST/assets"
 cp "$SRC/examples/index.html" "$DEST/index.html"
 cp "$SRC/examples/gallery.html" "$DEST/gallery.html"
 cp "$SRC/examples/site.css" "$DEST/site.css"
+cp "$SRC/examples/cms.js" "$DEST/cms.js"
 cp "$SRC/design-system/base.css" "$DEST/design-system/"
 cp "$SRC/design-system/tokens.css" "$DEST/design-system/"
 cp -a "$SRC/assets/brand" "$SRC/assets/works" "$SRC/assets/studio" "$DEST/assets/"
@@ -35,8 +36,10 @@ replacements = [
     ("./site.css", "site.css"),
     ("./gallery.html", "gallery.html"),
     ("./index.html", "index.html"),
+    ("./cms.js", "cms.js"),
     ("../docs/questions-for-owners.md", "gallery.html"),
     ("../design-system/index.html", "index.html"),
+    ('data-asset-root="../"', 'data-asset-root=""'),
 ]
 for path in dest.glob("*.html"):
     text = path.read_text(encoding="utf-8")

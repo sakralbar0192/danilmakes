@@ -42,7 +42,7 @@ function setPreviewCookie(res: import('express').Response): void {
     const secure = process.env.NODE_ENV === 'production'
     const parts = [
         `${COOKIE}=${encodeURIComponent(expectedToken())}`,
-        'Path=/artStudio/',
+        'Path=/',
         'HttpOnly',
         'SameSite=Lax',
         `Max-Age=${COOKIE_MAX_AGE_SEC}`,
@@ -53,15 +53,18 @@ function setPreviewCookie(res: import('express').Response): void {
 
 function clearPreviewCookie(res: import('express').Response): void {
     const secure = process.env.NODE_ENV === 'production'
-    const parts = [
+    // Clear both legacy /artStudio/ path and current Path=/
+    const base = [
         `${COOKIE}=`,
-        'Path=/artStudio/',
         'HttpOnly',
         'SameSite=Lax',
         'Max-Age=0',
     ]
-    if (secure) parts.push('Secure')
-    res.setHeader('Set-Cookie', parts.join('; '))
+    if (secure) base.push('Secure')
+    res.setHeader('Set-Cookie', [
+        [...base, 'Path=/'].join('; '),
+        [...base, 'Path=/artStudio/'].join('; '),
+    ])
 }
 
 /** nginx auth_request: 200 = allow, 401 = deny */

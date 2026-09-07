@@ -15,14 +15,31 @@
   --color-line: rgba(90, 83, 74, 0.14);
   --color-line-strong: rgba(90, 83, 74, 0.28);
 
-  /* ——— Brand pastels (from logo / banner) ——— */
+  /* ——— Brand pastels (logo, banner, menu cards) ——— */
   --color-brand-blue: #6b9bc2;
   --color-brand-blue-deep: #547fa3;
   --color-brand-pink: #e07b86;
   --color-brand-pink-deep: #c96570;
   --color-brand-green: #8fb89a;
+  --color-brand-green-deep: #5e9e8e; /* price teal from service cards */
   --color-brand-lilac: #c9b6e0;
+  --color-brand-lilac-deep: #8e84b0;
   --color-brand-yellow: #f0d77a;
+  --color-brand-peach: #f8e4c8;
+
+  /* Soft surfaces (VK menu cards) */
+  --color-soft-pink: #fbe4e7;
+  --color-soft-mint: #d8ebe4;
+  --color-soft-lilac: #dde3f4;
+  --color-soft-peach: #f7ead8;
+  --color-soft-yellow: #f7efd2;
+
+  /* Direction accents (banner icons) */
+  --color-dir-paint: var(--color-brand-blue);
+  --color-dir-graphic: var(--color-brand-pink);
+  --color-dir-draw: var(--color-brand-green);
+  --color-dir-design: var(--color-brand-lilac);
+  --color-dir-sculpt: #e8a87c;
 
   /* ——— Pigments / CTA ——— */
   --color-cadmium: var(--color-brand-pink);

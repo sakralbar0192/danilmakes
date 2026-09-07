@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="design-system/base.css" />
     <link rel="stylesheet" href="site.css" />
   </head>
-  <body class="grain">
+  <body class="grain" data-asset-root="">
     <div class="site-accents" aria-hidden="true">
       <div class="accent accent-corner">
         <svg class="accent-corner-bg" viewBox="0 0 240 230" xmlns="http://www.w3.org/2000/svg">
@@ -29,6 +29,7 @@
         <a class="brand" href="index.html" aria-label="Мама, я рисую — на главную">
           <img
             class="brand-logo"
+            data-cms="logo"
             src="assets/brand/logo.jpg"
             width="64"
             height="64"
@@ -41,8 +42,9 @@
           </span>
         </a>
         <nav class="nav" aria-label="Основное">
-          <a href="index.html#directions">Направления</a>
           <a href="gallery.html" aria-current="page">Работы</a>
+          <a href="index.html#schedule">Занятия</a>
+          <a href="index.html#studio">Студия</a>
           <a href="index.html#prices">Цены</a>
           <a href="index.html#contact">Контакты</a>
         </nav>
@@ -54,9 +56,9 @@
       <section class="section">
         <div class="container stack-lg">
           <div class="section-head">
-            <p class="eyebrow">Галерея</p>
-            <h1>Работы и жизнь студии</h1>
-            <p class="prose">
+            <p class="eyebrow" data-cms="gallery-page-eyebrow">Галерея</p>
+            <h1 data-cms="gallery-page-title">Работы и жизнь студии</h1>
+            <p class="prose" data-cms="gallery-page-lead">
               Фото из сообщества
               <a href="https://vk.ru/club238305506" target="_blank" rel="noopener">VK · Мама, я рисую</a>.
               Фильтры помогают быстро найти детские работы или атмосферу занятий.
@@ -68,10 +70,53 @@
             <button class="chip" type="button" data-filter="works">Работы</button>
             <button class="chip" type="button" data-filter="kids">Дети</button>
             <button class="chip" type="button" data-filter="studio">Студия</button>
+            <button class="chip" type="button" data-filter="ages-little">3–5</button>
+            <button class="chip" type="button" data-filter="ages-mid">6–8</button>
+            <button class="chip" type="button" data-filter="ages-older">9–11</button>
             <button class="chip" type="button" data-filter="adults">Взрослые</button>
           </div>
 
-          <div class="gallery-masonry" id="gallery">
+          <div class="gallery-masonry" id="gallery" data-cms="gallery-masonry">
+            <figure class="gallery-item tall" data-tags="works kids ages-little">
+              <div class="work-tile"><img src="assets/works/work-carrots.jpg" alt="Морковки" /></div>
+              <figcaption>Огород · малыши</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works kids ages-little">
+              <div class="work-tile"><img src="assets/works/work-flowers-can.jpg" alt="Цветы в лейке" /></div>
+              <figcaption>Цветы · гуашь</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works kids ages-mid">
+              <div class="work-tile"><img src="assets/works/work-frog.jpg" alt="Лягушка" /></div>
+              <figcaption>Лягушка · гуашь</figcaption>
+            </figure>
+            <figure class="gallery-item" data-tags="works kids ages-older">
+              <div class="work-tile"><img src="assets/works/work-bird-fruit.jpg" alt="Птица" /></div>
+              <figcaption>Зимняя птица</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="works kids ages-older">
+              <div class="work-tile"><img src="assets/works/work-robot.jpg" alt="Робот" /></div>
+              <figcaption>Робот · графика</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="studio kids ages-little">
+              <div class="work-tile"><img src="assets/studio/class-girl-yellow.jpg" alt="Малыш за работой" /></div>
+              <figcaption>Занятие · 3–5</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="studio kids ages-little">
+              <div class="work-tile"><img src="assets/studio/class-easel-dog.jpg" alt="У мольберта" /></div>
+              <figcaption>Мольберт · малыши</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="studio kids ages-mid">
+              <div class="work-tile"><img src="assets/studio/class-cake-duo.jpg" alt="Дети за столом" /></div>
+              <figcaption>Группа · 6–8</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="studio kids">
+              <div class="work-tile"><img src="assets/studio/class-04.jpg" alt="Рисование на чёрном" /></div>
+              <figcaption>Занятие в студии</figcaption>
+            </figure>
+            <figure class="gallery-item tall" data-tags="studio kids">
+              <div class="work-tile"><img src="assets/studio/class-06.jpg" alt="Группа с работами" /></div>
+              <figcaption>Итог занятия</figcaption>
+            </figure>
             <figure class="gallery-item tall" data-tags="works kids">
               <div class="work-tile"><img src="assets/works/vk-10.jpg" alt="Ёжик в тумане" /></div>
               <figcaption>Ёжик в тумане · гуашь</figcaption>
@@ -174,20 +219,12 @@
     </footer>
 
     <script>
-      const chips = document.querySelectorAll(".chip");
-      const items = document.querySelectorAll(".gallery-item");
-
-      chips.forEach((chip) => {
-        chip.addEventListener("click", () => {
-          chips.forEach((c) => c.classList.remove("is-active"));
-          chip.classList.add("is-active");
-          const filter = chip.dataset.filter;
-          items.forEach((item) => {
-            const tags = item.dataset.tags.split(/\s+/);
-            item.hidden = !(filter === "all" || tags.includes(filter));
-          });
-        });
-      });
+      window.ART_STUDIO_CMS = {
+        baseUrl: "/cms",
+        enabled: true,
+        assetBase: document.body.dataset.assetRoot || "",
+      };
     </script>
+    <script src="cms.js" defer></script>
   </body>
 </html>
