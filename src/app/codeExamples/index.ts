@@ -17,6 +17,7 @@ export const ECodeExamples = {
     FORM_INTEGRATION: 'formIntegration',
     BOOKING_ADMIN: 'bookingAdmin',
     XLSX_PIPELINE: 'xlsxPipeline',
+    FLEET_DATA_FIX: 'fleetDataFix',
     ONCE_MIGRATION: 'onceMigration'
 } as const
 export type ECodeExamples = TValueOf<typeof ECodeExamples>

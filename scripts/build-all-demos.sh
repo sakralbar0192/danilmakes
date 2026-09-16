@@ -14,8 +14,8 @@ npm run build:report-revenue
 echo "==> Building xlsx-pipeline demo..."
 npm run build:xlsx-pipeline
 
-echo "==> Building once-migration demo..."
-npm run build:once-migration
+echo "==> Building fleet-data-fix demo..."
+npm run build:fleet-data-fix
 
 echo "==> Building divisions demo..."
 npm run build:divisions

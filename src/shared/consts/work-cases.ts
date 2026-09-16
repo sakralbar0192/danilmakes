@@ -1,12 +1,34 @@
 import { ECodeExamples } from 'app/codeExamples'
 
-export type WorkCaseKind = 'primary' | 'secondary' | 'archive'
+export type WorkCaseKind = 'primary' | 'archive'
 
 export interface WorkCaseDemo {
     label: string
-    /** Public folder / iframe id, e.g. tariffPrices */
     demoId: string
     href: string
+}
+
+export interface WorkCaseSection {
+    id: string
+    title: string
+    problem: string
+    solution: string
+    effect: string
+}
+
+export interface WorkCaseLoadTest {
+    goal: string
+    methods: string
+    findings: string
+    decision: string
+}
+
+export interface WorkCaseFlowDiagram {
+    title: string
+    beforeTitle: string
+    before: string[]
+    afterTitle: string
+    after: string[]
 }
 
 export interface WorkCase {
@@ -27,291 +49,298 @@ export interface WorkCase {
     demos?: WorkCaseDemo[]
     guides?: string[]
     relatedSlugs?: string[]
+    groupId?: 'cio-calendar'
+    groupRole?: 'hub' | 'chapter'
+    sections?: WorkCaseSection[]
+    demoDesktopPolicy?: 'allow' | 'mobile-only'
+    loadTest?: WorkCaseLoadTest
+    flowDiagram?: WorkCaseFlowDiagram
 }
 
-const demoHref = (id: string) => `/demo/${id}`
+const demoHref = (id: string, query = '') => `/demo/${id}${query}`
 
-/** Bnovo + secondary cases. Order matches «вау» 1→3→2→4→5→6→7 then secondary. */
+/** Hiring cases: CIO hub + diversified hospitality stories. */
 export const WORK_CASES: WorkCase[] = [
     {
-        slug: 'tariff-calendar',
+        slug: 'cio-calendar',
         order: 1,
         featured: true,
         kind: 'primary',
-        title: 'Виртуализированный календарь тарифов',
-        seoTitle: 'Виртуализированный календарь цен и ограничений',
+        groupId: 'cio-calendar',
+        groupRole: 'hub',
+        title: 'Календарь «Цены и ограничения»',
+        seoTitle: 'Архитектура календаря тарифов PMS: слой сетки, контракт API, миграция без остановки',
         metaDescription:
-            'Кейс: сетка 365 дней × N категорий с inline-edit, двухфазным fetch и virtualizer — без подвисаний. Демо с живым API.',
-        hook: 'Ежедневный инструмент отельера: сетка 365 дней × N категорий с ценами, ограничениями и массовым редактированием — без подвисаний при скролле и без полной перезагрузки после каждой правки.',
+            'Архитектура модуля тарифов в hospitality PMS: виртуализация, контракт UI↔API, сессия редактирования, наличие и слои цен. Схему переиспользовали на других таблицах.',
+        hook: 'Ключевой модуль PMS для тысяч отелей: календарь на год × категории. Не «собрал экран» — спроектировал клиентский слой, контракт с API и правила согласованности после сохранения. Ниже — пять срезов одной архитектуры.',
         problem:
-            'Наивный рендер года × категорий плюс несколько слоёв цен убивает FPS и память. Полный GET после save — долго и дёргает UI.',
+            'На одном экране сходятся скорость сетки, ввод с телефона, наличие номеров и несколько источников цены. Без спроектированной архитектуры страдают отзывчивость и доверие к данным после сохранения — и команда не может наращивать фичи, не ломая экран.',
         solution:
-            'Двухфазный fetch (shell → content-parts), cell view-model из модели + черновиков, вертикальный virtualizer с freeze пула на mobile-edit, partial refetch только затронутых parts после save.',
+            'Спроектировал архитектуру модуля и резал эпики сам, согласовывая с продуктом. Клиентский слой: частичная загрузка, виртуализация, модель ячейки из данных и черновиков, точечное обновление после save. Контракт UI ↔ API: массовые операции, слияние после сохранения, явные слои цен. Главы ниже — срезы этой схемы, не отдельные экраны.',
         effect:
-            'Ownership ключевого revenue/ops-экрана PMS; документированная архитектура для онбординга; unit-покрытие критичной логики. В демо можно править ячейки и сохранить — ответ приходит с живого API.',
-        stack: ['Vue 3', 'Vuex', 'Vuetify 3', 'Vite', 'MSW / live API', 'Jest'],
-        role: 'Middle+ Frontend / ключевой разработчик модуля',
+            'Схему переиспользовали на других таблицах; коллеги делали фичи поверх неё. Команда владеет ключевым экраном продукта end-to-end — от контракта до онбординга.',
+        stack: ['Vue 2/3', 'Vuex', 'Jest', 'Playwright', 'REST'],
+        role: 'Senior Frontend · архитектура модуля тарифов',
+        demoDesktopPolicy: 'allow',
         demos: [
             {
-                label: 'Открыть календарь тарифов',
+                label: 'Открыть демо календаря',
                 demoId: ECodeExamples.TARIFF_PRICES,
                 href: demoHref(ECodeExamples.TARIFF_PRICES),
             },
         ],
         guides: [
-            'Переключайте режимы цен / ограничений',
-            'Отредактируйте ячейку и нажмите Сохранить',
-            'Прокрутите длинный горизонт — строки виртуализированы',
+            'Переключайте режимы цен / ограничений / динамических цен',
+            'Отредактируйте ячейку и сохраните — данные уходят в live API',
+            'Прокрутите длинный горизонт: строки подгружаются по мере скролла',
+            'Наличие номеров — в том же календаре',
         ],
-        relatedSlugs: ['mobile-webview-edit', 'availability-spa', 'rms-layers'],
+        sections: [
+            {
+                id: 'virtualizer',
+                title: 'Быстрая сетка на длинном периоде',
+                problem:
+                    'Год × много категорий и несколько слоёв цен — наивный рендер убивает FPS и память. Полный refetch после каждой правки долгий и дёргает UI: без общего слоя сетки каждый следующий экран повторяет ту же ошибку.',
+                solution:
+                    'Свой слой виртуализации и частичной загрузки: сначала каркас, потом данные кусками; на экране только видимые строки; модель ячейки собирается из данных и черновиков; после сохранения — точечный refetch затронутых частей.',
+                effect:
+                    'Скролл и save остаются отзывчивыми на самом нагруженном экране. Тот же слой дальше переиспользовали на других таблицах.',
+            },
+            {
+                id: 'mobile',
+                title: 'Редактирование с телефона и в WebView',
+                problem:
+                    'Клавиатура, sticky-шапки и виртуализатор срывают фокус: правка пропадает, «Сохранить» приходит, когда черновик ещё не зафиксирован — Safari, Android, Flutter WebView.',
+                solution:
+                    'Отдельная сессия редактирования, а не хаки в разметке: подскролл ячейки, freeze виртуализатора на время ввода, flush черновика перед save, правила под устройство. Зафиксировал в документации для QA.',
+                effect:
+                    'Один редактор для десктопа, телефона и гибридного приложения — без потери черновика. Понятная матрица устройств для команды.',
+            },
+            {
+                id: 'availability',
+                title: 'Наличие номеров в том же календаре',
+                problem:
+                    'Наличие правили в legacy отдельно от SPA. Формат bulk не совпадал с таблицей по датам; после save экран мог показать устаревшее раньше, чем данные каналов.',
+                solution:
+                    'Поэтапный перенос критичного контура на тот же календарь без остановки продукта: новый API массового обновления, правила слияния сохранённых значений поверх ответа, чтобы UI сразу отражал пост-save состояние.',
+                effect:
+                    'Единый UX цен и наличия; меньше рассинхрона с каналами. Контракт merge/refetch — часть онбординга модуля.',
+            },
+            {
+                id: 'rms',
+                title: 'Динамические цены и зависимые тарифы',
+                problem:
+                    'На одной ячейке — ручная цена, автоправила и «эхо» с родителя. Легко сохранить не тот слой или принять динамическую цену за ручную правку.',
+                solution:
+                    'Явный контракт слоёв при сохранении: routing ручного / динамического / зависимого, догрузка нужной части перед save, якорь ячейки при прокрутке виртуализатора. Контракт описал; по нему онбордили коллег.',
+                effect:
+                    'Динамическое ценообразование на том же экране, что и ручные тарифы — предсказуемо для отельера и для следующих фич команды.',
+            },
+            {
+                id: 'price-impact',
+                title: 'Где изменится цена',
+                problem:
+                    'Правка в PMS «не доезжает» на канал или ломает зависимый тариф. До сохранения непонятно, кого затронет изменение.',
+                solution:
+                    'Дерево влияния в шапке и в массовом изменении: потомки тарифа и подключённые каналы. Ошибка по одному каналу не валит весь ответ — soft-fail заложен в контракт, не в UI-костыль.',
+                effect:
+                    'Прозрачность до save: видно, куда уйдёт цена. Продуктовый срез той же архитектуры модуля, не отдельный экран.',
+            },
+        ],
     },
     {
-        slug: 'mobile-webview-edit',
+        slug: 'paid-tools',
         order: 2,
         featured: true,
         kind: 'primary',
-        title: 'Mobile editing в Safari / WebView',
-        seoTitle: 'Mobile UX календаря тарифов в WebView',
+        title: 'Тарифы подписки и платные инструменты',
+        seoTitle: 'Пакеты подписки и доступ к инструментам в hospitality SaaS',
         metaDescription:
-            'Кейс: стабильный ввод цен с телефона при sticky-шапках и виртуализаторе — visualViewport, freeze pool, flush черновика.',
-        hook: 'Отельер правит цены с телефона внутри hybrid WebView: клавиатура, sticky-шапки и виртуализатор не должны срывать ввод или «съедать» черновик при тапе «Сохранить».',
+            'Кейс: пакеты Zero / Light / Business решают, какие отчёты и автоправила доступны отельеру — и что происходит при понижении тарифа.',
+        hook: 'В B2B-продукте пакет подписки решает, какими отчётами, автоматизацией и правилами цен можно пользоваться — и что отключить при переходе на более простой тариф.',
         problem:
-            'На iOS/Android/WebView smooth scroll закрывает клавиатуру, blur без relatedTarget, resize remount\'ит строку виртуализатора, тап «Сохранить» приходит когда фокус уже не в input.',
+            'Простого «включено / выключено» мало: инструмент может входить в пакет, докупаться отдельно или уже истечь, но ещё показываться для просмотра. При понижении пакета автоправила цен не должны продолжать работать «втихую».',
         solution:
-            'Слой pure-helpers: edit-session, scroll-into-view с clamp, freeze virtualizer pool, flush по last-focused cell key, device-specific guard\'ы вместо «магии в компоненте».',
+            'Спроектировал модель статусов доступа (в пакете / докупается / истёк) и строил меню и права по ней — не набор булевых флагов. При downgrade — атомарная пауза связанных автоправил через API, а не «выключить галку в UI».',
         effect:
-            'Стабильный мобильный UX на самом нагруженном экране; Playwright-поверхности desktop / mobile / Android WebView.',
-        stack: ['Vue', 'visualViewport', 'Virtual Keyboard API', 'Playwright'],
-        role: 'Frontend · hybrid UX ownership',
-        demos: [
-            {
-                label: 'Тот же календарь (откройте с телефона)',
-                demoId: ECodeExamples.TARIFF_PRICES,
-                href: demoHref(ECodeExamples.TARIFF_PRICES),
-            },
-        ],
-        guides: [
-            'Откройте демо на телефоне или в DevTools device mode',
-            'Тапните ячейку цены — input должен остаться в фокусе при скролле',
-            'Сохраните с открытой клавиатурой',
-        ],
-        relatedSlugs: ['tariff-calendar'],
-    },
-    {
-        slug: 'availability-spa',
-        order: 3,
-        featured: false,
-        kind: 'primary',
-        title: 'Availability: с legacy PHP на Vue SPA',
-        seoTitle: 'Редактирование availability в Channel Manager SPA',
-        metaDescription:
-            'Кейс: перенос inventory с legacy MCP на SPA-календарь — inline, bulk weekday-grid, merge после save.',
-        hook: 'Перенос редактирования наличия номеров с legacy PHP Channel Manager UI на современный SPA-календарь — с inline и bulk, без рассинхрона UI после сохранения.',
-        problem:
-            'Legacy jQuery AJAX жили отдельно от SPA. Bulk-пейлоад — weekday-grid, а read-model — roomtype → дата → int. GET meta после save мог вернуть устаревшие данные.',
-        solution:
-            'Rollout platform → inline → bulk drawer; endpoint updateMassiveAvailability; expand weekday grid в day-tree; merge сохранённых значений поверх meta, чтобы UI сразу отражал пост-save состояние.',
-        effect:
-            'Единый UX тарифов + наличия для CM-клиентов; стабильный save/merge на критичном контуре синхронизации с каналами.',
-        stack: ['Vue', 'Vuex', 'REST', 'Channel Manager domain'],
-        role: 'Frontend · inventory / CM',
-        demos: [
-            {
-                label: 'Календарь с availability',
-                demoId: ECodeExamples.TARIFF_PRICES,
-                href: demoHref(ECodeExamples.TARIFF_PRICES),
-            },
-        ],
-        guides: [
-            'В демо availability доступна в ячейках наличия',
-            'Попробуйте bulk-изменение и сохранение',
-            'После save значения остаются согласованными без «прыжка» назад',
-        ],
-        relatedSlugs: ['tariff-calendar', 'rms-layers'],
-    },
-    {
-        slug: 'xlsx-streaming',
-        order: 4,
-        featured: false,
-        kind: 'primary',
-        title: 'Streaming-выгрузка цен в XLSX',
-        seoTitle: 'Потоковая Excel-выгрузка цен тарифа',
-        metaDescription:
-            'Кейс: отказ от полной CellDto-матрицы в пользу streaming pipeline — выгрузка без OOM на длинных периодах. Интерактивный demo + API.',
-        hook: 'Отельеру нужна Excel-выгрузка цен на длинный период. Классический PHPExcel + полная матрица ячеек → OOM на больших отелях. Перевёл пайплайн на потоковую запись.',
-        problem:
-            'Batch build держал всю матрицу периода в RAM; dual per_day падал по памяти на loadtest.',
-        solution:
-            'StreamingExporter: окна prices → dayVector → online grouper / write column → discard. Sparse write, без полной матрицы. На сайте — Node-эквивалент идеи (оригинал в проде — PHP 8).',
-        effect:
-            'Выгрузка проходит на кейсах, где раньше был OOM; понятный pipeline и метрики.',
-        stack: ['PHP 8 (прод)', 'Node stream (демо)', 'XLSX'],
-        role: 'Full-stack · perf',
-        originalStackNote: 'В проде — PHP StreamingExporter; демо показывает тот же pipeline на Node.',
-        demos: [
-            {
-                label: 'Pipeline + скачать XLSX',
-                demoId: 'xlsxPipeline',
-                href: demoHref('xlsxPipeline'),
-            },
-        ],
-        guides: [
-            'Запустите выгрузку и следите за этапами pipeline',
-            'Скачайте файл — он собран потоково на API',
-            'Сравните с «наивной» полной матрицей в подсказке по памяти',
-        ],
+            'Понятный набор возможностей тарифа; после понижения нет висящих правил. Модель gating переиспользуется в меню и в операциях над правилами цен.',
+        stack: ['Vue', 'Vuex', 'PHP', 'RMS API'],
+        role: 'Senior Full-stack · продуктовая платформа',
+        relatedSlugs: ['cio-calendar'],
     },
     {
         slug: 'revenue-report',
-        order: 5,
+        order: 3,
         featured: true,
         kind: 'primary',
         title: 'Отчёт «Доход, ADR, Загрузка»',
-        seoTitle: 'Revenue-отчёт ADR / RevPAR / occupancy',
+        seoTitle: 'Отчёт по доходу: ADR, RevPAR и загрузка',
         metaDescription:
-            'Кейс: revenue-экран с ADR, RevPAR, occupancy, сравнением периодов и Excel. Интерактивное демо с живым API.',
-        hook: 'Revenue-экран для отельера: ADR / RevPAR / occupancy, графики, фильтры, сравнение периодов, Excel — с onboarding-туром.',
+            'Кейс: экран выручки для отельера — ключевые метрики, графики, сравнение периодов и выгрузка в Excel.',
+        hook: 'Отельеру нужен понятный отчёт по выручке: доход, средняя цена, загрузка — с графиками, фильтрами, сравнением периодов и выгрузкой.',
         problem:
-            'Точные float-метрики, тяжёлая Excel-генерация на 50+ категориях, UX сравнения двух периодов без путаницы в %.',
+            'Метрики должны считаться точно; Excel на большом числе категорий тормозил; сравнение двух периодов легко запутать процентами и окраской.',
         solution:
-            'FE comparison-стратегии + Chart.js; BE collectors; range-стили в Excel; e2e на compare-виджеты. Демо ходит в /api/demos/revenue.',
+            'Стратегии сравнения периодов и форматтеры на клиенте, согласование float-метрик с API, выгрузка без поклеточной сборки. Период по умолчанию — текущий месяц; поведение сравнения закрепил тестами.',
         effect:
-            'Полноценный revenue-контур рядом с тарифами.',
+            'Рядом с календарём тарифов — полноценный контур аналитики как часть модуля дохода, а не «ещё один дашборд».',
         stack: ['Vue 3', 'Chart.js', 'Vuex', 'Excel export'],
-        role: 'Frontend · revenue analytics',
+        role: 'Senior Frontend · revenue-контур',
         demos: [
             {
-                label: 'Открыть отчёт',
+                label: 'Открыть демо отчёта',
                 demoId: ECodeExamples.REPORT_REVENUE,
                 href: demoHref(ECodeExamples.REPORT_REVENUE),
             },
         ],
         guides: [
-            'Смените период и категории',
-            'Посмотрите метрики ADR / RevPAR / occupancy',
-            'При сравнении периодов проверьте % без ложной окраски нуля',
+            'Период по умолчанию — текущий месяц',
+            'Смените категории и посмотрите доход / ADR / загрузку',
+            'При сравнении периодов проверьте проценты без ложной окраски нуля',
         ],
-        relatedSlugs: ['tariff-calendar'],
+        relatedSlugs: ['cio-calendar'],
     },
     {
-        slug: 'once-migration',
+        slug: 'roomtypes-bulk',
+        order: 4,
+        featured: false,
+        kind: 'primary',
+        title: 'Копирование ограничений на подкатегории',
+        seoTitle: 'Копирование ограничений на много дочерних размещений',
+        metaDescription:
+            'Кейс: быстрое копирование ограничений с категории на большое число подкатегорий — после нагрузочных замеров памяти и времени.',
+        hook: 'Админ отеля создаёт категории и много дочерних размещений. Нужно скопировать ограничения (и связанные цены) на все подкатегории быстро и без падений по памяти.',
+        problem:
+            'При копировании ограничений и создании подкатегорий цены писались по одной, а синхронизация с внешним контуром держала длинную транзакцию. На больших наборах росли время и потребление памяти.',
+        solution:
+            'После нагрузочных прогонов: массовая запись цен, копирование ограничений без лишней работы в транзакции, синхронизацию с внешним контуром перенесли на момент после успешного сохранения.',
+        effect:
+            'Создание категорий и копирование на много подкатегорий быстрее и предсказуемее: решение по замерам, не «оптимизировали запрос». Массовая запись и отложенный sync — схема, которую можно повторить на других bulk-операциях.',
+        stack: ['PHP 8', 'PostgreSQL', 'loadtest CLI'],
+        role: 'Senior Full-stack · прод и производительность',
+        loadTest: {
+            goal: 'Понять, нужно ли снижать память и время при копировании ограничений и создании большого числа подкатегорий.',
+            methods: 'Ручные тяжёлые сценарии и PHP CLI loadtest / профилирование копирования ограничений и sync в транзакции.',
+            findings: 'Поштучная запись и sync внутри транзакции давали лишнюю длительность и давление на память на больших наборах.',
+            decision: 'Сделали массовую запись и отложили внешнюю синхронизацию до commit — решение по результатам НТ.',
+        },
+        flowDiagram: {
+            title: 'Копирование ограничений: было → стало',
+            beforeTitle: 'Было',
+            before: [
+                'Создание категорий / подкатегорий',
+                'Копирование ограничений + цены по одной',
+                'Синхронизация с внешним контуром внутри транзакции',
+                'Долгое сохранение, давление на память',
+            ],
+            afterTitle: 'Стало',
+            after: [
+                'Создание категорий / подкатегорий',
+                'Массовая запись цен и копирование ограничений',
+                'Быстрый commit',
+                'Синхронизация с внешним контуром после сохранения',
+            ],
+        },
+        relatedSlugs: ['xlsx-streaming', 'fleet-data-fix'],
+    },
+    {
+        slug: 'xlsx-streaming',
+        order: 5,
+        featured: false,
+        kind: 'primary',
+        title: 'Выгрузка цен в Excel без переполнения памяти',
+        seoTitle: 'Потоковая Excel-выгрузка цен тарифа',
+        metaDescription:
+            'Кейс: выгрузка цен на длинный период падала по памяти — перешли на потоковую сборку файла окнами.',
+        hook: 'Отельеру нужна Excel-выгрузка цен на длинный период. Старый способ держал всю таблицу в памяти и на больших отелях падал.',
+        problem:
+            'Полная сборка листа со всеми ячейками периода раздувала RAM. На нагрузочном тесте dual per_day — порядка ~152M peak и OOM.',
+        solution:
+            'Пишем файл потоково: берём окно данных → собираем день → записываем колонку → освобождаем память. Закрепили поведение нагрузочными и юнит-тестами. На сайте — та же идея на Node.',
+        effect:
+            'Выгрузка проходит там, где раньше был OOM. Отказ от полной матрицы закреплён нагрузочными тестами — регрессия памяти ловится до прода.',
+        stack: ['PHP 8 (прод)', 'Node stream (демо)', 'XLSX', 'loadtest'],
+        role: 'Senior Full-stack · прод и производительность',
+        originalStackNote: 'В проде — PHP StreamingExporter; демо показывает тот же подход на Node.',
+        loadTest: {
+            goal: 'Понять, нужно ли снижать память и время выгрузки — и подтвердить эффект после изменений.',
+            methods: 'Ручные тяжёлые периоды и PHP loadtest с замером peak RAM и длительности.',
+            findings: 'Полная матрица ячеек на dual per_day — порядка ~152M peak и OOM на больших отелях.',
+            decision: 'Отказались от полной матрицы в пользу потоковой записи окнами; acceptance loadtest закрепил регрессии.',
+        },
+        demos: [
+            {
+                label: 'Смотреть pipeline и скачать XLSX',
+                demoId: 'xlsxPipeline',
+                href: demoHref('xlsxPipeline'),
+            },
+        ],
+        guides: [
+            'Сравните пик памяти: полная выгрузка vs потоковая',
+            'Пройдите стадии pipeline',
+            'Скачайте файл — он собран потоково на API',
+        ],
+        relatedSlugs: ['roomtypes-bulk', 'cio-calendar'],
+    },
+    {
+        slug: 'fleet-data-fix',
         order: 6,
         featured: false,
         kind: 'primary',
-        title: 'Once-миграция с resume',
-        seoTitle: 'Chunked data-fix с resume на больших таблицах',
+        title: 'Исправление данных по всему парку отелей',
+        seoTitle: 'CLI-таск: безопасное исправление данных по тысячам отелей',
         metaDescription:
-            'Кейс: once-task с чанками и --start_hotel_id для возобновления после сбоя. Интерактивный demo job runner.',
-        hook: 'Исправление некорректных данных в проде на больших таблицах без bulk-UPDATE по всей базе: чанки, курсор, resume после сбоя.',
+            'Кейс: прод-баг в правилах отмены — CLI-таск проходит весь активный парк отелей с dry-run, чанками и продолжением после сбоя.',
+        hook: 'В проде разъехались данные по правилам отмены в связанных таблицах. Нужно было аккуратно пройти весь список активных отелей (тысячи / десятки тысяч) и уметь продолжить после обрыва.',
         problem:
-            'Bulk UPDATE по всей таблице — риск таймаутов и локов. Нужны dry-run, прогресс и безопасный resume.',
+            'Один огромный UPDATE или «миграция схемы» — долгие блокировки и таймауты. Прогон по парку идёт часами: без пробного режима и продолжения с места остановки любой сбой = начинать сначала.',
         solution:
-            'Пошагово по hotel_id, SQL-чанки по booking_id, стоп с подсказкой resume. Демо — job runner на Postgres с курсором.',
+            'CLI-таск: сначала dry-run, затем обход отелей по id, правки чанками, паузы между шагами, логи с прогрессом и возможность продолжить с последнего обработанного отеля.',
         effect:
-            'Контролируемый data-fix в проде; паттерн для других once-задач. Доказательство end-to-end ownership за пределами SPA.',
-        stack: ['PHP 8 Minion (прод)', 'Node + PostgreSQL (демо)', 'chunked jobs'],
-        role: 'Full-stack · data / ops',
-        originalStackNote: 'В проде — Kohana Minion once-task; демо повторяет контракт resume на Node.',
-        demos: [
-            {
-                label: 'Запустить миграцию',
-                demoId: 'onceMigration',
-                href: demoHref('onceMigration'),
-            },
-        ],
-        guides: [
-            'Запустите dry-run, затем apply',
-            'Остановите mid-run и продолжите с сохранённого hotel_id',
-            'Смотрите лог прогресса по чанкам',
-        ],
+            'Контролируемое исправление по всему парку без bulk-лока: dry-run, чанки, resume. Full-stack ответственность за прод-данные, не только за UI.',
+        stack: ['PHP 8 Minion', 'PostgreSQL', 'CLI'],
+        role: 'Senior Full-stack · прод и производительность',
+        relatedSlugs: ['roomtypes-bulk'],
     },
     {
-        slug: 'rms-layers',
+        slug: 'cm-ota-metrics',
         order: 7,
-        featured: true,
+        featured: false,
         kind: 'primary',
-        title: 'RMS-слои и зависимые тарифы',
-        seoTitle: 'Динамическое ценообразование в календаре тарифов',
+        title: 'Метрики запросов канала продаж к OTA',
+        seoTitle: 'Метрики Channel Manager к внешним каналам бронирования',
         metaDescription:
-            'Кейс: базовые цены, RMS sale-слой и зависимые тарифы в одном календаре — layer routing, echo vs manual, stable cellKey.',
-        hook: 'В одном календаре — базовые цены, цены продажи по бизнес-правилам (RMS) и зависимые тарифы от родителя. Нужно правильно грузить слои и роутить save.',
+            'Кейс: метрики HTTP-запросов канала продаж к OTA — чтобы видеть сбои и нагрузку, а не тонуть в шумных логах.',
+        hook: 'Цены и наличие уходят во внешние каналы бронирования. Нужно было видеть, как канал продаж ходит к партнёрам при нагрузке и сбоях — без простыни бесполезных логов.',
         problem:
-            'Несколько источников истины; RMS-эхо нельзя считать manual; у зависимого тарифа baseline — формула от родителя. Неверный refetch → мигание ячеек.',
+            'Без метрик сложно понять, где тормозит или падает обмен с OTA. Подробные логи на каждый запрос мешали релизу и разбору инцидентов.',
         solution:
-            'Явный price-layer routing, ensureDynamicPartBeforePriceSave, resolve baseline/reset, cellKey-anchor для overlay, точечный refetch.',
+            'Собрали метрики запросов к OTA (в том числе Otello) для диагностики и нагрузочных прогонов; ужали шумные логи.',
         effect:
-            'Корректный UX динамического ценообразования на том же экране, что и ручные тарифы — сильный travel-tech сюжет.',
-        stack: ['Vue', 'Vuex', 'RMS domain', 'Jest'],
-        role: 'Frontend · domain FE+BE contract',
-        demos: [
-            {
-                label: 'Календарь с RMS-режимами',
-                demoId: ECodeExamples.TARIFF_PRICES,
-                href: demoHref(ECodeExamples.TARIFF_PRICES),
-            },
-        ],
-        guides: [
-            'Переключите режим RMS / combined',
-            'Отличите ручной override от RMS-эха',
-            'Сохраните и убедитесь в точечном обновлении',
-        ],
-        relatedSlugs: ['tariff-calendar', 'availability-spa'],
+            'Быстрее находить проблемы обмена с каналами продаж и безопаснее проводить нагрузочные тесты.',
+        stack: ['PHP CM', 'Prometheus', 'OTA drivers'],
+        role: 'Backend · диагностика канала продаж',
+        relatedSlugs: ['paid-tools', 'cio-calendar'],
     },
     {
-        slug: 'divisions',
-        order: 20,
+        slug: 'sentry-offline',
+        order: 8,
         featured: false,
-        kind: 'secondary',
-        title: 'Divisions',
-        metaDescription: 'Модуль оргструктуры на Lit Web Components — CRUD, FSD, демо без production API.',
-        hook: 'Админка подразделений и ресурсных пулов на Lit / Web Components.',
-        problem: 'Нужна FSD-архитектура на Web Components с типизацией и демо без production backend.',
-        solution: 'TypeScript, Lit, FSD, MSW-моки legacy ASMX.',
-        effect: 'Интерактивное демо со списком подразделений и CRUD.',
-        stack: ['TypeScript', 'Lit', 'FSD', 'MSW'],
-        role: 'Frontend · First Line Software',
-        demos: [
-            {
-                label: 'Открыть Divisions',
-                demoId: ECodeExamples.DIVISIONS,
-                href: demoHref(ECodeExamples.DIVISIONS),
-            },
-        ],
-    },
-    {
-        slug: 'family-meals',
-        order: 21,
-        featured: false,
-        kind: 'secondary',
-        title: 'Family Meal Planning',
-        metaDescription: 'Pet-project: рецепты → недельный план → список покупок. Vue 3 MFE / BFF.',
-        hook: 'Pet: библиотека рецептов, план питания и список покупок.',
-        problem: 'Собрать UX-сценарий end-to-end без тяжёлого backend в портфолио.',
-        solution: 'Vue 3, Module Federation (pet), MSW-демо.',
-        effect: 'Полный UX-сценарий в iframe.',
-        stack: ['Vue 3', 'Module Federation', 'MSW'],
-        role: 'Pet full-stack',
-        demos: [
-            {
-                label: 'Открыть демо',
-                demoId: ECodeExamples.FAMILY_MEALS,
-                href: demoHref(ECodeExamples.FAMILY_MEALS),
-            },
-        ],
-    },
-    {
-        slug: 'vball-agregator',
-        order: 22,
-        featured: false,
-        kind: 'secondary',
-        title: 'VBallAgregator',
-        metaDescription: 'Pet Telegram-бот: запись на игры, Prisma, outbox, Redis.',
-        hook: 'Pet-project: Telegram-сервис для волейбольных игр и записи.',
-        problem: 'Надёжная интеграция ботов с БД и очередями.',
-        solution: 'Node, Prisma, PostgreSQL, Redis, outbox.',
-        effect: 'Прототип дошёл до стадии тестирования; развитие остановлено осознанно.',
-        stack: ['Node', 'Prisma', 'PostgreSQL', 'Redis'],
-        role: 'Pet backend',
+        kind: 'primary',
+        title: 'Offline на шахматке и сбор ошибок SPA',
+        seoTitle: 'Offline-режим шахматки бронирований и Sentry во Vue',
+        metaDescription:
+            'Кейс: при недоступности сети на шахматке видны последние загруженные бронирования; ошибки Vue уходят в Sentry.',
+        hook: 'На шахматке бронирований при пропаже сети отельеру всё равно нужны последние данные на экране — и понятно, что правки сейчас недоступны. Отдельно — чтобы ошибки интерфейса не терялись «в тишине».',
+        problem:
+            'Без offline-режима при слабой сети экран вёл себя непредсказуемо. Ошибки во Vue-экранах было трудно воспроизвести и чинить без централизованного сбора.',
+        solution:
+            'На шахматке: индикация offline, отключение опасных действий, показ последних успешно загруженных бронирований. Ошибки SPA — в self-hosted Sentry.',
+        effect:
+            'Честный полевой UX при обрыве связи. Self-hosted Sentry — поиск клиентских ошибок примерно в 3 раза быстрее.',
+        stack: ['Vue', 'Sentry', 'offline UX'],
+        role: 'Frontend · DX и полевой UX',
+        relatedSlugs: ['cio-calendar', 'cm-ota-metrics'],
     },
 ]
 
@@ -321,18 +350,33 @@ export const getWorkCaseBySlug = (slug: string): WorkCase | undefined =>
 export const getFeaturedWorkCases = (): WorkCase[] =>
     WORK_CASES.filter(item => item.featured).sort((a, b) => a.order - b.order)
 
-export const getPrimaryWorkCases = (): WorkCase[] =>
-    WORK_CASES.filter(item => item.kind === 'primary').sort((a, b) => a.order - b.order)
+/** Cases shown on /work index (hub + standalone; no archive/secondary). */
+export const getIndexWorkCases = (): WorkCase[] =>
+    WORK_CASES
+        .filter(item => item.kind === 'primary' && item.groupRole !== 'chapter')
+        .sort((a, b) => a.order - b.order)
 
-export const getSecondaryWorkCases = (): WorkCase[] =>
-    WORK_CASES.filter(item => item.kind === 'secondary').sort((a, b) => a.order - b.order)
+export const getCioHubCase = (): WorkCase | undefined =>
+    WORK_CASES.find(item => item.groupId === 'cio-calendar' && item.groupRole === 'hub')
 
-/** Map old portfolio case slugs → work slugs for redirects */
+export const getPrimaryWorkCases = getIndexWorkCases
+
+/** Old work/portfolio slugs → current work path (slug or slug#anchor) */
+export const WORK_SLUG_REDIRECTS: Record<string, string> = {
+    'tariff-calendar': 'cio-calendar#virtualizer',
+    'mobile-webview-edit': 'cio-calendar#mobile',
+    'availability-spa': 'cio-calendar#availability',
+    'rms-layers': 'cio-calendar#rms',
+    'price-impact': 'cio-calendar#price-impact',
+    'once-migration': 'fleet-data-fix',
+    'rms-batch': 'paid-tools',
+}
+
 export const PORTFOLIO_TO_WORK_SLUG: Record<string, string> = {
-    'tariff-prices': 'tariff-calendar',
+    'tariff-prices': 'cio-calendar',
     'report-revenue': 'revenue-report',
-    divisions: 'divisions',
-    'family-meals': 'family-meals',
-    'vball-agregator': 'vball-agregator',
-    racketmate: 'vball-agregator',
+    divisions: 'work',
+    'family-meals': 'work',
+    'vball-agregator': 'work',
+    racketmate: 'work',
 }

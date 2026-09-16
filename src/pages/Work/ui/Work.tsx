@@ -5,16 +5,17 @@ import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import { SITE_CONTENT } from 'shared/content'
 import {
-    getPrimaryWorkCases,
-    getSecondaryWorkCases,
+    getCioHubCase,
+    getIndexWorkCases,
     WorkCase,
 } from 'shared/consts/work-cases'
 import { trackCtaClick } from 'shared/analytics/events'
-import { isHiringMode } from 'shared/config/siteMode'
 
-const CaseCard: FC<{ item: WorkCase }> = ({ item }) => (
+const CaseCard: FC<{ item: WorkCase; badge?: string }> = ({ item, badge }) => (
     <article className={ classes.card }>
-        <span className={ classes.order }>#{ item.order }</span>
+        {badge ? <span className={ classes.badge }>{ badge }</span> : (
+            <span className={ classes.order }>#{ item.order }</span>
+        )}
         <h3>
             <Link to={ `/work/${item.slug}` }>{ item.title }</Link>
         </h3>
@@ -32,8 +33,8 @@ const CaseCard: FC<{ item: WorkCase }> = ({ item }) => (
 const Work: FC = () => {
     const dispatch = useAppDispatch()
     const { workIndex } = SITE_CONTENT
-    const primary = getPrimaryWorkCases()
-    const secondary = getSecondaryWorkCases()
+    const hub = getCioHubCase()
+    const rest = getIndexWorkCases().filter(item => item.slug !== hub?.slug)
 
     useEffect(() => {
         dispatch(setCodeExampleSourceLinkHref(''))
@@ -44,25 +45,26 @@ const Work: FC = () => {
             <h1>{ workIndex.title }</h1>
             <p className={ classes.intro }>{ workIndex.intro }</p>
 
+            {hub && (
+                <section className={ classes.section }>
+                    <h2>Календарь ЦиО</h2>
+                    <p className={ classes.sectionNote }>
+                        Один модуль — архитектура и контракт с API. Главы — срезы: слой сетки, сессия редактирования, миграция наличия, слои цен и дерево влияния.
+                    </p>
+                    <div className={ classes.hubGrid }>
+                        <CaseCard item={ hub } badge='Кластер' />
+                    </div>
+                </section>
+            )}
+
             <section className={ classes.section }>
-                <h2>{ isHiringMode ? 'Hospitality / PMS' : 'Сложные интерфейсы' }</h2>
+                <h2>Кейсы</h2>
                 <div className={ classes.grid }>
-                    {primary.map(item => (
+                    {rest.map(item => (
                         <CaseCard key={ item.slug } item={ item } />
                     ))}
                 </div>
             </section>
-
-            {secondary.length > 0 && (
-                <section className={ classes.section }>
-                    <h2>Другие работы</h2>
-                    <div className={ classes.grid }>
-                        {secondary.map(item => (
-                            <CaseCard key={ item.slug } item={ item } />
-                        ))}
-                    </div>
-                </section>
-            )}
 
             <div className={ classes.cta }>
                 <Link

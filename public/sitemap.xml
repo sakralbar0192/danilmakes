@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://schemas.openxmlformats.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://danilmakes.ru/</loc>
     <changefreq>weekly</changefreq>
@@ -16,17 +16,22 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/work/tariff-calendar</loc>
+    <loc>https://danilmakes.ru/work/cio-calendar</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://danilmakes.ru/work/paid-tools</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/work/mobile-webview-edit</loc>
+    <loc>https://danilmakes.ru/work/revenue-report</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/work/availability-spa</loc>
+    <loc>https://danilmakes.ru/work/roomtypes-bulk</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -36,33 +41,18 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/work/revenue-report</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://danilmakes.ru/work/once-migration</loc>
+    <loc>https://danilmakes.ru/work/fleet-data-fix</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/work/rms-layers</loc>
+    <loc>https://danilmakes.ru/work/cm-ota-metrics</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://danilmakes.ru/work/divisions</loc>
+    <loc>https://danilmakes.ru/work/sentry-offline</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://danilmakes.ru/work/family-meals</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://danilmakes.ru/work/vball-agregator</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
 </urlset>

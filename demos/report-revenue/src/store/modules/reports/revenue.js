@@ -108,8 +108,8 @@ export default {
   },
   getters: {
     canShowReport(state) {
-      const { revenue = 0, load = 0 } = state.tableData.total?.selected ?? {};
-      return revenue !== 0 || load !== 0;
+      const { amount = 0, revenue = 0, load = 0 } = state.tableData.total?.selected ?? {};
+      return amount !== 0 || revenue !== 0 || load !== 0;
     },
     isAllAvailableCategorySelected(state, getters, rootState) {
       const allRoomTypes = rootState.hotelRoom.roomtypes;

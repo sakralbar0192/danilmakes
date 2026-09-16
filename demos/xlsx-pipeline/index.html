@@ -11,8 +11,21 @@
     <header>
       <p class="eyebrow">Full-stack demo · /api/demos/xlsx</p>
       <h1>Streaming XLSX pipeline</h1>
-      <p class="lead">Идея из продакшена (PHP StreamingExporter): окно → dayVector → sparse write → discard. Без полной CellDto-матрицы.</p>
+      <p class="lead">
+        Идея из продакшена (PHP StreamingExporter): окно → dayVector → sparse write → discard.
+        Без полной матрицы ячеек в памяти. НТ до рефакторинга: dual per_day ~152M peak / OOM.
+      </p>
     </header>
+
+    <section class="nt" aria-label="Нагрузочное тестирование">
+      <h2>Зачем НТ</h2>
+      <p>Понять, нужно ли снижать память и время выгрузки — до рефакторинга гипотеза, после — подтверждение.</p>
+      <ul>
+        <li><strong>Как:</strong> ручные тяжёлые прогоны + PHP CLI loadtest / протоколы.</li>
+        <li><strong>Что увидели:</strong> dual per_day с полной матрицей — порядка ~152M peak и OOM.</li>
+        <li><strong>Решение:</strong> потоковая запись окнами вместо полной матрицы в памяти; acceptance loadtest + parity.</li>
+      </ul>
+    </section>
 
     <section class="controls">
       <label>
@@ -24,16 +37,31 @@
     </section>
 
     <section class="compare">
-      <article>
+      <article class="stream">
         <h2>Stream</h2>
+        <p class="hint">В RAM только окно дня / колонка</p>
         <ol id="streamStages"></ol>
         <p class="peak" id="streamPeak"></p>
       </article>
-      <article>
-        <h2>Naive (полная матрица)</h2>
+      <article class="naive">
+        <h2>Полная выгрузка в памяти</h2>
+        <p class="hint">Вся сетка периода + CellDto</p>
         <ol id="naiveStages"></ol>
         <p class="peak" id="naivePeak"></p>
       </article>
+    </section>
+
+    <section class="bars" aria-hidden="true">
+      <div class="bar-row">
+        <span>Stream peak</span>
+        <div class="bar-track"><div id="streamBar" class="bar fill-stream"></div></div>
+        <span id="streamBarLabel"></span>
+      </div>
+      <div class="bar-row">
+        <span>Полная выгрузка</span>
+        <div class="bar-track"><div id="naiveBar" class="bar fill-naive"></div></div>
+        <span id="naiveBarLabel"></span>
+      </div>
     </section>
 
     <p id="status" class="status" aria-live="polite"></p>

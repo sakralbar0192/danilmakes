@@ -8,11 +8,11 @@ import { SITE_CONTENT } from 'shared/content'
 export const SITE_ORIGIN = 'https://danilmakes.ru'
 
 export const DEFAULT_PAGE_TITLE = isHiringMode
-    ? 'Данил Ухов — Frontend / full-stack · Travel & B2B SaaS | danilmakes'
+    ? 'Данил Ухов — Senior Frontend / Full-stack IC | danilmakes'
     : 'danilmakes.ru — продуктовый разработчик, Красноярск'
 
 export const DEFAULT_PAGE_DESCRIPTION = isHiringMode
-    ? 'Frontend / full-stack инженер, ~6 лет. Hospitality PMS: тарифы, availability, revenue. Интерактивные кейсы с живым API.'
+    ? 'Senior IC, ~6 лет. Архитектура модулей тарифов, контракты API, тяжёлые операционные экраны. Кейсы hospitality PMS с живым API.'
     : 'Данил Ухов — продуктовый разработчик в Красноярске. Сайты, приложения и небольшие проекты для бизнеса.'
 
 const DEMO_TITLES: Record<string, string> = {
@@ -25,7 +25,8 @@ const DEMO_TITLES: Record<string, string> = {
     [ECodeExamples.FORM_INTEGRATION]: 'Форма → Telegram + почта',
     [ECodeExamples.BOOKING_ADMIN]: 'Админка записей',
     [ECodeExamples.XLSX_PIPELINE]: 'Streaming XLSX',
-    [ECodeExamples.ONCE_MIGRATION]: 'Once-миграция',
+    [ECodeExamples.FLEET_DATA_FIX]: 'Fleet CLI data-fix',
+    [ECodeExamples.ONCE_MIGRATION]: 'Fleet CLI data-fix',
     [ECodeExamples.EUROPE]: 'Европа',
     [ECodeExamples.BICYCLE]: 'Велосипеды',
     [ECodeExamples.MISHKA]: 'Mishka',

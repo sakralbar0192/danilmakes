@@ -77,6 +77,74 @@
     color: t.$color-text;
 }
 
+.toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin: 0 0 28px;
+    padding: 14px 16px;
+    border: 1px solid t.$color-border;
+    border-radius: t.$radius-md;
+    background: rgba(255, 255, 255, 0.7);
+
+    a {
+        font-weight: 600;
+        font-size: 0.92rem;
+        text-decoration: none;
+    }
+}
+
+.chapter {
+    margin: 36px 0;
+    padding-top: 8px;
+    border-top: 1px solid t.$color-border;
+    scroll-margin-top: 72px;
+
+    h2 {
+        margin-bottom: 14px;
+        font-size: 1.3rem;
+    }
+
+    h3 {
+        margin: 14px 0 6px;
+        font-size: 1rem;
+        color: t.$color-primary;
+    }
+
+    p {
+        margin: 0 0 8px;
+        line-height: 1.65;
+    }
+}
+
+.flowDiagram {
+    display: grid;
+    gap: 14px;
+
+    @media (min-width: 720px) {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.flowColumn {
+    padding: 14px 16px;
+    border: 1px solid t.$color-border;
+    border-radius: t.$radius-md;
+    background: rgba(255, 255, 255, 0.72);
+
+    h3 {
+        margin: 0 0 10px;
+        font-size: 0.95rem;
+        color: t.$color-primary;
+    }
+
+    ol {
+        margin: 0;
+        padding-left: 1.15rem;
+        line-height: 1.65;
+    }
+}
+
 .demoBlock {
     margin: 36px 0;
 }

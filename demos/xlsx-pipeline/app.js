@@ -7,11 +7,35 @@ function renderStages(targetId, peakId, stages) {
   list.innerHTML = ''
   stages.forEach((stage) => {
     const li = document.createElement('li')
-    li.textContent = `${stage.label} — ~${stage.memoryMb} MB`
+    li.innerHTML = `<span>${stage.label} — ~${stage.memoryMb} MB</span><span class="ram">что в RAM: ${ramHint(stage.id)}</span>`
     list.appendChild(li)
   })
   const last = stages[stages.length - 1]
   peak.textContent = last ? `Peak ≈ ${last.memoryMb} MB` : ''
+  return last?.memoryMb ?? 0
+}
+
+function ramHint(id) {
+  const map = {
+    load: 'полная матрица цен периода',
+    celldto: 'CellDto на каждую ячейку',
+    write: 'матрица + workbook buffer',
+    peak: 'удержанный пик',
+    window: 'окно prices на день/колонку',
+    dayVector: 'компактный вектор дня',
+    discard: 'после сброса dayVector',
+  }
+  return map[id] || 'промежуточные буферы'
+}
+
+function renderBars(streamPeak, naivePeak) {
+  const max = Math.max(streamPeak, naivePeak, 1)
+  const streamBar = document.getElementById('streamBar')
+  const naiveBar = document.getElementById('naiveBar')
+  streamBar.style.width = `${Math.round((streamPeak / max) * 100)}%`
+  naiveBar.style.width = `${Math.round((naivePeak / max) * 100)}%`
+  document.getElementById('streamBarLabel').textContent = `${streamPeak} MB`
+  document.getElementById('naiveBarLabel').textContent = `${naivePeak} MB`
 }
 
 async function loadPipeline() {
@@ -20,8 +44,9 @@ async function loadPipeline() {
   const res = await fetch(`/api/demos/xlsx/pipeline?days=${days}`)
   if (!res.ok) throw new Error('pipeline failed')
   const data = await res.json()
-  renderStages('streamStages', 'streamPeak', data.stream)
-  renderStages('naiveStages', 'naivePeak', data.naive)
+  const streamPeak = renderStages('streamStages', 'streamPeak', data.stream)
+  const naivePeak = renderStages('naiveStages', 'naivePeak', data.naive)
+  renderBars(streamPeak, naivePeak)
   statusEl.textContent = data.note || 'Готово'
 }
 
@@ -37,7 +62,11 @@ async function exportFile() {
   const pipelineHeader = res.headers.get('X-Demo-Pipeline')
   if (pipelineHeader) {
     try {
-      renderStages('streamStages', 'streamPeak', JSON.parse(pipelineHeader))
+      const stages = JSON.parse(pipelineHeader)
+      const streamPeak = renderStages('streamStages', 'streamPeak', stages)
+      const naivePeakEl = document.getElementById('naivePeak')
+      const naiveMatch = /(\d+)/.exec(naivePeakEl?.textContent || '')
+      renderBars(streamPeak, Number(naiveMatch?.[1] || streamPeak))
     } catch {
       // ignore
     }

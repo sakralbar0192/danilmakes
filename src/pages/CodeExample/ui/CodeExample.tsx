@@ -1,7 +1,7 @@
 import { type FC, useEffect, useState } from 'react'
 import { Spinner } from 'react-bootstrap'
 import classes from './styles.module.scss'
-import { useParams } from 'react-router'
+import { useLocation, useParams } from 'react-router'
 import { ECodeExamples, ECodeExamplesLinksHrefs } from 'app/codeExamples'
 import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
@@ -12,6 +12,7 @@ const IFRAME_LOAD_TIMEOUT_MS = 30_000
 const CodeExample: FC = () => {
     const dispatch = useAppDispatch()
     const { choosenExample } = useParams() as { choosenExample: ECodeExamples }
+    const location = useLocation()
     const [loadState, setLoadState] = useState<'loading' | 'loaded' | 'error'>('loading')
 
     useEffect(() => {
@@ -23,7 +24,7 @@ const CodeExample: FC = () => {
 
     useEffect(() => {
         setLoadState('loading')
-    }, [choosenExample])
+    }, [choosenExample, location.search])
 
     useEffect(() => {
         if (loadState !== 'loading') {
@@ -54,7 +55,7 @@ const CodeExample: FC = () => {
         return null
     }
 
-    const demoUrl = `/${choosenExample}/`
+    const demoUrl = `/${choosenExample}/${location.search || ''}`
 
     const handleIframeLoad = () => {
         setLoadState('loaded')
@@ -84,6 +85,7 @@ const CodeExample: FC = () => {
             )}
 
             <iframe
+                key={ demoUrl }
                 className={ `${classes.iframe} ${loadState !== 'loaded' ? classes.iframeHidden : ''}` }
                 src={ demoUrl }
                 title={ choosenExample }

@@ -18,9 +18,9 @@ async function api(path, options) {
 function renderStatus(data) {
   const h = data.hotels || {}
   statsEl.innerHTML = `
-    <div class="stat"><strong>${h.total ?? 0}</strong><span>hotels</span></div>
-    <div class="stat"><strong>${h.invalid ?? 0}</strong><span>invalid</span></div>
-    <div class="stat"><strong>${h.fixed ?? 0}</strong><span>fixed</span></div>
+    <div class="stat"><strong>${h.total ?? 0}</strong><span>отелей в парке</span></div>
+    <div class="stat"><strong>${h.invalid ?? 0}</strong><span>к исправлению</span></div>
+    <div class="stat"><strong>${h.fixed ?? 0}</strong><span>исправлено</span></div>
   `
 
   jobsEl.innerHTML = ''

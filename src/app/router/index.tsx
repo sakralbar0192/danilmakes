@@ -12,16 +12,18 @@ import { ForFreelance } from 'pages/ForFreelance'
 import { PortfolioPrint } from 'pages/PortfolioPrint'
 import { Work } from 'pages/Work'
 import { WorkCase } from 'pages/WorkCase'
-import { PORTFOLIO_TO_WORK_SLUG } from 'shared/consts/work-cases'
+import { PORTFOLIO_TO_WORK_SLUG, WORK_SLUG_REDIRECTS } from 'shared/consts/work-cases'
 import { isHiringMode } from 'shared/config/siteMode'
 
 function PortfolioSlugRedirect() {
     const { slug = '' } = useParams()
     const mapped = PORTFOLIO_TO_WORK_SLUG[slug]
-    if (mapped) {
-        return <Navigate to={ `/work/${mapped}` } replace />
+    if (!mapped || mapped === 'work') {
+        return <Navigate to='/work' replace />
     }
-    return <Navigate to='/work' replace />
+    const redirect = WORK_SLUG_REDIRECTS[mapped] ?? mapped
+    const [toSlug, hash] = redirect.split('#')
+    return <Navigate to={ hash ? `/work/${toSlug}#${hash}` : `/work/${toSlug}` } replace />
 }
 
 const router = createBrowserRouter([

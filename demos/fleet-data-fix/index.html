@@ -3,15 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Once-migration resume — demo</title>
+  <title>Fleet CLI data-fix — demo</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <main class="page">
     <header>
       <p class="eyebrow">Full-stack demo · /api/demos/once</p>
-      <h1>Once-миграция с resume</h1>
-      <p class="lead">Чанки по hotel_id, dry-run / apply и продолжение с <code>--start_hotel_id</code> после сбоя. Синтетика в Postgres.</p>
+      <h1>CLI-таск: data-fix по парку отелей</h1>
+      <p class="lead">
+        Обход активного парка по <code>hotel_id</code>, чанки правок, dry-run / apply и resume с
+        <code>--start_hotel_id</code> после сбоя. Не schema-миграция — контролируемый data fix.
+        Синтетика в Postgres.
+      </p>
     </header>
 
     <section class="stats" id="stats"></section>
