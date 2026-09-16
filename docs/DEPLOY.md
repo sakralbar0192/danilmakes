@@ -113,14 +113,20 @@ CORS_ORIGIN=https://danilmakes.ru
 
 ## Обновление сайта
 
+**Обычный путь:** пуш в `master`. GitHub Actions (`.github/workflows/deploy-vps.yml`) синкает репозиторий на VPS тем же `rsync-deploy.sh` и запускает сборку.
+
+Нужны Secrets репозитория: `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`.
+
+Локально, без ожидания Actions:
+
 ```bash
-./scripts/deploy.sh
+./scripts/rsync-deploy.sh root@109.71.242.7
 ```
 
-Или с локальной машины:
+Только сборка на уже синхронизированном сервере:
 
 ```bash
-ssh user@VPS 'cd /opt/danilmakes && ./scripts/deploy.sh'
+ssh root@109.71.242.7 'cd /opt/danilmakes && ./scripts/deploy.sh'
 ```
 
 ## Бэкапы БД
@@ -157,9 +163,9 @@ npm config set fetch-retries 5
 npm ci
 ```
 
-### GitHub недоступен
+### GitHub Actions не деплоит
 
-Деплой не зависит от GitHub Actions — используйте `deploy.sh` по SSH.
+Проверьте Secrets `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY` и вкладку Actions. Пока workflow недоступен — локально `./scripts/rsync-deploy.sh`.
 
 ### Письма не приходят
 

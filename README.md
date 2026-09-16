@@ -58,9 +58,9 @@ demos/         — исходники демо (сборка в public/)
 
 ## Деплой на VPS
 
-Основной способ — `scripts/deploy.sh` на сервере. Подробно: [docs/DEPLOY.md](docs/DEPLOY.md).
+Основной способ: пуш в `master` → GitHub Actions гоняет `scripts/rsync-deploy.sh` (секреты `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`). Подробно: [docs/DEPLOY.md](docs/DEPLOY.md).
 
-Опционально: GitHub Actions (`.github/workflows/deploy-vps.yml`) при настройке Secrets `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`.
+Локально, без GitHub: `./scripts/rsync-deploy.sh root@109.71.242.7`.
 
 ## Контент
 

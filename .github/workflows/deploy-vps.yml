@@ -5,19 +5,28 @@ on:
     branches: ['master']
   workflow_dispatch:
 
+concurrency:
+  group: deploy-vps
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.2.0
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.1
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
-            cd /opt/danilmakes
-            ./scripts/deploy.sh
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+
+      - name: Trust VPS host key
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Sync and deploy
+        run: ./scripts/rsync-deploy.sh "${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}"
