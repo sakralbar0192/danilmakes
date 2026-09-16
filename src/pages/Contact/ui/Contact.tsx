@@ -1,10 +1,12 @@
 import { FC, FormEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import { Alert, Button, Form, Spinner } from 'react-bootstrap'
+import { useLocation } from 'react-router-dom'
 import classes from './styles.module.scss'
 import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import { SITE_CONTACT, hasPublicPhone } from 'shared/consts/contact'
+import { EXPERIENCE } from 'shared/consts/experience'
 import { SITE_CONTENT } from 'shared/content'
 import { trackContactError, trackContactSubmit, trackExternalClick } from 'shared/analytics/events'
 
@@ -12,13 +14,22 @@ type FormState = 'idle' | 'loading' | 'success' | 'error'
 
 const Contact: FC = () => {
     const dispatch = useAppDispatch()
+    const location = useLocation()
     const [formState, setFormState] = useState<FormState>('idle')
     const [errorMessage, setErrorMessage] = useState('')
     const { contact } = SITE_CONTENT
+    const showHiringExtras = SITE_CONTENT.mode === 'hiring'
 
     useEffect(() => {
         dispatch(setCodeExampleSourceLinkHref(''))
     }, [dispatch])
+
+    useEffect(() => {
+        if (location.hash !== '#resume') {
+            return
+        }
+        document.getElementById('resume')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, [location.hash])
 
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
@@ -99,6 +110,54 @@ const Contact: FC = () => {
                 <p><strong>Город:</strong> { SITE_CONTACT.city }</p>
                 <p><strong>Ответ:</strong> { SITE_CONTACT.responseTime }</p>
             </div>
+
+            {showHiringExtras && (
+                <>
+                    <section className={ classes.resume } id='resume'>
+                        <h2>Резюме на HH</h2>
+                        <p className={ classes.resumeLead }>
+                            Два профиля: frontend — основной, full-stack — если в вакансии явно нужны PHP / API / данные.
+                        </p>
+                        <ul className={ classes.resumeLinks }>
+                            <li>
+                                <a
+                                    href={ SITE_CONTACT.hhFrontend }
+                                    target='_blank'
+                                    rel='noreferrer'
+                                    onClick={ () => trackExternalClick('hh', 'frontend') }
+                                >
+                                    Senior Frontend Engineer
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href={ SITE_CONTACT.hhFullstack }
+                                    target='_blank'
+                                    rel='noreferrer'
+                                    onClick={ () => trackExternalClick('hh', 'fullstack') }
+                                >
+                                    Senior Full-stack Engineer
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section className={ classes.experience }>
+                        <h2>Опыт</h2>
+                        <ul>
+                            {EXPERIENCE.map(item => (
+                                <li key={ item.id }>
+                                    <strong>{ item.company }</strong>
+                                    {' · '}
+                                    { item.period }
+                                    {' · '}
+                                    { item.role }
+                                </li>
+                            ))}
+                        </ul>
+                    </section>
+                </>
+            )}
 
             <h2>{ contact.formTitle }</h2>
 

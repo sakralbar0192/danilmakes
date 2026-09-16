@@ -45,6 +45,9 @@ export interface WorkCase {
     effect: string
     stack: string[]
     role: string
+    product: string
+    period: string
+    cardHook?: string
     originalStackNote?: string
     demos?: WorkCaseDemo[]
     guides?: string[]
@@ -59,8 +62,11 @@ export interface WorkCase {
 
 const demoHref = (id: string, query = '') => `/demo/${id}${query}`
 
+export const PMS_PRODUCT = 'Hospitality B2B SaaS · PMS'
+export const PMS_PERIOD = '2023–2026'
+
 /** Hiring cases: CIO hub + diversified hospitality stories. */
-export const WORK_CASES: WorkCase[] = [
+const PMS_CASES: Array<Omit<WorkCase, 'product' | 'period'>> = [
     {
         slug: 'cio-calendar',
         order: 1,
@@ -72,6 +78,7 @@ export const WORK_CASES: WorkCase[] = [
         seoTitle: 'Архитектура операционного календаря: слой сетки, контракт API, миграция без остановки',
         metaDescription:
             'Senior-кейс: виртуализация, контракт UI↔API, сессия редактирования, слои данных. Схему переиспользовали на других таблицах.',
+        cardHook: 'Архитектура операционного календаря: клиентский слой, контракт с API, согласованность после сохранения.',
         hook: 'Не «собрал экран» — спроектировал архитектуру тяжёлого операционного календаря: клиентский слой, контракт с API и правила согласованности после сохранения. Ниже — пять срезов одной архитектуры.',
         problem:
             'На одном экране сходятся скорость сетки, ввод с телефона, наличие номеров и несколько источников цены. Без спроектированной архитектуры страдают отзывчивость и доверие к данным после сохранения — и команда не может наращивать фичи, не ломая экран.',
@@ -157,6 +164,7 @@ export const WORK_CASES: WorkCase[] = [
         seoTitle: 'Пакеты подписки и доступ к инструментам в hospitality SaaS',
         metaDescription:
             'Кейс: пакеты Zero / Light / Business решают, какие отчёты и автоправила доступны отельеру — и что происходит при понижении тарифа.',
+        cardHook: 'Пакет подписки решает доступ к отчётам и правилам цен — и что отключается при понижении тарифа.',
         hook: 'В B2B-продукте пакет подписки решает, какими отчётами, автоматизацией и правилами цен можно пользоваться — и что отключить при переходе на более простой тариф.',
         problem:
             'Простого «включено / выключено» мало: инструмент может входить в пакет, докупаться отдельно или уже истечь, но ещё показываться для просмотра. При понижении пакета автоправила цен не должны продолжать работать «втихую».',
@@ -177,6 +185,7 @@ export const WORK_CASES: WorkCase[] = [
         seoTitle: 'Отчёт по доходу: ADR, RevPAR и загрузка',
         metaDescription:
             'Кейс: экран выручки для отельера — ключевые метрики, графики, сравнение периодов и выгрузка в Excel.',
+        cardHook: 'Отчёт по выручке: доход, средняя цена, загрузка — графики, сравнение периодов, выгрузка.',
         hook: 'Нужен понятный отчёт по выручке: доход, средняя цена, загрузка — с графиками, фильтрами, сравнением периодов и выгрузкой.',
         problem:
             'Метрики должны считаться точно; Excel на большом числе категорий тормозил; сравнение двух периодов легко запутать процентами и окраской.',
@@ -343,6 +352,12 @@ export const WORK_CASES: WorkCase[] = [
         relatedSlugs: ['cio-calendar', 'cm-ota-metrics'],
     },
 ]
+
+export const WORK_CASES: WorkCase[] = PMS_CASES.map(item => ({
+    ...item,
+    product: PMS_PRODUCT,
+    period: PMS_PERIOD,
+}))
 
 export const getWorkCaseBySlug = (slug: string): WorkCase | undefined =>
     WORK_CASES.find(item => item.slug === slug)

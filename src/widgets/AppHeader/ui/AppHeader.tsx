@@ -13,6 +13,17 @@ export const AppHeader = () => {
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
+    const navClassName = (to: string) => ({ isActive, isPending }: { isActive: boolean; isPending?: boolean }) => {
+        if (isPending) {
+            return 'pending'
+        }
+        const active = isActive ? classes.active : undefined
+        if (to === '/contact') {
+            return [classes.contactCta, active].filter(Boolean).join(' ')
+        }
+        return active
+    }
+
     return (
         <header className={ classes.header } data-app-header>
             <button
@@ -32,7 +43,7 @@ export const AppHeader = () => {
                 {SITE_CONTENT.nav.map(item => (
                     <NavLink
                         key={ item.to }
-                        className={ ({ isActive }) => (isActive ? classes.active : undefined) }
+                        className={ navClassName(item.to) }
                         to={ item.to }
                         end={ item.end }
                     >
@@ -47,6 +58,14 @@ export const AppHeader = () => {
                         Исходный код
                     </a>
                 )}
+                <a
+                    href={ SITE_CONTACT.telegramUrl }
+                    target='_blank'
+                    rel='noreferrer'
+                    className={ classes.ghostLink }
+                >
+                    Telegram
+                </a>
                 <a
                     href={ SITE_CONTACT.github }
                     target='_blank'
@@ -63,9 +82,7 @@ export const AppHeader = () => {
                     {SITE_CONTENT.nav.map(item => (
                         <NavLink
                             key={ item.to }
-                            className={ ({ isActive, isPending }) =>
-                                (isPending ? 'pending' : isActive ? classes.active : '')
-                            }
+                            className={ navClassName(item.to) }
                             to={ item.to }
                             end={ item.end }
                             onClick={ handleClose }

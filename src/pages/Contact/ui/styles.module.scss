@@ -32,6 +32,45 @@
     }
 }
 
+.resume,
+.experience {
+    margin-bottom: 32px;
+    scroll-margin-top: 72px;
+
+    h2 {
+        margin-bottom: 8px;
+        font-size: 1.25rem;
+    }
+}
+
+.resumeLead {
+    margin: 0 0 12px;
+    color: #444;
+}
+
+.resumeLinks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    a {
+        font-weight: 600;
+    }
+}
+
+.experience ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #444;
+}
+
 @media (max-width: 576px) {
     .wrapper {
         padding: 24px 16px 40px;

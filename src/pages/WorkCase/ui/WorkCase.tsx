@@ -58,6 +58,7 @@ const WorkCase: FC = () => {
             </nav>
 
             <p className={ classes.role }>{ workCase.role }</p>
+            <p className={ classes.product }>{ workCase.product } · { workCase.period }</p>
             <h1>{ workCase.title }</h1>
             <p className={ classes.hook }>{ workCase.hook }</p>
 

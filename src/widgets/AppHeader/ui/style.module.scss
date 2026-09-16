@@ -48,6 +48,18 @@
     }
 }
 
+.contactCta {
+    background: t.$color-primary !important;
+    color: #fff !important;
+    font-weight: 600;
+
+    &:hover,
+    &.active {
+        background: t.$color-primary-dark !important;
+        color: #fff !important;
+    }
+}
+
 .headerAside {
     margin-left: auto;
     display: flex;

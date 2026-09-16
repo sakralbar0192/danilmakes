@@ -16,10 +16,11 @@ const CaseCard: FC<{ item: WorkCase; badge?: string }> = ({ item, badge }) => (
         {badge ? <span className={ classes.badge }>{ badge }</span> : (
             <span className={ classes.order }>#{ item.order }</span>
         )}
+        <p className={ classes.product }>{ item.product } · { item.period }</p>
         <h3>
             <Link to={ `/work/${item.slug}` }>{ item.title }</Link>
         </h3>
-        <p className={ classes.hook }>{ item.hook }</p>
+        <p className={ classes.hook }>{ item.cardHook ?? item.hook }</p>
         <p className={ classes.role }>{ item.role }</p>
         <div className={ classes.links }>
             <Link to={ `/work/${item.slug}` }>Подробнее</Link>
@@ -35,6 +36,8 @@ const Work: FC = () => {
     const { workIndex } = SITE_CONTENT
     const hub = getCioHubCase()
     const rest = getIndexWorkCases().filter(item => item.slug !== hub?.slug)
+    const secondaryTo = workIndex.ctaSecondaryTo
+    const secondaryLabel = workIndex.ctaSecondaryLabel
 
     useEffect(() => {
         dispatch(setCodeExampleSourceLinkHref(''))
@@ -74,13 +77,13 @@ const Work: FC = () => {
                 >
                     { workIndex.ctaLabel }
                 </Link>
-                {workIndex.ctaSecondaryTo && workIndex.ctaSecondaryLabel && (
+                {secondaryTo && secondaryLabel && (
                     <Link
-                        to={ workIndex.ctaSecondaryTo }
+                        to={ secondaryTo }
                         className={ classes.ctaSecondary }
-                        onClick={ () => trackCtaClick('work', workIndex.ctaSecondaryTo!) }
+                        onClick={ () => trackCtaClick('work', secondaryTo) }
                     >
-                        { workIndex.ctaSecondaryLabel }
+                        { secondaryLabel }
                     </Link>
                 )}
             </div>

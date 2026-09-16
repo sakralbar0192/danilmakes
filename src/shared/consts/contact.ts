@@ -8,6 +8,8 @@ export const SITE_CONTACT = {
     telegram: '@danilmakes',
     telegramUrl: 'https://t.me/danilmakes',
     github: 'https://github.com/sakralbar0192',
+    hhFrontend: 'https://hh.ru/resume/08d61cb6ff10ccd1200039ed1f64486d705041',
+    hhFullstack: 'https://hh.ru/resume/468b2238ff08a6680d0039ed1f447143683971',
     status: SITE_CONTENT.contact.status,
     availability: SITE_CONTENT.contact.availability,
     availabilityDetail: SITE_CONTENT.contact.availabilityDetail,

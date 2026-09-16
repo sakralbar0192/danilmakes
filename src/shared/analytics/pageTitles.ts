@@ -12,7 +12,7 @@ export const DEFAULT_PAGE_TITLE = isHiringMode
     : 'danilmakes.ru — продуктовый разработчик, Красноярск'
 
 export const DEFAULT_PAGE_DESCRIPTION = isHiringMode
-    ? 'Senior Frontend / Full-stack IC, ~6 лет. Архитектура сложных операционных экранов, контракты API, миграции без остановки. Кейсы с живым API.'
+    ? 'Данил Ухов — Senior Frontend / Full-stack IC, ~6 лет. B2B SaaS (PMS): архитектура модулей, контракты API, миграции без остановки. Кейсы с живым API.'
     : 'Данил Ухов — продуктовый разработчик в Красноярске. Сайты, приложения и небольшие проекты для бизнеса.'
 
 const DEMO_TITLES: Record<string, string> = {

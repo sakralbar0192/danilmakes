@@ -20,7 +20,7 @@ export function trackCaseStudyView(slug: string) {
     reachGoal(METRIKA_GOALS.CASE_STUDY_VIEW, { slug })
 }
 
-export function trackExternalClick(target: 'github' | 'telegram' | 'demo', label?: string) {
+export function trackExternalClick(target: 'github' | 'telegram' | 'demo' | 'hh', label?: string) {
     reachGoal(METRIKA_GOALS.EXTERNAL_CLICK, label ? { target, label } : { target })
 }
 

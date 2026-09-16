@@ -18,10 +18,16 @@
 }
 
 .role {
-    margin: 0 0 8px;
+    margin: 0 0 4px;
     color: t.$color-primary;
     font-weight: 600;
     font-size: 0.9rem;
+}
+
+.product {
+    margin: 0 0 8px;
+    color: t.$color-text-muted;
+    font-size: 0.88rem;
 }
 
 .hook {

@@ -5,11 +5,12 @@ import classes from './styles.module.scss'
 import { useAppDispatch } from 'app/hooks'
 import { setCodeExampleSourceLinkHref } from 'app/store/slices/mainSlice'
 import { getAvailabilityVariant, SITE_CONTACT } from 'shared/consts/contact'
+import { EXPERIENCE } from 'shared/consts/experience'
 import { FAQ_ITEMS } from 'shared/consts/faq'
 import { PRICING_NOTE, PRICING_TIERS } from 'shared/consts/pricing'
 import { SITE_CONTENT } from 'shared/content'
 import { getFeaturedWorkCases } from 'shared/consts/work-cases'
-import { trackCtaClick, trackPricingExampleClick } from 'shared/analytics/events'
+import { trackCtaClick, trackExternalClick, trackPricingExampleClick } from 'shared/analytics/events'
 import myAvatarUrl from 'widgets/AboutMeCard/assets/myAvatar.webp'
 
 const availabilityVariant = getAvailabilityVariant(SITE_CONTACT.availability)
@@ -36,7 +37,6 @@ const AboutMe: FC = () => {
                         />
                     </Col>
                     <Col xs={ 12 } md={ 8 }>
-                        <p className={ classes.brand }>{ hero.brand }</p>
                         <p className={ classes.eyebrow }>
                             { hero.eyebrow }
                             {' · '}
@@ -44,7 +44,17 @@ const AboutMe: FC = () => {
                                 { SITE_CONTACT.availability }
                             </span>
                         </p>
-                        <h1 className={ classes.title }>{ hero.title }</h1>
+                        {SITE_CONTENT.mode === 'hiring' ? (
+                            <>
+                                <h1 className={ classes.brand }>{ SITE_CONTACT.name }</h1>
+                                <p className={ classes.title }>{ hero.title }</p>
+                            </>
+                        ) : (
+                            <>
+                                <p className={ classes.brand }>{ hero.brand }</p>
+                                <h1 className={ classes.title }>{ hero.title }</h1>
+                            </>
+                        )}
                         <p className={ classes.lead }>{ hero.lead }</p>
                         <div className={ classes.heroActions }>
                             <Link
@@ -66,6 +76,32 @@ const AboutMe: FC = () => {
                 </Row>
             </section>
 
+            {SITE_CONTENT.mode === 'hiring' && (
+                <section className={ classes.section }>
+                    <h2>Опыт</h2>
+                    <ol className={ classes.experienceList }>
+                        {EXPERIENCE.map(item => (
+                            <li key={ item.id } className={ item.summary ? classes.experienceCompact : undefined }>
+                                <p className={ classes.experienceMeta }>
+                                    <span className={ classes.experiencePeriod }>{ item.period }</span>
+                                    <span>{ item.role }</span>
+                                </p>
+                                <h3>{ item.company }</h3>
+                                {item.summary ? (
+                                    <p>{ item.summary }</p>
+                                ) : (
+                                    <ul>
+                                        {item.bullets?.map(bullet => (
+                                            <li key={ bullet }>{ bullet }</li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </li>
+                        ))}
+                    </ol>
+                </section>
+            )}
+
             {home.showFeaturedWork && (
                 <section className={ classes.section }>
                     <h2>{ home.featuredTitle }</h2>
@@ -79,8 +115,9 @@ const AboutMe: FC = () => {
                             >
                                 <span className={ classes.featuredOrder }>0{ item.order }</span>
                                 <div>
+                                    <p className={ classes.featuredMeta }>{ item.product } · { item.period }</p>
                                     <h3>{ item.title }</h3>
-                                    <p>{ item.hook }</p>
+                                    <p>{ item.cardHook ?? item.hook }</p>
                                 </div>
                             </Link>
                         ))}
@@ -179,6 +216,17 @@ const AboutMe: FC = () => {
                     >
                         { home.showFeaturedWork ? 'Все кейсы' : 'Смотреть работы' }
                     </Link>
+                    {SITE_CONTENT.mode === 'hiring' && (
+                        <a
+                            href={ SITE_CONTACT.hhFrontend }
+                            className={ classes.ctaSecondary }
+                            target='_blank'
+                            rel='noreferrer'
+                            onClick={ () => trackExternalClick('hh', 'frontend') }
+                        >
+                            Резюме на HH
+                        </a>
+                    )}
                 </div>
             </section>
         </div>
