@@ -155,5 +155,35 @@ export const PORTFOLIO_LAYOUTS: PortfolioItem[] = [
         result: 'Согласованный дизайн на всех страницах, удобная навигация по каталогу.',
         demoLink: `/CodeExample/${ECodeExamples.JEVELLERY}`,
         sourceLink: 'https://github.com/sakralbar0192/Jewellery'
+    },
+    {
+        id: 'europe',
+        title: 'Europe',
+        category: 'layout',
+        task: 'Лендинг тура по Европе: hero, карточки направлений, табы, тарифы и форма.',
+        solution: 'Адаптивная вёрстка HTML/CSS/JS, picture/webp, sprite-иконки, мобильное меню.',
+        result: 'Одностраничник с переключением стран и модальной формой заявки.',
+        demoLink: `/CodeExample/${ECodeExamples.EUROPE}`,
+        sourceLink: 'https://github.com/sakralbar0192/Europe'
+    },
+    {
+        id: 'bicycle',
+        title: 'Bicycle',
+        category: 'layout',
+        task: 'Лендинг магазина велосипедов: hero, типы, видео и форма обратной связи.',
+        solution: 'HTML/SCSS, адаптив, навигация с оверлеем, оптимизация изображений.',
+        result: 'Готовый одностраничник с корректной сеткой на desktop и mobile.',
+        demoLink: `/CodeExample/${ECodeExamples.BICYCLE}`,
+        sourceLink: 'https://github.com/sakralbar0192/uhov-bicycles'
+    },
+    {
+        id: 'smart-device',
+        title: 'Smart Device',
+        category: 'layout',
+        task: 'Корпоративный лендинг Smart Device: услуги, преимущества, FAQ и форма.',
+        solution: 'HTML/SCSS, BEM, адаптив, sprite SVG, интерактивные аккордеоны.',
+        result: 'Пиксель-перфект вёрстка по макету с рабочими формами и меню.',
+        demoLink: `/CodeExample/${ECodeExamples.SMART_DEVICE}`,
+        sourceLink: 'https://github.com/sakralbar0192/smart-device'
     }
 ]

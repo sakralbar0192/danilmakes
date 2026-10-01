@@ -34,7 +34,10 @@ export const HIRING_CONTENT: ModeContent = {
         showFaq: false,
         showAudience: true,
         showFeaturedWork: true,
+        showLayoutCases: true,
         featuredTitle: 'Избранные кейсы',
+        layoutTitle: 'Вёрстка',
+        layoutNote: 'Учебные макеты — демонстрация вёрстки, не коммерческие проекты.',
         stackTitle: 'Стек',
         stackItems: [
             'Vue 2/3 · Vuex · Pinia',

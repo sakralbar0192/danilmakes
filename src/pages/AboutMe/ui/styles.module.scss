@@ -214,6 +214,68 @@
     padding-top: 2px;
 }
 
+.layoutNote {
+    margin: -8px 0 20px;
+    color: t.$color-text-muted;
+    line-height: 1.5;
+}
+
+.layoutCard {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px 22px;
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid t.$color-border;
+    border-radius: t.$radius-md;
+    animation: riseIn 0.5s ease both;
+
+    h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: t.$color-ink;
+    }
+
+    p {
+        margin: 0;
+        flex: 1;
+        color: t.$color-text-muted;
+        line-height: 1.5;
+        font-size: 0.95rem;
+    }
+}
+
+.layoutLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.layoutDemoLink,
+.layoutSourceLink {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.layoutDemoLink {
+    color: t.$color-primary;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.layoutSourceLink {
+    color: t.$color-text-muted;
+
+    &:hover {
+        color: t.$color-ink;
+        text-decoration: underline;
+    }
+}
+
 .experienceList {
     list-style: none;
     padding: 0;

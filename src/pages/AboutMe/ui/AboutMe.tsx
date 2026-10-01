@@ -8,8 +8,10 @@ import { getAvailabilityVariant, SITE_CONTACT } from 'shared/consts/contact'
 import { EXPERIENCE } from 'shared/consts/experience'
 import { FAQ_ITEMS } from 'shared/consts/faq'
 import { PRICING_NOTE, PRICING_TIERS } from 'shared/consts/pricing'
+import { PORTFOLIO_LAYOUTS } from 'shared/consts/portfolio'
 import { SITE_CONTENT } from 'shared/content'
 import { getFeaturedWorkCases } from 'shared/consts/work-cases'
+import { prefetchDemo } from 'shared/lib/prefetchDemo'
 import { trackCtaClick, trackExternalClick, trackPricingExampleClick } from 'shared/analytics/events'
 import myAvatarUrl from 'widgets/AboutMeCard/assets/myAvatar.webp'
 
@@ -122,6 +124,47 @@ const AboutMe: FC = () => {
                             </Link>
                         ))}
                     </div>
+                </section>
+            )}
+
+            {home.showLayoutCases && (
+                <section className={ classes.section }>
+                    <h2>{ home.layoutTitle }</h2>
+                    <p className={ classes.layoutNote }>{ home.layoutNote }</p>
+                    <Row xs={ 1 } sm={ 2 } className='g-3'>
+                        {PORTFOLIO_LAYOUTS.map((item, index) => (
+                            <Col key={ item.id }>
+                                <article
+                                    className={ classes.layoutCard }
+                                    style={ { animationDelay: `${index * 60}ms` } }
+                                >
+                                    <h3>{ item.title }</h3>
+                                    <p>{ item.task }</p>
+                                    <div className={ classes.layoutLinks }>
+                                        <Link
+                                            to={ item.demoLink }
+                                            className={ classes.layoutDemoLink }
+                                            onMouseEnter={ () => prefetchDemo(item.demoLink) }
+                                            onFocus={ () => prefetchDemo(item.demoLink) }
+                                        >
+                                            Смотреть
+                                        </Link>
+                                        {item.sourceLink && (
+                                            <a
+                                                href={ item.sourceLink }
+                                                target='_blank'
+                                                rel='noreferrer'
+                                                className={ classes.layoutSourceLink }
+                                                onClick={ () => trackExternalClick('github', item.id) }
+                                            >
+                                                Код
+                                            </a>
+                                        )}
+                                    </div>
+                                </article>
+                            </Col>
+                        ))}
+                    </Row>
                 </section>
             )}
 

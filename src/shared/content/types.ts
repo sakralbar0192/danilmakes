@@ -42,7 +42,10 @@ export interface ModeContent {
         showFaq: boolean
         showAudience: boolean
         showFeaturedWork: boolean
+        showLayoutCases: boolean
         featuredTitle: string
+        layoutTitle: string
+        layoutNote: string
         stackTitle: string
         stackItems: string[]
         ctaTitle: string
