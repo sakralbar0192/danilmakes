@@ -279,10 +279,15 @@ M4 сегменты              │ Server-side лог заявок
 # .env
 YANDEX_METRIKA_TOKEN=...
 YANDEX_METRIKA_COUNTER_ID=110107124
+# опционально переопределить сегмент (иначе DEFAULT в скрипте: не self-IP + не HeadlessChrome)
+# YANDEX_METRIKA_FILTERS=...
 
 npm run metrika:fetch
-# или: npm run metrika:fetch -- --date1=2025-01-01 --date2=today
+npm run metrika:fetch -- --date1=21daysAgo --date2=today
+npm run metrika:fetch -- --no-filter          # сырые, без сегмента
 ```
+
+По умолчанию выгрузка **без self-IP** `185.126.129.xxx` и без HeadlessChrome — иначе KPI раздуты своими визитами. В UI Метрики лучше закрепить полный IP в фильтрах счётчика.
 
 Файлы (в `.gitignore` → `tmp/`):
 
@@ -290,6 +295,7 @@ npm run metrika:fetch
 | ---- | ---------- |
 | `tmp/metrika/report-summary.json` | Обзор + сжатые таблицы — читать его |
 | `tmp/metrika/report-full.json` | Сырые ответы Reports API |
+| `tmp/metrika/brief-for-analysis.md` | Бриф для анализа в другом чате (после выгрузки) |
 
 ### Как читать summary
 

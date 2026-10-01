@@ -5,10 +5,13 @@
  * Требует в .env:
  *   YANDEX_METRIKA_TOKEN=...
  *   YANDEX_METRIKA_COUNTER_ID=110107124  (опционально)
+ *   YANDEX_METRIKA_FILTERS=...           (опционально; иначе DEFAULT_FILTERS)
  *
  * Usage:
  *   node scripts/fetch-metrika.mjs
- *   node scripts/fetch-metrika.mjs --date1=2025-01-01 --date2=today
+ *   node scripts/fetch-metrika.mjs --date1=21daysAgo --date2=today
+ *   node scripts/fetch-metrika.mjs --no-filter
+ *   node scripts/fetch-metrika.mjs --filters="ym:s:browserName!='HeadlessChrome'"
  */
 import fs from 'node:fs'
 import path from 'node:path'
@@ -19,6 +22,9 @@ const root = path.resolve(__dirname, '..')
 const outDir = path.join(root, 'tmp', 'metrika')
 
 const DEFAULT_COUNTER = '110107124'
+/** Self-IP (masked API form) + headless — см. docs/METRIKA.md */
+const DEFAULT_FILTERS =
+    "ym:s:ipAddress!='185.126.129.xxx' AND ym:s:browserName!='HeadlessChrome'"
 const API = 'https://api-metrika.yandex.net'
 
 function loadEnv(filePath) {
@@ -43,12 +49,28 @@ function loadEnv(filePath) {
 }
 
 function parseArgs(argv) {
-    const args = { date1: '365daysAgo', date2: 'today' }
+    const args = {
+        date1: '365daysAgo',
+        date2: 'today',
+        filters: undefined,
+        noFilter: false,
+    }
     for (const arg of argv) {
         if (arg.startsWith('--date1=')) args.date1 = arg.slice('--date1='.length)
         if (arg.startsWith('--date2=')) args.date2 = arg.slice('--date2='.length)
+        if (arg.startsWith('--filters=')) args.filters = arg.slice('--filters='.length)
+        if (arg === '--no-filter' || arg === '--raw') args.noFilter = true
     }
     return args
+}
+
+function resolveFilters(args, env) {
+    if (args.noFilter) return null
+    if (args.filters !== undefined) return args.filters.trim() || null
+    if (env.YANDEX_METRIKA_FILTERS !== undefined) {
+        return env.YANDEX_METRIKA_FILTERS.trim() || null
+    }
+    return DEFAULT_FILTERS
 }
 
 async function metrikaGet(token, pathname, params = {}) {
@@ -82,13 +104,14 @@ async function metrikaGet(token, pathname, params = {}) {
     return body
 }
 
-function reportParams(ids, date1, date2, extra) {
+function reportParams(ids, date1, date2, filters, extra) {
     return {
         ids,
         date1,
         date2,
         accuracy: 'full',
         limit: 100,
+        ...(filters ? { filters } : {}),
         ...extra,
     }
 }
@@ -105,7 +128,9 @@ async function main() {
     const env = { ...loadEnv(path.join(root, '.env')), ...process.env }
     const token = env.YANDEX_METRIKA_TOKEN
     const counterId = env.YANDEX_METRIKA_COUNTER_ID || DEFAULT_COUNTER
-    const { date1, date2 } = parseArgs(process.argv.slice(2))
+    const args = parseArgs(process.argv.slice(2))
+    const { date1, date2 } = args
+    const filters = resolveFilters(args, env)
 
     if (!token) {
         console.error(
@@ -119,81 +144,147 @@ async function main() {
 
     fs.mkdirSync(outDir, { recursive: true })
 
-    console.log(`Счётчик ${counterId}, период ${date1} → ${date2}`)
+    const rp = (extra) => reportParams(counterId, date1, date2, filters, extra)
 
-    const overview = await metrikaGet(token, '/stat/v1/data', reportParams(counterId, date1, date2, {
-        metrics: [
-            'ym:s:visits',
-            'ym:s:users',
-            'ym:s:pageviews',
-            'ym:s:bounceRate',
-            'ym:s:avgVisitDurationSeconds',
-            'ym:s:pageDepth',
-        ].join(','),
-    }))
+    console.log(`Счётчик ${counterId}, период ${date1} → ${date2}`)
+    console.log(`Фильтр: ${filters || '(нет — сырые данные)'}`)
+
+    const overview = await metrikaGet(
+        token,
+        '/stat/v1/data',
+        rp({
+            metrics: [
+                'ym:s:visits',
+                'ym:s:users',
+                'ym:s:pageviews',
+                'ym:s:bounceRate',
+                'ym:s:avgVisitDurationSeconds',
+                'ym:s:pageDepth',
+            ].join(','),
+        }),
+    )
+
+    // ym:pv:* плохо дружит с ym:s:ipAddress — при фильтре берём session pageviews
+    const popularPages = filters
+        ? await metrikaGet(
+              token,
+              '/stat/v1/data',
+              rp({
+                  metrics: 'ym:s:pageviews,ym:s:users',
+                  dimensions: 'ym:s:startURLPathFull',
+                  sort: '-ym:s:pageviews',
+              }),
+          )
+        : await metrikaGet(
+              token,
+              '/stat/v1/data',
+              rp({
+                  metrics: 'ym:pv:pageviews,ym:pv:users',
+                  dimensions: 'ym:pv:URLPathFull',
+                  sort: '-ym:pv:pageviews',
+              }),
+          )
 
     const reports = {
         meta: {
             counterId,
             date1,
             date2,
+            filters: filters || null,
             fetchedAt: new Date().toISOString(),
         },
         overview: {
             totals: overview.totals,
             metrics: overview.query?.metrics,
         },
-        byDay: await metrikaGet(token, '/stat/v1/data', reportParams(counterId, date1, date2, {
-            metrics: 'ym:s:visits,ym:s:users,ym:s:bounceRate',
-            dimensions: 'ym:s:date',
-            sort: 'ym:s:date',
-            limit: 400,
-        })),
-        trafficSources: await metrikaGet(token, '/stat/v1/data', reportParams(counterId, date1, date2, {
-            metrics: 'ym:s:visits,ym:s:users,ym:s:bounceRate,ym:s:avgVisitDurationSeconds',
-            dimensions: 'ym:s:trafficSource',
-            sort: '-ym:s:visits',
-        })),
-        searchEngines: await metrikaGet(token, '/stat/v1/data', reportParams(counterId, date1, date2, {
-            metrics: 'ym:s:visits,ym:s:users,ym:s:bounceRate',
-            dimensions: 'ym:s:searchEngine',
-            sort: '-ym:s:visits',
-        })),
-        entryPages: await metrikaGet(token, '/stat/v1/data', reportParams(counterId, date1, date2, {
-            metrics: 'ym:s:visits,ym:s:bounceRate,ym:s:avgVisitDurationSeconds',
-            dimensions: 'ym:s:startURLPathFull',
-            sort: '-ym:s:visits',
-        })),
-        popularPages: await metrikaGet(token, '/stat/v1/data', reportParams(counterId, date1, date2, {
-            metrics: 'ym:pv:pageviews,ym:pv:users',
-            dimensions: 'ym:pv:URLPathFull',
-            sort: '-ym:pv:pageviews',
-        })),
-        devices: await metrikaGet(token, '/stat/v1/data', reportParams(counterId, date1, date2, {
-            metrics: 'ym:s:visits,ym:s:bounceRate,ym:s:avgVisitDurationSeconds',
-            dimensions: 'ym:s:deviceCategory',
-            sort: '-ym:s:visits',
-        })),
-        browsers: await metrikaGet(token, '/stat/v1/data', reportParams(counterId, date1, date2, {
-            metrics: 'ym:s:visits,ym:s:bounceRate',
-            dimensions: 'ym:s:browser',
-            sort: '-ym:s:visits',
-            limit: 20,
-        })),
-        regions: await metrikaGet(token, '/stat/v1/data', reportParams(counterId, date1, date2, {
-            metrics: 'ym:s:visits,ym:s:users',
-            dimensions: 'ym:s:regionCity',
-            sort: '-ym:s:visits',
-            limit: 30,
-        })),
-        newVsReturning: await metrikaGet(token, '/stat/v1/data', reportParams(counterId, date1, date2, {
-            metrics: 'ym:s:visits,ym:s:bounceRate,ym:s:avgVisitDurationSeconds',
-            dimensions: 'ym:s:isNewUser',
-        })),
+        byDay: await metrikaGet(
+            token,
+            '/stat/v1/data',
+            rp({
+                metrics: 'ym:s:visits,ym:s:users,ym:s:bounceRate',
+                dimensions: 'ym:s:date',
+                sort: 'ym:s:date',
+                limit: 400,
+            }),
+        ),
+        trafficSources: await metrikaGet(
+            token,
+            '/stat/v1/data',
+            rp({
+                metrics: 'ym:s:visits,ym:s:users,ym:s:bounceRate,ym:s:avgVisitDurationSeconds',
+                dimensions: 'ym:s:trafficSource',
+                sort: '-ym:s:visits',
+            }),
+        ),
+        searchEngines: await metrikaGet(
+            token,
+            '/stat/v1/data',
+            rp({
+                metrics: 'ym:s:visits,ym:s:users,ym:s:bounceRate',
+                dimensions: 'ym:s:searchEngine',
+                sort: '-ym:s:visits',
+            }),
+        ),
+        entryPages: await metrikaGet(
+            token,
+            '/stat/v1/data',
+            rp({
+                metrics: 'ym:s:visits,ym:s:bounceRate,ym:s:avgVisitDurationSeconds',
+                dimensions: 'ym:s:startURLPathFull',
+                sort: '-ym:s:visits',
+            }),
+        ),
+        popularPages,
+        devices: await metrikaGet(
+            token,
+            '/stat/v1/data',
+            rp({
+                metrics: 'ym:s:visits,ym:s:bounceRate,ym:s:avgVisitDurationSeconds',
+                dimensions: 'ym:s:deviceCategory',
+                sort: '-ym:s:visits',
+            }),
+        ),
+        browsers: await metrikaGet(
+            token,
+            '/stat/v1/data',
+            rp({
+                metrics: 'ym:s:visits,ym:s:bounceRate',
+                dimensions: 'ym:s:browser',
+                sort: '-ym:s:visits',
+                limit: 20,
+            }),
+        ),
+        regions: await metrikaGet(
+            token,
+            '/stat/v1/data',
+            rp({
+                metrics: 'ym:s:visits,ym:s:users',
+                dimensions: 'ym:s:regionCity',
+                sort: '-ym:s:visits',
+                limit: 30,
+            }),
+        ),
+        newVsReturning: await metrikaGet(
+            token,
+            '/stat/v1/data',
+            rp({
+                metrics: 'ym:s:visits,ym:s:bounceRate,ym:s:avgVisitDurationSeconds',
+                dimensions: 'ym:s:isNewUser',
+            }),
+        ),
+        topIps: await metrikaGet(
+            token,
+            '/stat/v1/data',
+            rp({
+                metrics: 'ym:s:visits,ym:s:users,ym:s:avgVisitDurationSeconds',
+                dimensions: 'ym:s:ipAddress',
+                sort: '-ym:s:visits',
+                limit: 15,
+            }),
+        ),
         goals: await metrikaGet(token, `/management/v1/counter/${counterId}/goals`),
     }
 
-    // Достижения целей — по ID из management API
     const goalList = reports.goals?.goals || []
     const goalReaches = {}
     for (const goal of goalList) {
@@ -203,7 +294,7 @@ async function main() {
             goalReaches[goal.name || String(goalId)] = await metrikaGet(
                 token,
                 '/stat/v1/data',
-                reportParams(counterId, date1, date2, {
+                rp({
                     metrics: `ym:s:goal${goalId}reaches,ym:s:goal${goalId}conversionRate`,
                 }),
             )
@@ -227,6 +318,7 @@ async function main() {
         browsers: summarizeTable(reports.browsers, { maxRows: 10 }),
         regions: summarizeTable(reports.regions),
         newVsReturning: summarizeTable(reports.newVsReturning),
+        topIps: summarizeTable(reports.topIps),
         goals: goalList.map((g) => ({
             id: g.id,
             name: g.name,
