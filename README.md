@@ -1,6 +1,10 @@
 # danilmakes
 
-Личный сайт-визитка разработчика. Портфолио, контактная форма, backend для приёма заявок с уведомлениями на почту.
+Личный сайт-визитка: портфолио, кейсы, контактная форма, backend для заявок с уведомлениями на почту.
+
+**Live:** [danilmakes.ru](https://danilmakes.ru)
+
+> Интерактивные демо (`/demo/*`) — экспериментальные; для proof of skill опираться на тексты кейсов и код основной визитки.
 
 ## Стек
 
@@ -60,7 +64,7 @@ demos/         — исходники демо (сборка в public/)
 
 Основной способ: пуш в `master` → GitHub Actions гоняет `scripts/rsync-deploy.sh` (секреты `VPS_HOST`, `VPS_USER`, `VPS_SSH_KEY`). Подробно: [docs/DEPLOY.md](docs/DEPLOY.md).
 
-Локально, без GitHub: `./scripts/rsync-deploy.sh root@109.71.242.7`.
+Локально, без GitHub: `./scripts/rsync-deploy.sh user@your-host` (хост и ключ — в локальном окружении / секретах, не в README).
 
 ## Контент
 
