@@ -126,7 +126,7 @@ const Contact: FC = () => {
                                     rel='noreferrer'
                                     onClick={ () => trackExternalClick('hh', 'frontend') }
                                 >
-                                    Senior Frontend Engineer
+                                    Frontend Engineer
                                 </a>
                             </li>
                             <li>
@@ -136,7 +136,7 @@ const Contact: FC = () => {
                                     rel='noreferrer'
                                     onClick={ () => trackExternalClick('hh', 'fullstack') }
                                 >
-                                    Senior Full-stack Engineer
+                                    Full-stack Engineer (FE-first)
                                 </a>
                             </li>
                         </ul>

@@ -77,7 +77,7 @@ const PMS_CASES: Array<Omit<WorkCase, 'product' | 'period'>> = [
         title: 'Календарь «Цены и ограничения»',
         seoTitle: 'Архитектура операционного календаря: слой сетки, контракт API, миграция без остановки',
         metaDescription:
-            'Senior-кейс: виртуализация, контракт UI↔API, сессия редактирования, слои данных. Схему переиспользовали на других таблицах.',
+            'Кейс: виртуализация, контракт UI↔API, сессия редактирования, слои данных. Схему переиспользовали на других таблицах.',
         cardHook: 'Архитектура операционного календаря: клиентский слой, контракт с API, согласованность после сохранения.',
         hook: 'Не «собрал экран» — спроектировал архитектуру тяжёлого операционного календаря: клиентский слой, контракт с API и правила согласованности после сохранения. Ниже — пять срезов одной архитектуры.',
         problem:
@@ -87,7 +87,7 @@ const PMS_CASES: Array<Omit<WorkCase, 'product' | 'period'>> = [
         effect:
             'Схему переиспользовали на других таблицах; коллеги делали фичи поверх неё. Команда владеет ключевым экраном продукта end-to-end — от контракта до онбординга.',
         stack: ['Vue 2/3', 'Vuex', 'Jest', 'Playwright', 'REST'],
-        role: 'Senior Frontend · архитектура модуля тарифов',
+        role: 'Frontend · архитектура модуля тарифов',
         demoDesktopPolicy: 'allow',
         demos: [
             {
@@ -98,7 +98,7 @@ const PMS_CASES: Array<Omit<WorkCase, 'product' | 'period'>> = [
         ],
         guides: [
             'Переключайте режимы цен / ограничений / динамических цен',
-            'Отредактируйте ячейку и сохраните — данные уходят в live API',
+            'Отредактируйте ячейку и сохраните — правки в синтетическом срезе демо',
             'Прокрутите длинный горизонт: строки подгружаются по мере скролла',
             'Наличие номеров — в том же календаре',
         ],
@@ -157,8 +157,8 @@ const PMS_CASES: Array<Omit<WorkCase, 'product' | 'period'>> = [
     },
     {
         slug: 'paid-tools',
-        order: 2,
-        featured: true,
+        order: 4,
+        featured: false,
         kind: 'primary',
         title: 'Тарифы подписки и платные инструменты',
         seoTitle: 'Пакеты подписки и доступ к инструментам в hospitality SaaS',
@@ -173,12 +173,12 @@ const PMS_CASES: Array<Omit<WorkCase, 'product' | 'period'>> = [
         effect:
             'Понятный набор возможностей тарифа; после понижения нет висящих правил. Модель gating переиспользуется в меню и в операциях над правилами цен.',
         stack: ['Vue', 'Vuex', 'PHP', 'RMS API'],
-        role: 'Senior Full-stack · продуктовая платформа',
+        role: 'Full-stack · продуктовая платформа',
         relatedSlugs: ['cio-calendar'],
     },
     {
         slug: 'revenue-report',
-        order: 3,
+        order: 2,
         featured: true,
         kind: 'primary',
         title: 'Отчёт «Доход, ADR, Загрузка»',
@@ -194,7 +194,7 @@ const PMS_CASES: Array<Omit<WorkCase, 'product' | 'period'>> = [
         effect:
             'Рядом с календарём тарифов — полноценный контур аналитики как часть модуля дохода, а не «ещё один дашборд».',
         stack: ['Vue 3', 'Chart.js', 'Vuex', 'Excel export'],
-        role: 'Senior Frontend · revenue-контур',
+        role: 'Frontend · revenue-контур',
         demos: [
             {
                 label: 'Открыть демо отчёта',
@@ -211,7 +211,7 @@ const PMS_CASES: Array<Omit<WorkCase, 'product' | 'period'>> = [
     },
     {
         slug: 'roomtypes-bulk',
-        order: 4,
+        order: 5,
         featured: false,
         kind: 'primary',
         title: 'Копирование ограничений на подкатегории',
@@ -226,7 +226,7 @@ const PMS_CASES: Array<Omit<WorkCase, 'product' | 'period'>> = [
         effect:
             'Создание категорий и копирование на много подкатегорий быстрее и предсказуемее: решение по замерам, не «оптимизировали запрос». Массовая запись и отложенный sync — схема, которую можно повторить на других bulk-операциях.',
         stack: ['PHP 8', 'PostgreSQL', 'loadtest CLI'],
-        role: 'Senior Full-stack · прод и производительность',
+        role: 'Full-stack · прод и производительность',
         loadTest: {
             goal: 'Понять, нужно ли снижать память и время при копировании ограничений и создании большого числа подкатегорий.',
             methods: 'Ручные тяжёлые сценарии и PHP CLI loadtest / профилирование копирования ограничений и sync в транзакции.',
@@ -254,8 +254,8 @@ const PMS_CASES: Array<Omit<WorkCase, 'product' | 'period'>> = [
     },
     {
         slug: 'xlsx-streaming',
-        order: 5,
-        featured: false,
+        order: 3,
+        featured: true,
         kind: 'primary',
         title: 'Выгрузка цен в Excel без переполнения памяти',
         seoTitle: 'Потоковая Excel-выгрузка цен тарифа',
@@ -269,7 +269,7 @@ const PMS_CASES: Array<Omit<WorkCase, 'product' | 'period'>> = [
         effect:
             'Выгрузка проходит там, где раньше был OOM. Отказ от полной матрицы закреплён нагрузочными тестами — регрессия памяти ловится до прода.',
         stack: ['PHP 8 (прод)', 'Node stream (демо)', 'XLSX', 'loadtest'],
-        role: 'Senior Full-stack · прод и производительность',
+        role: 'Full-stack · прод и производительность',
         originalStackNote: 'В проде — PHP StreamingExporter; демо показывает тот же подход на Node.',
         loadTest: {
             goal: 'Понять, нужно ли снижать память и время выгрузки — и подтвердить эффект после изменений.',
@@ -308,7 +308,7 @@ const PMS_CASES: Array<Omit<WorkCase, 'product' | 'period'>> = [
         effect:
             'Контролируемое исправление по всему парку без bulk-лока: dry-run, чанки, resume. Full-stack ответственность за прод-данные, не только за UI.',
         stack: ['PHP 8 Minion', 'PostgreSQL', 'CLI'],
-        role: 'Senior Full-stack · прод и производительность',
+        role: 'Full-stack · прод и производительность',
         relatedSlugs: ['roomtypes-bulk'],
     },
     {

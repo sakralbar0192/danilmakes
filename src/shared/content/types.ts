@@ -9,8 +9,8 @@ export interface HeroContent {
     eyebrow: string
     title: string
     lead: string
-    primaryCta: { to: string; label: string }
-    secondaryCta: { to: string; label: string }
+    primaryCta: { to: string; label: string; external?: boolean }
+    secondaryCta: { to: string; label: string; external?: boolean }
 }
 
 export interface ContactContent {

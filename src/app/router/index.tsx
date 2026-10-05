@@ -56,6 +56,10 @@ const router = createBrowserRouter([
                 element: <Contact />
             },
             {
+                path: 'contacts',
+                element: <Navigate to='/contact' replace />
+            },
+            {
                 path: 'for-freelance',
                 element: isHiringMode ? <Navigate to='/contact' replace /> : <ForFreelance />
             },

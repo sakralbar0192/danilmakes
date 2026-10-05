@@ -136,19 +136,29 @@ export default {
       }
       commit("setHotelData", { rplansLoading: true });
 
-      const {
-        rplans,
-        rplansByIds,
-      } = await HotelService.getPlans();
+      try {
+        const {
+          rplans,
+          rplansByIds,
+        } = await HotelService.getPlans();
 
-      commit("setHotelData", {
-        rplans,
-        rplansByIds,
-        rplansReady: true,
-        rplansLoading: false,
-      });
+        commit("setHotelData", {
+          rplans,
+          rplansByIds,
+          rplansReady: true,
+          rplansLoading: false,
+        });
 
-      return rplansByIds;
+        return rplansByIds;
+      } catch (error) {
+        commit("setHotelData", {
+          rplans: [],
+          rplansByIds: {},
+          rplansReady: false,
+          rplansLoading: false,
+        });
+        throw error;
+      }
     },
     async updatePlans({ commit, dispatch }) {
       commit("setHotelData", { rplansReady: false, rplansLoading: false });

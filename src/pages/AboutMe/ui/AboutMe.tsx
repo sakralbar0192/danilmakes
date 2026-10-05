@@ -66,13 +66,28 @@ const AboutMe: FC = () => {
                             >
                                 { hero.primaryCta.label }
                             </Link>
-                            <Link
-                                to={ hero.secondaryCta.to }
-                                className={ classes.ctaSecondary }
-                                onClick={ () => trackCtaClick('hero', hero.secondaryCta.to) }
-                            >
-                                { hero.secondaryCta.label }
-                            </Link>
+                            {hero.secondaryCta.external ? (
+                                <a
+                                    href={ hero.secondaryCta.to }
+                                    className={ classes.ctaSecondary }
+                                    target='_blank'
+                                    rel='noreferrer'
+                                    onClick={ () => {
+                                        trackCtaClick('hero', hero.secondaryCta.to)
+                                        trackExternalClick('hh', 'frontend')
+                                    } }
+                                >
+                                    { hero.secondaryCta.label }
+                                </a>
+                            ) : (
+                                <Link
+                                    to={ hero.secondaryCta.to }
+                                    className={ classes.ctaSecondary }
+                                    onClick={ () => trackCtaClick('hero', hero.secondaryCta.to) }
+                                >
+                                    { hero.secondaryCta.label }
+                                </Link>
+                            )}
                         </div>
                     </Col>
                 </Row>

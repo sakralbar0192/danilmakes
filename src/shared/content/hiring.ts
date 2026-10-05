@@ -1,5 +1,9 @@
 import type { ModeContent } from './types'
 
+/** Same URL as SITE_CONTACT.hhFrontend — kept inline to avoid content↔contact cycle. */
+const HH_FRONTEND_RESUME =
+    'https://hh.ru/resume/08d61cb6ff10ccd1200039ed1f64486d705041'
+
 export const HIRING_CONTENT: ModeContent = {
     mode: 'hiring',
     nav: [
@@ -9,20 +13,20 @@ export const HIRING_CONTENT: ModeContent = {
     ],
     hero: {
         brand: 'danilmakes',
-        eyebrow: 'Красноярск · удалёнка · открыт к предложениям',
-        title: 'Senior Frontend / Full-stack IC',
+        eyebrow: 'Красноярск · удалёнка',
+        title: 'Frontend · ~6 лет · B2B SaaS',
         lead:
-            'Senior frontend, ~6 лет. Последние 3 года — B2B SaaS (PMS для тысяч отелей): архитектура ключевых модулей, контракты с API, согласованность данных после сохранения. Коммерчески Vue и React; стек — инструмент. Ищу продуктовую команду на удалёнке.',
+            'Frontend · Vue / React · операционные B2B-интерфейсы. ~6 лет, последние 3 — hospitality PMS: тяжёлые таблицы и календари, контракты с API, согласованность данных после сохранения. Full-stack — смежный опыт в кейсах, не главная витрина.',
         primaryCta: { to: '/work', label: 'Смотреть кейсы' },
-        secondaryCta: { to: '/contact#resume', label: 'Резюме на HH' },
+        secondaryCta: { to: HH_FRONTEND_RESUME, label: 'Резюме на HH', external: true },
     },
     contact: {
         status: 'Открыт к предложениям',
-        availability: 'Ищу роль',
-        availabilityDetail: 'Удалёнка · Senior Frontend или Senior Full-stack FE-first (PHP + SPA)',
+        availability: 'Открыт к предложениям',
+        availabilityDetail: 'Удалёнка · Frontend (Vue / React) · B2B SaaS',
         responseTime: 'Отвечаю за 1–2 рабочих дня',
         intro:
-            'Пишите по вакансиям Senior Frontend и Senior Full-stack FE-first. База в Красноярске, работаю только удалённо.',
+            'Пишите по вакансиям Frontend (Vue / React) в продуктовых B2B-командах. Full-stack FE-first — если в вакансии явно нужны PHP / API. База в Красноярске, работаю только удалённо.',
         formTitle: 'Написать',
         messageLabel: 'Сообщение / ссылка на вакансию',
         submitLabel: 'Отправить',
@@ -34,7 +38,7 @@ export const HIRING_CONTENT: ModeContent = {
         showFaq: false,
         showAudience: true,
         showFeaturedWork: true,
-        showLayoutCases: true,
+        showLayoutCases: false,
         featuredTitle: 'Избранные кейсы',
         layoutTitle: 'Вёрстка',
         layoutNote: 'Учебные макеты — демонстрация вёрстки, не коммерческие проекты.',
@@ -48,19 +52,19 @@ export const HIRING_CONTENT: ModeContent = {
             'Docker · Sentry',
         ],
         ctaTitle: 'Открыт к предложениям',
-        ctaBody: 'Удалёнка · Senior Frontend или Senior Full-stack IC.',
+        ctaBody: 'Удалёнка · Frontend · Vue / React · операционные B2B-интерфейсы.',
         audienceTitle: 'Как работаю',
         audienceBody:
-            'Senior IC, удалёнка. Проектирую архитектуру операционных экранов и контракты с API. Шесть месяцев вёл кросс-команду — дальше IC.',
+            'Проектирую архитектуру операционных экранов и контракты с API. Шесть месяцев вёл кросс-команду — дальше индивидуальный вклад в продукт.',
     },
     workIndex: {
         title: 'Кейсы',
         intro:
-            'Кейсы одного продуктового контура — hospitality B2B SaaS (PMS), 2023–2026. Не восемь работодателей: архитектура операционных редакторов, контракты API, миграции без остановки. Демо на синтетике с живым API.',
+            'Кейсы одного продуктового контура — hospitality B2B SaaS (PMS), 2023–2026. Не восемь работодателей: операционные редакторы, контракты API, миграции без остановки. Демо — портфолио-срез на синтетике, не прод Bnovo.',
         ctaLabel: 'Связаться',
     },
     caseCta: {
-        defaultPrompt: 'Нужен Senior IC под архитектуру таких экранов?',
+        defaultPrompt: 'Нужен Frontend под такие операционные экраны?',
         buttonLabel: 'Написать',
     },
 }

@@ -55,8 +55,8 @@ const desktopDemoHref = computed(() => {
 });
 const bannerText = computed(() =>
   focusMobile.value
-    ? "Портфолио-демо · mobile/WebView сценарий · синтетические данные"
-    : "Портфолио-демо · Цены и ограничения · режимы · availability · RMS · синтетика",
+    ? "Портфолио-срез · mobile/WebView · синтетика, не прод Bnovo"
+    : "Портфолио-срез · Цены и ограничения · синтетика, не прод Bnovo",
 );
 </script>
 

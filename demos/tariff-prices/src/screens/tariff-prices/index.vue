@@ -1,6 +1,22 @@
 <template>
   <template>
+    <div
+      v-if="bootstrapError"
+      class="tariff-bootstrap-error"
+      role="alert"
+    >
+      <p>Не удалось загрузить данные демо. Это портфолио-срез на синтетике — попробуйте ещё раз.</p>
+      <button
+        type="button"
+        class="tariff-bootstrap-error__retry"
+        :disabled="bootstrapRetrying"
+        @click="retryBootstrap"
+      >
+        {{ bootstrapRetrying ? "Загрузка…" : "Повторить" }}
+      </button>
+    </div>
     <tariff-prices-screen-layout
+      v-else
       ref="tariffPricesScreenLayout"
       :need-hide-footer="needHideFooter"
       :has-pending-tariff-changes="hasPendingTariffChanges"
@@ -86,6 +102,8 @@ export default {
       tableHideMobileAppFooter: false,
       isMobileFooterHiddenByKeyboard: false,
       mobileAppFooterController: null,
+      bootstrapError: false,
+      bootstrapRetrying: false,
     };
   },
   computed: {
@@ -133,10 +151,20 @@ export default {
   watch: {
     routeDataKey: {
       async handler() {
-        if (!this.rplans.length) {
+        if (!this.rplans.length || this.bootstrapError) {
           return;
         }
         await this.syncFromRoute();
+      },
+    },
+    rplans: {
+      async handler(plans) {
+        if (!plans?.length || this.bootstrapError) {
+          return;
+        }
+        if (!this.currentTariff?.id) {
+          await this.syncFromRoute({ resetChanges: false });
+        }
       },
     },
     shouldHideMobileAppFooterBar() {
@@ -160,14 +188,7 @@ export default {
     });
   },
   async mounted() {
-    await Promise.allSettled([
-      this.$store.dispatch("hotelRoom/getRoomTypes"),
-      this.$store.dispatch("hotel/getPlans"),
-      this.$store.dispatch("additionalServices/getAdditionalServices"),
-    ]);
-
-    this.applyInitialSavedState();
-    await this.syncFromRoute({ resetChanges: false });
+    await this.bootstrapScreenData();
 
     this.$nextTick(() => this.mobileAppFooterController?.syncBodyClass());
     if (typeof navigator !== "undefined") {
@@ -188,6 +209,38 @@ export default {
   methods: {
     ...mapActions("tariffPricesAndRestrictions", ["setIsLoading", "setCompactRestrictions", "setInterfaceSettings"]),
     ...mapMutations("tariffPricesAndRestrictions", ["setFullscreenMode"]),
+    async bootstrapScreenData() {
+      this.bootstrapError = false;
+      try {
+        await Promise.all([
+          this.$store.dispatch("hotelRoom/getRoomTypes"),
+          this.$store.dispatch("hotel/updatePlans"),
+          this.$store.dispatch("additionalServices/getAdditionalServices"),
+        ]);
+      } catch {
+        this.bootstrapError = true;
+        return;
+      }
+
+      if (!this.rplans.length) {
+        this.bootstrapError = true;
+        return;
+      }
+
+      this.applyInitialSavedState();
+      await this.syncFromRoute({ resetChanges: false });
+    },
+    async retryBootstrap() {
+      if (this.bootstrapRetrying) {
+        return;
+      }
+      this.bootstrapRetrying = true;
+      try {
+        await this.bootstrapScreenData();
+      } finally {
+        this.bootstrapRetrying = false;
+      }
+    },
     applyInitialSavedState() {
       const savedState = resolveInitialSavedState({
         user: this.user,
@@ -469,6 +522,10 @@ export default {
     },
     async updatePrices() {
       if (this.isTableContentPending) {
+        this.$dialog.toast({
+          content: this.$t("Дождитесь загрузки таблицы, затем сохраните снова."),
+          type: "info",
+        });
         return;
       }
       await this.$refs.pageTable?.flushPendingMobileEditableInputs?.();
@@ -611,4 +668,32 @@ export default {
 
 <style lang="scss">
   @import "./styles/index.scss";
+
+  .tariff-bootstrap-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 60vh;
+    padding: 24px;
+    text-align: center;
+    color: #1a2b3c;
+    font-size: 14px;
+  }
+
+  .tariff-bootstrap-error__retry {
+    border: 1px solid #1e8bc3;
+    background: #1e8bc3;
+    color: #fff;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    font: inherit;
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: wait;
+    }
+  }
 </style>

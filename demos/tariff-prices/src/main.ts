@@ -101,11 +101,15 @@ async function bootstrap() {
   app.mount("#app");
 
   await store.dispatch("hotel/getCurrentHotel").catch(() => {});
-  await Promise.allSettled([
-    store.dispatch("hotel/getPlans"),
-    store.dispatch("hotelRoom/getRoomTypes"),
-    store.dispatch("additionalServices/getAdditionalServices"),
-  ]);
+  try {
+    await Promise.all([
+      store.dispatch("hotel/getPlans"),
+      store.dispatch("hotelRoom/getRoomTypes"),
+      store.dispatch("additionalServices/getAdditionalServices"),
+    ]);
+  } catch {
+    // Screen shows retry UI if plans stay empty.
+  }
 
   const q = getDefaultRouteQuery();
   if (!router.currentRoute.value.query.dfrom) {

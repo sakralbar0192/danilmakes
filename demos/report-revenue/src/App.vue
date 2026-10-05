@@ -1,7 +1,7 @@
 <template>
   <v-app class="report-revenue-demo">
     <div class="demo-banner text-caption pa-2 text-center">
-      Портфолио-демо · Отчёт по доходу · синтетические данные
+      Портфолио-срез · Отчёт по доходу · синтетика, не прод Bnovo
     </div>
     <v-main>
       <router-view />
