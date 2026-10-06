@@ -12,6 +12,7 @@ import { ForFreelance } from 'pages/ForFreelance'
 import { PortfolioPrint } from 'pages/PortfolioPrint'
 import { Work } from 'pages/Work'
 import { WorkCase } from 'pages/WorkCase'
+import { Layouts } from 'pages/Layouts'
 import { PORTFOLIO_TO_WORK_SLUG, WORK_SLUG_REDIRECTS } from 'shared/consts/work-cases'
 import { isHiringMode } from 'shared/config/siteMode'
 
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
             {
                 path: 'contacts',
                 element: <Navigate to='/contact' replace />
+            },
+            {
+                path: 'layouts',
+                element: <Layouts />
             },
             {
                 path: 'for-freelance',

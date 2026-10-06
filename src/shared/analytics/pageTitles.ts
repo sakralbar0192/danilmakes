@@ -58,6 +58,11 @@ const ROUTE_META: Record<string, { title: string; description: string }> = {
             : 'Связаться — разработка сайтов, Красноярск | danilmakes.ru',
         description: SITE_CONTENT.contact.intro,
     },
+    '/layouts': {
+        title: 'Вёрстка — учебные макеты | danilmakes',
+        description:
+            'Учебные макеты: Mishka, Jewellery, Europe, Bicycle, Smart Device. Демонстрация вёрстки, не коммерческие проекты.',
+    },
     '/for-freelance': {
         title: 'Сотрудничество с биржами и заказчиками | danilmakes.ru',
         description:
