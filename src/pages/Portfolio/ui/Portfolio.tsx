@@ -192,7 +192,6 @@ const Portfolio: FC = () => {
 
             <PortfolioSection
                 title='Вёрстка'
-                note='Учебные макеты — демонстрация вёрстки, не коммерческие проекты.'
                 defaultOpen
                 columns={ { xs: 1, sm: 2 } }
             >

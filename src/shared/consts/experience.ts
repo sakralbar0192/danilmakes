@@ -16,7 +16,7 @@ export const EXPERIENCE: ExperienceItem[] = [
         bullets: [
             'Спроектировал архитектуру операционного календаря: виртуализация, модель ячейки, точечное обновление после сохранения. Схему переиспользовали на других таблицах.',
             'Контракт UI ↔ API: массовые операции, слои цен — по нему онбордили коллег.',
-            'Поэтапный перенос наличия с legacy на SPA без остановки продукта.',
+            'Поэтапная миграция с legacy на SPA без остановки продукта.',
         ],
     },
     {
@@ -25,7 +25,7 @@ export const EXPERIENCE: ExperienceItem[] = [
         role: 'Frontend Engineer · React',
         company: 'First Line Software',
         bullets: [
-            'React-якорь: схема миграции ключевых модулей с jQuery на React + TypeScript (FSD).',
+            'Миграция ключевых модулей с jQuery на React + TypeScript (FSD).',
             'Перевёл 3+ критичных модуля; Lighthouse 45 → 80, загрузка примерно на 2 секунды быстрее.',
         ],
     },
@@ -34,6 +34,6 @@ export const EXPERIENCE: ExperienceItem[] = [
         period: 'сен 2020 — авг 2021',
         role: 'Frontend-разработчик',
         company: 'Лига А',
-        summary: 'Старт карьеры: 7+ адаптивных проектов (Mobile First). Осваивал JavaScript и React.',
+        summary: 'Верстка: 7+ адаптивных проектов (Mobile First).',
     },
 ]

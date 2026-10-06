@@ -8,11 +8,11 @@ import { SITE_CONTENT } from 'shared/content'
 export const SITE_ORIGIN = 'https://danilmakes.ru'
 
 export const DEFAULT_PAGE_TITLE = isHiringMode
-    ? 'Данил Ухов — Frontend · ~6 лет · B2B SaaS | danilmakes'
+    ? 'Данил Ухов — Frontend · 5+ лет · B2B SaaS | danilmakes'
     : 'danilmakes.ru — продуктовый разработчик, Красноярск'
 
 export const DEFAULT_PAGE_DESCRIPTION = isHiringMode
-    ? 'Данил Ухов — Frontend · Vue / React · операционные B2B-интерфейсы. ~6 лет, hospitality PMS: таблицы, календари, контракты API. Кейсы — портфолио-срез на синтетике.'
+    ? 'Данил Ухов — Frontend · Vue / React · операционные B2B-интерфейсы. 5+ лет, hospitality PMS: таблицы, календари, контракты API. Кейсы — портфолио-срез на синтетике.'
     : 'Данил Ухов — продуктовый разработчик в Красноярске. Сайты, приложения и небольшие проекты для бизнеса.'
 
 const DEMO_TITLES: Record<string, string> = {

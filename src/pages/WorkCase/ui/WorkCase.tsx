@@ -191,15 +191,6 @@ const WorkCase: FC = () => {
                             { primaryDemo.label }
                         </Link>
                     )}
-                    {isHub && (
-                        <Link
-                            to='/demo/tariffPrices?focus=mobile'
-                            className={ classes.ctaSecondary }
-                            onClick={ () => trackCtaClick('work_case_demo', '/demo/tariffPrices?focus=mobile') }
-                        >
-                            Демо mobile (только телефон)
-                        </Link>
-                    )}
                 </div>
             </div>
         </div>

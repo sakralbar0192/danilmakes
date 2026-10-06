@@ -14,9 +14,9 @@ export const HIRING_CONTENT: ModeContent = {
     hero: {
         brand: 'danilmakes',
         eyebrow: 'Красноярск · удалёнка',
-        title: 'Frontend · ~6 лет · B2B SaaS',
+        title: 'Frontend · 5+ лет · B2B SaaS',
         lead:
-            'Frontend · Vue / React · операционные B2B-интерфейсы. ~6 лет, последние 3 — hospitality PMS: тяжёлые таблицы и календари, контракты с API, согласованность данных после сохранения. Full-stack — смежный опыт в кейсах, не главная витрина.',
+            'Frontend · Vue / React · операционные B2B-интерфейсы. Последние 3 года — hospitality PMS: тяжёлые таблицы и календари, контракты с API, согласованность данных после сохранения.',
         primaryCta: { to: '/work', label: 'Смотреть кейсы' },
         secondaryCta: { to: HH_FRONTEND_RESUME, label: 'Резюме на HH', external: true },
     },
@@ -41,26 +41,25 @@ export const HIRING_CONTENT: ModeContent = {
         showLayoutCases: false,
         featuredTitle: 'Избранные кейсы',
         layoutTitle: 'Вёрстка',
-        layoutNote: 'Учебные макеты — демонстрация вёрстки, не коммерческие проекты.',
+        layoutNote: 'демонстрация вёрстки, не коммерческие проекты.',
         stackTitle: 'Стек',
         stackItems: [
             'Vue 2/3 · Vuex · Pinia',
-            'React 18 · TypeScript',
+            'React 18 · Redux',
             'PHP 8 · PostgreSQL',
-            'Jest · Playwright · Chart.js',
+            'Jest · Playwright ',
             'Service Worker · IndexedDB',
             'Docker · Sentry',
         ],
         ctaTitle: 'Открыт к предложениям',
-        ctaBody: 'Удалёнка · Frontend · Vue / React · операционные B2B-интерфейсы.',
+        ctaBody: 'Удалёнка · Frontend · Vue / React',
         audienceTitle: 'Как работаю',
-        audienceBody:
-            'Проектирую архитектуру операционных экранов и контракты с API. Шесть месяцев вёл кросс-команду — дальше индивидуальный вклад в продукт.',
+        audienceBody: 'Проектирую архитектуру экранов и контракты с API. Есть опыт менторинга коллег и координации кросс-функциональной команды',
     },
     workIndex: {
         title: 'Кейсы',
         intro:
-            'Кейсы одного продуктового контура — hospitality B2B SaaS (PMS), 2023–2026. Не восемь работодателей: операционные редакторы, контракты API, миграции без остановки. Демо — портфолио-срез на синтетике, не прод Bnovo.',
+            'Кейсы продуктового контура — hospitality B2B SaaS (PMS), 2023–2026',
         ctaLabel: 'Связаться',
     },
     caseCta: {
