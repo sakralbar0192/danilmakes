@@ -129,16 +129,6 @@ const Contact: FC = () => {
                                     Frontend Engineer
                                 </a>
                             </li>
-                            <li>
-                                <a
-                                    href={ SITE_CONTACT.hhFullstack }
-                                    target='_blank'
-                                    rel='noreferrer'
-                                    onClick={ () => trackExternalClick('hh', 'fullstack') }
-                                >
-                                    Full-stack Engineer (FE-first)
-                                </a>
-                            </li>
                         </ul>
                     </section>
 
